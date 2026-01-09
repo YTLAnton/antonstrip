@@ -134,14 +134,7 @@
 
     <!-- Date Switcher -->
     <div class="sticky top-[100px] z-40 bg-slate-100 px-4 py-3 shadow-sm flex justify-center gap-4" id="tab-container">
-        <button onclick="switchDay(1)" id="btn-day1"
-            class="flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-md bg-slate-900 text-white transform scale-105">
-            1/24 (週六)<br><span class="text-xs font-normal opacity-80">科博館與澀</span>
-        </button>
-        <button onclick="switchDay(2)" id="btn-day2"
-            class="flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-slate-500 border border-slate-200">
-            1/25 (週日)<br><span class="text-xs font-normal opacity-80">國美館與綠美圖</span>
-        </button>
+        <!-- Tabs will be injected by JS -->
     </div>
 
     <!-- Main Content Container -->
@@ -183,6 +176,31 @@
         // ==========================================
         // 行程資料區 (Markdown Table Format) - 可直接編輯下方表格
         // ==========================================
+
+        // [欄位說明]
+        // | Day | Time | Type | Title | Location | Cost | Note | Extra |
+        //
+        // 1. Type (分類):
+        //    - transport (藍色/火車)
+        //    - taxi      (黃色/計程車)
+        //    - food      (橘色/餐廳)
+        //    - activity  (綠色/景點)
+        //    - hotel     (灰色/飯店)
+        //
+        // 2. Extra (特殊功能 - 可用逗號分隔):
+        //    - T-EX             : 顯示高鐵 T-EX App 開啟按鈕
+        //    - Driver           : 顯示「給司機看地址」按鈕
+        //    - Address:地址     : 設定導航連結與司機地址卡內容
+        //    - Tag:標籤文字      : 顯示灰色小標籤 (例如: 約 3 小時)
+        //    - Meta:說明文字     : 顯示醒目的資訊區塊 (例如: 訂位代號)
+        //    - 訂票代號:號碼      : 顯示可複製的訂票代號
+
+        // [設定區] 請在此定義日期與標籤
+        const tripDays = [
+            { date: '2026-01-24', label: '1/24 (週六)', subLabel: '科博館與澀' },
+            { date: '2026-01-25', label: '1/25 (週日)', subLabel: '國美館與綠美圖' }
+        ];
+
         const scheduleRaw = `
 | Day | Time        | Type      | Title                  | Location           | Cost       | Note                                | Extra                                |
 | :-: | :---------- | :-------- | :--------------------- | :----------------- | :--------- | :---------------------------------- | :----------------------------------- |
@@ -286,7 +304,9 @@
         let currentDay = 1;
 
         function init() {
+            renderTabs();
             renderSchedule(1);
+
             const header = document.getElementById('main-header');
             const tab = document.getElementById('tab-container');
             let lastScrollY = window.scrollY;
@@ -314,13 +334,38 @@
             }
         }
 
+        function renderTabs() {
+            const container = document.getElementById('tab-container');
+            container.innerHTML = tripDays.map((day, index) => {
+                const dayNum = index + 1;
+                return `<button onclick="switchDay(${dayNum})" id="btn-day${dayNum}"
+                    class="flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-slate-500 border border-slate-200">
+                    ${day.label}<br><span class="text-xs font-normal opacity-80">${day.subLabel}</span>
+                </button>`;
+            }).join('');
+
+            // Set initial active state manually or rely on switchDay(1) called in init
+            updateTabStyles(1);
+        }
+
+        function updateTabStyles(activeDay) {
+            tripDays.forEach((_, index) => {
+                const dayNum = index + 1;
+                const btn = document.getElementById(`btn-day${dayNum}`);
+                if (!btn) return;
+
+                if (dayNum === activeDay) {
+                    btn.className = "flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-md bg-slate-900 text-white transform scale-105";
+                } else {
+                    btn.className = "flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-slate-500 border border-slate-200";
+                }
+            });
+        }
+
         function switchDay(day) {
             if (currentDay === day) return;
             currentDay = day;
-            document.getElementById('btn-day1').className = day === 1 ? "flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-md bg-slate-900 text-white transform scale-105" : "flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-slate-500 border border-slate-200";
-            document.getElementById('btn-day1').innerHTML = '1/24 (週六)<br><span class="text-xs font-normal opacity-80">科博館與澀</span>';
-            document.getElementById('btn-day2').className = day === 2 ? "flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-md bg-slate-900 text-white transform scale-105" : "flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-slate-500 border border-slate-200";
-            document.getElementById('btn-day2').innerHTML = '1/25 (週日)<br><span class="text-xs font-normal opacity-80">國美館與綠美圖</span>';
+            updateTabStyles(day);
             renderSchedule(day);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -407,9 +452,14 @@
 
             // Check if it is the trip dates (1/24 or 1/25)
             // Note: In real world, check Year too, but for simplicity we assume close proximity or check if matches 1/24, 1/25
+            // Find infoDay based on tripDays config
             let infoDay = 0;
-            if (month === 1 && date === 24) infoDay = 1;
-            else if (month === 1 && date === 25) infoDay = 2;
+            const todayStr = `${now.getFullYear()}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+
+            const dayIndex = tripDays.findIndex(d => d.date === todayStr);
+            if (dayIndex !== -1) {
+                infoDay = dayIndex + 1;
+            }
 
             if (infoDay === 0) return; // Not today
 
