@@ -61,6 +61,33 @@
         .safe-pb {
             padding-bottom: env(safe-area-inset-bottom);
         }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-4px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(4px);
+            }
+        }
+
+        .shake {
+            animation: shake 0.8s cubic-bezier(.36, .07, .19, .97) both;
+        }
     </style>
 </head>
 
@@ -90,7 +117,7 @@
     <div class="sticky top-[100px] z-40 bg-slate-100 px-4 py-3 shadow-sm flex justify-center gap-4" id="tab-container">
         <button onclick="switchDay(1)" id="btn-day1"
             class="flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-md bg-slate-900 text-white transform scale-105">
-            1/24 (週六)<br><span class="text-xs font-normal opacity-80">科博館與澀</span>
+            1/9 (週五)<br><span class="text-xs font-normal opacity-80">科博館與澀</span>
         </button>
         <button onclick="switchDay(2)" id="btn-day2"
             class="flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-slate-500 border border-slate-200">
@@ -133,251 +160,109 @@
     <script>
         // 資料結構依照 SPEC v1.2 定義
         // V7 更新：新增 endTime 與 cost 欄位
-        const scheduleData = {
-            1: [
-                {
-                    time: "09:00",
-                    endTime: "10:18",
-                    title: "板橋出發",
-                    icon: "fa-train",
-                    color: "bg-blue-500",
-                    type: "transport",
-                    desc: "高鐵 117 (板橋發 → 台中抵)",
-                    cost: "$670",
-                    hasApp: true,
-                    meta: [
-                        { label: "訂票代號", value: "04273326", copy: true },
-                        { label: "朱朱 座位", value: "8車 4A", highlight: true },
-                        { label: "小胤 座位", value: "8車 4B", highlight: true },
-                        { label: "滷蛋 座位", value: "8車 4C", highlight: true }
-                    ]
-                },
-                {
-                    time: "10:30",
-                    endTime: "10:55",
-                    title: "移動：高鐵 → 精誠商圈",
-                    icon: "fa-taxi",
-                    color: "bg-yellow-500",
-                    type: "taxi",
-                    location: "精誠六街",
-                    address: "台中市西區精誠六街",
-                    desc: "從 4B 出口搭車。約 20-25 分",
-                    cost: "$250-$300",
-                    action: "showDriver"
-                },
-                {
-                    time: "11:00",
-                    endTime: "11:55",
-                    title: "漫步：精誠商圈",
-                    icon: "fa-tree",
-                    color: "bg-green-500",
-                    type: "activity",
-                    location: "精誠商圈",
-                    address: "台中市西區精誠路",
-                    desc: "台中小歐洲，探索巷弄洋房選物店。",
-                    cost: "免費",
-                    // V7 更新：移除 Solidbean subLoc
-                },
-                {
-                    time: "12:00",
-                    endTime: "13:15",
-                    title: "午餐：Glou Suru (麵吧)",
-                    icon: "fa-utensils",
-                    color: "bg-amber-600",
-                    type: "food",
-                    location: "Glou Suru",
-                    address: "台中市西區精誠六街15號",
-                    desc: "✅ 已訂位 3 位。燒鳥名店打造細緻麵食。",
-                    cost: "$500-$800",
-                    tags: ["約 75 分鐘"]
-                },
-                {
-                    time: "13:15",
-                    endTime: "13:25",
-                    title: "移動：前往科博館",
-                    icon: "fa-taxi",
-                    color: "bg-yellow-500",
-                    type: "taxi",
-                    location: "科博館",
-                    address: "台中市北區館前路1號",
-                    desc: "約 10 分鐘。建議搭車保留體力。",
-                    cost: "$110-$130",
-                    action: "showDriver"
-                },
-                {
-                    time: "13:30",
-                    endTime: "16:30",
-                    title: "國立自然科學博物館",
-                    icon: "fa-dinosaur",
-                    color: "bg-indigo-500",
-                    type: "activity",
-                    location: "科博館",
-                    address: "台中市北區館前路1號",
-                    desc: "重點：《鄒・自然博物》、《鯨掘》、《大地瑰寶》",
-                    cost: "全票 $120",
-                    tags: ["約 3 小時"]
-                },
-                {
-                    time: "16:30",
-                    endTime: "16:45",
-                    title: "移動：前往飯店",
-                    icon: "fa-taxi",
-                    color: "bg-yellow-500",
-                    type: "taxi",
-                    location: "植光花園酒店",
-                    address: "台中市中區光復路52號",
-                    desc: "約 10-15 分鐘",
-                    cost: "$150",
-                    action: "showDriver"
-                },
-                {
-                    time: "17:00",
-                    endTime: "17:40",
-                    title: "Check-in：植光花園酒店",
-                    icon: "fa-bed",
-                    color: "bg-slate-700",
-                    type: "hotel",
-                    location: "植光花園酒店",
-                    address: "台中市中區光復路52號",
-                    desc: "享受廢墟風建築光影，稍作休息。",
-                    cost: "$3659"
-                },
-                {
-                    time: "17:40",
-                    endTime: "18:00",
-                    title: "散步前往晚餐",
-                    icon: "fa-walking",
-                    color: "bg-blue-400",
-                    type: "transport",
-                    desc: "沿光復路→自由路→育才街",
-                    cost: "$0"
-                },
-                {
-                    time: "18:00",
-                    endTime: "20:30",
-                    title: "晚餐：澀 (Sur-)",
-                    icon: "fa-star",
-                    color: "bg-amber-600",
-                    type: "food",
-                    location: "澀 Sur-",
-                    address: "台中市北區育才街29號",
-                    desc: "✅ 預約制米其林星級。法式詮釋台灣味。",
-                    cost: "$6050",
-                    tags: ["約 2.5 小時"]
+
+        // ==========================================
+        // 行程資料區 (Markdown Table Format) - 可直接編輯下方表格
+        // ==========================================
+        const scheduleRaw = `
+| Day | Time        | Type      | Title                  | Location           | Cost       | Note                                | Extra                                |
+| :-: | :---------- | :-------- | :--------------------- | :----------------- | :--------- | :---------------------------------- | :----------------------------------- |
+|  1  | 09:00-10:18 | transport | 板橋出發               | -                  | $670       | 高鐵 117 (板橋發 → 台中抵)           | T-EX, 訂票代號:04273326              |
+|  1  | 10:30-10:55 | taxi      | 移動：高鐵 → 精誠商圈  | 精誠六街           | $250-$300  | 從 4B 出口搭車。約 20-25 分          | Driver                               |
+|  1  | 11:00-11:55 | activity  | 漫步：精誠商圈         | 精誠商圈           | 免費       | 台中小歐洲，探索巷弄洋房選物店。      | -                                    |
+|  1  | 12:00-13:15 | food      | 午餐：Glou Suru (麵吧) | Glou Suru          | $500-$800  | ✅ 已訂位 3 位。燒鳥名店打造細緻麵食。 | Tag:約 75 分鐘                       |
+|  1  | 13:15-13:25 | taxi      | 移動：前往科博館       | 科博館             | $110-$130  | 約 10 分鐘。建議搭車保留體力。        | Driver, Address:台中市北區館前路1號   |
+|  1  | 13:30-16:30 | activity  | 國立自然科學博物館     | 科博館             | 全票 $120  | 重點：《鄒・自然博物》、《鯨掘》      | Tag:約 3 小時, Address:台中市北區館前路1號 |
+|  1  | 16:30-16:45 | taxi      | 移動：前往飯店         | 植光花園酒店       | $150       | 約 10-15 分鐘                        | Driver, Address:台中市中區光復路52號  |
+|  1  | 17:00-17:40 | hotel     | Check-in：植光花園酒店 | 植光花園酒店       | $3659      | 享受廢墟風建築光影，稍作休息。        | Address:台中市中區光復路52號          |
+|  1  | 17:40-18:00 | transport | 散步前往晚餐           | -                  | $0         | 沿光復路→自由路→育才街               | -                                    |
+|  1  | 18:00-20:30 | food      | 晚餐：澀 (Sur-)        | 澀 Sur-            | $6050      | ✅ 預約制米其林星級。法式詮釋台灣味。 | Tag:約 2.5 小時, Address:台中市北區育才街29號 |
+|  2  | 08:00-09:00 | food      | 早餐：第二市場         | 第二市場           | 依點餐     | 步行 6 分鐘。顏記肉包、阿娥古早味。   | Address:台中市中區三民路二段87號      |
+|  2  | 09:00-09:10 | taxi      | 移動：前往國美館       | 國美館             | $120       | 約 10 分鐘                           | Driver, Address:台中市西區五權西路一段2號 |
+|  2  | 09:20-11:30 | activity  | 國立台灣美術館         | 國美館             | 免費       | 重點：《黑水》。                     | Tag:約 2 小時, Address:台中市西區五權西路一段2號 |
+|  2  | 12:00-13:00 | food      | 午餐：美村黑肉麵       | 美村黑肉麵         | $100-$150  | 必點：排骨飯、貢丸湯。只收現金。      | Tag:步行前往, Address:台中市西區美村路一段346號 |
+|  2  | 13:00-13:30 | taxi      | 移動：前往水湳 (遠程)  | 台中綠美圖         | $350-$400  | ⚠️ 距離較遠。約 25-30 分             | Driver, Address:台中市西屯區中科路2201號 |
+|  2  | 14:00-16:45 | activity  | 台中綠美圖             | 台中綠美圖         | 免費       | 開館首展《萬物的邀約》。純白系建築地標。 | Tag:約 3 小時, Address:台中市西屯區中科路2201號 |
+|  2  | 16:50-17:20 | taxi      | 移動：前往高鐵站       | 台中高鐵站         | $350-$400  | ⚠️ 務必準時上車！週日車流大。        | Driver, Address:高鐵台中站            |
+|  2  | 18:00-19:13 | transport | 賦歸：台中高鐵站       | -                  | $700-$1210 | 各自返家                             | T-EX, Meta:朱朱小胤回台北(18:04)票號04268574, Meta:滷蛋回板橋(18:08)票號04273528 |
+`;
+
+        function parseSchedule() {
+            if (typeof scheduleRaw === 'undefined') return {};
+            const lines = scheduleRaw.trim().split('\n');
+            const data = {};
+
+            // Skip header (row 0) and separator (row 1), start from row 2
+            for (let i = 2; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line || !line.startsWith('|')) continue;
+
+                const cols = line.split('|').map(c => c.trim());
+                if (cols.length < 8) continue;
+
+                const day = parseInt(cols[1]);
+                const timeStr = cols[2];
+                const type = cols[3].toLowerCase();
+                const title = cols[4];
+                const location = cols[5] === '-' ? '' : cols[5];
+                const cost = cols[6];
+                const note = cols[7];
+                const extra = cols[8];
+
+                if (!data[day]) data[day] = [];
+
+                const item = {
+                    title: title,
+                    type: type,
+                    desc: note,
+                    cost: cost,
+                    location: location
+                };
+
+                if (timeStr.includes('-')) {
+                    const [start, end] = timeStr.split('-');
+                    item.time = start;
+                    item.endTime = end;
+                } else {
+                    item.time = timeStr;
                 }
-            ],
-            2: [
-                {
-                    time: "08:00",
-                    endTime: "09:00",
-                    title: "早餐：第二市場",
-                    icon: "fa-mug-hot",
-                    color: "bg-orange-500",
-                    type: "food",
-                    location: "第二市場",
-                    address: "台中市中區三民路二段87號",
-                    desc: "步行 6 分鐘。顏記肉包、阿娥古早味。",
-                    cost: "依點餐"
-                },
-                {
-                    time: "09:00",
-                    endTime: "09:10",
-                    title: "移動：前往國美館",
-                    icon: "fa-taxi",
-                    color: "bg-yellow-500",
-                    type: "taxi",
-                    location: "國美館",
-                    address: "台中市西區五權西路一段2號",
-                    desc: "約 10 分鐘",
-                    cost: "$120",
-                    action: "showDriver"
-                },
-                {
-                    time: "09:20",
-                    endTime: "11:30",
-                    title: "國立台灣美術館",
-                    icon: "fa-palette",
-                    color: "bg-rose-500",
-                    type: "activity",
-                    location: "國美館",
-                    address: "台中市西區五權西路一段2號",
-                    desc: "重點：《黑水》。",
-                    cost: "免費",
-                    tags: ["約 2 小時"]
-                },
-                {
-                    time: "12:00",
-                    endTime: "13:00",
-                    title: "午餐：美村黑肉麵",
-                    icon: "fa-bowl-food",
-                    color: "bg-amber-600",
-                    type: "food",
-                    location: "美村黑肉麵",
-                    address: "台中市西區美村路一段346號",
-                    desc: "必點：排骨飯、貢丸湯。只收現金。",
-                    cost: "$100-$150",
-                    tags: ["步行前往"]
-                },
-                {
-                    time: "13:00",
-                    endTime: "13:30",
-                    title: "移動：前往水湳 (遠程)",
-                    icon: "fa-taxi",
-                    color: "bg-yellow-500",
-                    type: "taxi",
-                    location: "台中綠美圖",
-                    address: "台中市西屯區中科路2201號",
-                    desc: "⚠️ 距離較遠。約 25-30 分",
-                    cost: "$350-$400",
-                    action: "showDriver"
-                },
-                {
-                    time: "14:00",
-                    endTime: "16:45",
-                    title: "台中綠美圖",
-                    icon: "fa-book-open",
-                    color: "bg-emerald-500",
-                    type: "activity",
-                    location: "台中綠美圖",
-                    address: "台中市西屯區中科路2201號",
-                    desc: "開館首展《萬物的邀約》。純白系建築地標。",
-                    cost: "免費",
-                    tags: ["約 3 小時"]
-                },
-                {
-                    time: "16:50",
-                    endTime: "17:20",
-                    title: "移動：前往高鐵站",
-                    icon: "fa-taxi",
-                    color: "bg-yellow-500",
-                    type: "taxi",
-                    location: "台中高鐵站",
-                    address: "高鐵台中站",
-                    desc: "⚠️ 務必準時上車！週日車流大。",
-                    cost: "$350-$400",
-                    action: "showDriver"
-                },
-                {
-                    time: "18:00",
-                    endTime: "19:13",
-                    title: "賦歸：台中高鐵站",
-                    icon: "fa-train",
-                    color: "bg-blue-500",
-                    type: "transport",
-                    desc: "各自返家",
-                    cost: "$700-$1210",
-                    hasApp: true,
-                    meta: [
-                        { label: "朱朱小胤 回台北 (18:04)", value: "04268574", copy: true },
-                        { label: "小胤 座位", value: "5車 9E", highlight: true },
-                        { label: "朱朱 座位", value: "5車 9D", highlight: true },
-                        { label: "---------", value: "" },
-                        { label: "滷蛋 回板橋 (18:08)", value: "04273528", copy: true },
-                        { label: "滷蛋 座位", value: "6車 3A", highlight: true }
-                    ]
+
+                switch (type) {
+                    case 'transport': item.icon = 'fa-train'; item.color = 'bg-blue-500'; break;
+                    case 'taxi': item.icon = 'fa-taxi'; item.color = 'bg-yellow-500'; break;
+                    case 'food': item.icon = 'fa-utensils'; item.color = 'bg-amber-600'; break;
+                    case 'activity': item.icon = 'fa-tree'; item.color = 'bg-green-500'; break;
+                    case 'hotel': item.icon = 'fa-bed'; item.color = 'bg-slate-700'; break;
+                    default: item.icon = 'fa-circle'; item.color = 'bg-gray-500';
                 }
-            ]
-        };
+
+                if (title.includes('科博館')) { item.icon = 'fa-dinosaur'; item.color = 'bg-indigo-500'; }
+                if (title.includes('美術館')) { item.icon = 'fa-palette'; item.color = 'bg-rose-500'; }
+                if (title.includes('綠美圖')) { item.icon = 'fa-book-open'; item.color = 'bg-emerald-500'; }
+                if (title.includes('早餐')) { item.icon = 'fa-mug-hot'; item.color = 'bg-orange-500'; }
+
+                if (extra && extra !== '-') {
+                    const parts = extra.split(',').map(s => s.trim());
+                    item.tags = [];
+                    item.meta = [];
+                    parts.forEach(p => {
+                        if (p === 'T-EX') item.hasApp = true;
+                        if (p === 'Driver') item.action = 'showDriver';
+                        if (p.startsWith('Address:')) item.address = p.substring(8);
+                        if (p.startsWith('Tag:')) item.tags.push(p.substring(4));
+                        if (p.startsWith('訂票代號:')) item.meta.push({ label: '訂票代號', value: p.substring(5), copy: true });
+                        if (p.startsWith('Meta:')) item.meta.push({ label: '資訊', value: p.substring(5), highlight: true });
+                    });
+                    if (item.tags.length === 0) delete item.tags;
+                    if (item.meta.length === 0) delete item.meta;
+                }
+
+                data[day].push(item);
+            }
+            return data;
+        }
+
+        const scheduleData = parseSchedule();
 
         let currentDay = 1;
 
@@ -435,7 +320,7 @@
                 let costHtml = item.cost ? `<div class="mt-2 flex items-center text-xs font-medium text-slate-500 bg-amber-50 px-2 py-1 rounded inline-block border border-amber-100"><i class="fas fa-coins text-amber-500 mr-1"></i> ${item.cost}</div>` : '';
 
                 container.insertAdjacentHTML('beforeend', `
-                    <div class="card-enter relative pl-12 pb-8" style="animation-delay: ${index * 100}ms">
+                    <div id="card-${index}" class="card-enter relative pl-12 pb-8" style="animation-delay: ${index * 100}ms">
                         <div class="absolute left-0 top-0 w-12 h-12 flex items-center justify-center z-10"><div class="w-10 h-10 rounded-full ${item.color} text-white flex items-center justify-center shadow-md ring-4 ring-slate-50"><i class="fas ${item.icon} text-sm"></i></div></div>
                         <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
                             <div class="flex justify-between items-start mb-1"><span class="font-mono text-sm font-bold text-slate-400">${timeDisplay}</span>${item.type === 'taxi' ? '<i class="fas fa-taxi text-slate-200"></i>' : ''}</div>
@@ -478,7 +363,64 @@
             }
         }
 
+        function autoScrollToCurrentEvent() {
+            const now = new Date();
+            // 測試用：解除下一行註解以測試特定時間效果
+            // const now = new Date('2026-01-25T08:30:00'); 
+
+            const month = now.getMonth() + 1;
+            const date = now.getDate();
+            const currentHM = now.getHours() * 100 + now.getMinutes();
+
+            // Check if it is the trip dates (1/24 or 1/25)
+            // Note: In real world, check Year too, but for simplicity we assume close proximity or check if matches 1/24, 1/25
+            let infoDay = 0;
+            if (month === 1 && date === 24) infoDay = 1;
+            else if (month === 1 && date === 25) infoDay = 2;
+
+            if (infoDay === 0) return; // Not today
+
+            // Switch to the correct day
+            switchDay(infoDay);
+
+            // Find current or next event
+            const schedule = scheduleData[infoDay];
+            let targetIndex = -1;
+
+            for (let i = 0; i < schedule.length; i++) {
+                const item = schedule[i];
+                // Time format "09:00" -> 900
+                const [h, m] = item.time.split(':').map(Number);
+                const itemHM = h * 100 + m;
+
+                if (currentHM >= itemHM) {
+                    targetIndex = i; // keep updating to find the latest started event
+                } else {
+                    // This item starts in future.
+                    // If we haven't found any started event yet (targetIndex is -1), it means we are before the first event.
+                    // In that case, highlight the first event.
+                    if (targetIndex === -1) targetIndex = 0;
+                    break;
+                }
+            }
+
+            // If all events passed (end of day), targetIndex will be the last one.
+
+            if (targetIndex !== -1) {
+                setTimeout(() => {
+                    const el = document.getElementById(`card-${targetIndex}`);
+                    if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        el.classList.add('shake');
+                        setTimeout(() => el.classList.remove('shake'), 1000);
+                    }
+                }, 400); // 400ms delay to allow switchDay render and slideIn animation to start
+            }
+        }
+
         init();
+        // Trigger auto-scroll check
+        autoScrollToCurrentEvent();
     </script>
 </body>
 
