@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>2026朱朱慶生台中行</title>
+    <meta name="description" content="1/24-25 台中米其林與城市散策之旅">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e2e8f0;
+            z-index: 0;
+        }
+
+        .card-enter {
+            animation: slideIn 0.4s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Safe area padding for iPhones with notch */
+        header {
+            padding-top: env(safe-area-inset-top);
+        }
+
+        .safe-pb {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 pb-24 safe-pb">
+
+    <!-- Header -->
+    <header class="bg-slate-900 text-white pt-8 pb-6 px-6 sticky top-0 z-50 shadow-lg transition-all duration-300"
+        id="main-header">
+        <div class="flex justify-between items-start mb-2 pt-2">
+            <div>
+                <div class="text-xs font-bold text-amber-400 tracking-wider mb-1">TRAVEL GUIDE</div>
+                <h1 class="text-2xl font-bold">2026 朱朱慶生台中行</h1>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="shareApp()"
+                    class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center active:scale-90 transition-transform">
+                    <i class="fas fa-share-alt text-sm text-white"></i>
+                </button>
+                <div class="bg-amber-500 text-xs font-bold px-2 py-1 rounded text-slate-900 h-6 flex items-center">JAN
+                    24-25</div>
+            </div>
+        </div>
+        <div class="flex flex-wrap gap-2 text-xs text-slate-300 mt-2">
+            <span class="bg-slate-800 px-2 py-1 rounded-full border border-slate-700">#城市散策</span>
+            <span class="bg-slate-800 px-2 py-1 rounded-full border border-slate-700">#米其林</span>
+        </div>
+    </header>
+
+    <!-- Date Switcher -->
+    <div class="sticky top-[115px] z-40 bg-slate-100 px-4 py-3 shadow-sm flex justify-center gap-4" id="tab-container">
+        <button onclick="switchDay(1)" id="btn-day1"
+            class="flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-md bg-slate-900 text-white transform scale-105">
+            1/24 (週六)<br><span class="text-xs font-normal opacity-80">精誠散策</span>
+        </button>
+        <button onclick="switchDay(2)" id="btn-day2"
+            class="flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-slate-500 border border-slate-200">
+            1/25 (週日)<br><span class="text-xs font-normal opacity-80">市場與綠美圖</span>
+        </button>
+    </div>
+
+    <!-- Main Content Container -->
+    <main id="schedule-container" class="px-4 py-6 relative max-w-lg mx-auto min-h-screen">
+        <!-- Content injected by JS -->
+    </main>
+
+    <!-- Driver Modal -->
+    <div id="driver-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeDriverModal()"></div>
+        <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 pb-12 transform transition-transform duration-300 translate-y-full safe-pb"
+            id="driver-modal-content">
+            <div class="w-12 h-1 bg-slate-300 rounded-full mx-auto mb-6"></div>
+            <div class="text-center">
+                <p class="text-slate-500 text-sm mb-2">請載我到：</p>
+                <h2 id="driver-modal-title" class="text-2xl font-bold text-slate-900 mb-4">目的地名稱</h2>
+                <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-6 mb-6">
+                    <p id="driver-modal-address" class="text-3xl font-bold text-slate-900 leading-tight">地址內容</p>
+                </div>
+                <button onclick="closeDriverModal()"
+                    class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold text-lg active:scale-95 transition-transform">
+                    關閉
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast"
+        class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-4 py-2 rounded-full text-sm opacity-0 transition-opacity duration-300 pointer-events-none z-[70] shadow-lg flex items-center gap-2">
+        <i class="fas fa-check-circle text-green-400"></i>
+        <span id="toast-msg">已複製</span>
+    </div>
+
+    <script>
+        const scheduleData = {
+            1: [
+                { time: "09:00", title: "板橋出發", icon: "fa-train", color: "bg-blue-500", type: "transport", desc: "高鐵 117 (09:39 板橋發 → 10:18 抵台中)", hasApp: true, meta: [{ label: "訂票代號", value: "04273326", copy: true }] },
+                { time: "10:30", title: "移動：高鐵 → 精誠商圈", icon: "fa-taxi", color: "bg-yellow-500", type: "taxi", location: "精誠六街", address: "台中市西區精誠六街", desc: "從 4B 出口搭車。約 20-25 分 (車資 $250-$300)", action: "showDriver" },
+                { time: "11:00", title: "漫步：精誠商圈", icon: "fa-tree", color: "bg-green-500", type: "activity", location: "精誠商圈", address: "台中市西區精誠路", desc: "台中小歐洲，探索巷弄洋房選物店。", subLoc: { name: "Solidbean Coffee", address: "台中市西區精誠三街28號" } },
+                { time: "12:00", title: "午餐：Glou Suru (麵吧)", icon: "fa-utensils", color: "bg-amber-600", type: "food", location: "Glou Suru", address: "台中市西區精誠六街15號", desc: "✅ 已訂位 3 位。燒鳥名店打造細緻麵食。", tags: ["$500-$800", "約 75 分鐘"] },
+                { time: "13:15", title: "移動：前往科博館", icon: "fa-taxi", color: "bg-yellow-500", type: "taxi", location: "科博館", address: "台中市北區館前路1號", desc: "約 10 分鐘 (車資 $110-$130)。建議搭車保留體力。", action: "showDriver" },
+                { time: "13:30", title: "國立自然科學博物館", icon: "fa-dinosaur", color: "bg-indigo-500", type: "activity", location: "科博館", address: "台中市北區館前路1號", desc: "重點：《鄒・自然博物》、《鯨掘》、《大地瑰寶》", tags: ["全票 $100", "約 3 小時"] },
+                { time: "16:30", title: "移動：前往飯店", icon: "fa-taxi", color: "bg-yellow-500", type: "taxi", location: "植光花園酒店", address: "台中市中區光復路52號", desc: "約 10-15 分鐘 (車資 $150)", action: "showDriver" },
+                { time: "17:00", title: "Check-in：植光花園酒店", icon: "fa-bed", color: "bg-slate-700", type: "hotel", location: "植光花園酒店", address: "台中市中區光復路52號", desc: "享受廢墟風建築光影，稍作休息。" },
+                { time: "17:40", title: "散步前往晚餐", icon: "fa-walking", color: "bg-blue-400", type: "transport", desc: "沿光復路→自由路→育才街 (約 15 分鐘)" },
+                { time: "18:00", title: "晚餐：澀 (Sur-)", icon: "fa-star", color: "bg-amber-600", type: "food", location: "澀 Sur-", address: "台中市北區育才街29號", desc: "✅ 預約制米其林星級。法式詮釋台灣味。", tags: ["$2600+", "約 2.5 小時"] }
+            ],
+            2: [
+                { time: "08:00", title: "早餐：第二市場", icon: "fa-mug-hot", color: "bg-orange-500", type: "food", location: "第二市場", address: "台中市中區三民路二段87號", desc: "步行 6 分鐘。顏記肉包、阿娥古早味。" },
+                { time: "09:00", title: "移動：前往國美館", icon: "fa-taxi", color: "bg-yellow-500", type: "taxi", location: "國美館", address: "台中市西區五權西路一段2號", desc: "約 10 分鐘 (車資 $120)", action: "showDriver" },
+                { time: "09:20", title: "國立台灣美術館", icon: "fa-palette", color: "bg-rose-500", type: "activity", location: "國美館", address: "台中市西區五權西路一段2號", desc: "重點：《黑水》及當期展覽。停留約 2 小時。" },
+                { time: "12:00", title: "午餐：美村黑肉麵", icon: "fa-bowl-food", color: "bg-amber-600", type: "food", location: "美村黑肉麵", address: "台中市西區美村路一段346號", desc: "必點：排骨飯、貢丸湯。只收現金。", tags: ["$100-$150", "步行前往"] },
+                { time: "13:00", title: "移動：前往水湳 (遠程)", icon: "fa-taxi", color: "bg-yellow-500", type: "taxi", location: "台中綠美圖", address: "台中市西屯區中科路2201號", desc: "⚠️ 距離較遠。約 25-30 分 (車資 $350-$400)", action: "showDriver" },
+                { time: "14:00", title: "台中綠美圖", icon: "fa-book-open", color: "bg-emerald-500", type: "activity", location: "台中綠美圖", address: "台中市西屯區中科路2201號", desc: "開館首展《萬物的邀約》。純白系建築地標。", tags: ["拍照", "看展"] },
+                { time: "16:50", title: "移動：前往高鐵站", icon: "fa-taxi", color: "bg-yellow-500", type: "taxi", location: "台中高鐵站", address: "高鐵台中站", desc: "⚠️ 務必準時上車！週日車流大。", action: "showDriver" },
+                { time: "18:00", title: "賦歸：台中高鐵站", icon: "fa-train", color: "bg-blue-500", type: "transport", desc: "各自返家", hasApp: true, meta: [{ label: "朱朱回台北 (18:04)", value: "04268574", copy: true }, { label: "滷蛋回板橋 (18:08)", value: "04273528", copy: true }] }
+            ]
+        };
+
+        let currentDay = 1;
+
+        function init() {
+            renderSchedule(1);
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('main-header');
+                const tab = document.getElementById('tab-container');
+                if (window.scrollY > 10) {
+                    header.classList.add('py-4'); header.classList.remove('pt-8', 'pb-6');
+                    tab.style.top = '78px';
+                } else {
+                    header.classList.remove('py-4'); header.classList.add('pt-8', 'pb-6');
+                    tab.style.top = '115px';
+                }
+            });
+        }
+
+        function switchDay(day) {
+            if (currentDay === day) return;
+            currentDay = day;
+            document.getElementById('btn-day1').className = day === 1 ? "flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-md bg-slate-900 text-white transform scale-105" : "flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-slate-500 border border-slate-200";
+            document.getElementById('btn-day1').innerHTML = '1/24 (週六)<br><span class="text-xs font-normal opacity-80">精誠散策</span>';
+            document.getElementById('btn-day2').className = day === 2 ? "flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-md bg-slate-900 text-white transform scale-105" : "flex-1 max-w-[160px] py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-slate-500 border border-slate-200";
+            document.getElementById('btn-day2').innerHTML = '1/25 (週日)<br><span class="text-xs font-normal opacity-80">市場與綠美圖</span>';
+            renderSchedule(day);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderSchedule(day) {
+            const container = document.getElementById('schedule-container');
+            container.innerHTML = '<div class="timeline-line"></div>';
+            scheduleData[day].forEach((item, index) => {
+                let actionButton = item.action === 'showDriver' ? `<button onclick="openDriverModal('${item.location}', '${item.address}')" class="mt-3 flex items-center justify-center w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-lg transition-colors border border-slate-200"><i class="fas fa-eye mr-2"></i> 給司機看地址</button>` : '';
+                let appButton = item.hasApp ? `<a href="texpress://" class="mt-3 flex items-center justify-center w-full bg-[#ff7300] hover:bg-[#e66800] text-white font-bold py-2 px-4 rounded-lg transition-colors shadow-sm"><i class="fas fa-mobile-alt mr-2"></i> 開啟 T-EX 取票</a>` : '';
+                let metaHtml = (item.meta || []).map(m => `<div class="mt-2 p-2 bg-slate-50 rounded border border-slate-100 flex justify-between items-center"><div><span class="text-xs text-slate-500 block">${m.label}</span><span class="font-mono font-bold text-slate-700 select-all">${m.value}</span></div>${m.copy ? `<button onclick="copyToClipboard('${m.value}')" class="text-slate-400 hover:text-amber-500 p-2"><i class="far fa-copy"></i></button>` : ''}</div>`).join('');
+                let subLocHtml = item.subLoc ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.subLoc.address)}" target="_blank" class="block mt-2 pt-2 border-t border-dashed border-slate-200 group"><div class="flex items-center text-sm text-slate-600"><i class="fas fa-coffee text-amber-500 mr-2"></i><span class="group-hover:text-amber-600 transition-colors">${item.subLoc.name}</span><i class="fas fa-chevron-right text-xs text-slate-300 ml-auto"></i></div></a>` : '';
+                let tagsHtml = item.tags ? `<div class="flex gap-2 mt-2">` + item.tags.map(t => `<span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded-md font-medium">${t}</span>`).join('') + `</div>` : '';
+                let mapLink = item.address ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address)}" target="_blank" class="mt-3 flex items-center text-sm text-blue-600 font-medium hover:text-blue-700 transition-colors group"><i class="fas fa-map-marker-alt mr-2 group-hover:scale-110 transition-transform"></i><span class="truncate">${item.location || item.address}</span><i class="fas fa-external-link-alt ml-1 text-xs opacity-50"></i></a>` : '';
+
+                container.insertAdjacentHTML('beforeend', `
+                    <div class="card-enter relative pl-12 pb-8" style="animation-delay: ${index * 100}ms">
+                        <div class="absolute left-0 top-0 w-12 h-12 flex items-center justify-center z-10"><div class="w-10 h-10 rounded-full ${item.color} text-white flex items-center justify-center shadow-md ring-4 ring-slate-50"><i class="fas ${item.icon} text-sm"></i></div></div>
+                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start mb-1"><span class="font-mono text-sm font-bold text-slate-400">${item.time}</span>${item.type === 'taxi' ? '<i class="fas fa-taxi text-slate-200"></i>' : ''}</div>
+                            <h3 class="text-lg font-bold text-slate-800 leading-tight mb-1">${item.title}</h3>
+                            <p class="text-sm text-slate-500 mb-3 leading-relaxed">${item.desc}</p>
+                            ${tagsHtml}${metaHtml}${appButton}${actionButton}${mapLink}${subLocHtml}
+                        </div>
+                    </div>`);
+            });
+            container.insertAdjacentHTML('beforeend', `<div class="relative pl-12 pb-4 card-enter" style="animation-delay: ${scheduleData[day].length * 100}ms"><div class="absolute left-0 top-0 w-12 flex justify-center z-10"><div class="w-3 h-3 rounded-full bg-slate-300 ring-4 ring-slate-50"></div></div><div class="text-xs text-slate-400 font-medium pt-1">當日行程結束</div></div>`);
+        }
+
+        function openDriverModal(loc, addr) {
+            document.getElementById('driver-modal-title').textContent = loc;
+            document.getElementById('driver-modal-address').textContent = addr;
+            document.getElementById('driver-modal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('driver-modal-content').classList.remove('translate-y-full'), 10);
+        }
+
+        function closeDriverModal() {
+            document.getElementById('driver-modal-content').classList.add('translate-y-full');
+            setTimeout(() => document.getElementById('driver-modal').classList.add('hidden'), 300);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('opacity-0');
+                setTimeout(() => toast.classList.add('opacity-0'), 2000);
+            });
+        }
+
+        function shareApp() {
+            if (navigator.share) {
+                navigator.share({ title: '2026朱朱慶生台中行', text: '行程表與導航資訊', url: window.location.href }).catch(console.error);
+            } else {
+                copyToClipboard(window.location.href);
+                alert("網址已複製！請貼上給朋友");
+            }
+        }
+
+        init();
+    </script>
+</body>
+
+</html>
