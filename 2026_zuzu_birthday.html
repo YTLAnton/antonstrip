@@ -88,6 +88,25 @@
         .shake {
             animation: shake 0.8s cubic-bezier(.36, .07, .19, .97) both;
         }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+                border-color: #f1f5f9;
+            }
+
+            50% {
+                box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+                border-color: #f59e0b;
+                background-color: #fffbeb;
+            }
+        }
+
+        .card-glow {
+            animation: glow 1.5s ease-in-out infinite;
+        }
     </style>
 </head>
 
@@ -320,7 +339,7 @@
                 let costHtml = item.cost ? `<div class="mt-2 flex items-center text-xs font-medium text-slate-500 bg-amber-50 px-2 py-1 rounded inline-block border border-amber-100"><i class="fas fa-coins text-amber-500 mr-1"></i> ${item.cost}</div>` : '';
 
                 container.insertAdjacentHTML('beforeend', `
-                    <div id="card-${index}" class="card-enter relative pl-12 pb-8" style="animation-delay: ${index * 100}ms">
+                    <div id="card-${index}" class="relative pl-12 pb-8">
                         <div class="absolute left-0 top-0 w-12 h-12 flex items-center justify-center z-10"><div class="w-10 h-10 rounded-full ${item.color} text-white flex items-center justify-center shadow-md ring-4 ring-slate-50"><i class="fas ${item.icon} text-sm"></i></div></div>
                         <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
                             <div class="flex justify-between items-start mb-1"><span class="font-mono text-sm font-bold text-slate-400">${timeDisplay}</span>${item.type === 'taxi' ? '<i class="fas fa-taxi text-slate-200"></i>' : ''}</div>
@@ -331,7 +350,7 @@
                         </div>
                     </div>`);
             });
-            container.insertAdjacentHTML('beforeend', `<div class="relative pl-12 pb-4 card-enter" style="animation-delay: ${scheduleData[day].length * 100}ms"><div class="absolute left-0 top-0 w-12 flex justify-center z-10"><div class="w-3 h-3 rounded-full bg-slate-300 ring-4 ring-slate-50"></div></div><div class="text-xs text-slate-400 font-medium pt-1">當日行程結束</div></div>`);
+            container.insertAdjacentHTML('beforeend', `<div class="relative pl-12 pb-4"><div class="absolute left-0 top-0 w-12 flex justify-center z-10"><div class="w-3 h-3 rounded-full bg-slate-300 ring-4 ring-slate-50"></div></div><div class="text-xs text-slate-400 font-medium pt-1">當日行程結束</div></div>`);
         }
 
         function openDriverModal(loc, addr) {
@@ -412,10 +431,15 @@
                     const el = document.getElementById(`card-${targetIndex}`);
                     if (el) {
                         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        el.classList.add('shake');
-                        setTimeout(() => el.classList.remove('shake'), 1000);
+                        // Add glow effect to the inner card (the white box)
+                        const innerCard = el.querySelector('.bg-white');
+                        if (innerCard) {
+                            innerCard.classList.add('card-glow');
+                            // Remove after 3 seconds (2 cycles)
+                            setTimeout(() => innerCard.classList.remove('card-glow'), 3000);
+                        }
                     }
-                }, 400); // 400ms delay to allow switchDay render and slideIn animation to start
+                }, 100); // Reduced delay since no slideIn animation
             }
         }
 
