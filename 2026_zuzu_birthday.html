@@ -118,7 +118,7 @@
         <div class="flex justify-between items-start mb-2 pt-2">
             <div>
                 <div class="text-xs font-bold text-amber-400 tracking-wider mb-1">TRAVEL GUIDE</div>
-                <h1 class="text-2xl font-bold">2026 朱朱慶生台中行</h1>
+                <h1 class="text-2xl font-bold">2026 慶生台中行</h1>
             </div>
             <div class="flex gap-3">
                 <button onclick="shareApp()"
@@ -221,7 +221,7 @@
 |  2  | 13:00-13:30 | taxi      | 移動：前往水湳 (遠程)  | 台中綠美圖         | $350-$400  | ⚠️ 距離較遠。約 25-30 分             | Driver, Address:台中市西屯區中科路2201號 |
 |  2  | 14:00-16:45 | activity  | 台中綠美圖             | 台中綠美圖         | 免費       | 開館首展《萬物的邀約》。純白系建築地標。 | Tag:約 3 小時, Address:台中市西屯區中科路2201號 |
 |  2  | 16:50-17:20 | taxi      | 移動：前往高鐵站       | 台中高鐵站         | $350-$400  | ⚠️ 務必準時上車！週日車流大。        | Driver, Address:高鐵台中站            |
-|  2  | 18:00-19:13 | transport | 賦歸：台中高鐵站       | -                  | $700-$1210 | 各自返家                             | T-EX, Meta:朱朱小胤回台北(18:04)票號04268574, Meta:滷蛋回板橋(18:08)票號04273528 |
+|  2  | 18:00-19:13 | transport | 賦歸：台中高鐵站       | -                  | $700-$1210 | 各自返家                             | T-EX, Meta:回台北(18:04)票號04268574, Meta:回板橋(18:08)票號04273528 |
 `;
 
         function parseSchedule() {
@@ -434,7 +434,7 @@
 
         function shareApp() {
             if (navigator.share) {
-                navigator.share({ title: '2026朱朱慶生台中行', text: '行程表與導航資訊', url: window.location.href }).catch(console.error);
+                navigator.share({ title: '2026慶生台中行', text: '行程表與導航資訊', url: window.location.href }).catch(console.error);
             } else {
                 copyToClipboard(window.location.href);
                 alert("網址已複製！請貼上給朋友");
