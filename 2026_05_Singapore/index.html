@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SG 2026">
+  <meta name="theme-color" content="#c0392b">
+  <link rel="apple-touch-icon" id="app-icon" href="">
+  <script>
+    (function() {
+      try {
+        var c = document.createElement('canvas');
+        c.width = c.height = 180;
+        var ctx = c.getContext('2d');
+        var g = ctx.createLinearGradient(0, 0, 180, 180);
+        g.addColorStop(0, '#c0392b'); g.addColorStop(1, '#7b241c');
+        ctx.fillStyle = g; ctx.fillRect(0, 0, 180, 180);
+        ctx.font = '90px serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('🇸🇬', 90, 90);
+        document.getElementById('app-icon').href = c.toDataURL('image/png');
+      } catch(e) {}
+    })();
+  </script>
+  <title>新加坡 2026 🇸🇬</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { -webkit-tap-highlight-color: transparent; }
+    button, [data-action] { touch-action: manipulation; }
+
+    :root {
+      --primary: #c0392b;
+      --primary-dark: #922b21;
+      --primary-light: #fadbd8;
+      --accent: #e67e22;
+      --accent-light: #fef5e7;
+      --bg: #f5f4f1;
+      --surface: #ffffff;
+      --text: #1c2b28;
+      --text-2: #5f7672;
+      --text-3: #94a5a1;
+      --border: #e4e8e7;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --r: 10px;
+      --r-sm: 7px;
+      --type-景點: #2a7c6f; --type-景點-bg: #e6f2ef;
+      --type-吃喝: #c8956c; --type-吃喝-bg: #fdf0e5;
+      --type-移動: #6889a0; --type-移動-bg: #e8f0f5;
+      --type-作業: #8b7da8; --type-作業-bg: #eeeaf5;
+      --type-住宿: #a08060; --type-住宿-bg: #f5efe8;
+      --type-參考: #d97706; --type-參考-bg: #fef3c7;
+    }
+
+    html, body { height: 100%; font-family: "PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif; }
+    body { background: #1a1a2e; display: flex; justify-content: center; color: var(--text); font-size: 14px; line-height: 1.5; }
+
+    #app {
+      width: 100%; max-width: 390px; min-height: 100dvh;
+      background: var(--bg); position: relative; overflow-x: hidden;
+      display: flex; flex-direction: column;
+    }
+
+    /* ── Header ── */
+    #header {
+      background: linear-gradient(135deg, #1a2a2a, #c0392b 60%, #e74c3c);
+      color: white; padding: env(safe-area-inset-top) 16px 12px;
+      position: sticky; top: 0; z-index: 100;
+      transition: padding 0.2s;
+    }
+    #header.compact { padding-bottom: 8px; }
+    #header-top { display: flex; align-items: center; justify-content: space-between; }
+    #header-title { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.02em; }
+    #header-subtitle { font-size: 0.75rem; opacity: 0.85; margin-top: 2px; }
+    #header-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    #header-badges span {
+      background: rgba(255,255,255,0.18); border-radius: 99px;
+      padding: 2px 9px; font-size: 0.7rem; font-weight: 500;
+    }
+    #header.compact #header-subtitle,
+    #header.compact #header-badges { display: none; }
+    #search-wrap { margin-top: 8px; position: relative; }
+    #header.compact #search-wrap { margin-top: 6px; }
+    #search-input {
+      width: 100%; background: rgba(255,255,255,0.18); border: none;
+      border-radius: 8px; padding: 7px 32px 7px 10px;
+      color: white; font-size: 0.82rem; outline: none;
+    }
+    #search-input::placeholder { color: rgba(255,255,255,0.6); }
+    #search-clear {
+      position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: rgba(255,255,255,0.7);
+      font-size: 1rem; cursor: pointer; display: none;
+    }
+    #search-results {
+      position: absolute; left: 0; right: 0; top: 100%; margin-top: 4px;
+      background: white; border-radius: var(--r); box-shadow: var(--shadow-md);
+      max-height: 300px; overflow-y: auto; z-index: 200; display: none;
+    }
+    .search-item {
+      padding: 10px 14px; border-bottom: 1px solid var(--border);
+      cursor: pointer; font-size: 0.82rem; color: var(--text);
+    }
+    .search-item:last-child { border-bottom: none; }
+    .search-item:hover { background: var(--bg); }
+    .search-item-label { font-size: 0.7rem; color: var(--text-3); margin-bottom: 2px; }
+
+    /* ── Tab Bar ── */
+    #tab-bar {
+      display: flex; background: white;
+      border-top: 1px solid var(--border);
+      position: sticky; bottom: 0; z-index: 100;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    .tab-btn {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      padding: 8px 2px 6px; background: none; border: none;
+      cursor: pointer; font-size: 0.6rem; color: var(--text-3);
+      gap: 2px; transition: color 0.15s;
+    }
+    .tab-btn .tab-icon { font-size: 1.3rem; }
+    .tab-btn.active { color: var(--primary); }
+
+    /* ── Main Content ── */
+    #main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .tab-panel { display: none; padding-bottom: 16px; }
+    .tab-panel.active { display: block; }
+
+    /* ── Day Selector ── */
+    #day-selector {
+      display: flex; gap: 8px; padding: 12px 16px;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    #day-selector::-webkit-scrollbar { display: none; }
+    .day-btn {
+      flex-shrink: 0; display: flex; flex-direction: column; align-items: center;
+      padding: 6px 12px; border-radius: var(--r); border: 1.5px solid var(--border);
+      background: white; cursor: pointer; min-width: 52px; gap: 2px;
+      transition: all 0.15s;
+    }
+    .day-btn .day-n { font-size: 0.65rem; color: var(--text-3); font-weight: 600; }
+    .day-btn .day-date { font-size: 0.78rem; font-weight: 700; color: var(--text); }
+    .day-btn .day-wd { font-size: 0.62rem; color: var(--text-3); }
+    .day-btn.active { background: var(--primary); border-color: var(--primary); }
+    .day-btn.active .day-n, .day-btn.active .day-date, .day-btn.active .day-wd { color: white; }
+    .day-btn.today { border-color: var(--primary); }
+    .day-btn.today .day-date { color: var(--primary); }
+
+    /* ── Day Content ── */
+    #day-content { padding: 12px 12px 0; }
+    .day-header { padding: 0 4px 8px; }
+    .day-route { font-size: 0.78rem; color: var(--text-2); display: flex; align-items: center; gap: 5px; }
+    .day-note {
+      margin: 6px 0 10px; padding: 8px 10px;
+      background: var(--accent-light); border-radius: var(--r-sm);
+      font-size: 0.78rem; color: var(--accent); border-left: 3px solid var(--accent);
+    }
+
+    /* ── Weather ── */
+    .weather-bar {
+      background: white; border-radius: var(--r); padding: 10px 12px;
+      margin-bottom: 10px; border: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .weather-temp { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+    .weather-info { flex: 1; }
+    .weather-cond { font-size: 0.78rem; color: var(--text); }
+    .weather-tips { font-size: 0.7rem; color: var(--text-2); margin-top: 2px; }
+
+    /* ── Activity Card ── */
+    .activity-card {
+      background: var(--surface); border-radius: var(--r);
+      border: 1.5px solid var(--border); margin-bottom: 8px;
+      overflow: hidden; transition: box-shadow 0.15s;
+    }
+    .activity-card.cancelled-card { opacity: 0.6; }
+    .card-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px; cursor: pointer;
+    }
+    .card-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .card-meta { flex: 1; min-width: 0; }
+    .card-time { font-size: 0.68rem; color: var(--text-3); font-variant-numeric: tabular-nums; }
+    .card-name { font-size: 0.88rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-name.cancelled-text { text-decoration: line-through; }
+    .card-tags { display: flex; gap: 4px; margin-top: 3px; flex-wrap: wrap; }
+    .tag-type {
+      font-size: 0.62rem; font-weight: 600; padding: 1px 6px;
+      border-radius: 99px; white-space: nowrap;
+    }
+    .tag-cost {
+      font-size: 0.62rem; font-weight: 600; padding: 1px 6px;
+      border-radius: 99px; background: #fef9c3; color: #92400e;
+    }
+    .card-chevron { color: var(--text-3); font-size: 0.8rem; flex-shrink: 0; transition: transform 0.2s; }
+    .card-chevron.open { transform: rotate(90deg); }
+
+    .card-body { padding: 0 12px 12px; display: none; border-top: 1px solid var(--border); padding-top: 10px; }
+    .card-body.open { display: block; }
+
+    .card-desc { font-size: 0.82rem; color: var(--text); margin-bottom: 8px; line-height: 1.55; }
+    .card-hours { font-size: 0.72rem; color: var(--text-2); margin-bottom: 6px; }
+    .ticket-box {
+      background: #fff7ed; border: 1px solid #fed7aa; border-radius: var(--r-sm);
+      padding: 7px 10px; margin-bottom: 8px; font-size: 0.78rem; color: #9a3412;
+    }
+    .meta-box {
+      background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--r-sm);
+      padding: 7px 10px; margin-bottom: 8px; font-size: 0.78rem; color: #92400e;
+      font-weight: 500;
+    }
+    .notes-box {
+      border-left: 3px solid var(--accent); padding: 7px 10px;
+      background: #fff8f0; border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      margin-bottom: 8px; font-size: 0.78rem; color: var(--text-2); line-height: 1.5;
+    }
+    .copyable-box {
+      background: #f0fdf4; border: 1px solid #86efac; border-radius: var(--r-sm);
+      padding: 7px 10px; margin-bottom: 8px; font-size: 0.78rem; color: #166534;
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+    }
+    .copyable-box:hover { background: #dcfce7; }
+    .copy-icon { font-size: 0.9rem; opacity: 0.6; }
+
+    .card-buttons { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    .btn-map {
+      flex: 1; min-width: 120px; padding: 7px 10px; border-radius: var(--r-sm);
+      background: var(--primary); color: white; border: none; cursor: pointer;
+      font-size: 0.78rem; font-weight: 600; text-align: center;
+    }
+    .btn-driver {
+      flex: 1; min-width: 100px; padding: 7px 10px; border-radius: var(--r-sm);
+      background: white; color: var(--text); border: 1.5px solid var(--border);
+      cursor: pointer; font-size: 0.78rem; font-weight: 600; text-align: center;
+    }
+    .note-textarea {
+      width: 100%; margin-top: 8px; padding: 7px 10px;
+      border: 1.5px solid var(--border); border-radius: var(--r-sm);
+      font-size: 0.78rem; resize: vertical; min-height: 56px;
+      font-family: inherit; color: var(--text); outline: none;
+      background: white;
+    }
+    .note-textarea:focus { border-color: var(--primary); }
+    .btn-doc {
+      display: inline-block; margin-bottom: 8px; padding: 6px 12px;
+      border-radius: var(--r-sm); background: #eff6ff; color: #1d4ed8;
+      border: 1.5px solid #bfdbfe; font-size: 0.78rem; font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* ── Accommodation ── */
+    .accommodation-section {
+      margin-top: 12px; background: var(--surface); border-radius: var(--r);
+      border: 1.5px solid var(--border); overflow: hidden;
+    }
+    .accom-header {
+      padding: 10px 12px; display: flex; align-items: center; gap: 8px;
+      cursor: pointer; background: var(--type-住宿-bg);
+    }
+    .accom-title { font-size: 0.88rem; font-weight: 700; color: var(--type-住宿); }
+    .accom-sub { font-size: 0.7rem; color: var(--text-2); margin-top: 2px; }
+    .accom-body { padding: 10px 12px; display: none; }
+    .accom-body.open { display: block; }
+    .accom-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.8rem; border-bottom: 1px solid var(--border); }
+    .accom-row:last-of-type { border-bottom: none; }
+    .accom-label { color: var(--text-2); }
+    .accom-val { font-weight: 600; }
+
+    /* ── Cancelled ── */
+    .cancelled-section { margin-top: 12px; }
+    .cancelled-toggle {
+      padding: 8px 12px; background: #f8f8f8; border-radius: var(--r);
+      border: 1.5px dashed var(--border); cursor: pointer;
+      font-size: 0.75rem; color: var(--text-3); text-align: center;
+    }
+
+    /* ── Day Note ── */
+    .day-note-section { margin-top: 16px; padding: 0 4px; }
+    .day-note-label { font-size: 0.72rem; color: var(--text-3); margin-bottom: 4px; font-weight: 600; }
+
+    /* ── Glow ── */
+    @keyframes cardGlow {
+      0%, 100% { box-shadow: var(--shadow); border-color: var(--border); }
+      50% { box-shadow: 0 0 15px rgba(192,57,43,0.35); border-color: var(--primary); }
+    }
+    .card-glow { animation: cardGlow 1.5s ease-in-out 2; }
+
+    /* ── Food Tab ── */
+    .section-header {
+      padding: 14px 16px 6px; font-size: 0.72rem;
+      font-weight: 700; color: var(--text-3); text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .food-city { margin: 0 12px 8px; }
+    .food-city-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px; background: white; border-radius: var(--r);
+      border: 1.5px solid var(--border); cursor: pointer; margin-bottom: 2px;
+    }
+    .food-city-name { font-size: 0.9rem; font-weight: 700; }
+    .food-city-count { font-size: 0.7rem; color: var(--text-3); }
+    .food-list { display: none; }
+    .food-list.open { display: block; }
+    .food-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 9px 12px; background: white;
+      border: 1.5px solid var(--border); border-top: none;
+      cursor: pointer;
+    }
+    .food-item:last-child { border-radius: 0 0 var(--r) var(--r); }
+    .food-item-info { flex: 1; min-width: 0; }
+    .food-name { font-size: 0.82rem; font-weight: 600; }
+    .food-en { font-size: 0.7rem; color: var(--text-3); }
+    .food-note { font-size: 0.72rem; color: var(--text-2); margin-top: 2px; }
+    .food-price { font-size: 0.7rem; color: #92400e; background: #fef9c3; padding: 2px 6px; border-radius: 99px; white-space: nowrap; align-self: flex-start; margin-top: 2px; }
+    .food-map-btn { font-size: 0.85rem; color: var(--primary); flex-shrink: 0; align-self: center; }
+
+    /* ── Flight Tab ── */
+    .flight-group { margin: 0 12px 12px; }
+    .flight-group-title {
+      font-size: 0.78rem; font-weight: 700; color: var(--text-2);
+      padding: 10px 0 6px;
+    }
+    .flight-card {
+      background: white; border-radius: var(--r);
+      border: 1.5px solid var(--border); padding: 12px;
+    }
+    .flight-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .flight-no { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .flight-duration { font-size: 0.72rem; color: var(--text-3); }
+    .flight-route { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .flight-city { text-align: center; }
+    .flight-code { font-size: 1.1rem; font-weight: 700; }
+    .flight-name { font-size: 0.65rem; color: var(--text-3); }
+    .flight-time { font-size: 0.88rem; font-weight: 600; }
+    .flight-arrow { color: var(--text-3); font-size: 1rem; flex: 1; text-align: center; }
+    .flight-cost { font-size: 0.75rem; color: var(--text-2); padding-top: 8px; border-top: 1px solid var(--border); }
+
+    /* ── Packing Tab ── */
+    .pack-progress { margin: 12px 12px 4px; }
+    .pack-progress-bar { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .pack-progress-fill { height: 100%; background: var(--primary); border-radius: 99px; transition: width 0.3s; }
+    .pack-progress-label { font-size: 0.72rem; color: var(--text-3); margin-top: 4px; }
+    .pack-cat { margin: 0 12px 8px; background: white; border-radius: var(--r); border: 1.5px solid var(--border); overflow: hidden; }
+    .pack-cat-header { display: flex; align-items: center; gap: 8px; padding: 10px 12px; cursor: pointer; }
+    .pack-cat-icon { font-size: 1.1rem; }
+    .pack-cat-name { font-size: 0.88rem; font-weight: 600; flex: 1; }
+    .pack-cat-count { font-size: 0.7rem; color: var(--text-3); }
+    .pack-items { display: none; }
+    .pack-items.open { display: block; }
+    .pack-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-top: 1px solid var(--border); cursor: pointer; }
+    .pack-check { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .pack-check.checked { background: var(--primary); border-color: var(--primary); color: white; font-size: 0.7rem; }
+    .pack-item-text { font-size: 0.82rem; }
+    .pack-item-text.checked { text-decoration: line-through; color: var(--text-3); }
+    .pack-tips {
+      margin: 0 12px 8px; background: #eff6ff; border-radius: var(--r);
+      border: 1.5px solid #bfdbfe; padding: 12px;
+    }
+    .pack-tips-title { font-size: 0.78rem; font-weight: 700; color: #1d4ed8; margin-bottom: 8px; }
+    .pack-tips ul { padding-left: 16px; }
+    .pack-tips li { font-size: 0.75rem; color: #1e40af; margin-bottom: 4px; }
+
+    /* ── Tips Tab ── */
+    .tips-card { margin: 0 12px 8px; background: white; border-radius: var(--r); border: 1.5px solid var(--border); overflow: hidden; }
+    .tips-card-header { padding: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+    .tips-card-title { font-size: 0.88rem; font-weight: 700; }
+    .tips-card-body { display: none; padding: 0 12px 12px; }
+    .tips-card-body.open { display: block; }
+    .tips-card-body ul { padding-left: 16px; margin-top: 4px; }
+    .tips-card-body li { font-size: 0.8rem; color: var(--text-2); margin-bottom: 5px; line-height: 1.5; }
+    .tips-card-body p { font-size: 0.8rem; color: var(--text-2); line-height: 1.6; }
+
+    /* ── Data backup ── */
+    .backup-section { margin: 16px 12px 8px; }
+    .backup-title { font-size: 0.78rem; font-weight: 700; color: var(--text-2); margin-bottom: 8px; }
+    .backup-btns { display: flex; gap: 8px; }
+    .backup-btn {
+      flex: 1; padding: 8px; border-radius: var(--r-sm);
+      border: 1.5px solid var(--border); background: white;
+      font-size: 0.78rem; font-weight: 600; cursor: pointer; color: var(--text);
+    }
+    .backup-btn:hover { background: var(--bg); }
+
+    /* ── Driver Modal ── */
+    #driver-modal {
+      position: fixed; inset: 0; z-index: 300;
+      display: none; align-items: flex-end; justify-content: center;
+    }
+    #driver-modal.open { display: flex; }
+    #driver-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+    #driver-sheet {
+      position: relative; background: white; width: 100%; max-width: 390px;
+      border-radius: 20px 20px 0 0; padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
+      transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    #driver-modal.open #driver-sheet { transform: translateY(0); }
+    .driver-handle { width: 40px; height: 4px; background: var(--border); border-radius: 99px; margin: 0 auto 16px; }
+    .driver-label { font-size: 0.72rem; color: var(--text-3); font-weight: 600; margin-bottom: 8px; }
+    #driver-address { font-size: 1.8rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 16px; }
+    #driver-map-link {
+      display: block; padding: 11px; background: var(--primary); color: white;
+      text-decoration: none; border-radius: var(--r); text-align: center;
+      font-size: 0.88rem; font-weight: 700;
+    }
+    #driver-close {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--bg); border: none; border-radius: 99px;
+      width: 28px; height: 28px; cursor: pointer; font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: calc(70px + env(safe-area-inset-bottom));
+      left: 50%; transform: translateX(-50%) translateY(20px);
+      background: rgba(28,43,40,0.9); color: white;
+      padding: 8px 18px; border-radius: 99px; font-size: 0.82rem;
+      opacity: 0; transition: opacity 0.2s, transform 0.2s; z-index: 400;
+      white-space: nowrap; pointer-events: none;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (min-width: 430px) {
+      body { background: #1a1a2e; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================================================
+     行程資料區（使用者只需編輯這個區塊）
+     ================================================ -->
+<script id="trip-data" type="text/plain">
+---
+title: "新加坡 2026"
+emoji: "🇸🇬"
+subtitle: "2026/05/01 - 05/03 (3天2夜)"
+people: 4
+tripType: "自由行"
+transport: ["MRT", "Grab", "步行"]
+weather:
+  新加坡:
+    temp: "28-34°C"
+    condition: "熱帶氣候，全年高溫潮濕"
+    tips: "防曬、補水、隨身帶雨傘"
+    url: "https://www.weather.gov.sg/"
+---
+
+## Day 1 | 2026/05/01 (五) | 抵達新加坡
+
+route: 台北 → 新加坡
+dayNote: 無需租車，全程搭乘 MRT / Grab
+
+### 移動 | 搭機出發
+time: 08:00
+endTime: 13:30
+description: CI751 TPE→SIN，飛行時間約 4.5 小時
+notes: 提早 2 小時到桃園機場 T1
+copyable: 訂票代號 CI751-20260501ABC
+
+### 景點 | 濱海灣花園 Gardens by the Bay
+time: 15:00
+endTime: 18:30
+nameEn: Gardens by the Bay
+description: 超級樹林光影秀，推薦傍晚前往，18:45 和 20:45 各一場
+hours: 05:00-02:00
+cost: SGD 14/人（步道）
+ticket: 超級樹林步道 SGD 14/人，室內花穹 SGD 28/人
+address: 18 Marina Gardens Dr, Singapore 018953
+mapLink: https://maps.google.com/?q=Gardens+by+the+Bay+Singapore
+notes: ⚠️ 提前網路訂票，現場常售罄
+meta: 光影秀時間 18:45 / 20:45
+
+### 吃喝 | 老巴剎 Lau Pa Sat
+time: 19:00
+nameEn: Lau Pa Sat Festival Market
+description: 新加坡最著名的老牌美食中心，沙嗲是必點
+hours: 24 小時
+cost: $100-200/人
+address: 18 Raffles Quay, Singapore 048582
+mapLink: https://maps.google.com/?q=Lau+Pa+Sat+Singapore
+
+### 住宿 | Marina Bay Sands
+checkIn: 15:00
+checkOut: 11:00
+price: SGD 450/晚
+nights: 2
+address: 10 Bayfront Ave, Singapore 018956
+notes: 確認碼 MBS20260501
+copyable: 確認碼 MBS20260501
+
+---
+
+## Day 2 | 2026/05/02 (六) | 聖淘沙 & 老城區
+
+route: 市區 → 聖淘沙 → 牛車水
+dayNote: 全程 MRT，Sentosa Express 單程 SGD 4
+
+### 景點 | 環球影城 Universal Studios Singapore
+time: 09:00
+endTime: 17:00
+nameEn: Universal Studios Singapore
+description: 建議購買 Express Pass，熱門設施等候時間長
+hours: 10:00-18:00（建議提前確認）
+cost: SGD 83/人
+ticket: 成人 SGD 83/人，Express Pass SGD 55起
+address: 8 Sentosa Gateway, Singapore 098269
+mapLink: https://maps.google.com/?q=Universal+Studios+Singapore
+notes: ⚠️ 強烈建議提前購票，現場票價更高
+copyable: 訂票代號 USS-20260502XYZ
+
+### 吃喝 | 麥士威熟食中心 Maxwell Food Centre
+time: 18:30
+nameEn: Maxwell Food Centre
+description: 道地新加坡小販中心，天天海南雞飯是必吃
+hours: 08:00-22:00
+cost: $80-120/人
+address: 1 Kadayanallur St, Singapore 069184
+mapLink: https://maps.google.com/?q=Maxwell+Food+Centre+Singapore
+
+### 景點 | 小印度 Little India
+time: 20:00
+nameEn: Little India
+description: 感受印度文化氛圍，購買特色紀念品
+address: Little India, Singapore
+cancelled: true
+cancelReason: 行程太滿，移至 Day 3 備選
+
+### 住宿 | Marina Bay Sands
+checkIn: 15:00
+checkOut: 11:00
+price: SGD 450/晚
+nights: 2
+address: 10 Bayfront Ave, Singapore 018956
+notes: 確認碼 MBS20260501
+copyable: 確認碼 MBS20260501
+
+---
+
+## Day 3 | 2026/05/03 (日) | 返台
+
+route: 新加坡 → 台北
+dayNote: Grab 至機場，約 SGD 25-35
+
+### 景點 | 星耀樟宜 Jewel Changi Airport
+time: 09:00
+endTime: 12:00
+nameEn: Jewel Changi Airport
+description: 全球最美機場，雨霧漩渦瀑布必看，可在此購買伴手禮
+hours: 24 小時
+address: 78 Airport Blvd, Singapore 819666
+mapLink: https://maps.google.com/?q=Jewel+Changi+Airport+Singapore
+
+### 移動 | 返台
+time: 14:00
+endTime: 18:30
+description: CI752 SIN→TPE
+notes: 建議 11:00 前抵達機場辦理登機
+copyable: 訂票代號 CI752-20260503DEF
+
+---
+
+## 美食清單
+
+### 新加坡（全程）
+
+- 天天海南雞飯 Tian Tian Hainanese Chicken Rice | 必吃！麥士威熟食中心 | SGD 5-8
+- 辣螃蟹 Chilli Crab | 推薦 Jumbo Seafood，2人份約 SGD 80-100 | SGD 80-100/2人
+- 肉骨茶 Bak Kut Teh | 松發肉骨茶，早餐必試 | SGD 10-15
+- 椰漿飯 Nasi Lemak | 各大小販中心均有 | SGD 3-6
+- 榴槤 Durian | 貓山王當季必試，金鳳榴槤城 | SGD 20-50/kg
+
+---
+
+## 航班資訊
+
+### 去程（全員）
+- CI751 | 桃園(TPE) → 新加坡(SIN) | 08:00 → 13:30 | 飛行 4h30m
+- 費用：TWD 18,500/人
+
+### 回程（全員）
+- CI752 | 新加坡(SIN) → 桃園(TPE) | 14:00 → 18:30 | 飛行 4h30m
+- 費用：含去程票價
+
+---
+
+## 行李清單
+
+### 📄 證件
+- 護照（效期 6 個月以上）
+- 機票確認信（印出或截圖）
+- 訂房確認信
+
+### 👕 衣物
+- 輕薄排汗上衣 x 4
+- 短褲 x 3
+- 備用內衣褲 x 4
+
+### 🩺 醫藥
+- 胃藥
+- 止痛藥
+- 防蚊液
+- 防曬乳（SPF50+）
+
+### 📱 電子
+- 手機充電線
+- 行動電源（≤20000mAh）
+- 旅行插頭轉接頭（英式三腳插頭 Type G）
+
+---
+
+## 旅遊須知
+
+### 入境規定
+- 台灣護照免簽，可停留 30 天
+- 嚴禁攜帶口香糖入境（罰款高達 SGD 1000）
+- 不可攜帶生鮮食品、動植物
+- 攜帶菸草超過 1 條需申報繳稅
+
+### 交通
+- MRT 是最便宜的交通方式，買 EZ-Link 卡或用 Apple Pay 感應
+- Grab 類似台灣 Uber，建議下載備用
+- 禁止在 MRT 內飲食，罰款 SGD 500
+
+### 當地習慣
+- 餐廳通常已含 10% 服務費，不需額外小費
+- 全年高溫約 28-34°C，午後雷陣雨頻繁，帶折疊傘
+- 語言：英文通用
+- 插頭：英式三腳插頭（Type G），記得帶轉接頭
+</script>
+<!-- ================================================
+     以上為資料區，以下為應用程式邏輯（勿修改）
+     ================================================ -->
+
+<div id="app">
+  <!-- Header -->
+  <header id="header">
+    <div id="header-top">
+      <div>
+        <div id="header-title"></div>
+        <div id="header-subtitle"></div>
+      </div>
+    </div>
+    <div id="header-badges"></div>
+    <div id="search-wrap">
+      <input id="search-input" type="search" placeholder="🔍 搜尋景點、餐廳、活動…" autocomplete="off">
+      <button id="search-clear">✕</button>
+      <div id="search-results"></div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <div id="main">
+    <!-- 行程 Tab -->
+    <div class="tab-panel active" data-tab="itinerary">
+      <div id="day-selector"></div>
+      <div id="day-content"></div>
+    </div>
+
+    <!-- 美食 Tab -->
+    <div class="tab-panel" data-tab="food">
+      <div class="section-header">美食清單</div>
+      <div id="food-list"></div>
+    </div>
+
+    <!-- 航班 Tab -->
+    <div class="tab-panel" data-tab="flights">
+      <div class="section-header">航班資訊</div>
+      <div id="flights-list"></div>
+    </div>
+
+    <!-- 行李 Tab -->
+    <div class="tab-panel" data-tab="packing">
+      <div class="section-header">打包清單</div>
+      <div id="packing-progress" class="pack-progress"></div>
+      <div class="pack-tips">
+        <div class="pack-tips-title">✈️ 航空行李提醒</div>
+        <ul>
+          <li>液體、膠狀物品：每件≤100ml，裝入 1L 透明夾鏈袋（隨身行李）</li>
+          <li>鋰電池/行動電源：≤100Wh 免申報，100-160Wh 須航空公司同意，禁止托運</li>
+          <li>行動電源容量限制：≤20000mAh（約 74Wh）</li>
+          <li>托運行李限重：每件 23kg（請確認您的票種規定）</li>
+        </ul>
+      </div>
+      <div id="packing-list"></div>
+    </div>
+
+    <!-- 須知 Tab -->
+    <div class="tab-panel" data-tab="tips">
+      <div class="section-header">旅遊須知</div>
+      <div id="tips-list"></div>
+      <div class="backup-section">
+        <div class="backup-title">📦 資料備份</div>
+        <div class="backup-btns">
+          <button class="backup-btn" onclick="exportData()">📤 匯出備份</button>
+          <button class="backup-btn" onclick="document.getElementById('import-file').click()">📥 匯入備份</button>
+        </div>
+        <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Bar -->
+  <nav id="tab-bar">
+    <button class="tab-btn active" data-tab="itinerary" onclick="switchTab('itinerary')">
+      <span class="tab-icon">🗓</span><span>行程</span>
+    </button>
+    <button class="tab-btn" data-tab="food" onclick="switchTab('food')">
+      <span class="tab-icon">🍽️</span><span>美食</span>
+    </button>
+    <button class="tab-btn" data-tab="flights" onclick="switchTab('flights')">
+      <span class="tab-icon">✈️</span><span>航班</span>
+    </button>
+    <button class="tab-btn" data-tab="packing" onclick="switchTab('packing')">
+      <span class="tab-icon">🧳</span><span>行李</span>
+    </button>
+    <button class="tab-btn" data-tab="tips" onclick="switchTab('tips')">
+      <span class="tab-icon">📋</span><span>須知</span>
+    </button>
+  </nav>
+</div>
+
+<!-- Driver Modal -->
+<div id="driver-modal">
+  <div id="driver-overlay" onclick="closeDriver()"></div>
+  <div id="driver-sheet">
+    <div class="driver-handle"></div>
+    <button id="driver-close" onclick="closeDriver()">✕</button>
+    <div class="driver-label">📍 給司機看地址</div>
+    <div id="driver-address"></div>
+    <a id="driver-map-link" href="#" target="_blank">🗺 開啟 Google Maps 導航</a>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+// ── Parser ──────────────────────────────────────────────
+const raw = document.getElementById('trip-data').textContent.trim();
+
+function parseFrontmatter(text) {
+  const m = text.match(/^---\n([\s\S]*?)\n---/);
+  if (!m) return { config: {}, body: text };
+  const fm = m[1]; const body = text.slice(m[0].length).trim();
+  const config = {};
+  const lines = fm.split('\n');
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    const kv = line.match(/^(\w+):\s*(.*)/);
+    if (!kv) { i++; continue; }
+    const key = kv[1]; const val = kv[2].trim();
+    if (val === '') {
+      // nested object
+      const obj = {};
+      i++;
+      while (i < lines.length && lines[i].match(/^\s+/)) {
+        const inner = lines[i].trim();
+        const innerKey = inner.match(/^(\S+):/);
+        if (innerKey) {
+          const subKey = innerKey[1];
+          const subObj = {};
+          i++;
+          while (i < lines.length && lines[i].match(/^\s{4,}/)) {
+            const sub = lines[i].trim();
+            const sm = sub.match(/^(\w+):\s*(.*)/);
+            if (sm) subObj[sm[1]] = sm[2].replace(/"/g,'').trim();
+            i++;
+          }
+          obj[subKey] = subObj;
+        } else { i++; }
+      }
+      config[key] = obj;
+    } else if (val.startsWith('[')) {
+      config[key] = val.slice(1,-1).split(',').map(s => s.trim().replace(/"/g,''));
+    } else {
+      config[key] = isNaN(val) ? val.replace(/"/g,'') : Number(val);
+      i++;
+    }
+  }
+  return { config, body };
+}
+
+function parseKeyValues(lines) {
+  const obj = {};
+  for (const line of lines) {
+    const m = line.match(/^(\w+):\s*([\s\S]*)/);
+    if (m) {
+      const k = m[1], v = m[2].trim();
+      if (k === 'cancelled') obj[k] = v === 'true';
+      else if (k === 'nights') obj[k] = parseInt(v);
+      else obj[k] = v;
+    }
+  }
+  return obj;
+}
+
+function parseDayBlock(block) {
+  // header line: ## Day N | YYYY/MM/DD (wd) | title
+  const headerLine = block.split('\n')[0];
+  const hm = headerLine.match(/##\s*Day\s*(\d+)\s*\|\s*(\d{4}\/\d{2}\/\d{2})\s*\(([^)]+)\)\s*\|\s*(.*)/);
+  if (!hm) return null;
+  const day = { day: parseInt(hm[1]), date: hm[2], weekday: hm[3].trim(), title: hm[4].trim(), route:'', dayNote:'', activities:[], accommodation: null };
+
+  const rest = block.split('\n').slice(1);
+  // parse route/dayNote before first ###
+  let i = 0;
+  while (i < rest.length && !rest[i].startsWith('###')) {
+    const rkv = rest[i].match(/^(\w+):\s*(.*)/);
+    if (rkv) {
+      if (rkv[1] === 'route') day.route = rkv[2].trim();
+      if (rkv[1] === 'dayNote') day.dayNote = rkv[2].trim();
+    }
+    i++;
+  }
+  // parse ### sections
+  const actBlocks = rest.slice(i).join('\n').split(/(?=^###)/m).filter(s => s.trim());
+  for (const ab of actBlocks) {
+    const aLines = ab.trim().split('\n');
+    const aHeader = aLines[0].match(/###\s*([^|]+)\|\s*(.*)/);
+    if (!aHeader) continue;
+    const type = aHeader[1].trim();
+    const name = aHeader[2].trim();
+    const kvObj = parseKeyValues(aLines.slice(1));
+    if (type === '住宿') {
+      day.accommodation = { name, ...kvObj };
+    } else {
+      day.activities.push({ type, nameCn: name, ...kvObj });
+    }
+  }
+  return day;
+}
+
+function parseFoodBlock(block) {
+  const lines = block.split('\n').slice(1);
+  const groups = [];
+  let current = null;
+  for (const line of lines) {
+    const cityM = line.match(/^###\s*(.+?)（([^）]+)）/);
+    if (cityM) {
+      current = { city: cityM[1].trim(), days: cityM[2].trim(), items: [] };
+      groups.push(current); continue;
+    }
+    if (line.startsWith('- ') && current) {
+      const parts = line.slice(2).split('|').map(s => s.trim());
+      // "中文名 英文名 | note | price" or "中文名 | note | price"
+      const nameRaw = parts[0] || '';
+      const enM = nameRaw.match(/^([\u4e00-\u9fff\s]+)([\w\s]+)?$/);
+      let nameCn = nameRaw, nameEn = '';
+      if (enM && enM[2]) { nameCn = enM[1].trim(); nameEn = enM[2].trim(); }
+      // try split on space between CJK and latin
+      const spaceM = nameRaw.match(/^([\u4e00-\u9fff，。、\s]+)\s([A-Z].*)$/);
+      if (spaceM) { nameCn = spaceM[1].trim(); nameEn = spaceM[2].trim(); }
+      current.items.push({ name: nameCn, nameEn, note: parts[1]||'', price: parts[2]||'' });
+    }
+  }
+  return groups;
+}
+
+function parseFlightsBlock(block) {
+  const lines = block.split('\n').slice(1);
+  const routes = [];
+  let current = null;
+  for (const line of lines) {
+    if (line.startsWith('### ')) {
+      current = { label: line.slice(4).trim(), legs: [], cost: '' };
+      routes.push(current); continue;
+    }
+    if (!current) continue;
+    if (line.startsWith('- 費用：')) { current.cost = line.slice(5).trim(); continue; }
+    if (line.startsWith('- ')) {
+      // CI751 | 桃園(TPE) → 新加坡(SIN) | 08:00 → 13:30 | 飛行 4h30m
+      const parts = line.slice(2).split('|').map(s => s.trim());
+      if (parts.length < 3) continue;
+      const flight = parts[0];
+      const routeM = parts[1].match(/(.+?)\((\w+)\)\s*→\s*(.+?)\((\w+)\)/);
+      const timeM = parts[2].match(/(\d{2}:\d{2})\s*→\s*(\d{2}:\d{2})/);
+      const duration = (parts[3]||'').replace('飛行 ','').trim();
+      if (routeM && timeM) {
+        current.legs.push({
+          flight, from: routeM[1].trim(), fromCode: routeM[2],
+          to: routeM[3].trim(), toCode: routeM[4],
+          depart: timeM[1], arrive: timeM[2], duration
+        });
+      }
+    }
+  }
+  return { routes };
+}
+
+function parsePackingBlock(block) {
+  const lines = block.split('\n').slice(1);
+  const cats = [];
+  let current = null;
+  for (const line of lines) {
+    const catM = line.match(/^###\s*(.+)/);
+    if (catM) {
+      const raw = catM[1].trim();
+      const iconM = raw.match(/^([\p{Emoji}]+)\s*(.*)/u);
+      current = { cat: iconM ? iconM[2].trim() : raw, icon: iconM ? iconM[1] : '📦', items: [] };
+      cats.push(current); continue;
+    }
+    if (line.startsWith('- ') && current) {
+      current.items.push({ item: line.slice(2).trim() });
+    }
+  }
+  return cats;
+}
+
+function parseTipsBlock(block) {
+  const lines = block.split('\n').slice(1);
+  const sections = [];
+  let current = null;
+  for (const line of lines) {
+    if (line.startsWith('### ')) {
+      current = { title: line.slice(4).trim(), items: [] };
+      sections.push(current); continue;
+    }
+    if (!current) continue;
+    if (line.startsWith('- ')) current.items.push(line.slice(2).trim());
+    else if (line.trim()) current.items.push(line.trim());
+  }
+  return { sections };
+}
+
+// ── Main parse ──────────────────────────────────────────
+const { config, body } = parseFrontmatter(raw);
+
+const blocks = body.split(/^(?=##\s)/m).filter(s => s.trim());
+const DATA = {
+  ...config,
+  days: [], food: [], flights: { routes: [] }, packingList: [], tips: { sections: [] }
+};
+
+for (const block of blocks) {
+  const firstLine = block.trim().split('\n')[0];
+  if (firstLine.match(/##\s*Day\s*\d+/)) {
+    const d = parseDayBlock(block.trim());
+    if (d) DATA.days.push(d);
+  } else if (firstLine.includes('美食清單')) {
+    DATA.food = parseFoodBlock(block.trim());
+  } else if (firstLine.includes('航班資訊')) {
+    DATA.flights = parseFlightsBlock(block.trim());
+  } else if (firstLine.includes('行李清單')) {
+    DATA.packingList = parsePackingBlock(block.trim());
+  } else if (firstLine.includes('旅遊須知')) {
+    DATA.tips = parseTipsBlock(block.trim());
+  }
+}
+
+// ── Helpers ─────────────────────────────────────────────
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function typeIcon(act) {
+  if (act.type === '景點') return '📍';
+  if (act.type === '吃喝') return '🍽️';
+  if (act.type === '作業') return '📋';
+  if (act.type === '參考') return '💡';
+  if (act.type === '住宿') return '🏠';
+  // 移動 — detect
+  const t = (act.nameCn + ' ' + (act.description||'')).toLowerCase();
+  if (/搭機|飛機|航班|ci\d|br\d|sin|tpe/.test(t)) return '✈️';
+  if (/mrt|地鐵/.test(t)) return '🚇';
+  if (/grab|計程車|uber/.test(t)) return '🚕';
+  if (/步行|散步/.test(t)) return '🚶';
+  return '🚗';
+}
+
+function typeColor(type) {
+  const map = { '景點':'景點','吃喝':'吃喝','移動':'移動','作業':'作業','住宿':'住宿','參考':'參考' };
+  return map[type] || '景點';
+}
+
+function mapsUrl(act) {
+  if (act.mapLink) return act.mapLink;
+  if (act.address) return `https://maps.google.com/?q=${encodeURIComponent(act.address)}`;
+  if (act.nameEn) return `https://maps.google.com/?q=${encodeURIComponent(act.nameEn)}`;
+  if (act.nameCn) return `https://maps.google.com/?q=${encodeURIComponent(act.nameCn)}`;
+  return null;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function copyText(text) {
+  navigator.clipboard?.writeText(text).catch(() => {
+    const el = document.createElement('textarea');
+    el.value = text; document.body.appendChild(el);
+    el.select(); document.execCommand('copy');
+    document.body.removeChild(el);
+  });
+  showToast('✅ 已複製！');
+}
+
+function openDriver(address, mapUrl) {
+  document.getElementById('driver-address').textContent = address;
+  const link = document.getElementById('driver-map-link');
+  link.href = mapUrl || `https://maps.google.com/?q=${encodeURIComponent(address)}`;
+  document.getElementById('driver-modal').classList.add('open');
+}
+function closeDriver() { document.getElementById('driver-modal').classList.remove('open'); }
+
+// ── Render Header ────────────────────────────────────────
+document.getElementById('header-title').textContent = `${DATA.emoji} ${DATA.title}`;
+document.getElementById('header-subtitle').textContent = DATA.subtitle;
+const badges = document.getElementById('header-badges');
+[DATA.tripType, `${DATA.people}人`, ...(DATA.transport||[])].forEach(b => {
+  const s = document.createElement('span'); s.textContent = b; badges.appendChild(s);
+});
+
+// ── Tab switching ────────────────────────────────────────
+function switchTab(tab) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.tab-panel[data-tab="${tab}"]`).classList.add('active');
+  document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
+  document.getElementById('main').scrollTop = 0;
+}
+
+// ── Render Itinerary ─────────────────────────────────────
+let currentDayIndex = 0;
+
+function renderDaySelector() {
+  const el = document.getElementById('day-selector');
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}/${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}`;
+  el.innerHTML = DATA.days.map((d, i) => {
+    const isToday = d.date === todayStr;
+    const isActive = i === currentDayIndex;
+    return `<button class="day-btn ${isActive?'active':''} ${isToday&&!isActive?'today':''}" onclick="selectDay(${i})">
+      <span class="day-n">Day ${d.day}</span>
+      <span class="day-date">${d.date.slice(5)}</span>
+      <span class="day-wd">${d.weekday}</span>
+    </button>`;
+  }).join('');
+}
+
+function renderActivity(act, dayIdx, actIdx) {
+  const tc = typeColor(act.type);
+  const icon = typeIcon(act);
+  const timeStr = act.time ? (act.endTime ? `${act.time} - ${act.endTime}` : act.time) : '';
+  const mapUrl = mapsUrl(act);
+  const storKey = `note_${dayIdx}_${actIdx}`;
+  const savedNote = localStorage.getItem(storKey) || '';
+  const isCancelled = act.cancelled;
+
+  return `<div class="activity-card ${isCancelled?'cancelled-card':''}" id="act-${dayIdx}-${actIdx}">
+    <div class="card-header" onclick="toggleCard('act-${dayIdx}-${actIdx}')">
+      <span class="card-icon">${icon}</span>
+      <div class="card-meta">
+        ${timeStr ? `<div class="card-time">${escHtml(timeStr)}</div>` : ''}
+        <div class="card-name ${isCancelled?'cancelled-text':''}">${escHtml(act.nameCn)}</div>
+        <div class="card-tags">
+          <span class="tag-type" style="background:var(--type-${tc}-bg);color:var(--type-${tc})">${escHtml(act.type)}</span>
+          ${act.cost ? `<span class="tag-cost">${escHtml(act.cost)}</span>` : ''}
+        </div>
+      </div>
+      <span class="card-chevron" id="chv-act-${dayIdx}-${actIdx}">›</span>
+    </div>
+    <div class="card-body" id="body-act-${dayIdx}-${actIdx}">
+      ${isCancelled && act.cancelReason ? `<div class="notes-box">已排除：${escHtml(act.cancelReason)}</div>` : ''}
+      ${act.description ? `<div class="card-desc">${escHtml(act.description)}</div>` : ''}
+      ${act.hours ? `<div class="card-hours">🕐 營業時間：${escHtml(act.hours)}</div>` : ''}
+      ${act.cost ? `<div class="tag-cost" style="display:inline-block;margin-bottom:8px">💰 ${escHtml(act.cost)}</div>` : ''}
+      ${act.ticket ? `<div class="ticket-box">🎫 ${escHtml(act.ticket)}</div>` : ''}
+      ${act.meta ? `<div class="meta-box">ℹ️ ${escHtml(act.meta)}</div>` : ''}
+      ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
+      ${act.notes ? `<div class="notes-box">${escHtml(act.notes)}</div>` : ''}
+      ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">📄 查看文件</a>` : ''}
+      <div class="card-buttons">
+        ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
+        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}','${mapUrl||''}')">👁 給司機看</button>` : ''}
+      </div>
+      <textarea class="note-textarea" placeholder="備注…" onchange="localStorage.setItem('${storKey}',this.value)">${escHtml(savedNote)}</textarea>
+    </div>
+  </div>`;
+}
+
+function renderAccommodation(accom, dayIdx) {
+  if (!accom) return '';
+  const mapUrl = accom.mapLink || (accom.address ? `https://maps.google.com/?q=${encodeURIComponent(accom.address)}` : null);
+  const storKey = `note_accom_${dayIdx}`;
+  const savedNote = localStorage.getItem(storKey) || '';
+  return `<div class="accommodation-section" id="accom-${dayIdx}">
+    <div class="accom-header" onclick="toggleAccom(${dayIdx})">
+      <span>🏠</span>
+      <div style="flex:1">
+        <div class="accom-title">${escHtml(accom.name)}</div>
+        <div class="accom-sub">${accom.checkIn?`入住 ${accom.checkIn}`:''}${accom.checkOut?` · 退房 ${accom.checkOut}`:''}</div>
+      </div>
+      <span class="card-chevron" id="chv-accom-${dayIdx}">›</span>
+    </div>
+    <div class="accom-body" id="body-accom-${dayIdx}">
+      ${accom.price ? `<div class="accom-row"><span class="accom-label">費用</span><span class="accom-val">${escHtml(accom.price)}</span></div>` : ''}
+      ${accom.nights ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${accom.nights} 晚</span></div>` : ''}
+      ${accom.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(accom.address)}</span></div>` : ''}
+      ${accom.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(accom.copyable)}')" style="margin-top:8px">${escHtml(accom.copyable)}<span class="copy-icon">📋</span></div>` : ''}
+      ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(accom.notes)}</div>` : ''}
+      <div class="card-buttons" style="margin-top:8px">
+        ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
+        ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}','${mapUrl||''}')">👁 給司機看</button>` : ''}
+      </div>
+      <textarea class="note-textarea" placeholder="備注…" onchange="localStorage.setItem('${storKey}',this.value)">${escHtml(savedNote)}</textarea>
+    </div>
+  </div>`;
+}
+
+function renderWeather(day) {
+  if (!DATA.weather) return '';
+  for (const [cityKey, w] of Object.entries(DATA.weather)) {
+    if (day.title.includes(cityKey) || day.route.includes(cityKey) || (day.dayNote && day.dayNote.includes(cityKey))) {
+      return `<div class="weather-bar">
+        <div class="weather-temp">${escHtml(w.temp)}</div>
+        <div class="weather-info">
+          <div class="weather-cond">${escHtml(w.condition)}</div>
+          <div class="weather-tips">${escHtml(w.tips)}</div>
+        </div>
+      </div>`;
+    }
+  }
+  return '';
+}
+
+function renderDayContent(dayIdx) {
+  const day = DATA.days[dayIdx];
+  if (!day) return;
+  const el = document.getElementById('day-content');
+  const normal = day.activities.filter(a => !a.cancelled);
+  const cancelled = day.activities.filter(a => a.cancelled);
+  const dayNoteKey = `daynote_${dayIdx}`;
+  const savedDayNote = localStorage.getItem(dayNoteKey) || '';
+
+  let html = `<div class="day-header">
+    <div class="day-route">📍 ${escHtml(day.route || day.title)}</div>
+    ${day.dayNote ? `<div class="day-note">${escHtml(day.dayNote)}</div>` : ''}
+  </div>
+  ${renderWeather(day)}
+  ${normal.map((a, i) => renderActivity(a, dayIdx, i)).join('')}
+  ${renderAccommodation(day.accommodation, dayIdx)}
+  ${cancelled.length ? `
+    <div class="cancelled-section">
+      <div class="cancelled-toggle" onclick="toggleCancelled(${dayIdx})">已排除景點 (${cancelled.length}) ▾</div>
+      <div id="cancelled-list-${dayIdx}" style="display:none">
+        ${cancelled.map((a, i) => renderActivity(a, dayIdx, normal.length + i)).join('')}
+      </div>
+    </div>` : ''}
+  <div class="day-note-section">
+    <div class="day-note-label">今日備注</div>
+    <textarea class="note-textarea" placeholder="今天的備注…" onchange="localStorage.setItem('${dayNoteKey}',this.value)">${escHtml(savedDayNote)}</textarea>
+  </div>`;
+  el.innerHTML = html;
+}
+
+function selectDay(idx) {
+  currentDayIndex = idx;
+  renderDaySelector();
+  renderDayContent(idx);
+}
+
+function toggleCard(id) {
+  const body = document.getElementById(`body-${id}`);
+  const chv = document.getElementById(`chv-${id}`);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chv.classList.toggle('open', !isOpen);
+}
+
+function toggleAccom(dayIdx) {
+  toggleCard(`accom-${dayIdx}`);
+}
+
+function toggleCancelled(dayIdx) {
+  const el = document.getElementById(`cancelled-list-${dayIdx}`);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+// Auto-locate current activity
+function autoLocate() {
+  const now = new Date();
+  const todayStr = `${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')}`;
+  const dayIdx = DATA.days.findIndex(d => d.date === todayStr);
+  if (dayIdx < 0) return;
+  selectDay(dayIdx);
+  const day = DATA.days[dayIdx];
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+  const normal = day.activities.filter(a => !a.cancelled);
+  let targetIdx = -1;
+  for (let i = 0; i < normal.length; i++) {
+    const a = normal[i];
+    if (!a.time) continue;
+    const [h, m] = a.time.split(':').map(Number);
+    const actMin = h * 60 + m;
+    let nextMin = Infinity;
+    for (let j = i + 1; j < normal.length; j++) {
+      if (normal[j].time) {
+        const [nh, nm] = normal[j].time.split(':').map(Number);
+        nextMin = nh * 60 + nm; break;
+      }
+    }
+    if (nowMin >= actMin && nowMin < nextMin) { targetIdx = i; break; }
+  }
+  if (targetIdx >= 0) {
+    setTimeout(() => {
+      const card = document.getElementById(`act-${dayIdx}-${targetIdx}`);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('card-glow');
+        setTimeout(() => card.classList.remove('card-glow'), 3200);
+      }
+    }, 300);
+  }
+}
+
+// ── Render Food ───────────────────────────────────────────
+function renderFood() {
+  const el = document.getElementById('food-list');
+  el.innerHTML = DATA.food.map((group, gi) => `
+    <div class="food-city">
+      <div class="food-city-header" onclick="toggleFoodGroup(${gi})">
+        <div>
+          <div class="food-city-name">${escHtml(group.city)}</div>
+          <div class="food-city-count">${group.days} · ${group.items.length} 項</div>
+        </div>
+        <span class="card-chevron open" id="chv-food-${gi}">›</span>
+      </div>
+      <div class="food-list open" id="food-group-${gi}">
+        ${group.items.map(item => {
+          const searchQ = item.nameEn || item.name;
+          const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(searchQ + ' Singapore')}`;
+          return `<div class="food-item" onclick="window.open('${mapUrl}','_blank')">
+            <div class="food-item-info">
+              <div class="food-name">${escHtml(item.name)}</div>
+              ${item.nameEn ? `<div class="food-en">${escHtml(item.nameEn)}</div>` : ''}
+              ${item.note ? `<div class="food-note">${escHtml(item.note)}</div>` : ''}
+              ${item.price ? `<div><span class="food-price">${escHtml(item.price)}</span></div>` : ''}
+            </div>
+            <span class="food-map-btn">🗺</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function toggleFoodGroup(gi) {
+  const list = document.getElementById(`food-group-${gi}`);
+  const chv = document.getElementById(`chv-food-${gi}`);
+  list.classList.toggle('open');
+  chv.classList.toggle('open', list.classList.contains('open'));
+}
+
+// ── Render Flights ────────────────────────────────────────
+function renderFlights() {
+  const el = document.getElementById('flights-list');
+  el.innerHTML = DATA.flights.routes.map(route => `
+    <div class="flight-group">
+      <div class="flight-group-title">${escHtml(route.label)}</div>
+      ${route.legs.map(leg => `
+        <div class="flight-card">
+          <div class="flight-row">
+            <span class="flight-no">${escHtml(leg.flight)}</span>
+            <span class="flight-duration">✈️ ${escHtml(leg.duration)}</span>
+          </div>
+          <div class="flight-route">
+            <div class="flight-city">
+              <div class="flight-code">${escHtml(leg.fromCode)}</div>
+              <div class="flight-name">${escHtml(leg.from)}</div>
+              <div class="flight-time">${escHtml(leg.depart)}</div>
+            </div>
+            <div class="flight-arrow">──────›</div>
+            <div class="flight-city" style="text-align:right">
+              <div class="flight-code">${escHtml(leg.toCode)}</div>
+              <div class="flight-name">${escHtml(leg.to)}</div>
+              <div class="flight-time">${escHtml(leg.arrive)}</div>
+            </div>
+          </div>
+          ${route.cost ? `<div class="flight-cost">💰 ${escHtml(route.cost)}</div>` : ''}
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+// ── Render Packing ────────────────────────────────────────
+function getPackKey(catIdx, itemIdx) { return `pack_${catIdx}_${itemIdx}`; }
+
+function updatePackProgress() {
+  let total = 0, checked = 0;
+  DATA.packingList.forEach((cat, ci) => {
+    cat.items.forEach((_, ii) => {
+      total++;
+      if (localStorage.getItem(getPackKey(ci, ii)) === '1') checked++;
+    });
+  });
+  const pct = total ? Math.round(checked / total * 100) : 0;
+  document.getElementById('packing-progress').innerHTML = `
+    <div class="pack-progress-bar"><div class="pack-progress-fill" style="width:${pct}%"></div></div>
+    <div class="pack-progress-label">已打包 ${checked} / ${total} 項（${pct}%）</div>`;
+}
+
+function togglePackItem(ci, ii) {
+  const k = getPackKey(ci, ii);
+  const checked = localStorage.getItem(k) === '1';
+  localStorage.setItem(k, checked ? '0' : '1');
+  renderPacking();
+}
+
+function renderPacking() {
+  const el = document.getElementById('packing-list');
+  el.innerHTML = DATA.packingList.map((cat, ci) => {
+    const total = cat.items.length;
+    const done = cat.items.filter((_, ii) => localStorage.getItem(getPackKey(ci, ii)) === '1').length;
+    return `<div class="pack-cat">
+      <div class="pack-cat-header" onclick="togglePackCat(${ci})">
+        <span class="pack-cat-icon">${escHtml(cat.icon)}</span>
+        <span class="pack-cat-name">${escHtml(cat.cat)}</span>
+        <span class="pack-cat-count">${done}/${total}</span>
+        <span class="card-chevron open" id="chv-pack-${ci}">›</span>
+      </div>
+      <div class="pack-items open" id="pack-cat-${ci}">
+        ${cat.items.map((item, ii) => {
+          const isChecked = localStorage.getItem(getPackKey(ci, ii)) === '1';
+          return `<div class="pack-item" onclick="togglePackItem(${ci},${ii})">
+            <div class="pack-check ${isChecked?'checked'}">${isChecked?'✓':''}</div>
+            <span class="pack-item-text ${isChecked?'checked':''}">${escHtml(item.item)}</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+  updatePackProgress();
+}
+
+function togglePackCat(ci) {
+  const el = document.getElementById(`pack-cat-${ci}`);
+  const chv = document.getElementById(`chv-pack-${ci}`);
+  el.classList.toggle('open');
+  chv.classList.toggle('open', el.classList.contains('open'));
+}
+
+// ── Render Tips ───────────────────────────────────────────
+function renderTips() {
+  const el = document.getElementById('tips-list');
+  el.innerHTML = DATA.tips.sections.map((sec, i) => `
+    <div class="tips-card">
+      <div class="tips-card-header" onclick="toggleTipsCard(${i})">
+        <span class="tips-card-title">${escHtml(sec.title)}</span>
+        <span class="card-chevron open" id="chv-tips-${i}">›</span>
+      </div>
+      <div class="tips-card-body open" id="tips-body-${i}">
+        <ul>${sec.items.map(item => `<li>${escHtml(item)}</li>`).join('')}</ul>
+      </div>
+    </div>`).join('');
+}
+
+function toggleTipsCard(i) {
+  const body = document.getElementById(`tips-body-${i}`);
+  const chv = document.getElementById(`chv-tips-${i}`);
+  body.classList.toggle('open');
+  chv.classList.toggle('open', body.classList.contains('open'));
+}
+
+// ── Search ────────────────────────────────────────────────
+function buildSearchIndex() {
+  const idx = [];
+  DATA.days.forEach((day, di) => {
+    day.activities.forEach((act, ai) => {
+      idx.push({ text: `${act.nameCn} ${act.nameEn||''} ${act.description||''}`, label: `Day ${day.day} · ${act.type}`, name: act.nameCn, tab: 'itinerary', dayIdx: di, actIdx: ai });
+    });
+    if (day.accommodation) {
+      idx.push({ text: day.accommodation.name, label: `Day ${day.day} · 住宿`, name: day.accommodation.name, tab: 'itinerary', dayIdx: di });
+    }
+  });
+  DATA.food.forEach((group) => {
+    group.items.forEach(item => {
+      idx.push({ text: `${item.name} ${item.nameEn||''}`, label: `美食 · ${group.city}`, name: item.name, tab: 'food' });
+    });
+  });
+  return idx;
+}
+const searchIndex = buildSearchIndex();
+
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+const searchClear = document.getElementById('search-clear');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  searchClear.style.display = q ? 'block' : 'none';
+  if (!q) { searchResults.style.display = 'none'; return; }
+  const hits = searchIndex.filter(item => item.text.toLowerCase().includes(q)).slice(0, 8);
+  if (!hits.length) { searchResults.style.display = 'none'; return; }
+  searchResults.innerHTML = hits.map((h, i) => `
+    <div class="search-item" onclick="jumpToResult(${i}, searchHits)">
+      <div class="search-item-label">${escHtml(h.label)}</div>
+      <div>${escHtml(h.name)}</div>
+    </div>`).join('');
+  // store hits for onclick
+  window.searchHits = hits;
+  // fix onclick
+  searchResults.querySelectorAll('.search-item').forEach((el, i) => {
+    el.onclick = () => jumpToResult(i, hits);
+  });
+  searchResults.style.display = 'block';
+});
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = ''; searchClear.style.display = 'none';
+  searchResults.style.display = 'none';
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#search-wrap')) searchResults.style.display = 'none';
+});
+
+function jumpToResult(i, hits) {
+  const h = hits[i];
+  searchResults.style.display = 'none';
+  switchTab(h.tab);
+  if (h.tab === 'itinerary' && h.dayIdx !== undefined) {
+    selectDay(h.dayIdx);
+    if (h.actIdx !== undefined) {
+      setTimeout(() => {
+        const card = document.getElementById(`act-${h.dayIdx}-${h.actIdx}`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const body = document.getElementById(`body-act-${h.dayIdx}-${h.actIdx}`);
+          const chv = document.getElementById(`chv-act-${h.dayIdx}-${h.actIdx}`);
+          if (!body.classList.contains('open')) { body.classList.add('open'); chv.classList.add('open'); }
+        }
+      }, 100);
+    }
+  }
+}
+
+// ── Header scroll ─────────────────────────────────────────
+document.getElementById('main').addEventListener('scroll', function() {
+  const header = document.getElementById('header');
+  header.classList.toggle('compact', this.scrollTop > 10);
+});
+
+// ── Backup ────────────────────────────────────────────────
+function exportData() {
+  const data = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    data[k] = localStorage.getItem(k);
+  }
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url;
+  a.download = `sg2026-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(url);
+  showToast('✅ 已匯出備份');
+}
+
+function importData(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      Object.entries(data).forEach(([k, v]) => localStorage.setItem(k, v));
+      showToast('✅ 已匯入備份，請重新整理');
+      renderPacking(); renderDayContent(currentDayIndex);
+    } catch { showToast('❌ 匯入失敗'); }
+  };
+  reader.readAsText(file);
+}
+
+// ── Init ──────────────────────────────────────────────────
+renderFood();
+renderFlights();
+renderPacking();
+renderTips();
+renderDaySelector();
+renderDayContent(0);
+autoLocate();
+</script>
+</body>
+</html>
