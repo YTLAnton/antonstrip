@@ -24,7 +24,8 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    button, a {
+    button,
+    a {
       outline: none;
     }
 
@@ -90,8 +91,13 @@
 
     /* 桌機：維持手機比例置中，補回深色背景 */
     @media (min-width: 480px) {
-      body { background: #1a1a2e; }
-      #app { max-width: 390px; }
+      body {
+        background: #1a1a2e;
+      }
+
+      #app {
+        max-width: 390px;
+      }
     }
 
     /* ── Header ── */
@@ -1137,7 +1143,8 @@
       inset: 0;
       z-index: 300;
       display: none;
-      align-items: flex-end;
+      background: white;
+      align-items: center;
       justify-content: center;
     }
 
@@ -1145,66 +1152,37 @@
       display: flex;
     }
 
-    #driver-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-    }
-
     #driver-sheet {
       position: relative;
-      background: white;
       width: 100%;
-      max-width: 390px;
-      border-radius: 20px 20px 0 0;
-      padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
-      transform: translateY(100%);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    #driver-modal.open #driver-sheet {
-      transform: translateY(0);
-    }
-
-    .driver-handle {
-      width: 40px;
-      height: 4px;
-      background: var(--border);
-      border-radius: 99px;
-      margin: 0 auto 16px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 32px;
     }
 
     .driver-label {
-      font-size: 0.72rem;
+      font-size: 1rem;
       color: var(--text-3);
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
     }
 
     #driver-address {
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 2.6rem;
+      font-weight: 800;
       color: var(--text);
       line-height: 1.3;
-      margin-bottom: 16px;
-    }
-
-    #driver-map-link {
-      display: block;
-      padding: 11px;
-      background: var(--primary);
-      color: white;
-      text-decoration: none;
-      border-radius: var(--r);
       text-align: center;
-      font-size: 0.88rem;
-      font-weight: 700;
     }
 
     #driver-close {
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: 20px;
+      right: 20px;
       background: var(--bg);
       border: none;
       border-radius: 99px;
@@ -1256,7 +1234,6 @@
   <script id="trip-data" type="text/plain">
 ---
 title: "2026/04 台南MO行"
-emoji: "MO"
 subtitle: "2026/04/25 - 04/26 (2天1夜)"
 people: 2
 tripType: "自由行"
@@ -1435,13 +1412,10 @@ app: 台鐵
 
   <!-- Driver Modal -->
   <div id="driver-modal">
-    <div id="driver-overlay" onclick="closeDriver()"></div>
     <div id="driver-sheet">
-      <div class="driver-handle"></div>
       <button id="driver-close" onclick="closeDriver()">✕</button>
       <div class="driver-label">📍 給司機看地址</div>
       <div id="driver-address"></div>
-      <a id="driver-map-link" href="#" target="_blank">🗺 開啟 Google Maps 導航</a>
     </div>
   </div>
 
@@ -1694,8 +1668,6 @@ app: 台鐵
     function mapsUrl(act) {
       if (act.mapLink) return act.mapLink;
       if (act.address) return `https://maps.google.com/?q=${encodeURIComponent(act.address)}`;
-      if (act.nameEn) return `https://maps.google.com/?q=${encodeURIComponent(act.nameEn)}`;
-      if (act.nameCn) return `https://maps.google.com/?q=${encodeURIComponent(act.nameCn)}`;
       return null;
     }
 
@@ -1733,10 +1705,8 @@ app: 台鐵
       showToast('✅ 已複製！');
     }
 
-    function openDriver(address, mapUrl) {
+    function openDriver(address) {
       document.getElementById('driver-address').textContent = address;
-      const link = document.getElementById('driver-map-link');
-      link.href = mapUrl || `https://maps.google.com/?q=${encodeURIComponent(address)}`;
       document.getElementById('driver-modal').classList.add('open');
     }
     function closeDriver() { document.getElementById('driver-modal').classList.remove('open'); }
@@ -1814,6 +1784,7 @@ app: 台鐵
       </div>
       <span class="card-chevron" id="chv-act-${dayIdx}-${actIdx}">›</span>
     </div>
+    ${renderAppButton(act)}
     <div class="card-body" id="body-act-${dayIdx}-${actIdx}">
       ${isCancelled && act.cancelReason ? `<div class="notes-box">已排除：${escHtml(act.cancelReason)}</div>` : ''}
       ${act.description ? `<div class="card-desc">${escHtml(act.description)}</div>` : ''}
@@ -1824,10 +1795,9 @@ app: 台鐵
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box">${escHtml(act.notes)}</div>` : ''}
       ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">📄 查看文件</a>` : ''}
-      ${renderAppButton(act)}
       <div class="card-buttons">
         ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
-        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
+        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看</button>` : ''}
       </div>
     </div>
   </div>`;
@@ -1854,7 +1824,7 @@ app: 台鐵
       ${renderAppButton(accom)}
       <div class="card-buttons" style="margin-top:8px">
         ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
-        ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
+        ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}')">👁 給司機看</button>` : ''}
       </div>
     </div>
   </div>`;
