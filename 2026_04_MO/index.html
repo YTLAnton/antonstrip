@@ -89,7 +89,7 @@
     #header {
       background: linear-gradient(135deg, #1a2a2a, #c0392b 60%, #e74c3c);
       color: white;
-      padding: env(safe-area-inset-top) 16px 12px;
+      padding: calc(env(safe-area-inset-top) + 14px) 16px 12px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -2086,7 +2086,9 @@ copyable: 訂票代碼 3615830
       if (visible.length) {
         document.querySelector(`.tab-panel[data-tab="${visible[0].key}"]`).classList.add('active');
       }
-      document.getElementById('tab-bar').innerHTML = visible.map((t, i) =>
+      const nav = document.getElementById('tab-bar');
+      nav.style.display = visible.length <= 1 ? 'none' : '';
+      nav.innerHTML = visible.map((t, i) =>
         `<button class="tab-btn ${i === 0 ? 'active' : ''}" data-tab="${t.key}" onclick="switchTab('${t.key}')">
           <span class="tab-icon">${t.icon}</span><span>${t.label}</span>
         </button>`
