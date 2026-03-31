@@ -287,6 +287,9 @@
       scrollbar-width: none;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
 
     #day-selector::-webkit-scrollbar {
@@ -1143,7 +1146,7 @@
       inset: 0;
       z-index: 300;
       display: none;
-      background: white;
+      background: rgba(0, 0, 0, 0.5);
       align-items: center;
       justify-content: center;
     }
@@ -1155,12 +1158,15 @@
     #driver-sheet {
       position: relative;
       width: 100%;
+      max-width: 390px;
       height: 100%;
+      max-height: 100dvh;
+      background: white;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 32px;
+      padding: 40px 32px calc(40px + env(safe-area-inset-bottom));
     }
 
     .driver-label {
@@ -1177,6 +1183,19 @@
       color: var(--text);
       line-height: 1.3;
       text-align: center;
+      margin-bottom: 48px;
+    }
+
+    #driver-confirm {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--r);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     #driver-close {
@@ -1236,19 +1255,16 @@
 title: "2026/04 台南MO行"
 subtitle: "2026/04/25 - 04/26 (2天1夜)"
 people: 2
-tripType: "自由行"
-transport: ["台鐵", "計程車", "步行"]
-weather:
-  台南:
-    temp: "24-29°C"
-    condition: "可能會有陣雨"
-    tips: "帶雨傘"
+keywords: ["自由行", "台鐵", "計程車", "步行"]
 ---
 
 ## Day 1 | 2026/04/25 (五) | 抵達台南
 
 route: 台北 → 台南
 dayNote: 聽講座吃MO
+weatherTemp: 24-29°C
+weatherCond: 可能會有陣雨
+weatherTips: 帶雨傘
 
 ### 交通 | 台鐵出發
 time: 08:00
@@ -1313,10 +1329,13 @@ mapLink: https://maps.app.goo.gl/KSj8Q1q6sWADc23P6
 
 ---
 
-## Day 2 | 2026/04/26 (日) | 
+## Day 2 | 2026/04/26 (日) |
 
 route: 台南 → 台北
 dayNote: 慢慢回家
+weatherTemp: 24-29°C
+weatherCond: 多雲時晴
+weatherTips: 帶雨傘備用
 
 ### 飲食 | 西羅殿牛肉湯
 time: 04:30
@@ -1416,6 +1435,7 @@ app: 台鐵
       <button id="driver-close" onclick="closeDriver()">✕</button>
       <div class="driver-label">📍 給司機看地址</div>
       <div id="driver-address"></div>
+      <button id="driver-confirm" onclick="closeDriver()">確定</button>
     </div>
   </div>
 
@@ -1489,16 +1509,19 @@ app: 台鐵
       const headerLine = block.split('\n')[0];
       const hm = headerLine.match(/##\s*Day\s*(\d+)\s*\|\s*(\d{4}\/\d{2}\/\d{2})\s*\(([^)]+)\)\s*\|\s*(.*)/);
       if (!hm) return null;
-      const day = { day: parseInt(hm[1]), date: hm[2], weekday: hm[3].trim(), title: hm[4].trim(), route: '', dayNote: '', activities: [], accommodation: null };
+      const day = { day: parseInt(hm[1]), date: hm[2], weekday: hm[3].trim(), title: hm[4].trim(), route: '', dayNote: '', weather: null, activities: [], accommodation: null };
 
       const rest = block.split('\n').slice(1);
-      // parse route/dayNote before first ###
+      // parse route/dayNote/weather before first ###
       let i = 0;
       while (i < rest.length && !rest[i].startsWith('###')) {
         const rkv = rest[i].match(/^(\w+):\s*(.*)/);
         if (rkv) {
           if (rkv[1] === 'route') day.route = rkv[2].trim();
           if (rkv[1] === 'dayNote') day.dayNote = rkv[2].trim();
+          if (rkv[1] === 'weatherTemp') { if (!day.weather) day.weather = {}; day.weather.temp = rkv[2].trim(); }
+          if (rkv[1] === 'weatherCond') { if (!day.weather) day.weather = {}; day.weather.condition = rkv[2].trim(); }
+          if (rkv[1] === 'weatherTips') { if (!day.weather) day.weather = {}; day.weather.tips = rkv[2].trim(); }
         }
         i++;
       }
@@ -1733,7 +1756,8 @@ app: 台鐵
     document.getElementById('header-title').textContent = `${DATA.emoji || ''} ${DATA.title || ''}`.trim();
     document.getElementById('header-subtitle').textContent = DATA.subtitle;
     const badges = document.getElementById('header-badges');
-    [DATA.tripType, `${DATA.people}人`, ...(DATA.transport || [])].forEach(b => {
+    [`${DATA.people}人`, ...(DATA.keywords || [])].forEach(b => {
+      if (!b) return;
       const s = document.createElement('span'); s.textContent = b; badges.appendChild(s);
     });
 
@@ -1784,7 +1808,6 @@ app: 台鐵
       </div>
       <span class="card-chevron" id="chv-act-${dayIdx}-${actIdx}">›</span>
     </div>
-    ${renderAppButton(act)}
     <div class="card-body" id="body-act-${dayIdx}-${actIdx}">
       ${isCancelled && act.cancelReason ? `<div class="notes-box">已排除：${escHtml(act.cancelReason)}</div>` : ''}
       ${act.description ? `<div class="card-desc">${escHtml(act.description)}</div>` : ''}
@@ -1795,6 +1818,7 @@ app: 台鐵
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box">${escHtml(act.notes)}</div>` : ''}
       ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">📄 查看文件</a>` : ''}
+      ${renderAppButton(act)}
       <div class="card-buttons">
         ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
         ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看</button>` : ''}
@@ -1831,19 +1855,15 @@ app: 台鐵
     }
 
     function renderWeather(day) {
-      if (!DATA.weather) return '';
-      for (const [cityKey, w] of Object.entries(DATA.weather)) {
-        if (day.title.includes(cityKey) || day.route.includes(cityKey) || (day.dayNote && day.dayNote.includes(cityKey))) {
-          return `<div class="weather-bar">
-        <div class="weather-temp">${escHtml(w.temp)}</div>
+      if (!day.weather) return '';
+      const w = day.weather;
+      return `<div class="weather-bar">
+        <div class="weather-temp">${escHtml(w.temp || '')}</div>
         <div class="weather-info">
-          <div class="weather-cond">${escHtml(w.condition)}</div>
-          <div class="weather-tips">${escHtml(w.tips)}</div>
+          ${w.condition ? `<div class="weather-cond">${escHtml(w.condition)}</div>` : ''}
+          ${w.tips ? `<div class="weather-tips">${escHtml(w.tips)}</div>` : ''}
         </div>
       </div>`;
-        }
-      }
-      return '';
     }
 
     function renderDayContent(dayIdx) {
