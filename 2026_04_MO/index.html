@@ -1347,39 +1347,6 @@ copyable: 訂票代碼 3615830
 
 ---
 
-## 台鐵資訊
-
-### 去程
-- 111次 | 台北 → 台南 | 08:00 → 11:25 | 乘車時間約 3.5 小時
-- 費用：TWD 891/人
-
-### 回程
-- 132次 | 台南 → 台北 | 14:46 → 18:15 | 乘車時間約 3.5 小時
-- 費用：TWD 891/人
-
----
-
-## 行李清單
-
-### 👕 衣物
-- 輕薄上衣 x 2
-- 短褲 x 1
-- 內衣褲 x 1
-
-### 💊 醫藥
-- 頭痛藥
-- B群
-
-### 📱 電子
-- 充電頭
-- 充電線
-- 行動電源
-
-### 🧳 其他
-- 菜單夾
-- 牙膏
-- 牙刷
-
 </script>
   <!-- ================================================
      以上為資料區，以下為應用程式邏輯（勿修改）
@@ -1426,15 +1393,7 @@ copyable: 訂票代碼 3615830
       <div class="tab-panel" data-tab="packing">
         <div class="section-header">打包清單</div>
         <div id="packing-progress" class="pack-progress"></div>
-        <div class="pack-tips">
-          <div class="pack-tips-title">✈️ 航空行李提醒</div>
-          <ul>
-            <li>液體、膠狀物品：每件≤100ml，裝入 1L 透明夾鏈袋（隨身行李）</li>
-            <li>鋰電池/行動電源：≤100Wh 免申報，100-160Wh 須航空公司同意，禁止托運</li>
-            <li>行動電源容量限制：≤20000mAh（約 74Wh）</li>
-            <li>托運行李限重：每件 23kg（請確認您的票種規定）</li>
-          </ul>
-        </div>
+        <div id="packing-tips"></div>
         <div id="packing-list"></div>
       </div>
 
@@ -1442,35 +1401,11 @@ copyable: 訂票代碼 3615830
       <div class="tab-panel" data-tab="tips">
         <div class="section-header">旅遊須知</div>
         <div id="tips-list"></div>
-        <div class="backup-section">
-          <div class="backup-title">📦 資料備份</div>
-          <div class="backup-btns">
-            <button class="backup-btn" onclick="exportData()">📤 匯出備份</button>
-            <button class="backup-btn" onclick="document.getElementById('import-file').click()">📥 匯入備份</button>
-          </div>
-          <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
-        </div>
       </div>
     </div>
 
-    <!-- Tab Bar -->
-    <nav id="tab-bar">
-      <button class="tab-btn active" data-tab="itinerary" onclick="switchTab('itinerary')">
-        <span class="tab-icon">🗓</span><span>行程</span>
-      </button>
-      <button class="tab-btn" data-tab="food" onclick="switchTab('food')">
-        <span class="tab-icon">🍽️</span><span>美食</span>
-      </button>
-      <button class="tab-btn" data-tab="flights" onclick="switchTab('flights')">
-        <span class="tab-icon">✈️</span><span>航班</span>
-      </button>
-      <button class="tab-btn" data-tab="packing" onclick="switchTab('packing')">
-        <span class="tab-icon">🧳</span><span>行李</span>
-      </button>
-      <button class="tab-btn" data-tab="tips" onclick="switchTab('tips')">
-        <span class="tab-icon">📋</span><span>須知</span>
-      </button>
-    </nav>
+    <!-- Tab Bar（由 JS 動態產生）-->
+    <nav id="tab-bar"></nav>
   </div>
 
   <!-- Driver Modal -->
@@ -1684,7 +1619,7 @@ copyable: 訂票代碼 3615830
     const blocks = body.split(/^(?=##\s)/m).filter(s => s.trim());
     const DATA = {
       ...config,
-      days: [], food: [], flights: { routes: [] }, packingList: [], tips: { sections: [] }
+      days: [], food: [], flights: { routes: [] }, packingList: [], packingTips: { sections: [] }, tips: { sections: [] }
     };
 
     for (const block of blocks) {
@@ -1698,6 +1633,8 @@ copyable: 訂票代碼 3615830
         DATA.flights = parseFlightsBlock(block.trim());
       } else if (firstLine.includes('行李清單')) {
         DATA.packingList = parsePackingBlock(block.trim());
+      } else if (firstLine.includes('打包提醒')) {
+        DATA.packingTips = parseTipsBlock(block.trim());
       } else if (firstLine.includes('旅遊須知')) {
         DATA.tips = parseTipsBlock(block.trim());
       }
@@ -1819,8 +1756,6 @@ copyable: 訂票代碼 3615830
       const icon = typeIcon(act);
       const timeStr = act.time ? (act.endTime ? `${act.time} - ${act.endTime}` : act.time) : '';
       const mapUrl = mapsUrl(act);
-      const storKey = `note_${dayIdx}_${actIdx}`;
-      const savedNote = localStorage.getItem(storKey) || '';
       const isCancelled = act.cancelled;
 
       return `<div class="activity-card ${isCancelled ? 'cancelled-card' : ''}" id="act-${dayIdx}-${actIdx}">
@@ -1850,7 +1785,6 @@ copyable: 訂票代碼 3615830
         ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
         ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
       </div>
-      <textarea class="note-textarea" placeholder="備注…" onchange="localStorage.setItem('${storKey}',this.value)">${escHtml(savedNote)}</textarea>
     </div>
   </div>`;
     }
@@ -1858,8 +1792,6 @@ copyable: 訂票代碼 3615830
     function renderAccommodation(accom, dayIdx) {
       if (!accom) return '';
       const mapUrl = accom.mapLink || (accom.address ? `https://maps.google.com/?q=${encodeURIComponent(accom.address)}` : null);
-      const storKey = `note_accom_${dayIdx}`;
-      const savedNote = localStorage.getItem(storKey) || '';
       return `<div class="accommodation-section" id="accom-${dayIdx}">
     <div class="accom-header" onclick="toggleAccom(${dayIdx})">
       <span>🏠</span>
@@ -1879,7 +1811,6 @@ copyable: 訂票代碼 3615830
         ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
         ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
       </div>
-      <textarea class="note-textarea" placeholder="備注…" onchange="localStorage.setItem('${storKey}',this.value)">${escHtml(savedNote)}</textarea>
     </div>
   </div>`;
     }
@@ -1906,8 +1837,6 @@ copyable: 訂票代碼 3615830
       const el = document.getElementById('day-content');
       const normal = day.activities.filter(a => !a.cancelled);
       const cancelled = day.activities.filter(a => a.cancelled);
-      const dayNoteKey = `daynote_${dayIdx}`;
-      const savedDayNote = localStorage.getItem(dayNoteKey) || '';
 
       let html = `<div class="day-header">
     <div class="day-route">📍 ${escHtml(day.route || day.title)}</div>
@@ -1922,11 +1851,7 @@ copyable: 訂票代碼 3615830
       <div id="cancelled-list-${dayIdx}" style="display:none">
         ${cancelled.map((a, i) => renderActivity(a, dayIdx, normal.length + i)).join('')}
       </div>
-    </div>` : ''}
-  <div class="day-note-section">
-    <div class="day-note-label">今日備注</div>
-    <textarea class="note-textarea" placeholder="今天的備注…" onchange="localStorage.setItem('${dayNoteKey}',this.value)">${escHtml(savedDayNote)}</textarea>
-  </div>`;
+    </div>` : ''}`;
       el.innerHTML = html;
     }
 
@@ -2114,6 +2039,17 @@ copyable: 訂票代碼 3615830
       chv.classList.toggle('open', el.classList.contains('open'));
     }
 
+    // ── Render Packing Tips ───────────────────────────────────
+    function renderPackingTips() {
+      const el = document.getElementById('packing-tips');
+      if (!DATA.packingTips.sections.length) { el.innerHTML = ''; return; }
+      el.innerHTML = DATA.packingTips.sections.map(sec => `
+    <div class="pack-tips">
+      <div class="pack-tips-title">${escHtml(sec.title)}</div>
+      <ul>${sec.items.map(item => `<li>${escHtml(item)}</li>`).join('')}</ul>
+    </div>`).join('');
+    }
+
     // ── Render Tips ───────────────────────────────────────────
     function renderTips() {
       const el = document.getElementById('tips-list');
@@ -2134,6 +2070,27 @@ copyable: 訂票代碼 3615830
       const chv = document.getElementById(`chv-tips-${i}`);
       body.classList.toggle('open');
       chv.classList.toggle('open', body.classList.contains('open'));
+    }
+
+    // ── Tab Bar 動態產生 ──────────────────────────────────────
+    function renderTabBar() {
+      const tabs = [
+        { key: 'itinerary', icon: '🗓', label: '行程', hasContent: DATA.days.length > 0 },
+        { key: 'food', icon: '🍽️', label: '美食', hasContent: DATA.food.length > 0 },
+        { key: 'flights', icon: '✈️', label: '航班', hasContent: DATA.flights.routes.length > 0 },
+        { key: 'packing', icon: '🧳', label: '行李', hasContent: DATA.packingList.length > 0 },
+        { key: 'tips', icon: '📋', label: '須知', hasContent: DATA.tips.sections.length > 0 },
+      ];
+      const visible = tabs.filter(t => t.hasContent);
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      if (visible.length) {
+        document.querySelector(`.tab-panel[data-tab="${visible[0].key}"]`).classList.add('active');
+      }
+      document.getElementById('tab-bar').innerHTML = visible.map((t, i) =>
+        `<button class="tab-btn ${i === 0 ? 'active' : ''}" data-tab="${t.key}" onclick="switchTab('${t.key}')">
+          <span class="tab-icon">${t.icon}</span><span>${t.label}</span>
+        </button>`
+      ).join('');
     }
 
     // ── Search ────────────────────────────────────────────────
@@ -2215,38 +2172,11 @@ copyable: 訂票代碼 3615830
       header.classList.toggle('compact', this.scrollTop > 10);
     });
 
-    // ── Backup ────────────────────────────────────────────────
-    function exportData() {
-      const data = {};
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        data[k] = localStorage.getItem(k);
-      }
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url;
-      a.download = `sg2026-backup-${new Date().toISOString().slice(0, 10)}.json`;
-      a.click(); URL.revokeObjectURL(url);
-      showToast('✅ 已匯出備份');
-    }
-
-    function importData(e) {
-      const file = e.target.files[0]; if (!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => {
-        try {
-          const data = JSON.parse(ev.target.result);
-          Object.entries(data).forEach(([k, v]) => localStorage.setItem(k, v));
-          showToast('✅ 已匯入備份，請重新整理');
-          renderPacking(); renderDayContent(currentDayIndex);
-        } catch { showToast('❌ 匯入失敗'); }
-      };
-      reader.readAsText(file);
-    }
-
     // ── Init ──────────────────────────────────────────────────
+    renderTabBar();
     renderFood();
     renderFlights();
+    renderPackingTips();
     renderPacking();
     renderTips();
     renderDaySelector();
