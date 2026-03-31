@@ -24,6 +24,10 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    button, a {
+      outline: none;
+    }
+
     button,
     [data-action] {
       touch-action: manipulation;
@@ -66,7 +70,7 @@
     }
 
     body {
-      background: #1a1a2e;
+      background: var(--bg);
       display: flex;
       justify-content: center;
       color: var(--text);
@@ -76,13 +80,18 @@
 
     #app {
       width: 100%;
-      max-width: 390px;
       min-height: 100dvh;
       background: var(--bg);
       position: relative;
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
+    }
+
+    /* 桌機：維持手機比例置中，補回深色背景 */
+    @media (min-width: 480px) {
+      body { background: #1a1a2e; }
+      #app { max-width: 390px; }
     }
 
     /* ── Header ── */
@@ -1692,10 +1701,10 @@ app: 台鐵
 
     // ── App Deep Link Button ─────────────────────────────────
     const APP_MAP = {
-      '台鐵':    { label: '🚂 台鐵 e 訂通',    url: 'traeticket://', bg: '#1a6b3a', color: '#fff' },
-      '高鐵':    { label: '🚄 T-Express 高鐵', url: 'texpress://',   bg: '#e65100', color: '#fff' },
-      '長榮航空': { label: '✈️ 長榮航空',       url: 'evaair://',     bg: '#005f40', color: '#fff' },
-      'Agoda':   { label: '🏨 Agoda',          url: 'agoda://',      bg: '#5c2d91', color: '#fff' },
+      '台鐵': { label: '🚂 台鐵 e 訂通', url: 'traeticket://', bg: '#1a6b3a', color: '#fff' },
+      '高鐵': { label: '🚄 T-Express 高鐵', url: 'texpress://', bg: '#e65100', color: '#fff' },
+      '長榮航空': { label: '✈️ 長榮航空', url: 'evaair://', bg: '#005f40', color: '#fff' },
+      'Agoda': { label: '🏨 Agoda', url: 'agoda://', bg: '#5c2d91', color: '#fff' },
     };
 
     function renderAppButton(act) {
