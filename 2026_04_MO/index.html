@@ -1250,7 +1250,7 @@
      ================================================ -->
   <script id="trip-data" type="text/plain">
 ---
-title: "2026/04 台南MO行"
+title: "台南MO行"
 subtitle: "2026/04/25 - 04/26 (2天1夜)"
 people: 2
 keywords: ["自由行", "台鐵", "計程車", "步行"]
@@ -1269,6 +1269,7 @@ weatherTips: 帶雨傘
 time: 08:00
 endTime: 11:25
 description: 自強(3000)111次 | 座位 10 車 5,7 號
+cost: NTD 891/人
 notes: 提早 20 分鐘到台北車站
 copyable: 訂票代碼 3615829
 
@@ -1361,6 +1362,7 @@ mapLink: https://maps.app.goo.gl/hK9zknShU5gnAy116
 time: 14:46
 endTime: 18:15
 description: 自強(3000)132次 | 座位 2 車 14,16 號
+cost: NTD 891/人
 notes: 提早半小時到台南車站
 copyable: 訂票代碼 3615830
 
@@ -1824,7 +1826,7 @@ copyable: 訂票代碼 3615830
       ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">📄 查看文件</a>` : ''}
       ${renderAppButton(act)}
       <div class="card-buttons">
-        ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
+        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
         ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看</button>` : ''}
       </div>
     </div>
@@ -1851,7 +1853,7 @@ copyable: 訂票代碼 3615830
       ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(accom.notes)}</div>` : ''}
       ${renderAppButton(accom)}
       <div class="card-buttons" style="margin-top:8px">
-        ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
+        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
         ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}')">👁 給司機看</button>` : ''}
       </div>
     </div>
@@ -1865,7 +1867,7 @@ copyable: 訂票代碼 3615830
         <div class="weather-temp">${escHtml(w.temp || '')}</div>
         <div class="weather-info">
           ${w.condition ? `<div class="weather-cond">${escHtml(w.condition)}</div>` : ''}
-          ${w.rain ? `<div class="weather-cond" style="margin-top:2px;">☔️ 降雨機率 ${escHtml(w.rain)}</div>` : ''}
+          ${w.rain ? `<div class="weather-cond" style="margin-top:2px;">☂️ ${escHtml(w.rain)}</div>` : ''}
           ${w.tips ? `<div class="weather-tips">${escHtml(w.tips)}</div>` : ''}
         </div>
       </div>`;
@@ -1919,12 +1921,23 @@ copyable: 訂票代碼 3615830
     }
 
     // Auto-locate current activity
+    // 若今天在行程日期內 → 切換至今日並定位當前時段活動
+    // 若今天不在行程日期內 → 顯示 Day 1 最頂端（不捲動）
     function autoLocate() {
       const now = new Date();
       const todayStr = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`;
       const dayIdx = DATA.days.findIndex(d => d.date === todayStr);
-      if (dayIdx < 0) return;
+
+      // 今天不在行程範圍內 → 顯示 Day 1 最頂端
+      if (dayIdx < 0) {
+        renderDayContent(0);
+        return;
+      }
+
+      // 今天在行程內 → 切換至今日
       selectDay(dayIdx);
+
+      // 找出當前時段對應的活動
       const day = DATA.days[dayIdx];
       const nowMin = now.getHours() * 60 + now.getMinutes();
       const normal = day.activities.filter(a => !a.cancelled);
@@ -1971,7 +1984,7 @@ copyable: 訂票代碼 3615830
         ${group.items.map(item => {
         const searchQ = item.nameEn || item.name;
         const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(searchQ + ' ' + (group.city || ''))}`;
-        return `<div class="food-item" onclick="window.open('${mapUrl}','_blank')">
+        return `<div class="food-item" onclick="location.href='${mapUrl}'">
             <div class="food-item-info">
               <div class="food-name">${escHtml(item.name)}</div>
               ${item.nameEn ? `<div class="food-en">${escHtml(item.nameEn)}</div>` : ''}
@@ -2222,8 +2235,7 @@ copyable: 訂票代碼 3615830
     renderPacking();
     renderTips();
     renderDaySelector();
-    renderDayContent(0);
-    autoLocate();
+    autoLocate(); // 統一負責初始渲染：今天在行程內→定位；不在→顯示 Day 1 頂端
   </script>
 </body>
 
