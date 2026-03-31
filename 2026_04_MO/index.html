@@ -1331,6 +1331,13 @@ cost: NTD 200/人
 address: 台南市中西區民族路二段248號
 mapLink: https://maps.app.goo.gl/Unh2Nb4vkYBXUhqy9
 
+### 飲食 | On LIVE 炸雞現場
+time: 12:30
+description: Ray推薦、炸雞
+cost: NTD 200/人
+address: 台南市中西區赤崁東街2號
+mapLink: https://maps.app.goo.gl/hK9zknShU5gnAy116
+
 ### 交通 | 台鐵回程
 time: 14:46
 endTime: 18:15
@@ -1520,6 +1527,7 @@ copyable: 訂票代碼 3615830
           config[key] = obj;
         } else if (val.startsWith('[')) {
           config[key] = val.slice(1, -1).split(',').map(s => s.trim().replace(/"/g, ''));
+          i++;
         } else {
           config[key] = isNaN(val) ? val.replace(/"/g, '') : Number(val);
           i++;
@@ -1754,7 +1762,7 @@ copyable: 訂票代碼 3615830
     function closeDriver() { document.getElementById('driver-modal').classList.remove('open'); }
 
     // ── Render Header ────────────────────────────────────────
-    
+
     // 從資料動態設定網頁標題與 App Icon
     document.title = `${DATA.title || '行程表'} ${DATA.emoji || ''}`.trim();
     (function () {
