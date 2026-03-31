@@ -607,6 +607,19 @@
       border-color: var(--primary);
     }
 
+    .btn-app {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: var(--r-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
     .btn-doc {
       display: inline-block;
       margin-bottom: 8px;
@@ -1257,6 +1270,7 @@ endTime: 11:25
 description: 自強(3000)111次 台北→台南，乘車時間約 3.5 小時
 notes: 提早半小時到台北車站
 copyable: 訂票代碼 3615829
+app: 台鐵
 
 ### 飲食 | 落成米糕
 time: 12:00
@@ -1291,6 +1305,7 @@ address: 台南市北區公園里公園路128號
 mapLink: https://maps.app.goo.gl/MmkHggbBpHJc9T5u9
 notes: 要自己帶牙膏牙刷
 copyable: 訂單編號 1708158227
+app: Agoda
 
 ### 行程 | 「五條港的仕紳南管音樂」@ 硓𥑮石．芳宅
 time: 15:30
@@ -1344,6 +1359,7 @@ endTime: 18:15
 description: 自強(3000)132次 台南 → 台北，乘車時間約 3.5 小時
 notes: 提早半小時到台南車站
 copyable: 訂票代碼 3615830
+app: 台鐵
 
 ---
 
@@ -1674,6 +1690,24 @@ copyable: 訂票代碼 3615830
       return null;
     }
 
+    // ── App Deep Link Button ─────────────────────────────────
+    const APP_MAP = {
+      '台鐵':    { label: '🚂 台鐵 e 訂通',    url: 'traeticket://', bg: '#1a6b3a', color: '#fff' },
+      '高鐵':    { label: '🚄 T-Express 高鐵', url: 'texpress://',   bg: '#e65100', color: '#fff' },
+      '長榮航空': { label: '✈️ 長榮航空',       url: 'evaair://',     bg: '#005f40', color: '#fff' },
+      'Agoda':   { label: '🏨 Agoda',          url: 'agoda://',      bg: '#5c2d91', color: '#fff' },
+    };
+
+    function renderAppButton(act) {
+      if (!act.app) return '';
+      const cfg = APP_MAP[act.app];
+      const url = cfg ? cfg.url : act.app; // 若非內建關鍵字，把 app 欄位本身當作 URL
+      if (!url) return '';
+      const label = cfg ? cfg.label : `📱 開啟 App`;
+      const bg = cfg ? cfg.bg : '#555';
+      return `<a href="${escHtml(url)}" class="btn-app" style="background:${bg};color:${cfg ? cfg.color : '#fff'}">${label}</a>`;
+    }
+
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg; t.classList.add('show');
@@ -1781,6 +1815,7 @@ copyable: 訂票代碼 3615830
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box">${escHtml(act.notes)}</div>` : ''}
       ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">📄 查看文件</a>` : ''}
+      ${renderAppButton(act)}
       <div class="card-buttons">
         ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
         ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
@@ -1807,6 +1842,7 @@ copyable: 訂票代碼 3615830
       ${accom.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(accom.address)}</span></div>` : ''}
       ${accom.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(accom.copyable)}')" style="margin-top:8px">${escHtml(accom.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(accom.notes)}</div>` : ''}
+      ${renderAppButton(accom)}
       <div class="card-buttons" style="margin-top:8px">
         ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
         ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
