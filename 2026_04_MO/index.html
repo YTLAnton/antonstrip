@@ -7,26 +7,10 @@
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SG 2026">
+  <meta name="apple-mobile-web-app-title" content="Trip">
   <meta name="theme-color" content="#c0392b">
   <link rel="apple-touch-icon" id="app-icon" href="">
-  <script>
-    (function () {
-      try {
-        var c = document.createElement('canvas');
-        c.width = c.height = 180;
-        var ctx = c.getContext('2d');
-        var g = ctx.createLinearGradient(0, 0, 180, 180);
-        g.addColorStop(0, '#c0392b'); g.addColorStop(1, '#7b241c');
-        ctx.fillStyle = g; ctx.fillRect(0, 0, 180, 180);
-        ctx.font = '90px serif';
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText('🇸🇬', 90, 90);
-        document.getElementById('app-icon').href = c.toDataURL('image/png');
-      } catch (e) { }
-    })();
-  </script>
-  <title>新加坡 2026 🇸🇬</title>
+  <title>行程表</title>
   <style>
     *,
     *::before,
@@ -1632,7 +1616,7 @@ copyable: 訂票代碼 3615830
         if (!current) continue;
         if (line.startsWith('- 費用：')) { current.cost = line.slice(5).trim(); continue; }
         if (line.startsWith('- ')) {
-          // CI751 | 桃園(TPE) → 新加坡(SIN) | 08:00 → 13:30 | 飛行 4h30m
+          // 例: CX456 | 台北(TPE) → 大阪(KIX) | 08:00 → 12:00 | 飛行 3h00m
           const parts = line.slice(2).split('|').map(s => s.trim());
           if (parts.length < 3) continue;
           const flight = parts[0];
@@ -1770,7 +1754,25 @@ copyable: 訂票代碼 3615830
     function closeDriver() { document.getElementById('driver-modal').classList.remove('open'); }
 
     // ── Render Header ────────────────────────────────────────
-    document.getElementById('header-title').textContent = `${DATA.emoji} ${DATA.title}`;
+    
+    // 從資料動態設定網頁標題與 App Icon
+    document.title = `${DATA.title || '行程表'} ${DATA.emoji || ''}`.trim();
+    (function () {
+      try {
+        var c = document.createElement('canvas');
+        c.width = c.height = 180;
+        var ctx = c.getContext('2d');
+        var g = ctx.createLinearGradient(0, 0, 180, 180);
+        g.addColorStop(0, '#c0392b'); g.addColorStop(1, '#7b241c');
+        ctx.fillStyle = g; ctx.fillRect(0, 0, 180, 180);
+        ctx.font = '90px serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(DATA.emoji || '📅', 90, 90);
+        document.getElementById('app-icon').href = c.toDataURL('image/png');
+      } catch (e) { }
+    })();
+
+    document.getElementById('header-title').textContent = `${DATA.emoji || ''} ${DATA.title || ''}`.trim();
     document.getElementById('header-subtitle').textContent = DATA.subtitle;
     const badges = document.getElementById('header-badges');
     [DATA.tripType, `${DATA.people}人`, ...(DATA.transport || [])].forEach(b => {
@@ -1995,7 +1997,7 @@ copyable: 訂票代碼 3615830
       <div class="food-list open" id="food-group-${gi}">
         ${group.items.map(item => {
         const searchQ = item.nameEn || item.name;
-        const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(searchQ + ' Singapore')}`;
+        const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(searchQ + ' ' + (group.city || ''))}`;
         return `<div class="food-item" onclick="window.open('${mapUrl}','_blank')">
             <div class="food-item-info">
               <div class="food-name">${escHtml(item.name)}</div>
