@@ -1329,7 +1329,6 @@ address: 台南市中西區信義街46巷15號
 mapLink: https://maps.app.goo.gl/wDUqCpyqUgQQna5s7
 notes: 已報名
 
-
 ### 飲食 | MO
 time: 18:00
 endTime: 22:00
@@ -1836,7 +1835,7 @@ copyable: 訂票代碼 3615830
     function renderActivity(act, dayIdx, actIdx) {
       if (act.type === '住宿') {
         const id = `act-${dayIdx}-${actIdx}`;
-        const mapUrl = act.mapLink || (act.address ? `https://maps.google.com/?q=${encodeURIComponent(act.address)}` : null);
+        const mapUrl = mapsUrl(act);
         return `<div class="accommodation-section" id="${id}">
     <div class="accom-header" onclick="toggleCard('${id}')">
       <span>🏠</span>
@@ -1847,15 +1846,15 @@ copyable: 訂票代碼 3615830
       <span class="card-chevron" id="chv-${id}">›</span>
     </div>
     <div class="accom-body" id="body-${id}">
-      ${act.price ? `<div class="accom-row"><span class="accom-label">費用<\span><span class="accom-val">${escHtml(act.price)}<\span><\div>` : ''}
-      ${act.nights ? `<div class="accom-row"><span class="accom-label">晚數<\span><span class="accom-val">${act.nights} 晚<\span><\div>` : ''}
-      ${act.address ? `<div class="accom-row"><span class="accom-label">地址<\span><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
-      ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')" style="margin-top:8px">${escHtml(act.copyable)}<span class="copy-icon">📋</span><\div>` : ''}
-      ${act.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(act.notes)}<\div>` : ''}
+      ${act.price ? `<div class="accom-row"><span class="accom-label">費用</span><span class="accom-val">${escHtml(act.price)}</span></div>` : ''}
+      ${(act.nights || act.night) ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${act.nights || act.night} 晚</span></div>` : ''}
+      ${act.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
+      ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')" style="margin-top:8px">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
+      ${act.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(act.notes)}</div>` : ''}
       ${renderAppButton(act)}
       <div class="card-buttons" style="margin-top:8px">
-        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps<\button>` : ''}
-        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看<\button>` : ''}
+        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
+        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看</button>` : ''}
       </div>
     </div>
   </div>`;
