@@ -1546,11 +1546,7 @@ copyable: 訂票代碼 3615830
         const type = aHeader[1].trim();
         const name = aHeader[2].trim();
         const kvObj = parseKeyValues(aLines.slice(1));
-        if (type === '住宿') {
-          day.accommodation = { name, ...kvObj };
-        } else {
-          day.activities.push({ type, nameCn: name, ...kvObj });
-        }
+        day.activities.push({ type, nameCn: name, ...kvObj });
       }
       return day;
     }
@@ -1806,6 +1802,32 @@ copyable: 訂票代碼 3615830
     }
 
     function renderActivity(act, dayIdx, actIdx) {
+      if (act.type === '住宿') {
+        const id = `act-${dayIdx}-${actIdx}`;
+        const mapUrl = act.mapLink || (act.address ? `https://maps.google.com/?q=${encodeURIComponent(act.address)}` : null);
+        return `<div class="accommodation-section" id="${id}">
+    <div class="accom-header" onclick="toggleCard('${id}')">
+      <span>🏠</span>
+      <div style="flex:1">
+        <div class="accom-title"><span class="tag-type" style="background:var(--type-住宿-bg);color:var(--type-住宿);margin-right:6px;">住宿</span>${escHtml(act.nameCn)}</div>
+        <div class="accom-sub">${act.checkIn ? `入住 ${act.checkIn}` : ''}${act.checkOut ? ` · 退房 ${act.checkOut}` : ''}</div>
+      </div>
+      <span class="card-chevron" id="chv-${id}">›</span>
+    </div>
+    <div class="accom-body" id="body-${id}">
+      ${act.price ? `<div class="accom-row"><span class="accom-label">費用<\span><span class="accom-val">${escHtml(act.price)}<\span><\div>` : ''}
+      ${act.nights ? `<div class="accom-row"><span class="accom-label">晚數<\span><span class="accom-val">${act.nights} 晚<\span><\div>` : ''}
+      ${act.address ? `<div class="accom-row"><span class="accom-label">地址<\span><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
+      ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')" style="margin-top:8px">${escHtml(act.copyable)}<span class="copy-icon">📋</span><\div>` : ''}
+      ${act.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(act.notes)}<\div>` : ''}
+      ${renderAppButton(act)}
+      <div class="card-buttons" style="margin-top:8px">
+        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps<\button>` : ''}
+        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看<\button>` : ''}
+      </div>
+    </div>
+  </div>`;
+      }
       const tc = typeColor(act.type);
       const icon = typeIcon(act);
       const timeStr = act.time ? (act.endTime ? `${act.time} - ${act.endTime}` : act.time) : '';
@@ -1896,7 +1918,6 @@ copyable: 訂票代碼 3615830
   </div>
   ${renderWeather(day)}
   ${normal.map((a, i) => renderActivity(a, dayIdx, i)).join('')}
-  ${renderAccommodation(day.accommodation, dayIdx)}
   ${cancelled.length ? `
     <div class="cancelled-section">
       <div class="cancelled-toggle" onclick="toggleCancelled(${dayIdx})">已排除行程 (${cancelled.length}) ▾</div>
