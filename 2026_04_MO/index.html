@@ -1308,6 +1308,8 @@ address: 台南市中西區忠義路二段84巷16號
 mapLink: https://maps.app.goo.gl/csEPMZJw4msM6wKw6
 
 ### 住宿 | Vacay Stay 休日行旅
+time: 15:00
+endTime: 15:30
 checkIn: 15:00
 checkOut: 11:00
 price: NTD 2,050/晚
@@ -1669,6 +1671,23 @@ copyable: 訂票代碼 3615830
         DATA.tips = parseTipsBlock(block.trim());
       }
     }
+
+    // ── Sort activities by time ──────────────────────────────
+    function actTime(a) {
+      const t = a.time || (a.type === '住宿' ? a.checkIn : null);
+      if (!t) return null;
+      const [h, m] = t.split(':').map(Number);
+      return h * 60 + (m || 0);
+    }
+    DATA.days.forEach(day => {
+      day.activities.sort((a, b) => {
+        const ta = actTime(a), tb = actTime(b);
+        if (ta === null && tb === null) return 0;
+        if (ta === null) return 1;
+        if (tb === null) return -1;
+        return ta - tb;
+      });
+    });
 
     // ── Helpers ─────────────────────────────────────────────
     function escHtml(s) {
@@ -2186,9 +2205,6 @@ copyable: 訂票代碼 3615830
         day.activities.forEach((act, ai) => {
           idx.push({ text: `${act.nameCn} ${act.nameEn || ''} ${act.description || ''}`, label: `Day ${day.day} · ${act.type}`, name: act.nameCn, tab: 'itinerary', dayIdx: di, actIdx: ai });
         });
-        if (day.accommodation) {
-          idx.push({ text: day.accommodation.name, label: `Day ${day.day} · 住宿`, name: day.accommodation.name, tab: 'itinerary', dayIdx: di });
-        }
       });
       DATA.food.forEach((group) => {
         group.items.forEach(item => {
