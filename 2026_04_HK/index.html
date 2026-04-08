@@ -7,36 +7,20 @@
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SG 2026">
-  <meta name="theme-color" content="#c0392b">
-  <link rel="apple-touch-icon" id="app-icon" href="">
-  <script>
-    (function () {
-      try {
-        var c = document.createElement('canvas');
-        c.width = c.height = 180;
-        var ctx = c.getContext('2d');
-        var g = ctx.createLinearGradient(0, 0, 180, 180);
-        g.addColorStop(0, '#c0392b'); g.addColorStop(1, '#7b241c');
-        ctx.fillStyle = g; ctx.fillRect(0, 0, 180, 180);
-        ctx.font = '90px serif';
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText('🇸🇬', 90, 90);
-        document.getElementById('app-icon').href = c.toDataURL('image/png');
-      } catch (e) { }
-    })();
-  </script>
+  <meta name="apple-mobile-web-app-title" content="台南MO行">
+  <meta name="theme-color" content="#121212">
+
   <!-- ╔══════════════════════════════════════════╗
        ║  🔧 可調整區：分享預覽（LINE / FB 卡片）  ║
        ╚══════════════════════════════════════════╝ -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="新加坡 2026">
-  <meta property="og:description" content="2026/05/01 - 05/03 (3天2夜)">
-  <meta property="og:url" content="https://ytlanton.github.io/antonstrip/2026_05_Singapore/">
-  <meta name="description" content="2026/05/01 - 05/03 (3天2夜)">
+  <meta property="og:title" content="2026.04 Horlick送別行">
+  <meta property="og:description" content="2026/04/11 - 04/12 (2天1夜)">
+  <meta property="og:url" content="https://ytlanton.github.io/antonstrip/2026_04_HK/">
+  <meta name="description" content="2026/04/11 - 04/12 (2天1夜)">
   <!-- ═══════════════════════════════════════════ -->
 
-  <title>新加坡 2026</title>
+  <title>2026.04 Horlick送別行</title>
   <style>
     *,
     *::before,
@@ -51,40 +35,45 @@
     }
 
     button,
+    a {
+      outline: none;
+    }
+
+    button,
     [data-action] {
       touch-action: manipulation;
     }
 
     :root {
-      --primary: #c0392b;
-      --primary-dark: #922b21;
-      --primary-light: #fadbd8;
-      --accent: #e67e22;
-      --accent-light: #fef5e7;
-      --bg: #f5f4f1;
-      --surface: #ffffff;
-      --text: #1c2b28;
-      --text-2: #5f7672;
-      --text-3: #94a5a1;
-      --border: #e4e8e7;
-      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --primary: #0891b2;
+      --primary-dark: #0e7490;
+      --primary-light: rgba(8, 145, 178, 0.2);
+      --accent: #d97706;
+      --accent-light: rgba(217, 119, 6, 0.15);
+      --bg: #121212;
+      --surface: #1e1e1e;
+      --text: #e5e5e5;
+      --text-2: #a3a3a3;
+      --text-3: #737373;
+      --border: #333333;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.7);
       --r: 10px;
       --r-sm: 7px;
-      --type-行程: #2a7c6f;
-      --type-行程-bg: #e6f2ef;
-      --type-飲食: #c8956c;
-      --type-飲食-bg: #fdf0e5;
-      --type-交通: #6889a0;
-      --type-交通-bg: #e8f0f5;
-      --type-作業: #8b7da8;
-      --type-作業-bg: #eeeaf5;
-      --type-住宿: #a08060;
-      --type-住宿-bg: #f5efe8;
-      --type-景點: #c07a30;
-      --type-景點-bg: #faeee0;
-      --type-參考: #d97706;
-      --type-參考-bg: #fef3c7;
+      --type-行程: #5eead4;
+      --type-行程-bg: rgba(45, 212, 191, 0.15);
+      --type-飲食: #fdba74;
+      --type-飲食-bg: rgba(251, 146, 60, 0.15);
+      --type-交通: #93c5fd;
+      --type-交通-bg: rgba(96, 165, 250, 0.15);
+      --type-作業: #c4b5fd;
+      --type-作業-bg: rgba(167, 139, 250, 0.15);
+      --type-住宿: #fcd34d;
+      --type-住宿-bg: rgba(251, 191, 36, 0.15);
+      --type-景點: #fb923c;
+      --type-景點-bg: rgba(251, 146, 60, 0.15);
+      --type-參考: #a78bfa;
+      --type-參考-bg: rgba(139, 92, 246, 0.15);
     }
 
     html,
@@ -94,7 +83,7 @@
     }
 
     body {
-      background: #1a1a2e;
+      background: var(--bg);
       display: flex;
       justify-content: center;
       color: var(--text);
@@ -104,7 +93,6 @@
 
     #app {
       width: 100%;
-      max-width: 390px;
       min-height: 100dvh;
       background: var(--bg);
       position: relative;
@@ -113,11 +101,22 @@
       flex-direction: column;
     }
 
+    /* 桌機：維持手機比例置中，補回深色背景 */
+    @media (min-width: 480px) {
+      body {
+        background: #000000;
+      }
+
+      #app {
+        max-width: 390px;
+      }
+    }
+
     /* ── Header ── */
     #header {
-      background: linear-gradient(135deg, #1a2a2a, #c0392b 60%, #e74c3c);
+      background: linear-gradient(135deg, #0c1a20, #0e4f60 70%, #0891b2);
       color: white;
-      padding: env(safe-area-inset-top) 16px 12px;
+      padding: calc(env(safe-area-inset-top) + 14px) 16px 12px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -209,7 +208,7 @@
       right: 0;
       top: 100%;
       margin-top: 4px;
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       box-shadow: var(--shadow-md);
       max-height: 300px;
@@ -243,7 +242,7 @@
     /* ── Tab Bar ── */
     #tab-bar {
       display: flex;
-      background: white;
+      background: var(--surface);
       border-top: 1px solid var(--border);
       position: sticky;
       bottom: 0;
@@ -300,6 +299,7 @@
       scrollbar-width: none;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
     }
 
     #day-selector::-webkit-scrollbar {
@@ -314,7 +314,7 @@
       padding: 6px 12px;
       border-radius: var(--r);
       border: 1.5px solid var(--border);
-      background: white;
+      background: var(--surface);
       cursor: pointer;
       min-width: 52px;
       gap: 2px;
@@ -386,7 +386,7 @@
 
     /* ── Weather ── */
     .weather-bar {
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       padding: 10px 12px;
       margin-bottom: 10px;
@@ -487,8 +487,8 @@
       font-weight: 600;
       padding: 1px 6px;
       border-radius: 99px;
-      background: #fef9c3;
-      color: #92400e;
+      background: rgba(253, 224, 71, 0.15);
+      color: #fce726;
     }
 
     .card-chevron {
@@ -527,30 +527,30 @@
     }
 
     .ticket-box {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
+      background: rgba(234, 88, 12, 0.1);
+      border: 1px solid rgba(234, 88, 12, 0.3);
       border-radius: var(--r-sm);
       padding: 7px 10px;
       margin-bottom: 8px;
       font-size: 0.78rem;
-      color: #9a3412;
+      color: #fdba74;
     }
 
     .meta-box {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
+      background: rgba(202, 138, 4, 0.1);
+      border: 1px solid rgba(202, 138, 4, 0.3);
       border-radius: var(--r-sm);
       padding: 7px 10px;
       margin-bottom: 8px;
       font-size: 0.78rem;
-      color: #92400e;
+      color: #fde047;
       font-weight: 500;
     }
 
     .notes-box {
       border-left: 3px solid var(--accent);
       padding: 7px 10px;
-      background: #fff8f0;
+      background: rgba(255, 255, 255, 0.04);
       border-radius: 0 var(--r-sm) var(--r-sm) 0;
       margin-bottom: 8px;
       font-size: 0.78rem;
@@ -559,13 +559,13 @@
     }
 
     .copyable-box {
-      background: #f0fdf4;
-      border: 1px solid #86efac;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
       border-radius: var(--r-sm);
       padding: 7px 10px;
       margin-bottom: 8px;
       font-size: 0.78rem;
-      color: #166534;
+      color: #86efac;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -573,7 +573,7 @@
     }
 
     .copyable-box:hover {
-      background: #dcfce7;
+      background: rgba(34, 197, 94, 0.2);
     }
 
     .copy-icon {
@@ -607,7 +607,7 @@
       min-width: 100px;
       padding: 7px 10px;
       border-radius: var(--r-sm);
-      background: white;
+      background: var(--surface);
       color: var(--text);
       border: 1.5px solid var(--border);
       cursor: pointer;
@@ -628,11 +628,24 @@
       font-family: inherit;
       color: var(--text);
       outline: none;
-      background: white;
+      background: var(--surface);
     }
 
     .note-textarea:focus {
       border-color: var(--primary);
+    }
+
+    .btn-app {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: var(--r-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      letter-spacing: 0.02em;
     }
 
     .btn-doc {
@@ -640,9 +653,9 @@
       margin-bottom: 8px;
       padding: 6px 12px;
       border-radius: var(--r-sm);
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1.5px solid #bfdbfe;
+      background: rgba(59, 130, 246, 0.1);
+      color: #93c5fd;
+      border: 1.5px solid rgba(59, 130, 246, 0.3);
       font-size: 0.78rem;
       font-weight: 600;
       text-decoration: none;
@@ -663,13 +676,12 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      background: var(--type-住宿-bg);
     }
 
     .accom-title {
       font-size: 0.88rem;
       font-weight: 700;
-      color: var(--type-住宿);
+      color: var(--text);
     }
 
     .accom-sub {
@@ -714,7 +726,7 @@
 
     .cancelled-toggle {
       padding: 8px 12px;
-      background: #f8f8f8;
+      background: rgba(255, 255, 255, 0.04);
       border-radius: var(--r);
       border: 1.5px dashed var(--border);
       cursor: pointer;
@@ -774,7 +786,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 12px;
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       border: 1.5px solid var(--border);
       cursor: pointer;
@@ -804,7 +816,7 @@
       align-items: flex-start;
       gap: 10px;
       padding: 9px 12px;
-      background: white;
+      background: var(--surface);
       border: 1.5px solid var(--border);
       border-top: none;
       cursor: pointer;
@@ -837,8 +849,8 @@
 
     .food-price {
       font-size: 0.7rem;
-      color: #92400e;
-      background: #fef9c3;
+      color: #fce726;
+      background: rgba(253, 224, 71, 0.15);
       padding: 2px 6px;
       border-radius: 99px;
       white-space: nowrap;
@@ -866,7 +878,7 @@
     }
 
     .flight-card {
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       border: 1.5px solid var(--border);
       padding: 12px;
@@ -957,7 +969,7 @@
 
     .pack-cat {
       margin: 0 12px 8px;
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       border: 1.5px solid var(--border);
       overflow: hidden;
@@ -1032,16 +1044,16 @@
 
     .pack-tips {
       margin: 0 12px 8px;
-      background: #eff6ff;
+      background: rgba(59, 130, 246, 0.1);
       border-radius: var(--r);
-      border: 1.5px solid #bfdbfe;
+      border: 1.5px solid rgba(59, 130, 246, 0.3);
       padding: 12px;
     }
 
     .pack-tips-title {
       font-size: 0.78rem;
       font-weight: 700;
-      color: #1d4ed8;
+      color: #93c5fd;
       margin-bottom: 8px;
     }
 
@@ -1051,14 +1063,14 @@
 
     .pack-tips li {
       font-size: 0.75rem;
-      color: #1e40af;
+      color: #bfdbfe;
       margin-bottom: 4px;
     }
 
     /* ── Tips Tab ── */
     .tips-card {
       margin: 0 12px 8px;
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       border: 1.5px solid var(--border);
       overflow: hidden;
@@ -1126,7 +1138,7 @@
       padding: 8px;
       border-radius: var(--r-sm);
       border: 1.5px solid var(--border);
-      background: white;
+      background: var(--surface);
       font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
@@ -1143,7 +1155,8 @@
       inset: 0;
       z-index: 300;
       display: none;
-      align-items: flex-end;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
       justify-content: center;
     }
 
@@ -1151,66 +1164,54 @@
       display: flex;
     }
 
-    #driver-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-    }
-
     #driver-sheet {
       position: relative;
-      background: white;
-      width: 100%;
+      width: 90%;
       max-width: 390px;
-      border-radius: 20px 20px 0 0;
-      padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
-      transform: translateY(100%);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    #driver-modal.open #driver-sheet {
-      transform: translateY(0);
-    }
-
-    .driver-handle {
-      width: 40px;
-      height: 4px;
-      background: var(--border);
-      border-radius: 99px;
-      margin: 0 auto 16px;
+      height: auto;
+      max-height: 80vh;
+      border-radius: var(--r);
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 32px calc(40px + env(safe-area-inset-bottom));
     }
 
     .driver-label {
-      font-size: 0.72rem;
+      font-size: 1rem;
       color: var(--text-3);
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
     }
 
     #driver-address {
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 2.6rem;
+      font-weight: 800;
       color: var(--text);
       line-height: 1.3;
-      margin-bottom: 16px;
+      text-align: center;
+      margin-bottom: 48px;
     }
 
-    #driver-map-link {
-      display: block;
-      padding: 11px;
+    #driver-confirm {
+      width: 100%;
+      padding: 14px;
       background: var(--primary);
       color: white;
-      text-decoration: none;
+      border: none;
       border-radius: var(--r);
-      text-align: center;
-      font-size: 0.88rem;
+      font-size: 1rem;
       font-weight: 700;
+      cursor: pointer;
     }
 
     #driver-close {
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: 20px;
+      right: 20px;
       background: var(--bg);
       border: none;
       border-radius: 99px;
@@ -1248,7 +1249,7 @@
 
     @media (min-width: 430px) {
       body {
-        background: #1a1a2e;
+        background: #000000;
       }
     }
   </style>
@@ -1261,201 +1262,136 @@
      ================================================ -->
   <script id="trip-data" type="text/plain">
 ---
-title: "新加坡 2026"
-emoji: "🇸🇬"
-subtitle: "2026/05/01 - 05/03 (3天2夜)"
-people: 4
-tripType: "自由行"
-transport: ["MRT", "Grab", "步行"]
-weather:
-  新加坡:
-    temp: "28-34°C"
-    condition: "熱帶氣候，全年高溫潮濕"
-    tips: "防曬、補水、隨身帶雨傘"
-    url: "https://www.weather.gov.sg/"
+title: "2026.04 Horlick送別行"
+subtitle: "2026/04/11 - 04/12 (2天1夜)"
+people: 2
+keywords: ["自由行", "地鐵", "計程車", "步行"]
 ---
 
-## Day 1 | 2026/05/01 (五) | 抵達新加坡
+## Day 1 | 2026/04/11 (六) | 出發香港
 
-route: 台北 → 新加坡
-dayNote: 無需租車，全程搭乘 MRT / Grab
+route: 台北 → 香港
+dayNote: 西九龍看展覽
+weatherTemp: 25-26°C
+weatherCond: 晴時多雲
+weatherRain: 0%
+weatherTips: 
 
-### 交通 | 搭機出發
+### 交通 | 台鐵出發：台北 → 台南
 time: 08:00
+endTime: 11:25
+description: 自強(3000)111次 | 座位 10 車 5,7 號
+cost: NTD 891 / 人
+notes: 提早 20 分鐘到台北車站
+copyable: 訂票代碼 3615829
+
+### 飲食 | 落成米糕
+time: 12:00
+endTime: 12:30
+description: 必比登、順流Joyce推薦
+cost: NTD 100 / 人
+address: 台南市中西區民族路二段241號
+mapLink: https://maps.app.goo.gl/rk36ADP2t5FgKaEJ9
+
+### 景點 | Tu Xing 土星工作室｜Soil Space 應力空間
+time: 12:40
 endTime: 13:30
-description: CI751 TPE→SIN，飛行時間約 4.5 小時
-notes: 提早 2 小時到桃園機場 T1
-copyable: 訂票代號 CI751-20260501ABC
+description: 順流Joyce推薦
+cost: NTD 0 / 人
+address: 台南市中西區民權路二段64巷56號
+mapLink: https://maps.app.goo.gl/vMXbGvzbHQYYCnUR8
 
-### 行程 | 硓𥑮石．芳宅
+### 景點 | 臺灣首廟天壇【天公廟】
+time: 13:40
+endTime: 14:30
+description: 歷史悠久的玉皇上帝廟、寵物光明燈
+cost: NTD 1,200 / 貓
+address: 台南市中西區忠義路二段84巷16號
+mapLink: https://maps.app.goo.gl/csEPMZJw4msM6wKw6
+
+### 住宿 | Vacay Stay 休日行旅
 time: 15:00
-endTime: 18:30
-nameEn: Gardens by the Bay
-description: 超級樹林光影秀，推薦傍晚前往，18:45 和 20:45 各一場
-hours: 05:00-02:00
-cost: SGD 14/人（步道）
-ticket: 超級樹林步道 SGD 14/人，室內花穹 SGD 28/人
-address: 18 Marina Gardens Dr, Singapore 018953
-mapLink: https://maps.google.com/?q=Gardens+by+the+Bay+Singapore
-notes: ⚠️ 提前網路訂票，現場常售罄
-meta: 光影秀時間 18:45 / 20:45
-
-### 飲食 | 老巴剎 Lau Pa Sat
-time: 19:00
-nameEn: Lau Pa Sat Festival Market
-description: 新加坡最著名的老牌美食中心，沙嗲是必點
-hours: 24 小時
-cost: $100-200/人
-address: 18 Raffles Quay, Singapore 048582
-mapLink: https://maps.google.com/?q=Lau+Pa+Sat+Singapore
-
-### 住宿 | Marina Bay Sands
+endTime: 15:30
 checkIn: 15:00
 checkOut: 11:00
-price: SGD 450/晚
-nights: 2
-address: 10 Bayfront Ave, Singapore 018956
-notes: 確認碼 MBS20260501
-copyable: 確認碼 MBS20260501
+price: NTD 2,050 / 晚
+address: 台南市北區公園里公園路128號
+mapLink: https://maps.app.goo.gl/MmkHggbBpHJc9T5u9
+notes: 要自己帶牙膏牙刷
+copyable: 訂單編號 1708158227
+app: Agoda
 
----
-
-## Day 2 | 2026/05/02 (六) | 聖淘沙 & 老城區
-
-route: 市區 → 聖淘沙 → 牛車水
-dayNote: 全程 MRT，Sentosa Express 單程 SGD 4
-
-### 行程 | 環球影城 Universal Studios Singapore
-time: 09:00
+### 行程 | 「五條港的仕紳南管音樂」@ 硓𥑮石．芳宅
+time: 15:30
 endTime: 17:00
-nameEn: Universal Studios Singapore
-description: 建議購買 Express Pass，熱門設施等候時間長
-hours: 10:00-18:00（建議提前確認）
-cost: SGD 83/人
-ticket: 成人 SGD 83/人，Express Pass SGD 55起
-address: 8 Sentosa Gateway, Singapore 098269
-mapLink: https://maps.google.com/?q=Universal+Studios+Singapore
-notes: ⚠️ 強烈建議提前購票，現場票價更高
-copyable: 訂票代號 USS-20260502XYZ
+description: 在百年老屋中，透過南管音樂的演繹與導聆，理解仕紳文化與地方生活的連結。
+cost: NTD 0 / 人
+address: 台南市中西區信義街46巷15號
+mapLink: https://maps.app.goo.gl/wDUqCpyqUgQQna5s7
+notes: 已報名
 
-### 飲食 | 麥士威熟食中心 Maxwell Food Centre
-time: 18:30
-nameEn: Maxwell Food Centre
-description: 道地新加坡小販中心，天天海南雞飯是必吃
-hours: 08:00-22:00
-cost: $80-120/人
-address: 1 Kadayanallur St, Singapore 069184
-mapLink: https://maps.google.com/?q=Maxwell+Food+Centre+Singapore
+### 飲食 | MO
+time: 18:00
+endTime: 22:00
+description: 號稱全台最強Fine Dining
+cost: NTD 7,095 / 人
+address: 台南市北區崇安街30號
+mapLink: https://maps.app.goo.gl/KSj8Q1q6sWADc23P6
 
-### 行程 | 小印度 Little India
-time: 20:00
-nameEn: Little India
-description: 感受印度文化氛圍，購買特色紀念品
-address: Little India, Singapore
-cancelled: true
-cancelReason: 行程太滿，移至 Day 3 備選
-
-### 住宿 | Marina Bay Sands
+### 住宿 | Vacay Stay 休日行旅
+time: 22:30
+endTime: 00:00
 checkIn: 15:00
 checkOut: 11:00
-price: SGD 450/晚
-nights: 2
-address: 10 Bayfront Ave, Singapore 018956
-notes: 確認碼 MBS20260501
-copyable: 確認碼 MBS20260501
+price: NTD 2,050 / 晚
+address: 台南市北區公園里公園路128號
+mapLink: https://maps.app.goo.gl/MmkHggbBpHJc9T5u9
+notes: 要自己帶牙膏牙刷
+copyable: 訂單編號 1708158227
+app: Agoda
 
 ---
 
-## Day 3 | 2026/05/03 (日) | 返台
+## Day 2 | 2026/04/12 (日) | 回到台灣
 
-route: 新加坡 → 台北
-dayNote: Grab 至機場，約 SGD 25-35
+route: 香港 → 台北
+dayNote: 慢慢回家
+weatherTemp: 24-29°C
+weatherCond: 多雲時晴
+weatherRain: 10%
+weatherTips: 帶雨傘備用
 
-### 行程 | 星耀樟宜 Jewel Changi Airport
-time: 09:00
-endTime: 12:00
-nameEn: Jewel Changi Airport
-description: 全球最美機場，雨霧漩渦瀑布必看，可在此購買伴手禮
-hours: 24 小時
-address: 78 Airport Blvd, Singapore 819666
-mapLink: https://maps.google.com/?q=Jewel+Changi+Airport+Singapore
+### 飲食 | 西羅殿牛肉湯
+time: 04:30
+description: 必比登、檸檬推薦
+cost: NTD 200 / 人
+address: 台南市北區公園南路98號
+mapLink: https://maps.app.goo.gl/ZnJVLfWHQD1bjgre8
 
-### 交通 | 返台
-time: 14:00
-endTime: 18:30
-description: CI752 SIN→TPE
-notes: 建議 11:00 前抵達機場辦理登機
-copyable: 訂票代號 CI752-20260503DEF
+### 飲食 | 清子香腸熟肉
+time: 11:30
+description: 盧怡安推薦、香腸米腸粉腸
+cost: NTD 200 / 人
+address: 台南市中西區民族路二段248號
+mapLink: https://maps.app.goo.gl/Unh2Nb4vkYBXUhqy9
 
----
+### 飲食 | On LIVE 炸雞現場
+time: 12:30
+description: Ray推薦、炸雞
+cost: NTD 200 / 人
+address: 台南市中西區赤崁東街2號
+mapLink: https://maps.app.goo.gl/hK9zknShU5gnAy116
 
-## 美食清單
-
-### 新加坡（全程）
-
-- 天天海南雞飯 Tian Tian Hainanese Chicken Rice | 必吃！麥士威熟食中心 | SGD 5-8
-- 辣螃蟹 Chilli Crab | 推薦 Jumbo Seafood，2人份約 SGD 80-100 | SGD 80-100/2人
-- 肉骨茶 Bak Kut Teh | 松發肉骨茶，早餐必試 | SGD 10-15
-- 椰漿飯 Nasi Lemak | 各大小販中心均有 | SGD 3-6
-- 榴槤 Durian | 貓山王當季必試，金鳳榴槤城 | SGD 20-50/kg
-
----
-
-## 航班資訊
-
-### 去程（全員）
-- CI751 | 桃園(TPE) → 新加坡(SIN) | 08:00 → 13:30 | 飛行 4h30m
-- 費用：TWD 18,500/人
-
-### 回程（全員）
-- CI752 | 新加坡(SIN) → 桃園(TPE) | 14:00 → 18:30 | 飛行 4h30m
-- 費用：含去程票價
+### 交通 | 台鐵回程：台南 → 台北
+time: 14:46
+endTime: 18:15
+description: 自強(3000)132次 | 座位 2 車 14,16 號
+cost: NTD 891 / 人
+notes: 提早半小時到台南車站
+copyable: 訂票代碼 3615830
 
 ---
 
-## 行李清單
-
-### 📄 證件
-- 護照（效期 6 個月以上）
-- 機票確認信（印出或截圖）
-- 訂房確認信
-
-### 👕 衣物
-- 輕薄排汗上衣 x 4
-- 短褲 x 3
-- 備用內衣褲 x 4
-
-### 🩺 醫藥
-- 胃藥
-- 止痛藥
-- 防蚊液
-- 防曬乳（SPF50+）
-
-### 📱 電子
-- 手機充電線
-- 行動電源（≤20000mAh）
-- 旅行插頭轉接頭（英式三腳插頭 Type G）
-
----
-
-## 旅遊須知
-
-### 入境規定
-- 台灣護照免簽，可停留 30 天
-- 嚴禁攜帶口香糖入境（罰款高達 SGD 1000）
-- 不可攜帶生鮮食品、動植物
-- 攜帶菸草超過 1 條需申報繳稅
-
-### 交通
-- MRT 是最便宜的交通方式，買 EZ-Link 卡或用 Apple Pay 感應
-- Grab 類似台灣 Uber，建議下載備用
-- 禁止在 MRT 內飲食，罰款 SGD 500
-
-### 當地習慣
-- 餐廳通常已含 10% 服務費，不需額外小費
-- 全年高溫約 28-34°C，午後雷陣雨頻繁，帶折疊傘
-- 語言：英文通用
-- 插頭：英式三腳插頭（Type G），記得帶轉接頭
 </script>
   <!-- ================================================
      以上為資料區，以下為應用程式邏輯（勿修改）
@@ -1479,10 +1415,11 @@ copyable: 訂票代號 CI752-20260503DEF
     </header>
 
     <!-- Main -->
+    <div id="day-selector"></div>
+
     <div id="main">
       <!-- 行程 Tab -->
       <div class="tab-panel active" data-tab="itinerary">
-        <div id="day-selector"></div>
         <div id="day-content"></div>
       </div>
 
@@ -1502,15 +1439,7 @@ copyable: 訂票代號 CI752-20260503DEF
       <div class="tab-panel" data-tab="packing">
         <div class="section-header">打包清單</div>
         <div id="packing-progress" class="pack-progress"></div>
-        <div class="pack-tips">
-          <div class="pack-tips-title">✈️ 航空行李提醒</div>
-          <ul>
-            <li>液體、膠狀物品：每件≤100ml，裝入 1L 透明夾鏈袋（隨身行李）</li>
-            <li>鋰電池/行動電源：≤100Wh 免申報，100-160Wh 須航空公司同意，禁止托運</li>
-            <li>行動電源容量限制：≤20000mAh（約 74Wh）</li>
-            <li>托運行李限重：每件 23kg（請確認您的票種規定）</li>
-          </ul>
-        </div>
+        <div id="packing-tips"></div>
         <div id="packing-list"></div>
       </div>
 
@@ -1518,46 +1447,20 @@ copyable: 訂票代號 CI752-20260503DEF
       <div class="tab-panel" data-tab="tips">
         <div class="section-header">旅遊須知</div>
         <div id="tips-list"></div>
-        <div class="backup-section">
-          <div class="backup-title">📦 資料備份</div>
-          <div class="backup-btns">
-            <button class="backup-btn" onclick="exportData()">📤 匯出備份</button>
-            <button class="backup-btn" onclick="document.getElementById('import-file').click()">📥 匯入備份</button>
-          </div>
-          <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
-        </div>
       </div>
     </div>
 
-    <!-- Tab Bar -->
-    <nav id="tab-bar">
-      <button class="tab-btn active" data-tab="itinerary" onclick="switchTab('itinerary')">
-        <span class="tab-icon">🗓</span><span>行程</span>
-      </button>
-      <button class="tab-btn" data-tab="food" onclick="switchTab('food')">
-        <span class="tab-icon">🍽️</span><span>美食</span>
-      </button>
-      <button class="tab-btn" data-tab="flights" onclick="switchTab('flights')">
-        <span class="tab-icon">✈️</span><span>航班</span>
-      </button>
-      <button class="tab-btn" data-tab="packing" onclick="switchTab('packing')">
-        <span class="tab-icon">🧳</span><span>行李</span>
-      </button>
-      <button class="tab-btn" data-tab="tips" onclick="switchTab('tips')">
-        <span class="tab-icon">📋</span><span>須知</span>
-      </button>
-    </nav>
+    <!-- Tab Bar（由 JS 動態產生）-->
+    <nav id="tab-bar"></nav>
   </div>
 
   <!-- Driver Modal -->
   <div id="driver-modal">
-    <div id="driver-overlay" onclick="closeDriver()"></div>
     <div id="driver-sheet">
-      <div class="driver-handle"></div>
       <button id="driver-close" onclick="closeDriver()">✕</button>
       <div class="driver-label">📍 給司機看地址</div>
       <div id="driver-address"></div>
-      <a id="driver-map-link" href="#" target="_blank">🗺 開啟 Google Maps 導航</a>
+      <button id="driver-confirm" onclick="closeDriver()">確定</button>
     </div>
   </div>
 
@@ -1631,16 +1534,20 @@ copyable: 訂票代號 CI752-20260503DEF
       const headerLine = block.split('\n')[0];
       const hm = headerLine.match(/##\s*Day\s*(\d+)\s*\|\s*(\d{4}\/\d{2}\/\d{2})\s*\(([^)]+)\)\s*\|\s*(.*)/);
       if (!hm) return null;
-      const day = { day: parseInt(hm[1]), date: hm[2], weekday: hm[3].trim(), title: hm[4].trim(), route: '', dayNote: '', activities: [], accommodation: null };
+      const day = { day: parseInt(hm[1]), date: hm[2], weekday: hm[3].trim(), title: hm[4].trim(), route: '', dayNote: '', weather: null, activities: [], accommodation: null };
 
       const rest = block.split('\n').slice(1);
-      // parse route/dayNote before first ###
+      // parse route/dayNote/weather before first ###
       let i = 0;
       while (i < rest.length && !rest[i].startsWith('###')) {
         const rkv = rest[i].match(/^(\w+):\s*(.*)/);
         if (rkv) {
           if (rkv[1] === 'route') day.route = rkv[2].trim();
           if (rkv[1] === 'dayNote') day.dayNote = rkv[2].trim();
+          if (rkv[1] === 'weatherTemp') { if (!day.weather) day.weather = {}; day.weather.temp = rkv[2].trim(); }
+          if (rkv[1] === 'weatherCond') { if (!day.weather) day.weather = {}; day.weather.condition = rkv[2].trim(); }
+          if (rkv[1] === 'weatherRain') { if (!day.weather) day.weather = {}; day.weather.rain = rkv[2].trim(); }
+          if (rkv[1] === 'weatherTips') { if (!day.weather) day.weather = {}; day.weather.tips = rkv[2].trim(); }
         }
         i++;
       }
@@ -1696,7 +1603,7 @@ copyable: 訂票代號 CI752-20260503DEF
         if (!current) continue;
         if (line.startsWith('- 費用：')) { current.cost = line.slice(5).trim(); continue; }
         if (line.startsWith('- ')) {
-          // CI751 | 桃園(TPE) → 新加坡(SIN) | 08:00 → 13:30 | 飛行 4h30m
+          // 例: CX456 | 台北(TPE) → 大阪(KIX) | 08:00 → 12:00 | 飛行 3h00m
           const parts = line.slice(2).split('|').map(s => s.trim());
           if (parts.length < 3) continue;
           const flight = parts[0];
@@ -1756,7 +1663,7 @@ copyable: 訂票代號 CI752-20260503DEF
     const blocks = body.split(/^(?=##\s)/m).filter(s => s.trim());
     const DATA = {
       ...config,
-      days: [], food: [], flights: { routes: [] }, packingList: [], tips: { sections: [] }
+      days: [], food: [], flights: { routes: [] }, packingList: [], packingTips: { sections: [] }, tips: { sections: [] }
     };
 
     for (const block of blocks) {
@@ -1770,6 +1677,8 @@ copyable: 訂票代號 CI752-20260503DEF
         DATA.flights = parseFlightsBlock(block.trim());
       } else if (firstLine.includes('行李清單')) {
         DATA.packingList = parsePackingBlock(block.trim());
+      } else if (firstLine.includes('打包提醒')) {
+        DATA.packingTips = parseTipsBlock(block.trim());
       } else if (firstLine.includes('旅遊須知')) {
         DATA.tips = parseTipsBlock(block.trim());
       }
@@ -1822,9 +1731,25 @@ copyable: 訂票代號 CI752-20260503DEF
     function mapsUrl(act) {
       if (act.mapLink) return act.mapLink;
       if (act.address) return `https://maps.google.com/?q=${encodeURIComponent(act.address)}`;
-      if (act.nameEn) return `https://maps.google.com/?q=${encodeURIComponent(act.nameEn)}`;
-      if (act.nameCn) return `https://maps.google.com/?q=${encodeURIComponent(act.nameCn)}`;
       return null;
+    }
+
+    // ── App Deep Link Button ─────────────────────────────────
+    const APP_MAP = {
+      '台鐵': { label: '🚂 台鐵 e 訂通', url: 'traeticket://', bg: '#1a6b3a', color: '#fff' },
+      '高鐵': { label: '🚄 T-Express 高鐵', url: 'texpress://', bg: '#e65100', color: '#fff' },
+      '長榮航空': { label: '✈️ 長榮航空', url: 'evaair://', bg: '#005f40', color: '#fff' },
+      'Agoda': { label: '🏨 Agoda', url: 'agoda://', bg: '#5c2d91', color: '#fff' },
+    };
+
+    function renderAppButton(act) {
+      if (!act.app) return '';
+      const cfg = APP_MAP[act.app];
+      const url = cfg ? cfg.url : act.app; // 若非內建關鍵字，把 app 欄位本身當作 URL
+      if (!url) return '';
+      const label = cfg ? cfg.label : `📱 開啟 App`;
+      const bg = cfg ? cfg.bg : '#555';
+      return `<a href="${escHtml(url)}" class="btn-app" style="background:${bg};color:${cfg ? cfg.color : '#fff'}">${label}</a>`;
     }
 
     function showToast(msg) {
@@ -1843,19 +1768,40 @@ copyable: 訂票代號 CI752-20260503DEF
       showToast('✅ 已複製！');
     }
 
-    function openDriver(address, mapUrl) {
+    function openDriver(address) {
+      document.body.style.overflow = 'hidden';
       document.getElementById('driver-address').textContent = address;
-      const link = document.getElementById('driver-map-link');
-      link.href = mapUrl || `https://maps.google.com/?q=${encodeURIComponent(address)}`;
       document.getElementById('driver-modal').classList.add('open');
     }
-    function closeDriver() { document.getElementById('driver-modal').classList.remove('open'); }
+    function closeDriver() {
+      document.body.style.overflow = '';
+      document.getElementById('driver-modal').classList.remove('open');
+    }
 
     // ── Render Header ────────────────────────────────────────
-    document.getElementById('header-title').textContent = `${DATA.emoji} ${DATA.title}`;
+
+    // 從資料動態設定網頁標題與 App Icon
+    document.title = `${DATA.title || '行程表'} ${DATA.emoji || ''}`.trim();
+    (function () {
+      try {
+        var c = document.createElement('canvas');
+        c.width = c.height = 180;
+        var ctx = c.getContext('2d');
+        var g = ctx.createLinearGradient(0, 0, 180, 180);
+        g.addColorStop(0, '#c0392b'); g.addColorStop(1, '#7b241c');
+        ctx.fillStyle = g; ctx.fillRect(0, 0, 180, 180);
+        ctx.font = '90px serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(DATA.emoji || '📅', 90, 90);
+        document.getElementById('app-icon').href = c.toDataURL('image/png');
+      } catch (e) { }
+    })();
+
+    document.getElementById('header-title').textContent = `${DATA.emoji || ''} ${DATA.title || ''}`.trim();
     document.getElementById('header-subtitle').textContent = DATA.subtitle;
     const badges = document.getElementById('header-badges');
-    [DATA.tripType, `${DATA.people}人`, ...(DATA.transport || [])].forEach(b => {
+    [`${DATA.people}人`, ...(DATA.keywords || [])].forEach(b => {
+      if (!b) return;
       const s = document.createElement('span'); s.textContent = b; badges.appendChild(s);
     });
 
@@ -1864,6 +1810,7 @@ copyable: 訂票代號 CI752-20260503DEF
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelector(`.tab-panel[data-tab="${tab}"]`).classList.add('active');
+      document.getElementById('day-selector').style.display = tab === 'itinerary' ? '' : 'none';
       document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
       document.getElementById('main').scrollTop = 0;
     }
@@ -1890,8 +1837,6 @@ copyable: 訂票代號 CI752-20260503DEF
       if (act.type === '住宿') {
         const id = `act-${dayIdx}-${actIdx}`;
         const mapUrl = mapsUrl(act);
-        const storKey = `note_${dayIdx}_${actIdx}`;
-        const savedNote = localStorage.getItem(storKey) || '';
         const timeStr = act.time ? (act.endTime ? `${act.time} - ${act.endTime}` : act.time) : '';
         return `<div class="activity-card" id="${id}">
     <div class="card-header" onclick="toggleCard('${id}')">
@@ -1914,10 +1859,9 @@ copyable: 訂票代號 CI752-20260503DEF
       ${act.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(act.notes)}</div>` : ''}
       ${renderAppButton(act)}
       <div class="card-buttons" style="margin-top:8px">
-        ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
-        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
+        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
+        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看</button>` : ''}
       </div>
-      <textarea class="note-textarea" placeholder="備注…" onchange="localStorage.setItem('${storKey}',this.value)">${escHtml(savedNote)}</textarea>
     </div>
   </div>`;
       }
@@ -1925,8 +1869,6 @@ copyable: 訂票代號 CI752-20260503DEF
       const icon = typeIcon(act);
       const timeStr = act.time ? (act.endTime ? `${act.time} - ${act.endTime}` : act.time) : '';
       const mapUrl = mapsUrl(act);
-      const storKey = `note_${dayIdx}_${actIdx}`;
-      const savedNote = localStorage.getItem(storKey) || '';
       const isCancelled = act.cancelled;
 
       return `<div class="activity-card ${isCancelled ? 'cancelled-card' : ''}" id="act-${dayIdx}-${actIdx}">
@@ -1946,17 +1888,16 @@ copyable: 訂票代號 CI752-20260503DEF
       ${isCancelled && act.cancelReason ? `<div class="notes-box">已排除：${escHtml(act.cancelReason)}</div>` : ''}
       ${act.description ? `<div class="card-desc">${escHtml(act.description)}</div>` : ''}
       ${act.hours ? `<div class="card-hours">🕐 營業時間：${escHtml(act.hours)}</div>` : ''}
-      ${act.cost ? `<div class="tag-cost" style="display:inline-block;margin-bottom:8px">💰 ${escHtml(act.cost)}</div>` : ''}
       ${act.ticket ? `<div class="ticket-box">🎫 ${escHtml(act.ticket)}</div>` : ''}
       ${act.meta ? `<div class="meta-box">ℹ️ ${escHtml(act.meta)}</div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box">${escHtml(act.notes)}</div>` : ''}
       ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">📄 查看文件</a>` : ''}
+      ${renderAppButton(act)}
       <div class="card-buttons">
-        ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
-        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
+        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
+        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看</button>` : ''}
       </div>
-      <textarea class="note-textarea" placeholder="備注…" onchange="localStorage.setItem('${storKey}',this.value)">${escHtml(savedNote)}</textarea>
     </div>
   </div>`;
     }
@@ -1964,13 +1905,11 @@ copyable: 訂票代號 CI752-20260503DEF
     function renderAccommodation(accom, dayIdx) {
       if (!accom) return '';
       const mapUrl = accom.mapLink || (accom.address ? `https://maps.google.com/?q=${encodeURIComponent(accom.address)}` : null);
-      const storKey = `note_accom_${dayIdx}`;
-      const savedNote = localStorage.getItem(storKey) || '';
       return `<div class="accommodation-section" id="accom-${dayIdx}">
     <div class="accom-header" onclick="toggleAccom(${dayIdx})">
       <span>🏠</span>
       <div style="flex:1">
-        <div class="accom-title">${escHtml(accom.name)}</div>
+        <div class="accom-title"><span class="tag-type" style="background:var(--type-住宿-bg);color:var(--type-住宿);margin-right:6px;">住宿</span>${escHtml(accom.name)}</div>
         <div class="accom-sub">${accom.checkIn ? `入住 ${accom.checkIn}` : ''}${accom.checkOut ? ` · 退房 ${accom.checkOut}` : ''}</div>
       </div>
       <span class="card-chevron" id="chv-accom-${dayIdx}">›</span>
@@ -1981,29 +1920,26 @@ copyable: 訂票代號 CI752-20260503DEF
       ${accom.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(accom.address)}</span></div>` : ''}
       ${accom.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(accom.copyable)}')" style="margin-top:8px">${escHtml(accom.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(accom.notes)}</div>` : ''}
+      ${renderAppButton(accom)}
       <div class="card-buttons" style="margin-top:8px">
-        ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
-        ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
+        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
+        ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}')">👁 給司機看</button>` : ''}
       </div>
-      <textarea class="note-textarea" placeholder="備注…" onchange="localStorage.setItem('${storKey}',this.value)">${escHtml(savedNote)}</textarea>
     </div>
   </div>`;
     }
 
     function renderWeather(day) {
-      if (!DATA.weather) return '';
-      for (const [cityKey, w] of Object.entries(DATA.weather)) {
-        if (day.title.includes(cityKey) || day.route.includes(cityKey) || (day.dayNote && day.dayNote.includes(cityKey))) {
-          return `<div class="weather-bar">
-        <div class="weather-temp">${escHtml(w.temp)}</div>
+      if (!day.weather) return '';
+      const w = day.weather;
+      return `<div class="weather-bar">
+        <div class="weather-temp">${escHtml(w.temp || '')}</div>
         <div class="weather-info">
-          <div class="weather-cond">${escHtml(w.condition)}</div>
-          <div class="weather-tips">${escHtml(w.tips)}</div>
+          ${w.condition ? `<div class="weather-cond">${escHtml(w.condition)}</div>` : ''}
+          ${w.rain ? `<div class="weather-cond" style="margin-top:2px;">☂️ ${escHtml(w.rain)}</div>` : ''}
+          ${w.tips ? `<div class="weather-tips">${escHtml(w.tips)}</div>` : ''}
         </div>
       </div>`;
-        }
-      }
-      return '';
     }
 
     function renderDayContent(dayIdx) {
@@ -2012,8 +1948,6 @@ copyable: 訂票代號 CI752-20260503DEF
       const el = document.getElementById('day-content');
       const normal = day.activities.filter(a => !a.cancelled);
       const cancelled = day.activities.filter(a => a.cancelled);
-      const dayNoteKey = `daynote_${dayIdx}`;
-      const savedDayNote = localStorage.getItem(dayNoteKey) || '';
 
       let html = `<div class="day-header">
     <div class="day-route">📍 ${escHtml(day.route || day.title)}</div>
@@ -2027,11 +1961,7 @@ copyable: 訂票代號 CI752-20260503DEF
       <div id="cancelled-list-${dayIdx}" style="display:none">
         ${cancelled.map((a, i) => renderActivity(a, dayIdx, normal.length + i)).join('')}
       </div>
-    </div>` : ''}
-  <div class="day-note-section">
-    <div class="day-note-label">今日備注</div>
-    <textarea class="note-textarea" placeholder="今天的備注…" onchange="localStorage.setItem('${dayNoteKey}',this.value)">${escHtml(savedDayNote)}</textarea>
-  </div>`;
+    </div>` : ''}`;
       el.innerHTML = html;
     }
 
@@ -2059,12 +1989,23 @@ copyable: 訂票代號 CI752-20260503DEF
     }
 
     // Auto-locate current activity
+    // 若今天在行程日期內 → 切換至今日並定位當前時段活動
+    // 若今天不在行程日期內 → 顯示 Day 1 最頂端（不捲動）
     function autoLocate() {
       const now = new Date();
       const todayStr = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`;
       const dayIdx = DATA.days.findIndex(d => d.date === todayStr);
-      if (dayIdx < 0) return;
+
+      // 今天不在行程範圍內 → 顯示 Day 1 最頂端
+      if (dayIdx < 0) {
+        renderDayContent(0);
+        return;
+      }
+
+      // 今天在行程內 → 切換至今日
       selectDay(dayIdx);
+
+      // 找出當前時段對應的活動
       const day = DATA.days[dayIdx];
       const nowMin = now.getHours() * 60 + now.getMinutes();
       const normal = day.activities.filter(a => !a.cancelled);
@@ -2110,8 +2051,8 @@ copyable: 訂票代號 CI752-20260503DEF
       <div class="food-list open" id="food-group-${gi}">
         ${group.items.map(item => {
         const searchQ = item.nameEn || item.name;
-        const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(searchQ + ' Singapore')}`;
-        return `<div class="food-item" onclick="window.open('${mapUrl}','_blank')">
+        const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(searchQ + ' ' + (group.city || ''))}`;
+        return `<div class="food-item" onclick="location.href='${mapUrl}'">
             <div class="food-item-info">
               <div class="food-name">${escHtml(item.name)}</div>
               ${item.nameEn ? `<div class="food-en">${escHtml(item.nameEn)}</div>` : ''}
@@ -2219,6 +2160,17 @@ copyable: 訂票代號 CI752-20260503DEF
       chv.classList.toggle('open', el.classList.contains('open'));
     }
 
+    // ── Render Packing Tips ───────────────────────────────────
+    function renderPackingTips() {
+      const el = document.getElementById('packing-tips');
+      if (!DATA.packingTips.sections.length) { el.innerHTML = ''; return; }
+      el.innerHTML = DATA.packingTips.sections.map(sec => `
+    <div class="pack-tips">
+      <div class="pack-tips-title">${escHtml(sec.title)}</div>
+      <ul>${sec.items.map(item => `<li>${escHtml(item)}</li>`).join('')}</ul>
+    </div>`).join('');
+    }
+
     // ── Render Tips ───────────────────────────────────────────
     function renderTips() {
       const el = document.getElementById('tips-list');
@@ -2239,6 +2191,29 @@ copyable: 訂票代號 CI752-20260503DEF
       const chv = document.getElementById(`chv-tips-${i}`);
       body.classList.toggle('open');
       chv.classList.toggle('open', body.classList.contains('open'));
+    }
+
+    // ── Tab Bar 動態產生 ──────────────────────────────────────
+    function renderTabBar() {
+      const tabs = [
+        { key: 'itinerary', icon: '🗓', label: '行程', hasContent: DATA.days.length > 0 },
+        { key: 'food', icon: '🍽️', label: '美食', hasContent: DATA.food.length > 0 },
+        { key: 'flights', icon: '✈️', label: '航班', hasContent: DATA.flights.routes.length > 0 },
+        { key: 'packing', icon: '🧳', label: '行李', hasContent: DATA.packingList.length > 0 },
+        { key: 'tips', icon: '📋', label: '須知', hasContent: DATA.tips.sections.length > 0 },
+      ];
+      const visible = tabs.filter(t => t.hasContent);
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      if (visible.length) {
+        document.querySelector(`.tab-panel[data-tab="${visible[0].key}"]`).classList.add('active');
+      }
+      const nav = document.getElementById('tab-bar');
+      nav.style.display = visible.length <= 1 ? 'none' : '';
+      nav.innerHTML = visible.map((t, i) =>
+        `<button class="tab-btn ${i === 0 ? 'active' : ''}" data-tab="${t.key}" onclick="switchTab('${t.key}')">
+          <span class="tab-icon">${t.icon}</span><span>${t.label}</span>
+        </button>`
+      ).join('');
     }
 
     // ── Search ────────────────────────────────────────────────
@@ -2317,43 +2292,15 @@ copyable: 訂票代號 CI752-20260503DEF
       header.classList.toggle('compact', this.scrollTop > 10);
     });
 
-    // ── Backup ────────────────────────────────────────────────
-    function exportData() {
-      const data = {};
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        data[k] = localStorage.getItem(k);
-      }
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url;
-      a.download = `sg2026-backup-${new Date().toISOString().slice(0, 10)}.json`;
-      a.click(); URL.revokeObjectURL(url);
-      showToast('✅ 已匯出備份');
-    }
-
-    function importData(e) {
-      const file = e.target.files[0]; if (!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => {
-        try {
-          const data = JSON.parse(ev.target.result);
-          Object.entries(data).forEach(([k, v]) => localStorage.setItem(k, v));
-          showToast('✅ 已匯入備份，請重新整理');
-          renderPacking(); renderDayContent(currentDayIndex);
-        } catch { showToast('❌ 匯入失敗'); }
-      };
-      reader.readAsText(file);
-    }
-
     // ── Init ──────────────────────────────────────────────────
+    renderTabBar();
     renderFood();
     renderFlights();
+    renderPackingTips();
     renderPacking();
     renderTips();
     renderDaySelector();
-    renderDayContent(0);
-    autoLocate();
+    autoLocate(); // 統一負責初始渲染：今天在行程內→定位；不在→顯示 Day 1 頂端
   </script>
 </body>
 
