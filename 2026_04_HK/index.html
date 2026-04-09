@@ -1512,6 +1512,45 @@ people: 2
 keywords: ["Horlick", "竹昇麵", "M+", "香港故宮", "維港夜景", "Bar Leone", "MORA", "車仔麵", "早茶", "芋蝦"]
 ---
 
+## Day 0 | 行前準備
+
+dayNote: 香港行動電源規定：100Wh以下最多2顆；100-160Wh經航空公司許可最多2顆；160Wh以上禁止攜帶。
+
+### 證件 | 護照
+### 證件 | 台胞證
+
+### 重要 | 錢包
+### 重要 | 星展卡
+### 重要 | 現金 HKD 1,000
+
+### 衣物 | 短袖上衣
+### 衣物 | 內褲
+### 衣物 | 襪子
+### 衣物 | 腰包
+
+### 清潔 | 牙刷
+### 清潔 | 牙膏
+### 清潔 | 牙間刷
+### 清潔 | 汙衣袋
+
+### 電子 | iPhone 15 Pro Max
+### 電子 | 手機殼與掛繩
+### 電子 | Airpods
+### 電子 | 充電器(英式三腳方型插頭) * 2
+### 電子 | 充電線 * 5
+### 電子 | 行動電源 * 2
+
+### 藥妝 | Loxonin * 3
+### 藥妝 | B群 * 3
+### 藥妝 | 樂途達
+### 藥妝 | 爽身濕紙巾
+### 藥妝 | 衛生紙
+### 藥妝 | 易克冒 * 2
+### 藥妝 | 休足時間 * 2
+
+### 其他 | 菜單夾
+### 其他 | 筆
+
 ## Day 1 | 2026/04/11 (六) | 出發香港
 
 route: 台北 → 香港
@@ -1539,6 +1578,7 @@ description: 在機場休息
 time: 09:55
 endTime: 12:05
 description: 
+meta: 行李限重 23 kg； 手提行李1+1總限重 7 kg
 cost: NTD 5,133 / 人
 ticket: Ticket number: 160 2131358170
 notes: Booking ref: D8S62X
@@ -1715,6 +1755,7 @@ mapLink: https://maps.app.goo.gl/PFN5R6naNpDx3hFs7
 time: 19:20
 endTime: 21:20
 description: 
+meta: 行李限重 23 kg； 手提行李1+1總限重 7 kg
 ticket: Ticket number: 160 2131358170
 notes: Booking ref: D8S62X
 app: 國泰航空
@@ -1868,11 +1909,16 @@ docLink: https://www.tms.tw/9AE5AA
     }
 
     function parseDayBlock(block) {
-      // header line: ## Day N | YYYY/MM/DD (wd) | title
+      // header line: ## Day N | YYYY/MM/DD (wd) | title  OR  ## Day N | title
       const headerLine = block.split('\n')[0];
-      const hm = headerLine.match(/##\s*Day\s*(\d+)\s*\|\s*(\d{4}\/\d{2}\/\d{2})\s*\(([^)]+)\)\s*\|\s*(.*)/);
-      if (!hm) return null;
-      const day = { day: parseInt(hm[1]), date: hm[2], weekday: hm[3].trim(), title: hm[4].trim(), route: '', dayNote: '', weather: null, activities: [], accommodation: null };
+      const hmFull = headerLine.match(/##\s*Day\s*(\d+)\s*\|\s*(\d{4}\/\d{2}\/\d{2})\s*\(([^)]+)\)\s*\|\s*(.*)/);
+      const hmShort = !hmFull && headerLine.match(/##\s*Day\s*(\d+)\s*\|\s*(.*)/);
+      if (!hmFull && !hmShort) return null;
+      const dayNum = parseInt(hmFull ? hmFull[1] : hmShort[1]);
+      const date = hmFull ? hmFull[2] : '';
+      const weekday = hmFull ? hmFull[3].trim() : '';
+      const title = hmFull ? hmFull[4].trim() : hmShort[2].trim();
+      const day = { day: dayNum, date, weekday, title, route: '', dayNote: '', weather: null, activities: [], accommodation: null };
 
       const rest = block.split('\n').slice(1);
       // parse route/dayNote/weather before first ###
@@ -2098,7 +2144,7 @@ docLink: https://www.tms.tw/9AE5AA
         last = m.index + m[0].length;
       }
       parts.push(escHtml(raw.slice(last)));
-      return parts.join('');
+      return parts.join('').replace(/\\n/g, '<br>');
     }
 
     // ── 景點圖片卡 ───────────────────────────────────────────
@@ -2275,7 +2321,7 @@ docLink: https://www.tms.tw/9AE5AA
       ${act.ticket ? `<div class="ticket-box">🎫 ${escHtml(act.ticket)}</div>` : ''}
       ${act.meta ? `<div class="meta-box">ℹ️ ${escHtml(act.meta)}</div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
-      ${act.notes ? `<div class="notes-box">${escHtml(act.notes)}</div>` : ''}
+      ${act.notes ? `<div class="notes-box">${renderText(act.notes)}</div>` : ''}
       ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">📄 查看文件</a>` : ''}
       ${renderAppButton(act)}
       <div class="card-buttons">
@@ -2326,16 +2372,71 @@ docLink: https://www.tms.tw/9AE5AA
       </div>`;
     }
 
+    function getPrep0Key(dayIdx, actIdx) {
+      return `prep0-${encodeURIComponent(DATA.title)}-${dayIdx}-${actIdx}`;
+    }
+    function togglePrep0(dayIdx, actIdx) {
+      const key = getPrep0Key(dayIdx, actIdx);
+      localStorage.setItem(key, localStorage.getItem(key) === '1' ? '0' : '1');
+      renderDayContent(dayIdx);
+    }
+    function togglePrep0Cat(bodyId, chvId) {
+      const el = document.getElementById(bodyId);
+      const chv = document.getElementById(chvId);
+      el.classList.toggle('open');
+      chv.classList.toggle('open', el.classList.contains('open'));
+    }
+    function renderDay0Checklist(day, dayIdx) {
+      if (!day.activities.length) return '<div style="padding:20px;opacity:0.5;text-align:center">尚無項目</div>';
+      const groups = {}, groupOrder = [];
+      day.activities.forEach((act, i) => {
+        const t = act.type || '其他';
+        if (!groups[t]) { groups[t] = []; groupOrder.push(t); }
+        groups[t].push({ act, i });
+      });
+      return groupOrder.map((type, gi) => {
+        const items = groups[type];
+        const done = items.filter(({ i }) => localStorage.getItem(getPrep0Key(dayIdx, i)) === '1').length;
+        const icon = typeIcon({ type, nameCn: '', description: '' });
+        return `<div class="pack-cat fade-in-up">
+          <div class="pack-cat-header" onclick="togglePrep0Cat('prep0cat-${dayIdx}-${gi}','prep0chv-${dayIdx}-${gi}')">
+            <span class="pack-cat-icon">${icon}</span>
+            <span class="pack-cat-name">${escHtml(type)}</span>
+            <span class="pack-cat-count">${done}/${items.length}</span>
+            <span class="card-chevron open" id="prep0chv-${dayIdx}-${gi}">›</span>
+          </div>
+          <div class="pack-items open" id="prep0cat-${dayIdx}-${gi}">
+            ${items.map(({ act, i }) => {
+          const checked = localStorage.getItem(getPrep0Key(dayIdx, i)) === '1';
+          return `<div class="pack-item" onclick="togglePrep0(${dayIdx},${i})">
+                <div class="pack-check ${checked ? 'checked' : ''}">${checked ? '✓' : ''}</div>
+                <span class="pack-item-text ${checked ? 'checked' : ''}">${escHtml(act.nameCn)}</span>
+              </div>`;
+        }).join('')}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
     function renderDayContent(dayIdx) {
       const day = DATA.days[dayIdx];
       if (!day) return;
       const el = document.getElementById('day-content');
+      if (day.day === 0) {
+        el.innerHTML = `<div class="day-header">
+          <div class="day-route">📋 ${escHtml(day.title)}</div>
+          ${day.dayNote ? `<div class="day-note">${renderText(day.dayNote)}</div>` : ''}
+        </div>
+        ${renderDay0Checklist(day, dayIdx)}`;
+        initFadeIn(el);
+        return;
+      }
       const normal = day.activities.filter(a => !a.cancelled);
       const cancelled = day.activities.filter(a => a.cancelled);
 
       let html = `<div class="day-header">
     <div class="day-route">📍 ${escHtml(day.route || day.title)}</div>
-    ${day.dayNote ? `<div class="day-note">${escHtml(day.dayNote)}</div>` : ''}
+    ${day.dayNote ? `<div class="day-note">${renderText(day.dayNote)}</div>` : ''}
   </div>
   ${renderWeather(day)}
   ${normal.map((a, i) => renderActivity(a, dayIdx, i)).join('')}
