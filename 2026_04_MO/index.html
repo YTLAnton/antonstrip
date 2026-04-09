@@ -1278,7 +1278,6 @@
     .si-wrap img { width: 100%; display: block; object-fit: cover; max-height: 220px; transition: transform 0.3s; }
     .si-sm img { max-height: 140px; }
     @media (hover: hover) { .si-wrap:hover img { transform: scale(1.03); } }
-    .si-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.45)); color: #fff; font-size: 0.72rem; padding: 18px 8px 6px; }
 
 
     /* ── Multi-image grid ── */
@@ -1981,7 +1980,6 @@ copyable: 訂票代碼 3615830
         const safe = escHtml(src);
         return `<div class="si-wrap${extra ? ' ' + extra : ''}" onclick="openLightbox('${safe}')">
         <img src="${safe}" alt="${label}" loading="lazy">
-        <div class="si-label">${label}</div>
       </div>`;
       };
 
