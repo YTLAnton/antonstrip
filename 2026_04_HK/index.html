@@ -20,6 +20,8 @@
   <meta name="description" content="2026/04/11 - 04/12 (2天1夜)">
   <!-- ═══════════════════════════════════════════ -->
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <title>2026.04 Horlick送別行</title>
   <style>
     *,
@@ -85,7 +87,7 @@
     html,
     body {
       height: 100%;
-      font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", -apple-system, sans-serif;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
       scrollbar-width: none;
     }
     html::-webkit-scrollbar,
@@ -95,6 +97,10 @@
 
     body {
       background: var(--bg);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 32px 32px;
       display: flex;
       justify-content: center;
       color: var(--text);
@@ -148,6 +154,7 @@
       font-size: 1.3rem;
       font-weight: 700;
       letter-spacing: 0.02em;
+      font-family: inherit;
     }
 
     #header-subtitle {
@@ -435,7 +442,13 @@
       border: 1.5px solid var(--border);
       margin-bottom: 8px;
       overflow: hidden;
-      transition: box-shadow 0.15s;
+      transition: box-shadow 0.15s, transform 0.2s;
+    }
+    @media (hover: hover) {
+      .activity-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.45);
+      }
     }
 
     .activity-card.cancelled-card {
@@ -462,7 +475,7 @@
 
     .card-time {
       font-size: 0.68rem;
-      color: var(--text-3);
+      color: var(--primary);
       font-variant-numeric: tabular-nums;
     }
 
@@ -1263,6 +1276,163 @@
         background: #000000;
       }
     }
+
+    /* ── 景點圖片卡 ── */
+    .si-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 160px;
+      border-radius: 8px;
+      margin: 4px 0 10px;
+      cursor: zoom-in;
+    }
+    .si-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .si-wrap:hover img { transform: scale(1.03); }
+    .si-wrap.si-sm { height: 120px; }
+    .si-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.72));
+      color: #fff;
+      padding: 12px 10px 7px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+
+    /* ── Multi-image grid ── */
+    .si-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 8px 0; }
+    .si-grid-2 .si-wrap { margin: 0; }
+    .si-grid-3 { margin: 8px 0; }
+    .si-grid-3 > .si-wrap img { max-height: 160px; }
+    .si-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; }
+    .si-row2 .si-wrap { margin: 0; }
+    .si-row2 .si-wrap img { max-height: 120px; }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.93);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 52px 12px 16px;
+    }
+    #lightbox.hidden { display: none !important; }
+    #lightbox-img {
+      max-width: 100%;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    #lightbox-close {
+      position: fixed;
+      top: 10px; right: 10px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      font-size: 1.2rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── 捲動淡入 ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .fade-in-up.visible {
+      animation: fadeInUp 0.42s ease both;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-up.visible { animation: none; }
+    }
+
+    /* ── 重點文字標記 ── */
+    .hl-y {
+      background: linear-gradient(transparent 55%, rgba(255,210,0,0.3) 55%);
+      padding: 0 2px;
+    }
+    .hl-p {
+      border-bottom: 2px solid rgba(255,110,140,0.75);
+      padding-bottom: 1px;
+    }
+
+    /* ── Desktop RWD (≥ 768px) ── */
+    @media (min-width: 768px) {
+      #app {
+        max-width: 100%;
+        height: 100dvh;
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 240px 1fr;
+      }
+      #header {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        position: relative;
+        top: auto;
+      }
+      #day-selector {
+        grid-column: 1;
+        grid-row: 2;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+        border-bottom: none;
+        padding: 12px 8px;
+        align-items: stretch;
+        min-height: 0;
+        height: 100%;
+        background: var(--surface);
+      }
+      .day-btn {
+        flex-direction: row;
+        min-width: auto;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 8px 12px;
+        text-align: left;
+      }
+      .day-btn .day-n { width: 40px; flex-shrink: 0; }
+      .day-btn .day-wd { margin-left: auto; }
+      #main {
+        grid-column: 2;
+        grid-row: 2;
+        max-width: 100%;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 0 8px;
+      }
+      #tab-bar {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        position: relative;
+        bottom: auto;
+      }
+      #driver-sheet { max-width: 500px; }
+      #day-content { max-width: 900px; margin: 0 auto; }
+    }
+
   </style>
 </head>
 
@@ -1831,6 +2001,47 @@ docLink: https://www.tms.tw/9AE5AA
       'Agoda': { label: '🏨 Agoda', url: 'agoda://', bg: '#5c2d91', color: '#fff' },
     };
 
+    // ── 文字標記處理 ─────────────────────────────────────────
+    function renderText(raw) {
+      if (!raw) return '';
+      const parts = [];
+      let last = 0;
+      const re = /==([\s\S]+?)==|~~([\s\S]+?)~~/g;
+      let m;
+      while ((m = re.exec(raw)) !== null) {
+        parts.push(escHtml(raw.slice(last, m.index)));
+        if (m[1] !== undefined) parts.push(`<span class="hl-y">${escHtml(m[1])}</span>`);
+        if (m[2] !== undefined) parts.push(`<span class="hl-p">${escHtml(m[2])}</span>`);
+        last = m.index + m[0].length;
+      }
+      parts.push(escHtml(raw.slice(last)));
+      return parts.join('');
+    }
+
+    // ── 景點圖片卡 ───────────────────────────────────────────
+    function renderImageCard(act) {
+      if (!act.imageUrl) return '';
+      const imgs = [act.imageUrl, act.imageUrl2, act.imageUrl3].filter(Boolean);
+      const label = escHtml(act.nameCn || '');
+
+      const makeWrap = (src, extra) => {
+        const safe = escHtml(src);
+        return `<div class="si-wrap${extra ? ' ' + extra : ''}" onclick="openLightbox('${safe}')">
+        <img src="${safe}" alt="${label}" loading="lazy">
+        <div class="si-label">${label}</div>
+      </div>`;
+      };
+
+      if (imgs.length === 1) {
+        const cls = act.imageSize === 'small' ? 'si-sm' : '';
+        return makeWrap(imgs[0], cls);
+      }
+      if (imgs.length === 2) {
+        return `<div class="si-grid-2">${makeWrap(imgs[0])}${makeWrap(imgs[1])}</div>`;
+      }
+      return `<div class="si-grid-3">${makeWrap(imgs[0])}<div class="si-row2">${makeWrap(imgs[1])}${makeWrap(imgs[2])}</div></div>`;
+    }
+
     function renderAppButton(act) {
       if (!act.app) return '';
       const cfg = APP_MAP[act.app];
@@ -1927,7 +2138,7 @@ docLink: https://www.tms.tw/9AE5AA
         const id = `act-${dayIdx}-${actIdx}`;
         const mapUrl = mapsUrl(act);
         const timeStr = act.time ? (act.endTime ? `${act.time} - ${act.endTime}` : act.time) : '';
-        return `<div class="activity-card" id="${id}">
+        return `<div class="activity-card fade-in-up" id="${id}">
     <div class="card-header" onclick="toggleCard('${id}')">
       <span class="card-icon">🏠</span>
       <div class="card-meta">
@@ -1941,6 +2152,7 @@ docLink: https://www.tms.tw/9AE5AA
       <span class="card-chevron" id="chv-${id}">›</span>
     </div>
     <div class="card-body" id="body-${id}">
+      ${renderImageCard(act)}
       ${act.checkIn || act.checkOut ? `<div class="accom-sub" style="margin-bottom:8px">${act.checkIn ? `入住 ${act.checkIn}` : ''}${act.checkOut ? ` · 退房 ${act.checkOut}` : ''}</div>` : ''}
       ${(act.nights || act.night) ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${act.nights || act.night} 晚</span></div>` : ''}
       ${act.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
@@ -1960,7 +2172,7 @@ docLink: https://www.tms.tw/9AE5AA
       const mapUrl = mapsUrl(act);
       const isCancelled = act.cancelled;
 
-      return `<div class="activity-card ${isCancelled ? 'cancelled-card' : ''}" id="act-${dayIdx}-${actIdx}">
+      return `<div class="activity-card fade-in-up ${isCancelled ? 'cancelled-card' : ''}" id="act-${dayIdx}-${actIdx}">
     <div class="card-header" onclick="toggleCard('act-${dayIdx}-${actIdx}')">
       <span class="card-icon">${icon}</span>
       <div class="card-meta">
@@ -1974,8 +2186,9 @@ docLink: https://www.tms.tw/9AE5AA
       <span class="card-chevron" id="chv-act-${dayIdx}-${actIdx}">›</span>
     </div>
     <div class="card-body" id="body-act-${dayIdx}-${actIdx}">
+      ${renderImageCard(act)}
       ${isCancelled && act.cancelReason ? `<div class="notes-box">已排除：${escHtml(act.cancelReason)}</div>` : ''}
-      ${act.description ? `<div class="card-desc">${escHtml(act.description)}</div>` : ''}
+      ${act.description ? `<div class="card-desc">${renderText(act.description)}</div>` : ''}
       ${act.hours ? `<div class="card-hours">🕐 營業時間：${escHtml(act.hours)}</div>` : ''}
       ${act.ticket ? `<div class="ticket-box">🎫 ${escHtml(act.ticket)}</div>` : ''}
       ${act.meta ? `<div class="meta-box">ℹ️ ${escHtml(act.meta)}</div>` : ''}
@@ -2052,6 +2265,7 @@ docLink: https://www.tms.tw/9AE5AA
       </div>
     </div>` : ''}`;
       el.innerHTML = html;
+      initFadeIn(el);
     }
 
     function selectDay(idx) {
@@ -2388,9 +2602,39 @@ docLink: https://www.tms.tw/9AE5AA
     renderPackingTips();
     renderPacking();
     renderTips();
+    // ── 圖片 Lightbox ────────────────────────────────────────
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // ── 捲動淡入 ─────────────────────────────────────────────
+    function initFadeIn(container) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.05 });
+      container.querySelectorAll('.fade-in-up').forEach(el => obs.observe(el));
+    }
+
     renderDaySelector();
     autoLocate(); // 統一負責初始渲染：今天在行程內→定位；不在→顯示 Day 1 頂端
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
   </script>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="hidden" onclick="if(event.target===this)closeLightbox()">
+    <button id="lightbox-close" onclick="closeLightbox()" aria-label="關閉">✕</button>
+    <img id="lightbox-img" alt="">
+  </div>
 </body>
 
 </html>
