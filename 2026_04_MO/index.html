@@ -86,6 +86,11 @@
     body {
       height: 100%;
       font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", -apple-system, sans-serif;
+      scrollbar-width: none;
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      display: none;
     }
 
     body {
@@ -114,7 +119,7 @@
       }
 
       #app {
-        max-width: 390px;
+        max-width: 430px;
       }
     }
 
@@ -1173,7 +1178,7 @@
     #driver-sheet {
       position: relative;
       width: 90%;
-      max-width: 390px;
+      max-width: 430px;
       height: auto;
       max-height: 80vh;
       border-radius: var(--r);
