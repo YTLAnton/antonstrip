@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(python3:*)",
-      "Bash(find /c/Users/anton_liu/Downloads/ANTI/antonstrip -type d ! -path */.git/*)"
+      "Bash(find /c/Users/anton_liu/Downloads/ANTI/antonstrip -type d ! -path */.git/*)",
+      "Bash(\" /c/Users/anton_liu/Downloads/ANTI/antonstrip/2026_04_MO/index.html | head -30)",
+      "Bash(grep -n \"script\\\\|MARKDOWN\\\\|markdownContent\\\\|const md\\\\|const trip\\\\|```\" /c/Users/anton_liu/Downloads/ANTI/antonstrip/2026_04_MO/index.html | head -30)",
+      "Bash(chmod +x:*)",
+      "Bash(python:*)"
     ]
   }
 }
