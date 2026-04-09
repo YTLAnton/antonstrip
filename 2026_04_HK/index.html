@@ -2126,7 +2126,7 @@ docLink: https://www.tms.tw/9AE5AA
       '台鐵': { label: '🚂 台鐵 e 訂通', url: 'traeticket://', bg: '#1a6b3a', color: '#fff' },
       '高鐵': { label: '🚄 T-Express 高鐵', url: 'texpress://', bg: '#e65100', color: '#fff' },
       '長榮航空': { label: '✈️ 長榮航空', url: 'evaair://', bg: '#005f40', color: '#fff' },
-      '國泰航空': { label: '✈️ 國泰航空', url: 'cathaypacific://', bg: '#006564', color: '#fff' },
+      '國泰航空': { label: '✈️ 國泰航空', url: 'https://www.cathaypacific.com/', bg: '#006564', color: '#fff' },
       'Agoda': { label: '🏨 Agoda', url: 'agoda://', bg: '#5c2d91', color: '#fff' },
     };
 
@@ -2333,7 +2333,7 @@ docLink: https://www.tms.tw/9AE5AA
       ${act.meta ? `<div class="meta-box">ℹ️ ${escHtml(act.meta)}</div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box">${renderText(act.notes)}</div>` : ''}
-      ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">📄 查看文件</a>` : ''}
+      ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">🔗 相關連結</a>` : ''}
       ${renderAppButton(act)}
       <div class="card-buttons">
         ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
