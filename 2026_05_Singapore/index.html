@@ -85,6 +85,12 @@
       --type-景點-bg: #faeee0;
       --type-參考: #d97706;
       --type-參考-bg: #fef3c7;
+      --type-休息: #7a8fa0;
+      --type-休息-bg: #eaf0f5;
+      --type-展覽: #b06080;
+      --type-展覽-bg: #faeef3;
+      --type-購物: #3a8a6a;
+      --type-購物-bg: #e6f5ef;
     }
 
     html,
@@ -1805,6 +1811,9 @@ copyable: 訂票代號 CI752-20260503DEF
       if (act.type === '作業') return '📋';
       if (act.type === '參考') return '💡';
       if (act.type === '住宿') return '🏠';
+      if (act.type === '休息') return '😴';
+      if (act.type === '展覽') return '🖼️';
+      if (act.type === '購物') return '🛍️';
       // 交通 — detect
       const t = (act.nameCn + ' ' + (act.description || '')).toLowerCase();
       if (/搭機|飛機|航班|ci\d|br\d|sin|tpe/.test(t)) return '✈️';
@@ -1815,7 +1824,7 @@ copyable: 訂票代號 CI752-20260503DEF
     }
 
     function typeColor(type) {
-      const map = { '行程': '行程', '景點': '景點', '飲食': '飲食', '交通': '交通', '作業': '作業', '住宿': '住宿', '參考': '參考' };
+      const map = { '行程': '行程', '景點': '景點', '飲食': '飲食', '交通': '交通', '作業': '作業', '住宿': '住宿', '參考': '參考', '休息': '休息', '展覽': '展覽', '購物': '購物' };
       return map[type] || '行程';
     }
 
