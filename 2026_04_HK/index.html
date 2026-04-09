@@ -90,6 +90,7 @@
       font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
       scrollbar-width: none;
     }
+
     html::-webkit-scrollbar,
     body::-webkit-scrollbar {
       display: none;
@@ -98,8 +99,8 @@
     body {
       background: var(--bg);
       background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
       background-size: 32px 32px;
       display: flex;
       justify-content: center;
@@ -444,10 +445,11 @@
       overflow: hidden;
       transition: box-shadow 0.15s, transform 0.2s;
     }
+
     @media (hover: hover) {
       .activity-card:hover {
         transform: translateY(-1px);
-        box-shadow: 0 4px 16px rgba(0,0,0,0.45);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
       }
     }
 
@@ -1286,6 +1288,7 @@
       margin: 4px 0 10px;
       cursor: zoom-in;
     }
+
     .si-wrap img {
       width: 100%;
       height: 100%;
@@ -1293,12 +1296,21 @@
       display: block;
       transition: transform 0.3s ease;
     }
-    .si-wrap:hover img { transform: scale(1.03); }
-    .si-wrap.si-sm { height: 120px; }
+
+    .si-wrap:hover img {
+      transform: scale(1.03);
+    }
+
+    .si-wrap.si-sm {
+      height: 120px;
+    }
+
     .si-label {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.72));
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.72));
       color: #fff;
       padding: 12px 10px 7px;
       font-size: 0.78rem;
@@ -1308,40 +1320,73 @@
 
 
     /* ── Multi-image grid ── */
-    .si-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 8px 0; }
-    .si-grid-2 .si-wrap { margin: 0; }
-    .si-grid-3 { margin: 8px 0; }
-    .si-grid-3 > .si-wrap img { max-height: 160px; }
-    .si-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; }
-    .si-row2 .si-wrap { margin: 0; }
-    .si-row2 .si-wrap img { max-height: 120px; }
+    .si-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin: 8px 0;
+    }
+
+    .si-grid-2 .si-wrap {
+      margin: 0;
+    }
+
+    .si-grid-3 {
+      margin: 8px 0;
+    }
+
+    .si-grid-3>.si-wrap img {
+      max-height: 160px;
+    }
+
+    .si-row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .si-row2 .si-wrap {
+      margin: 0;
+    }
+
+    .si-row2 .si-wrap img {
+      max-height: 120px;
+    }
 
     /* ── Lightbox ── */
     #lightbox {
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: rgba(0,0,0,0.93);
+      background: rgba(0, 0, 0, 0.93);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 52px 12px 16px;
     }
-    #lightbox.hidden { display: none !important; }
+
+    #lightbox.hidden {
+      display: none !important;
+    }
+
     #lightbox-img {
       max-width: 100%;
       max-height: 88vh;
       object-fit: contain;
       border-radius: 6px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
     }
+
     #lightbox-close {
       position: fixed;
-      top: 10px; right: 10px;
-      width: 40px; height: 40px;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: none;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255, 255, 255, 0.92);
       color: #111;
       font-size: 1.2rem;
       line-height: 1;
@@ -1354,23 +1399,35 @@
 
     /* ── 捲動淡入 ── */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: none; }
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
     }
+
     .fade-in-up.visible {
       animation: fadeInUp 0.42s ease both;
     }
+
     @media (prefers-reduced-motion: reduce) {
-      .fade-in-up.visible { animation: none; }
+      .fade-in-up.visible {
+        animation: none;
+      }
     }
 
     /* ── 重點文字標記 ── */
     .hl-y {
-      background: linear-gradient(transparent 55%, rgba(255,210,0,0.3) 55%);
+      background: linear-gradient(transparent 55%, rgba(255, 210, 0, 0.3) 55%);
       padding: 0 2px;
     }
+
     .hl-p {
-      border-bottom: 2px solid rgba(255,110,140,0.75);
+      border-bottom: 2px solid rgba(255, 110, 140, 0.75);
       padding-bottom: 1px;
     }
 
@@ -1384,12 +1441,14 @@
         grid-template-rows: auto 1fr auto;
         grid-template-columns: 240px 1fr;
       }
+
       #header {
         grid-column: 1 / -1;
         grid-row: 1;
         position: relative;
         top: auto;
       }
+
       #day-selector {
         grid-column: 1;
         grid-row: 2;
@@ -1404,6 +1463,7 @@
         height: 100%;
         background: var(--surface);
       }
+
       .day-btn {
         flex-direction: row;
         min-width: auto;
@@ -1413,8 +1473,16 @@
         padding: 8px 12px;
         text-align: left;
       }
-      .day-btn .day-n { width: 40px; flex-shrink: 0; }
-      .day-btn .day-wd { margin-left: auto; }
+
+      .day-btn .day-n {
+        width: 40px;
+        flex-shrink: 0;
+      }
+
+      .day-btn .day-wd {
+        margin-left: auto;
+      }
+
       #main {
         grid-column: 2;
         grid-row: 2;
@@ -1423,16 +1491,23 @@
         overflow-y: auto;
         padding: 0 8px;
       }
+
       #tab-bar {
         grid-column: 1 / -1;
         grid-row: 3;
         position: relative;
         bottom: auto;
       }
-      #driver-sheet { max-width: 500px; }
-      #day-content { max-width: 900px; margin: 0 auto; }
-    }
 
+      #driver-sheet {
+        max-width: 500px;
+      }
+
+      #day-content {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+    }
   </style>
 </head>
 
@@ -1489,6 +1564,7 @@ cost: HKD 40-60 / 人
 hours: 10:00-20:00
 address: 香港深水埗福榮街80號地舖
 mapLink: https://maps.app.goo.gl/t7DbwH2fa24BoESW9
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/LauSumKee.jpg
 
 ### 展覽 | M+
 time: 14:45
@@ -1499,6 +1575,9 @@ hours: 10:00-18:00
 address: 香港西九龍博物館道38號
 mapLink: https://maps.app.goo.gl/UJ3hchNF24tAtTWc7
 docLink: https://www.mplus.org.hk/tc/
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/M%2B.jpg
+imageUrl2: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E5%9D%82%E6%9C%AC%E9%BE%8D%E4%B8%80%E8%A7%80%E9%9F%B3%E2%80%A7%E8%81%BD%E6%99%82.jpg
+imageUrl3: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E9%B9%BD%E7%94%B0%E5%8D%83%E6%98%A5%EF%BC%9A%E7%84%A1%E9%99%90%E8%A8%98%E6%86%B6.jpg
 
 ### 展覽 | 香港故宮
 time: 17:00
@@ -1509,6 +1588,8 @@ hours: 10:00-20:00
 address: 8 Museum Drive West Kowloon, Tsim Sha Tsui, 香港
 mapLink: https://maps.app.goo.gl/Gm6JirG4CC8M5Z7J9
 docLink: https://www.hkpm.org.hk/tc/home
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E9%A6%99%E6%B8%AF%E6%95%85%E5%AE%AE.jpg
+imageUrl2: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E5%8F%A4%E5%9F%83%E5%8F%8A%E6%96%87%E6%98%8E%E5%A4%A7%E5%B1%95%E2%94%80%E2%94%80%E5%9F%83%E5%8F%8A%E5%8D%9A%E7%89%A9%E9%A4%A8%E7%8F%8D%E8%97%8F.jpg
 
 ### 景點 | 維多利亞港
 time: 18:00
@@ -1516,6 +1597,9 @@ endTime: 19:30
 description: 世界三大夜景、前九廣鐵路鐘樓、星光大道
 address: 香港尖沙咀梳士巴利道10號
 mapLink: https://maps.app.goo.gl/GmaLCd2Qkz1obWz37
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E7%B6%AD%E5%A4%9A%E5%88%A9%E4%BA%9E%E6%B8%AF.jpg
+imageUrl2: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E5%89%8D%E4%B9%9D%E5%BB%A3%E9%90%B5%E8%B7%AF%E9%90%98%E6%A8%93.jpg
+imageUrl3: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E6%98%9F%E5%85%89%E5%A4%A7%E9%81%93.jpg
 
 ### 交通 | 天星小輪
 time: 19:00
@@ -1525,6 +1609,7 @@ cost: HKD 5 / 人
 hours: 06:30-23:30
 address: 香港梳士巴利道
 mapLink: https://maps.app.goo.gl/cMutGcfV2CRpGz5a7
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E5%A4%A9%E6%98%9F%E5%B0%8F%E8%BC%AA.jpg
 
 ### 參考 | Bar Leone
 time: 20:00
@@ -1532,6 +1617,7 @@ endTime: 20:20
 description: 登記候位
 address: 香港中環必列者士街11-15號
 mapLink: https://maps.app.goo.gl/nxnZegrsrZdNfBWZ6
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/Bar%20Leone.jpg
 
 ### 飲食 | MORA
 time: 20:30
@@ -1541,6 +1627,7 @@ cost: HKD 1,078 / 人
 hours: 18:00-23:30
 address: 香港上環摩羅上街40號
 mapLink: https://maps.app.goo.gl/5xh9z9kWf7EJ53jC6
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/MORA.jpg
 
 ### 飲食 | Bar Leone
 time: 22:44
@@ -1550,6 +1637,7 @@ cost: HKD 300 / 人
 hours: 17:00-00:00
 address: 香港中環必列者士街11-15號
 mapLink: https://maps.app.goo.gl/nxnZegrsrZdNfBWZ6
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/Bar%20Leone.jpg
 
 ### 住宿 | 普特曼酒店
 time: 00:00
@@ -1562,6 +1650,7 @@ app: Agoda
 address: 香港中環皇后大道中202號
 mapLink: https://maps.app.goo.gl/disL7ihBG5Qw9DR5A
 notes: 參考編號：1128147164474590 ； Hotel's Reference ID：1128147164474687 ； 預訂編號：1716025093
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E6%99%AE%E7%89%B9%E6%9B%BC%E9%85%92%E5%BA%97.jpg
 
 ---
 
@@ -1588,6 +1677,7 @@ cost: HKD 200 / 人
 hours: 03:00-16:00
 address: 香港堅尼地城士美菲路美暉大廈地下8號鋪
 mapLink: https://maps.app.goo.gl/g9zshj1zKL3DUqnr7
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E6%96%B0%E8%88%88%E9%A3%9F%E5%AE%B6.jpg
 
 ### 休息 | 普特曼酒店
 time: 07:30
@@ -1604,6 +1694,7 @@ cost: HKD 500 / 人
 hours: 10:00–19:30
 address: 香港上環皇后大道中176B號G/F
 mapLink: https://maps.app.goo.gl/rbfbU1h46bswn9AX9
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E9%99%B3%E6%84%8F%E9%BD%8B.jpg
 
 ### 飲食 | 文記車仔麵
 time: 11:00
@@ -1613,6 +1704,7 @@ cost: HKD 90 / 人
 hours: 11:00–04:00
 address: 香港深水埗福榮街121號地下
 mapLink: https://maps.app.goo.gl/eWMjbbdjtnbAUkk97
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/%E6%96%87%E8%A8%98%E8%BB%8A%E4%BB%94%E9%BA%B5.jpg
 
 ### 行程 | 寵愛無限
 time: 13:45
@@ -1620,6 +1712,9 @@ endTime: 15:00
 description: 送別Horlick
 address: 香港葵涌永立街8-14號B座 19樓全層
 mapLink: https://maps.app.goo.gl/7SKVtxEVUsnyL9ab7
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/Horlick(light).JPG
+imageUrl2: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/Horlick.jpg
+imageUrl3: https://github.com/YTLAnton/antonstrip/blob/main/2026_04_HK/img/Horlick(2025).JPG
 
 ### 休息 | HKG
 time: 17:00
@@ -2625,7 +2720,7 @@ docLink: https://www.tms.tw/9AE5AA
 
     renderDaySelector();
     autoLocate(); // 統一負責初始渲染：今天在行程內→定位；不在→顯示 Day 1 頂端
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLightbox();
     });
   </script>
