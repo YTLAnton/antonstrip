@@ -2253,6 +2253,11 @@ docLink: https://www.tms.tw/9AE5AA
       el.innerHTML = DATA.days.map((d, i) => {
         const isToday = d.date === todayStr;
         const isActive = i === currentDayIndex;
+        if (!d.date) {
+          return `<button class="day-btn ${isActive ? 'active' : ''} ${isToday && !isActive ? 'today' : ''}" onclick="selectDay(${i})" style="justify-content: center;">
+      <span class="day-n">Day ${d.day}</span>
+    </button>`;
+        }
         return `<button class="day-btn ${isActive ? 'active' : ''} ${isToday && !isActive ? 'today' : ''}" onclick="selectDay(${i})">
       <span class="day-n">Day ${d.day}</span>
       <span class="day-date">${d.date.slice(5)}</span>
@@ -2375,10 +2380,30 @@ docLink: https://www.tms.tw/9AE5AA
     function getPrep0Key(dayIdx, actIdx) {
       return `prep0-${encodeURIComponent(DATA.title)}-${dayIdx}-${actIdx}`;
     }
-    function togglePrep0(dayIdx, actIdx) {
+    function togglePrep0(element, dayIdx, actIdx, countId, totalItems) {
       const key = getPrep0Key(dayIdx, actIdx);
-      localStorage.setItem(key, localStorage.getItem(key) === '1' ? '0' : '1');
-      renderDayContent(dayIdx);
+      const isChecked = localStorage.getItem(key) === '1';
+      const newVal = isChecked ? '0' : '1';
+      localStorage.setItem(key, newVal);
+      
+      const checkEl = element.querySelector('.pack-check');
+      const textEl = element.querySelector('.pack-item-text');
+      if (newVal === '1') {
+        checkEl.classList.add('checked');
+        checkEl.textContent = '✓';
+        textEl.classList.add('checked');
+      } else {
+        checkEl.classList.remove('checked');
+        checkEl.textContent = '';
+        textEl.classList.remove('checked');
+      }
+      
+      const countEl = document.getElementById(countId);
+      if (countEl) {
+         const groupEl = element.closest('.pack-items');
+         const done = groupEl.querySelectorAll('.pack-check.checked').length;
+         countEl.textContent = `${done}/${totalItems}`;
+      }
     }
     function togglePrep0Cat(bodyId, chvId) {
       const el = document.getElementById(bodyId);
@@ -2397,18 +2422,17 @@ docLink: https://www.tms.tw/9AE5AA
       return groupOrder.map((type, gi) => {
         const items = groups[type];
         const done = items.filter(({ i }) => localStorage.getItem(getPrep0Key(dayIdx, i)) === '1').length;
-        const icon = typeIcon({ type, nameCn: '', description: '' });
+        const countId = `prep0count-${dayIdx}-${gi}`;
         return `<div class="pack-cat fade-in-up">
           <div class="pack-cat-header" onclick="togglePrep0Cat('prep0cat-${dayIdx}-${gi}','prep0chv-${dayIdx}-${gi}')">
-            <span class="pack-cat-icon">${icon}</span>
             <span class="pack-cat-name">${escHtml(type)}</span>
-            <span class="pack-cat-count">${done}/${items.length}</span>
+            <span class="pack-cat-count" id="${countId}">${done}/${items.length}</span>
             <span class="card-chevron open" id="prep0chv-${dayIdx}-${gi}">›</span>
           </div>
           <div class="pack-items open" id="prep0cat-${dayIdx}-${gi}">
             ${items.map(({ act, i }) => {
           const checked = localStorage.getItem(getPrep0Key(dayIdx, i)) === '1';
-          return `<div class="pack-item" onclick="togglePrep0(${dayIdx},${i})">
+          return `<div class="pack-item" onclick="togglePrep0(this, ${dayIdx}, ${i}, '${countId}', ${items.length})">
                 <div class="pack-check ${checked ? 'checked' : ''}">${checked ? '✓' : ''}</div>
                 <span class="pack-item-text ${checked ? 'checked' : ''}">${escHtml(act.nameCn)}</span>
               </div>`;
@@ -2606,11 +2630,31 @@ docLink: https://www.tms.tw/9AE5AA
     <div class="pack-progress-label">已打包 ${checked} / ${total} 項（${pct}%）</div>`;
     }
 
-    function togglePackItem(ci, ii) {
+    function togglePackItem(element, ci, ii, countId, total) {
       const k = getPackKey(ci, ii);
-      const checked = localStorage.getItem(k) === '1';
-      localStorage.setItem(k, checked ? '0' : '1');
-      renderPacking();
+      const isChecked = localStorage.getItem(k) === '1';
+      const newVal = isChecked ? '0' : '1';
+      localStorage.setItem(k, newVal);
+      
+      const checkEl = element.querySelector('.pack-check');
+      const textEl = element.querySelector('.pack-item-text');
+      if (newVal === '1') {
+        checkEl.classList.add('checked');
+        checkEl.textContent = '✓';
+        textEl.classList.add('checked');
+      } else {
+        checkEl.classList.remove('checked');
+        checkEl.textContent = '';
+        textEl.classList.remove('checked');
+      }
+      
+      const countEl = document.getElementById(countId);
+      if (countEl) {
+         const groupEl = element.closest('.pack-items');
+         const done = groupEl.querySelectorAll('.pack-check.checked').length;
+         countEl.textContent = `${done}/${total}`;
+      }
+      updatePackProgress();
     }
 
     function renderPacking() {
@@ -2618,17 +2662,17 @@ docLink: https://www.tms.tw/9AE5AA
       el.innerHTML = DATA.packingList.map((cat, ci) => {
         const total = cat.items.length;
         const done = cat.items.filter((_, ii) => localStorage.getItem(getPackKey(ci, ii)) === '1').length;
+        const countId = `pack-count-${ci}`;
         return `<div class="pack-cat">
       <div class="pack-cat-header" onclick="togglePackCat(${ci})">
-        <span class="pack-cat-icon">${escHtml(cat.icon)}</span>
         <span class="pack-cat-name">${escHtml(cat.cat)}</span>
-        <span class="pack-cat-count">${done}/${total}</span>
+        <span class="pack-cat-count" id="${countId}">${done}/${total}</span>
         <span class="card-chevron open" id="chv-pack-${ci}">›</span>
       </div>
       <div class="pack-items open" id="pack-cat-${ci}">
         ${cat.items.map((item, ii) => {
           const isChecked = localStorage.getItem(getPackKey(ci, ii)) === '1';
-          return `<div class="pack-item" onclick="togglePackItem(${ci},${ii})">
+          return `<div class="pack-item" onclick="togglePackItem(this, ${ci}, ${ii}, '${countId}', ${total})">
             <div class="pack-check ${isChecked ? 'checked' : ''}">${isChecked ? '✓' : ''}</div>
             <span class="pack-item-text ${isChecked ? 'checked' : ''}">${escHtml(item.item)}</span>
           </div>`;
