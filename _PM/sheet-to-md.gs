@@ -104,8 +104,6 @@ function exportTripMD() {
       md += 'notes: \n';
       md += 'copyable: \n';
       md += 'docLink: \n';
-      md += 'cancelled: \n';
-      md += 'cancelReason: \n';
       md += '\n';
     }
   }
@@ -151,6 +149,9 @@ function inferType(name) {
   if (/酒店|飯店|旅館|inn|hotel/i.test(name))                          return '住宿';
   if (/tpe|hkg|kix|nrt|icn|cx\d|台鐵|高鐵|機|班機|自強|普悠瑪|送機|搭機|接機/i.test(name)) return '交通';
   if (/食|麵|飯|茶|粥|湯|點心|cafe|bar|leone|mora|餐|燒烤|火鍋|小吃|夜市/i.test(name)) return '飲食';
+  if (/博物館|美術館|展覽|展|gallery|museum/i.test(name))              return '展覽';
+  if (/購物|mall|商場|市集|超市|免稅|shopping/i.test(name))            return '購物';
+  if (/休息|午休|小睡|check.in|check.out/i.test(name))                return '休息';
   return '景點';
 }
 
