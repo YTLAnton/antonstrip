@@ -7,7 +7,7 @@
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="台南MO行">
+  <meta name="apple-mobile-web-app-title" content="Horlick送別行">
   <meta name="theme-color" content="#121212">
 
   <!-- ╔══════════════════════════════════════════╗
@@ -2210,6 +2210,12 @@ docLink: https://www.tms.tw/9AE5AA
 
     // 從資料動態設定網頁標題與 App Icon
     document.title = `${DATA.title || '行程表'} ${DATA.emoji || ''}`.trim();
+
+    // 動態設定 iOS 桌面名稱
+    const iosTitleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+    if (iosTitleMeta) {
+      iosTitleMeta.setAttribute('content', DATA.title || '行程表');
+    }
     (function () {
       try {
         var c = document.createElement('canvas');
@@ -2385,7 +2391,7 @@ docLink: https://www.tms.tw/9AE5AA
       const isChecked = localStorage.getItem(key) === '1';
       const newVal = isChecked ? '0' : '1';
       localStorage.setItem(key, newVal);
-      
+
       const checkEl = element.querySelector('.pack-check');
       const textEl = element.querySelector('.pack-item-text');
       if (newVal === '1') {
@@ -2397,12 +2403,12 @@ docLink: https://www.tms.tw/9AE5AA
         checkEl.textContent = '';
         textEl.classList.remove('checked');
       }
-      
+
       const countEl = document.getElementById(countId);
       if (countEl) {
-         const groupEl = element.closest('.pack-items');
-         const done = groupEl.querySelectorAll('.pack-check.checked').length;
-         countEl.textContent = `${done}/${totalItems}`;
+        const groupEl = element.closest('.pack-items');
+        const done = groupEl.querySelectorAll('.pack-check.checked').length;
+        countEl.textContent = `${done}/${totalItems}`;
       }
     }
     function togglePrep0Cat(bodyId, chvId) {
@@ -2636,7 +2642,7 @@ docLink: https://www.tms.tw/9AE5AA
       const isChecked = localStorage.getItem(k) === '1';
       const newVal = isChecked ? '0' : '1';
       localStorage.setItem(k, newVal);
-      
+
       const checkEl = element.querySelector('.pack-check');
       const textEl = element.querySelector('.pack-item-text');
       if (newVal === '1') {
@@ -2648,12 +2654,12 @@ docLink: https://www.tms.tw/9AE5AA
         checkEl.textContent = '';
         textEl.classList.remove('checked');
       }
-      
+
       const countEl = document.getElementById(countId);
       if (countEl) {
-         const groupEl = element.closest('.pack-items');
-         const done = groupEl.querySelectorAll('.pack-check.checked').length;
-         countEl.textContent = `${done}/${total}`;
+        const groupEl = element.closest('.pack-items');
+        const done = groupEl.querySelectorAll('.pack-check.checked').length;
+        countEl.textContent = `${done}/${total}`;
       }
       updatePackProgress();
     }
