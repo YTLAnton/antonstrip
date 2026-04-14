@@ -325,6 +325,15 @@
       padding-bottom: 16px;
     }
 
+    .day-footer {
+      margin-top: 48px;
+      padding: 32px 16px calc(32px + env(safe-area-inset-bottom));
+      text-align: center;
+      font-size: 0.65rem;
+      color: rgba(128, 128, 128, 0.45);
+      letter-spacing: 0.08em;
+    }
+
     .tab-panel.active {
       display: block;
     }
@@ -3042,7 +3051,8 @@ docLink:
       <div id="cancelled-list-${dayIdx}" style="display:none">
         ${cancelled.map((a, i) => renderActivity(a, dayIdx, normal.length + i)).join('')}
       </div>
-    </div>` : ''}`;
+    </div>` : ''}
+  <div class="day-footer">- Crafted by Anton Liu -</div>`;
       el.innerHTML = html;
       initFadeIn(el);
     }
