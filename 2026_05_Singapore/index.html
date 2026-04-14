@@ -1899,13 +1899,13 @@ imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img
 ### 景點 | 新加坡國家美術館 National Gallery Singapore
 time: 14:45
 endTime: 15:45
-group: 1 St Andrew's Rd, Singapore 178957
+group: 
 description: 東南亞現代藝術、新加坡國家收藏、蓮花燈光秀、Padma畫廊、建築地標
 cost: SGD 20 / 人
 hours: 10:00-19:00
 ticket: 
 meta: 
-address: 
+address: 1 St Andrew's Rd, Singapore 178957
 mapLink: https://maps.app.goo.gl/1CfRuMeDc3ZKaQWc6
 notes: 
 copyable: 
@@ -2034,6 +2034,12 @@ weatherTips: 要帶傘
 time: 09:00
 endTime: 09:36
 
+### 行程 | 自由活動
+time: 09:00
+endTime: 18:00
+group: 滷蛋、阿凱
+description: 自由活動準備回家
+
 ### 飲食 | Le Matin Petit
 time: 10:00
 endTime: 12:00
@@ -2081,6 +2087,7 @@ mapLink: https://maps.app.goo.gl/YoSXtUZ4gVK7rMm76
 notes: 
 copyable: 
 docLink: 
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/BR216.jpg?raw=true
 
 ### 接機 | 回家
 time: 20:30
@@ -2639,7 +2646,7 @@ docLink:
       ${renderImageCard(act)}
       ${act.checkIn || act.checkOut ? `<div class="accom-sub" style="margin-bottom:8px">${act.checkIn ? `入住 ${act.checkIn}` : ''}${act.checkOut ? ` · 退房 ${act.checkOut}` : ''}</div>` : ''}
       ${(act.nights || act.night) ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${act.nights || act.night} 晚</span></div>` : ''}
-      ${act.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
+      ${act.address ? `<div class="accom-row"><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')" style="margin-top:8px">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(act.notes)}</div>` : ''}
       ${renderAppButton(act)}
@@ -2704,7 +2711,7 @@ docLink:
     <div class="accom-body" id="body-accom-${dayIdx}">
       ${accom.price ? `<div class="accom-row"><span class="accom-label">費用</span><span class="accom-val">${escHtml(accom.price)}</span></div>` : ''}
       ${accom.nights ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${accom.nights} 晚</span></div>` : ''}
-      ${accom.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(accom.address)}</span></div>` : ''}
+      ${accom.address ? `<div class="accom-row"><span class="accom-val" style="font-size:0.72rem">${escHtml(accom.address)}</span></div>` : ''}
       ${accom.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(accom.copyable)}')" style="margin-top:8px">${escHtml(accom.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(accom.notes)}</div>` : ''}
       ${renderAppButton(accom)}
