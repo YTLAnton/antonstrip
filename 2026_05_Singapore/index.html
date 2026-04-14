@@ -2561,8 +2561,8 @@ docLink:
     const APP_MAP = {
       '台鐵': { label: '🚂 台鐵 e 訂通', url: 'traeticket://', bg: '#1a6b3a', color: '#fff' },
       '高鐵': { label: '🚄 T-Express 高鐵', url: 'texpress://', bg: '#e65100', color: '#fff' },
-      '長榮航空': { label: '✈️ 長榮航空', url: 'evaair://', bg: '#005f40', color: '#fff' },
-      '國泰航空': { label: '✈️ 國泰航空', url: 'https://www.cathaypacific.com/', bg: '#006564', color: '#fff' },
+      '長榮航空': { label: '✈️ 長榮航空', url: 'evamobile://', bg: '#005f40', color: '#fff' },
+      '國泰航空': { label: '✈️ 國泰航空', url: 'CXMobile://', bg: '#006564', color: '#fff' },
       'Agoda': { label: '🏨 Agoda', url: 'agoda://', bg: '#5c2d91', color: '#fff' },
       'Grab': { label: '🚗 Grab', url: 'grab://', bg: '#00b14f', color: '#fff' },
     };
@@ -2727,7 +2727,7 @@ docLink:
       const mapUrl = mapsUrl(act);
       if (act.type === '住宿') {
         return !!(act.imageUrl || act.checkIn || act.checkOut || act.nights || act.night ||
-          act.address || act.copyable || act.notes || act.app || mapUrl);
+          act.ticket || act.meta || act.address || act.copyable || act.notes || act.app || mapUrl);
       }
       return !!(act.imageUrl || act.description || act.hours || act.ticket || act.meta ||
         act.copyable || act.notes || act.docLink || act.app || mapUrl || act.address ||

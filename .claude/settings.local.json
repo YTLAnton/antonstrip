@@ -6,7 +6,13 @@
       "Bash(\" /c/Users/anton_liu/Downloads/ANTI/antonstrip/2026_04_MO/index.html | head -30)",
       "Bash(grep -n \"script\\\\|MARKDOWN\\\\|markdownContent\\\\|const md\\\\|const trip\\\\|```\" /c/Users/anton_liu/Downloads/ANTI/antonstrip/2026_04_MO/index.html | head -30)",
       "Bash(chmod +x:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "WebSearch",
+      "WebFetch(domain:gist.github.com)",
+      "WebFetch(domain:apps.apple.com)",
+      "WebFetch(domain:itunes.apple.com)",
+      "WebFetch(domain:www.airlinemobileapps.com)",
+      "WebFetch(domain:iosbundleidfinder.vercel.app)"
     ]
   }
 }
