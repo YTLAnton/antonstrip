@@ -464,6 +464,12 @@
       padding: 10px 12px;
       cursor: pointer;
     }
+    .card-header.no-expand {
+      cursor: default;
+    }
+    .card-header.no-expand .card-chevron {
+      display: none;
+    }
 
     .card-icon {
       font-size: 1.1rem;
@@ -1109,7 +1115,7 @@
     }
 
     .split-group {
-      margin: 4px 12px 8px;
+      margin-bottom: 8px;
       border-radius: var(--r);
       border: 1.5px solid var(--primary-light);
       overflow: hidden;
@@ -1138,7 +1144,16 @@
 
     .split-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+    .split-cards .card-name {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+    }
+    .split-cards .tag-type,
+    .split-cards .tag-cost,
+    .split-cards .tag-group {
+      white-space: normal;
     }
 
     .split-cards>.activity-card {
@@ -2623,13 +2638,25 @@ docLink:
       }).join('');
     }
 
+    function hasBodyContent(act) {
+      const mapUrl = mapsUrl(act);
+      if (act.type === '住宿') {
+        return !!(act.imageUrl || act.checkIn || act.checkOut || act.nights || act.night ||
+                  act.address || act.copyable || act.notes || act.app || mapUrl);
+      }
+      return !!(act.imageUrl || act.description || act.hours || act.ticket || act.meta ||
+                act.copyable || act.notes || act.docLink || act.app || mapUrl || act.address ||
+                (act.cancelled && act.cancelReason));
+    }
+
     function renderActivity(act, dayIdx, actIdx) {
       if (act.type === '住宿') {
         const id = `act-${dayIdx}-${actIdx}`;
         const mapUrl = mapsUrl(act);
         const timeStr = act.time ? (act.endTime ? `${act.time} - ${act.endTime}` : act.time) : '';
+        const hasBody = hasBodyContent(act);
         return `<div class="activity-card fade-in-up" id="${id}">
-    <div class="card-header" onclick="toggleCard('${id}')">
+    <div class="card-header${hasBody ? '' : ' no-expand'}" ${hasBody ? `onclick="toggleCard('${id}')"` : ''}>
       <span class="card-icon">🏠</span>
       <div class="card-meta">
         ${timeStr ? `<div class="card-time">${escHtml(timeStr)}</div>` : ''}
@@ -2662,9 +2689,10 @@ docLink:
       const timeStr = act.time ? (act.endTime ? `${act.time} - ${act.endTime}` : act.time) : '';
       const mapUrl = mapsUrl(act);
       const isCancelled = act.cancelled;
+      const hasBody = hasBodyContent(act);
 
       return `<div class="activity-card fade-in-up ${isCancelled ? 'cancelled-card' : ''}" id="act-${dayIdx}-${actIdx}">
-    <div class="card-header" onclick="toggleCard('act-${dayIdx}-${actIdx}')">
+    <div class="card-header${hasBody ? '' : ' no-expand'}" ${hasBody ? `onclick="toggleCard('act-${dayIdx}-${actIdx}')"` : ''}>
       <span class="card-icon">${icon}</span>
       <div class="card-meta">
         ${timeStr ? `<div class="card-time">${escHtml(timeStr)}</div>` : ''}
@@ -2874,7 +2902,7 @@ docLink:
           <span class="split-label">分組行程</span>
           ${timeStr ? `<span class="split-time">${escHtml(timeStr)}</span>` : ''}
         </div>
-        <div class="split-cards">
+        <div class="split-cards" style="grid-template-columns: repeat(${items.length}, 1fr)">
           ${items.map(({ act, origIdx }) => renderActivity(act, dayIdx, origIdx)).join('')}
         </div>
       </div>`;
