@@ -1641,7 +1641,7 @@
 title: "新加坡慶生行"
 subtitle: "2026/05/22 - 05/24 (3天2夜)"
 people: 小胤, 朱朱, 滷蛋, 阿凱
-keywords: ["慶生", "Chef André", "", "", "", "", "", "", "", ""]
+keywords: ["慶生", "Chef André", "哈利波特", "美食", "人文", "歷史", "", "", "", ""]
 ---
 
 ## Day 0 | 行前準備
@@ -1770,7 +1770,8 @@ address: 165 Tg Pagar Rd, 新加坡 088539
 mapLink: https://maps.app.goo.gl/CEudcspyKwkSNhW59
 imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/Amara%20singapore.jpg?raw=true
 
-### 展覽 | 哈利波特：魔法幻境 Harry Potter: Visions of Magic
+### 展覽 | 哈利波特：魔法幻境 
+nameEn: Harry Potter: Visions of Magic
 time: 16:00
 endTime: 18:00
 description: 世界最大、哈利波特、沉浸式、互動魔杖、魔法動物、光影特效
@@ -2698,7 +2699,7 @@ docLink:
       ${(act.nights || act.night) ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${act.nights || act.night} 晚</span></div>` : ''}
       ${act.address ? `<div class="accom-row"><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')" style="margin-top:8px">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
-      ${act.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(act.notes)}</div>` : ''}
+      ${act.notes ? `<div class="notes-box" style="margin-top:8px">${renderText(act.notes)}</div>` : ''}
       ${renderAppButton(act)}
       <div class="card-buttons" style="margin-top:8px">
         ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
@@ -2733,8 +2734,8 @@ docLink:
       ${isCancelled && act.cancelReason ? `<div class="notes-box">已排除：${escHtml(act.cancelReason)}</div>` : ''}
       ${act.description ? `<div class="card-desc">${renderText(act.description)}</div>` : ''}
       ${act.hours ? `<div class="card-hours">🕐 營業時間：${escHtml(act.hours)}</div>` : ''}
-      ${act.ticket ? `<div class="ticket-box">🎫 ${escHtml(act.ticket)}</div>` : ''}
-      ${act.meta ? `<div class="meta-box">ℹ️ ${escHtml(act.meta)}</div>` : ''}
+      ${act.ticket ? `<div class="ticket-box">🎫 ${renderText(act.ticket)}</div>` : ''}
+      ${act.meta ? `<div class="meta-box">ℹ️ ${renderText(act.meta)}</div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box">${renderText(act.notes)}</div>` : ''}
       ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">🔗 相關連結</a>` : ''}
@@ -2764,7 +2765,7 @@ docLink:
       ${accom.nights ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${accom.nights} 晚</span></div>` : ''}
       ${accom.address ? `<div class="accom-row"><span class="accom-val" style="font-size:0.72rem">${escHtml(accom.address)}</span></div>` : ''}
       ${accom.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(accom.copyable)}')" style="margin-top:8px">${escHtml(accom.copyable)}<span class="copy-icon">📋</span></div>` : ''}
-      ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(accom.notes)}</div>` : ''}
+      ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${renderText(accom.notes)}</div>` : ''}
       ${renderAppButton(accom)}
       <div class="card-buttons" style="margin-top:8px">
         ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
