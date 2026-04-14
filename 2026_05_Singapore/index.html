@@ -464,9 +464,11 @@
       padding: 10px 12px;
       cursor: pointer;
     }
+
     .card-header.no-expand {
       cursor: default;
     }
+
     .card-header.no-expand .card-chevron {
       display: none;
     }
@@ -1142,30 +1144,51 @@
       opacity: 0.8;
     }
 
-    .split-cards {
+    .split-cols {
       display: grid;
     }
-    .split-cards .card-name {
+
+    .split-col {
+      border-right: 1px solid var(--border);
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .split-col:last-child {
+      border-right: none;
+    }
+
+    .split-col-header {
+      padding: 5px 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(8, 145, 178, 0.06);
+      border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+    }
+
+    .split-col .activity-card {
+      margin: 0;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .split-col .activity-card:last-child {
+      border-bottom: none;
+    }
+
+    .split-col .card-name {
       white-space: normal;
       overflow: visible;
       text-overflow: unset;
     }
-    .split-cards .tag-type,
-    .split-cards .tag-cost,
-    .split-cards .tag-group {
+
+    .split-col .tag-type,
+    .split-col .tag-cost,
+    .split-col .tag-group {
       white-space: normal;
-    }
-
-    .split-cards>.activity-card {
-      margin: 0;
-      border-radius: 0;
-      border: none;
-      border-top: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-    }
-
-    .split-cards>.activity-card:last-child {
-      border-right: none;
     }
 
     .tag-group {
@@ -2047,7 +2070,7 @@ weatherTips: 要帶傘
 
 ### 起床 | KeSa House
 time: 09:00
-endTime: 09:36
+endTime: 09:30
 
 ### 行程 | 自由活動
 time: 09:00
@@ -2642,11 +2665,11 @@ docLink:
       const mapUrl = mapsUrl(act);
       if (act.type === '住宿') {
         return !!(act.imageUrl || act.checkIn || act.checkOut || act.nights || act.night ||
-                  act.address || act.copyable || act.notes || act.app || mapUrl);
+          act.address || act.copyable || act.notes || act.app || mapUrl);
       }
       return !!(act.imageUrl || act.description || act.hours || act.ticket || act.meta ||
-                act.copyable || act.notes || act.docLink || act.app || mapUrl || act.address ||
-                (act.cancelled && act.cancelReason));
+        act.copyable || act.notes || act.docLink || act.app || mapUrl || act.address ||
+        (act.cancelled && act.cancelReason));
     }
 
     function renderActivity(act, dayIdx, actIdx) {
@@ -2876,12 +2899,16 @@ docLink:
       let i = 0;
       while (i < activities.length) {
         if (activities[i].group) {
-          const block = [];
+          // 收集連續有 group: 的活動，依 group 值分欄
+          const columns = new Map();
+          const colOrder = [];
           while (i < activities.length && activities[i].group) {
-            block.push({ act: activities[i], origIdx: i });
+            const g = activities[i].group;
+            if (!columns.has(g)) { columns.set(g, []); colOrder.push(g); }
+            columns.get(g).push({ act: activities[i], origIdx: i });
             i++;
           }
-          queue.push({ type: 'split', items: block });
+          queue.push({ type: 'split', columns: colOrder.map(g => ({ group: g, items: columns.get(g) })) });
         } else {
           queue.push({ type: 'single', act: activities[i], origIdx: i });
           i++;
@@ -2890,20 +2917,18 @@ docLink:
       return queue;
     }
 
-    function renderSplitGroup(items, dayIdx) {
-      const firstTime = items[0].act.time || '';
-      const allSameEnd = items.every(x => x.act.endTime && x.act.endTime === items[0].act.endTime);
-      const timeStr = firstTime
-        ? (allSameEnd ? `${firstTime} - ${items[0].act.endTime}` : firstTime)
-        : '';
+    function renderSplitGroup({ columns }, dayIdx) {
       return `<div class="split-group fade-in-up">
         <div class="split-group-header">
           <span>⑂</span>
           <span class="split-label">分組行程</span>
-          ${timeStr ? `<span class="split-time">${escHtml(timeStr)}</span>` : ''}
         </div>
-        <div class="split-cards" style="grid-template-columns: repeat(${items.length}, 1fr)">
-          ${items.map(({ act, origIdx }) => renderActivity(act, dayIdx, origIdx)).join('')}
+        <div class="split-cols" style="grid-template-columns: repeat(${columns.length}, 1fr)">
+          ${columns.map(({ group, items }) => `
+            <div class="split-col">
+              <div class="split-col-header">👥 ${escHtml(group)}</div>
+              ${items.map(({ act, origIdx }) => renderActivity(act, dayIdx, origIdx)).join('')}
+            </div>`).join('')}
         </div>
       </div>`;
     }
@@ -2931,7 +2956,7 @@ docLink:
   </div>
   ${renderWeather(day)}
   ${queue.map(item => item.type === 'split'
-        ? renderSplitGroup(item.items, dayIdx)
+        ? renderSplitGroup(item, dayIdx)
         : renderActivity(item.act, dayIdx, item.origIdx)
       ).join('')}
   ${cancelled.length ? `
