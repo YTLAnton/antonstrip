@@ -1068,6 +1068,109 @@
       color: var(--text-3);
     }
 
+    .prep0-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 12px 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .prep0-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .prep0-tab {
+      flex-shrink: 0;
+      padding: 5px 18px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: none;
+      color: var(--text-2);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      font-family: inherit;
+    }
+
+    .prep0-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .prep0-shared-label {
+      padding: 10px 16px 4px;
+      font-size: 0.7rem;
+      color: var(--text-3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .split-group {
+      margin-bottom: 8px;
+      border-radius: var(--r);
+      border: 1.5px solid var(--primary-light);
+      overflow: hidden;
+    }
+
+    .split-group-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--primary-light);
+      font-size: 0.75rem;
+    }
+
+    .split-label {
+      font-weight: 700;
+      color: var(--primary);
+      flex: 1;
+    }
+
+    .split-time {
+      font-size: 0.72rem;
+      color: var(--primary);
+      opacity: 0.8;
+    }
+
+    .split-cards {
+      display: grid;
+    }
+    .split-cards .card-name {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+    }
+    .split-cards .tag-type,
+    .split-cards .tag-cost,
+    .split-cards .tag-group {
+      white-space: normal;
+    }
+
+    .split-cards>.activity-card {
+      margin: 0;
+      border-radius: 0;
+      border: none;
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+
+    .split-cards>.activity-card:last-child {
+      border-right: none;
+    }
+
+    .tag-group {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.62rem;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
     .pack-tips {
       margin: 0 12px 8px;
       background: rgba(59, 130, 246, 0.1);
@@ -1784,7 +1887,22 @@ notes: 到了之後現場購票等車
       const actBlocks = rest.slice(i).join('\n').split(/(?=^###)/m).filter(s => s.trim());
       for (const ab of actBlocks) {
         const aLines = ab.trim().split('\n');
-        const aHeader = aLines[0].match(/###\s*([^|]+)\|\s*(.*)/);
+        const headerLine = aLines[0];
+
+        // 人名區塊：### Name（沒有 | 符號）
+        if (!headerLine.includes('|')) {
+          const personName = headerLine.replace(/^###\s*/, '').trim();
+          if (!personName) continue;
+          for (const line of aLines.slice(1)) {
+            const itemM = line.match(/^-\s*([^|]+)\|\s*(.*)/);
+            if (!itemM) continue;
+            day.activities.push({ type: itemM[1].trim(), nameCn: itemM[2].trim(), person: personName });
+          }
+          continue;
+        }
+
+        // 一般項目：### type | name
+        const aHeader = headerLine.match(/###\s*([^|]+)\|\s*(.*)/);
         if (!aHeader) continue;
         const type = aHeader[1].trim();
         const name = aHeader[2].trim();
@@ -1973,6 +2091,7 @@ notes: 到了之後現場購票等車
       '長榮航空': { label: '✈️ 長榮航空', url: 'evaair://', bg: '#005f40', color: '#fff' },
       '國泰航空': { label: '✈️ 國泰航空', url: 'https://www.cathaypacific.com/', bg: '#006564', color: '#fff' },
       'Agoda': { label: '🏨 Agoda', url: 'agoda://', bg: '#5c2d91', color: '#fff' },
+      'Grab': { label: '🚗 Grab', url: 'grab://', bg: '#00b14f', color: '#fff' },
     };
 
     // ── 文字標記處理 ─────────────────────────────────────────
@@ -2131,6 +2250,7 @@ notes: 到了之後現場購票等車
         <div class="card-tags">
           <span class="tag-type" style="background:var(--type-住宿-bg);color:var(--type-住宿)">住宿</span>
           ${act.price ? `<span class="tag-cost">${escHtml(act.price)}</span>` : ''}
+          ${act.group ? `<span class="tag-group">👥 ${escHtml(act.group)}</span>` : ''}
         </div>
       </div>
       <span class="card-chevron" id="chv-${id}">›</span>
@@ -2139,7 +2259,7 @@ notes: 到了之後現場購票等車
       ${renderImageCard(act)}
       ${act.checkIn || act.checkOut ? `<div class="accom-sub" style="margin-bottom:8px">${act.checkIn ? `入住 ${act.checkIn}` : ''}${act.checkOut ? ` · 退房 ${act.checkOut}` : ''}</div>` : ''}
       ${(act.nights || act.night) ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${act.nights || act.night} 晚</span></div>` : ''}
-      ${act.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
+      ${act.address ? `<div class="accom-row"><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')" style="margin-top:8px">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(act.notes)}</div>` : ''}
       ${renderAppButton(act)}
@@ -2165,6 +2285,7 @@ notes: 到了之後現場購票等車
         <div class="card-tags">
           <span class="tag-type" style="background:var(--type-${tc}-bg);color:var(--type-${tc})">${escHtml(act.type)}</span>
           ${act.cost ? `<span class="tag-cost">${escHtml(act.cost)}</span>` : ''}
+          ${act.group ? `<span class="tag-group">👥 ${escHtml(act.group)}</span>` : ''}
         </div>
       </div>
       <span class="card-chevron" id="chv-act-${dayIdx}-${actIdx}">›</span>
@@ -2203,7 +2324,7 @@ notes: 到了之後現場購票等車
     <div class="accom-body" id="body-accom-${dayIdx}">
       ${accom.price ? `<div class="accom-row"><span class="accom-label">費用</span><span class="accom-val">${escHtml(accom.price)}</span></div>` : ''}
       ${accom.nights ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${accom.nights} 晚</span></div>` : ''}
-      ${accom.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(accom.address)}</span></div>` : ''}
+      ${accom.address ? `<div class="accom-row"><span class="accom-val" style="font-size:0.72rem">${escHtml(accom.address)}</span></div>` : ''}
       ${accom.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(accom.copyable)}')" style="margin-top:8px">${escHtml(accom.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(accom.notes)}</div>` : ''}
       ${renderAppButton(accom)}
