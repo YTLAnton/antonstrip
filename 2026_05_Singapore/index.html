@@ -1803,6 +1803,7 @@ meta: 參考編號 41272SG011301
 address: 55 Keong Saik Rd., 新加坡 089158
 mapLink: https://maps.app.goo.gl/xDwiMrYQrKpWW2Rh8
 imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/KeSa%20House.jpg?raw=true
+app: Agoda
 
 ### 住宿 | Amara singapore Check-in
 time: 14:30
@@ -1899,6 +1900,7 @@ checkOut: 12:00
 address: 165 Tg Pagar Rd, 新加坡 088539
 mapLink: https://maps.app.goo.gl/CEudcspyKwkSNhW59
 imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/Amara%20singapore.jpg?raw=true
+app: Agoda
 
 ---
 
@@ -2091,6 +2093,7 @@ meta: 參考編號 41272SG011301
 address: 55 Keong Saik Rd., 新加坡 089158
 mapLink: https://maps.app.goo.gl/xDwiMrYQrKpWW2Rh8
 imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/KeSa%20House.jpg?raw=true
+app: Agoda
 
 ### 住宿 | Amara singapore
 time: 23:59
@@ -2755,6 +2758,8 @@ docLink:
       ${renderImageCard(act)}
       ${act.checkIn || act.checkOut ? `<div class="accom-sub" style="margin-bottom:8px">${act.checkIn ? `入住 ${act.checkIn}` : ''}${act.checkOut ? ` · 退房 ${act.checkOut}` : ''}</div>` : ''}
       ${(act.nights || act.night) ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${act.nights || act.night} 晚</span></div>` : ''}
+      ${act.ticket ? `<div class="ticket-box">🎫 ${renderText(act.ticket)}</div>` : ''}
+      ${act.meta ? `<div class="meta-box">ℹ️ ${renderText(act.meta)}</div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')" style="margin-top:8px">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box" style="margin-top:8px">${renderText(act.notes)}</div>` : ''}
       ${renderAppButton(act)}
