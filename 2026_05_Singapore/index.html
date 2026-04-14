@@ -7,38 +7,22 @@
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SG 2026">
-  <meta name="theme-color" content="#c0392b">
-  <link rel="apple-touch-icon" id="app-icon" href="">
-  <script>
-    (function () {
-      try {
-        var c = document.createElement('canvas');
-        c.width = c.height = 180;
-        var ctx = c.getContext('2d');
-        var g = ctx.createLinearGradient(0, 0, 180, 180);
-        g.addColorStop(0, '#c0392b'); g.addColorStop(1, '#7b241c');
-        ctx.fillStyle = g; ctx.fillRect(0, 0, 180, 180);
-        ctx.font = '90px serif';
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText('🇸🇬', 90, 90);
-        document.getElementById('app-icon').href = c.toDataURL('image/png');
-      } catch (e) { }
-    })();
-  </script>
+  <meta name="apple-mobile-web-app-title" content="Horlick送別行">
+  <meta name="theme-color" content="#121212">
+
   <!-- ╔══════════════════════════════════════════╗
        ║  🔧 可調整區：分享預覽（LINE / FB 卡片）  ║
        ╚══════════════════════════════════════════╝ -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="新加坡 2026">
-  <meta property="og:description" content="2026/05/01 - 05/03 (3天2夜)">
+  <meta property="og:title" content="新加坡慶生行">
+  <meta property="og:description" content="2026/05/22 - 05/24 (3天2夜)">
   <meta property="og:url" content="https://ytlanton.github.io/antonstrip/2026_05_Singapore/">
-  <meta name="description" content="2026/05/01 - 05/03 (3天2夜)">
+  <meta name="description" content="2026/05/22 - 05/24 (3天2夜)">
   <!-- ═══════════════════════════════════════════ -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <title>新加坡 2026</title>
+  <title>新加坡慶生行</title>
   <style>
     *,
     *::before,
@@ -53,46 +37,51 @@
     }
 
     button,
+    a {
+      outline: none;
+    }
+
+    button,
     [data-action] {
       touch-action: manipulation;
     }
 
     :root {
-      --primary: #c0392b;
-      --primary-dark: #922b21;
-      --primary-light: #fadbd8;
-      --accent: #e67e22;
-      --accent-light: #fef5e7;
-      --bg: #f5f4f1;
-      --surface: #ffffff;
-      --text: #1c2b28;
-      --text-2: #5f7672;
-      --text-3: #94a5a1;
-      --border: #e4e8e7;
-      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --primary: #0891b2;
+      --primary-dark: #0e7490;
+      --primary-light: rgba(8, 145, 178, 0.2);
+      --accent: #d97706;
+      --accent-light: rgba(217, 119, 6, 0.15);
+      --bg: #121212;
+      --surface: #1e1e1e;
+      --text: #e5e5e5;
+      --text-2: #a3a3a3;
+      --text-3: #737373;
+      --border: #333333;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.7);
       --r: 10px;
       --r-sm: 7px;
-      --type-行程: #2a7c6f;
-      --type-行程-bg: #e6f2ef;
-      --type-飲食: #c8956c;
-      --type-飲食-bg: #fdf0e5;
-      --type-交通: #6889a0;
-      --type-交通-bg: #e8f0f5;
-      --type-作業: #8b7da8;
-      --type-作業-bg: #eeeaf5;
-      --type-住宿: #a08060;
-      --type-住宿-bg: #f5efe8;
-      --type-景點: #c07a30;
-      --type-景點-bg: #faeee0;
-      --type-參考: #d97706;
-      --type-參考-bg: #fef3c7;
-      --type-休息: #7a8fa0;
-      --type-休息-bg: #eaf0f5;
-      --type-展覽: #b06080;
-      --type-展覽-bg: #faeef3;
-      --type-購物: #3a8a6a;
-      --type-購物-bg: #e6f5ef;
+      --type-行程: #5eead4;
+      --type-行程-bg: rgba(45, 212, 191, 0.15);
+      --type-飲食: #fdba74;
+      --type-飲食-bg: rgba(251, 146, 60, 0.15);
+      --type-交通: #93c5fd;
+      --type-交通-bg: rgba(96, 165, 250, 0.15);
+      --type-作業: #c4b5fd;
+      --type-作業-bg: rgba(167, 139, 250, 0.15);
+      --type-住宿: #fcd34d;
+      --type-住宿-bg: rgba(251, 191, 36, 0.15);
+      --type-景點: #fb923c;
+      --type-景點-bg: rgba(251, 146, 60, 0.15);
+      --type-參考: #a78bfa;
+      --type-參考-bg: rgba(139, 92, 246, 0.15);
+      --type-休息: #94a3b8;
+      --type-休息-bg: rgba(148, 163, 184, 0.15);
+      --type-展覽: #f9a8d4;
+      --type-展覽-bg: rgba(249, 168, 212, 0.15);
+      --type-購物: #6ee7b7;
+      --type-購物-bg: rgba(110, 231, 183, 0.15);
     }
 
     html,
@@ -101,16 +90,17 @@
       font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
       scrollbar-width: none;
     }
+
     html::-webkit-scrollbar,
     body::-webkit-scrollbar {
       display: none;
     }
 
     body {
-      background: #1a1a2e;
+      background: var(--bg);
       background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
       background-size: 32px 32px;
       display: flex;
       justify-content: center;
@@ -121,7 +111,6 @@
 
     #app {
       width: 100%;
-      max-width: 430px;
       min-height: 100dvh;
       background: var(--bg);
       position: relative;
@@ -130,11 +119,22 @@
       flex-direction: column;
     }
 
+    /* 桌機：維持手機比例置中，補回深色背景 */
+    @media (min-width: 480px) {
+      body {
+        background: #000000;
+      }
+
+      #app {
+        max-width: 430px;
+      }
+    }
+
     /* ── Header ── */
     #header {
-      background: linear-gradient(135deg, #1a2a2a, #c0392b 60%, #e74c3c);
+      background: linear-gradient(135deg, #0c1a20, #0e4f60 70%, #0891b2);
       color: white;
-      padding: env(safe-area-inset-top) 16px 12px;
+      padding: calc(env(safe-area-inset-top) + 14px) 16px 12px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -227,7 +227,7 @@
       right: 0;
       top: 100%;
       margin-top: 4px;
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       box-shadow: var(--shadow-md);
       max-height: 300px;
@@ -261,7 +261,7 @@
     /* ── Tab Bar ── */
     #tab-bar {
       display: flex;
-      background: white;
+      background: var(--surface);
       border-top: 1px solid var(--border);
       position: sticky;
       bottom: 0;
@@ -318,6 +318,7 @@
       scrollbar-width: none;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
     }
 
     #day-selector::-webkit-scrollbar {
@@ -332,7 +333,7 @@
       padding: 6px 12px;
       border-radius: var(--r);
       border: 1.5px solid var(--border);
-      background: white;
+      background: var(--surface);
       cursor: pointer;
       min-width: 52px;
       gap: 2px;
@@ -404,7 +405,7 @@
 
     /* ── Weather ── */
     .weather-bar {
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       padding: 10px 12px;
       margin-bottom: 10px;
@@ -442,10 +443,14 @@
       border: 1.5px solid var(--border);
       margin-bottom: 8px;
       overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.2s;
+      transition: box-shadow 0.15s, transform 0.2s;
     }
+
     @media (hover: hover) {
-      .activity-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.13); transform: translateY(-2px); }
+      .activity-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+      }
     }
 
     .activity-card.cancelled-card {
@@ -508,8 +513,8 @@
       font-weight: 600;
       padding: 1px 6px;
       border-radius: 99px;
-      background: #fef9c3;
-      color: #92400e;
+      background: rgba(253, 224, 71, 0.15);
+      color: #fce726;
     }
 
     .card-chevron {
@@ -548,30 +553,30 @@
     }
 
     .ticket-box {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
+      background: rgba(234, 88, 12, 0.1);
+      border: 1px solid rgba(234, 88, 12, 0.3);
       border-radius: var(--r-sm);
       padding: 7px 10px;
       margin-bottom: 8px;
       font-size: 0.78rem;
-      color: #9a3412;
+      color: #fdba74;
     }
 
     .meta-box {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
+      background: rgba(202, 138, 4, 0.1);
+      border: 1px solid rgba(202, 138, 4, 0.3);
       border-radius: var(--r-sm);
       padding: 7px 10px;
       margin-bottom: 8px;
       font-size: 0.78rem;
-      color: #92400e;
+      color: #fde047;
       font-weight: 500;
     }
 
     .notes-box {
       border-left: 3px solid var(--accent);
       padding: 7px 10px;
-      background: #fff8f0;
+      background: rgba(255, 255, 255, 0.04);
       border-radius: 0 var(--r-sm) var(--r-sm) 0;
       margin-bottom: 8px;
       font-size: 0.78rem;
@@ -580,13 +585,13 @@
     }
 
     .copyable-box {
-      background: #f0fdf4;
-      border: 1px solid #86efac;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
       border-radius: var(--r-sm);
       padding: 7px 10px;
       margin-bottom: 8px;
       font-size: 0.78rem;
-      color: #166534;
+      color: #86efac;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -594,7 +599,7 @@
     }
 
     .copyable-box:hover {
-      background: #dcfce7;
+      background: rgba(34, 197, 94, 0.2);
     }
 
     .copy-icon {
@@ -628,7 +633,7 @@
       min-width: 100px;
       padding: 7px 10px;
       border-radius: var(--r-sm);
-      background: white;
+      background: var(--surface);
       color: var(--text);
       border: 1.5px solid var(--border);
       cursor: pointer;
@@ -649,11 +654,24 @@
       font-family: inherit;
       color: var(--text);
       outline: none;
-      background: white;
+      background: var(--surface);
     }
 
     .note-textarea:focus {
       border-color: var(--primary);
+    }
+
+    .btn-app {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: var(--r-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      letter-spacing: 0.02em;
     }
 
     .btn-doc {
@@ -661,9 +679,9 @@
       margin-bottom: 8px;
       padding: 6px 12px;
       border-radius: var(--r-sm);
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1.5px solid #bfdbfe;
+      background: rgba(59, 130, 246, 0.1);
+      color: #93c5fd;
+      border: 1.5px solid rgba(59, 130, 246, 0.3);
       font-size: 0.78rem;
       font-weight: 600;
       text-decoration: none;
@@ -684,13 +702,12 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      background: var(--type-住宿-bg);
     }
 
     .accom-title {
       font-size: 0.88rem;
       font-weight: 700;
-      color: var(--type-住宿);
+      color: var(--text);
     }
 
     .accom-sub {
@@ -735,7 +752,7 @@
 
     .cancelled-toggle {
       padding: 8px 12px;
-      background: #f8f8f8;
+      background: rgba(255, 255, 255, 0.04);
       border-radius: var(--r);
       border: 1.5px dashed var(--border);
       cursor: pointer;
@@ -795,7 +812,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 12px;
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       border: 1.5px solid var(--border);
       cursor: pointer;
@@ -825,7 +842,7 @@
       align-items: flex-start;
       gap: 10px;
       padding: 9px 12px;
-      background: white;
+      background: var(--surface);
       border: 1.5px solid var(--border);
       border-top: none;
       cursor: pointer;
@@ -858,8 +875,8 @@
 
     .food-price {
       font-size: 0.7rem;
-      color: #92400e;
-      background: #fef9c3;
+      color: #fce726;
+      background: rgba(253, 224, 71, 0.15);
       padding: 2px 6px;
       border-radius: 99px;
       white-space: nowrap;
@@ -887,7 +904,7 @@
     }
 
     .flight-card {
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       border: 1.5px solid var(--border);
       padding: 12px;
@@ -978,7 +995,7 @@
 
     .pack-cat {
       margin: 0 12px 8px;
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       border: 1.5px solid var(--border);
       overflow: hidden;
@@ -1051,18 +1068,112 @@
       color: var(--text-3);
     }
 
+    .prep0-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 12px 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .prep0-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .prep0-tab {
+      flex-shrink: 0;
+      padding: 5px 18px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: none;
+      color: var(--text-2);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      font-family: inherit;
+    }
+
+    .prep0-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .prep0-shared-label {
+      padding: 10px 16px 4px;
+      font-size: 0.7rem;
+      color: var(--text-3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .split-group {
+      margin: 4px 12px 8px;
+      border-radius: var(--r);
+      border: 1.5px solid var(--primary-light);
+      overflow: hidden;
+    }
+
+    .split-group-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--primary-light);
+      font-size: 0.75rem;
+    }
+
+    .split-label {
+      font-weight: 700;
+      color: var(--primary);
+      flex: 1;
+    }
+
+    .split-time {
+      font-size: 0.72rem;
+      color: var(--primary);
+      opacity: 0.8;
+    }
+
+    .split-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    .split-cards>.activity-card {
+      margin: 0;
+      border-radius: 0;
+      border: none;
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+
+    .split-cards>.activity-card:last-child {
+      border-right: none;
+    }
+
+    .tag-group {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.62rem;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
     .pack-tips {
       margin: 0 12px 8px;
-      background: #eff6ff;
+      background: rgba(59, 130, 246, 0.1);
       border-radius: var(--r);
-      border: 1.5px solid #bfdbfe;
+      border: 1.5px solid rgba(59, 130, 246, 0.3);
       padding: 12px;
     }
 
     .pack-tips-title {
       font-size: 0.78rem;
       font-weight: 700;
-      color: #1d4ed8;
+      color: #93c5fd;
       margin-bottom: 8px;
     }
 
@@ -1072,14 +1183,14 @@
 
     .pack-tips li {
       font-size: 0.75rem;
-      color: #1e40af;
+      color: #bfdbfe;
       margin-bottom: 4px;
     }
 
     /* ── Tips Tab ── */
     .tips-card {
       margin: 0 12px 8px;
-      background: white;
+      background: var(--surface);
       border-radius: var(--r);
       border: 1.5px solid var(--border);
       overflow: hidden;
@@ -1147,7 +1258,7 @@
       padding: 8px;
       border-radius: var(--r-sm);
       border: 1.5px solid var(--border);
-      background: white;
+      background: var(--surface);
       font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
@@ -1164,7 +1275,8 @@
       inset: 0;
       z-index: 300;
       display: none;
-      align-items: flex-end;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
       justify-content: center;
     }
 
@@ -1172,66 +1284,54 @@
       display: flex;
     }
 
-    #driver-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-    }
-
     #driver-sheet {
       position: relative;
-      background: white;
-      width: 100%;
+      width: 90%;
       max-width: 430px;
-      border-radius: 20px 20px 0 0;
-      padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
-      transform: translateY(100%);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    #driver-modal.open #driver-sheet {
-      transform: translateY(0);
-    }
-
-    .driver-handle {
-      width: 40px;
-      height: 4px;
-      background: var(--border);
-      border-radius: 99px;
-      margin: 0 auto 16px;
+      height: auto;
+      max-height: 80vh;
+      border-radius: var(--r);
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 32px calc(40px + env(safe-area-inset-bottom));
     }
 
     .driver-label {
-      font-size: 0.72rem;
+      font-size: 1rem;
       color: var(--text-3);
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
     }
 
     #driver-address {
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 2.6rem;
+      font-weight: 800;
       color: var(--text);
       line-height: 1.3;
-      margin-bottom: 16px;
+      text-align: center;
+      margin-bottom: 48px;
     }
 
-    #driver-map-link {
-      display: block;
-      padding: 11px;
+    #driver-confirm {
+      width: 100%;
+      padding: 14px;
       background: var(--primary);
       color: white;
-      text-decoration: none;
+      border: none;
       border-radius: var(--r);
-      text-align: center;
-      font-size: 0.88rem;
+      font-size: 1rem;
       font-weight: 700;
+      cursor: pointer;
     }
 
     #driver-close {
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: 20px;
+      right: 20px;
       background: var(--bg);
       border: none;
       border-radius: 99px;
@@ -1269,47 +1369,149 @@
 
     @media (min-width: 430px) {
       body {
-        background: #1a1a2e;
+        background: #000000;
       }
     }
-    /* ── Image Card ── */
-    .si-wrap { border-radius: var(--r); overflow: hidden; margin: 8px 0; cursor: pointer; position: relative; }
-    .si-wrap img { width: 100%; display: block; object-fit: cover; max-height: 220px; transition: transform 0.3s; }
-    .si-sm img { max-height: 140px; }
-    @media (hover: hover) { .si-wrap:hover img { transform: scale(1.03); } }
+
+    /* ── 景點圖片卡 ── */
+    .si-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 160px;
+      border-radius: 8px;
+      margin: 4px 0 10px;
+      cursor: zoom-in;
+    }
+
+    .si-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .si-wrap:hover img {
+      transform: scale(1.03);
+    }
+
+    .si-wrap.si-sm {
+      height: 120px;
+    }
+
 
 
     /* ── Multi-image grid ── */
-    .si-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 8px 0; }
-    .si-grid-2 .si-wrap { margin: 0; }
-    .si-grid-3 { margin: 8px 0; }
-    .si-grid-3 > .si-wrap img { max-height: 160px; }
-    .si-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; }
-    .si-row2 .si-wrap { margin: 0; }
-    .si-row2 .si-wrap img { max-height: 120px; }
+    .si-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin: 8px 0;
+    }
+
+    .si-grid-2 .si-wrap {
+      margin: 0;
+    }
+
+    .si-grid-3 {
+      margin: 8px 0;
+    }
+
+    .si-grid-3>.si-wrap img {
+      max-height: 160px;
+    }
+
+    .si-row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .si-row2 .si-wrap {
+      margin: 0;
+    }
+
+    .si-row2 .si-wrap img {
+      max-height: 120px;
+    }
 
     /* ── Lightbox ── */
-    #lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.88); display: flex; align-items: center; justify-content: center; }
-    #lightbox.hidden { display: none; }
-    #lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 6px; box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
-    #lightbox-close { position: absolute; top: 18px; right: 22px; color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; }
-
-    /* ── Fade-in ── */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: none; }
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.93);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 52px 12px 16px;
     }
+
+    #lightbox.hidden {
+      display: none !important;
+    }
+
+    #lightbox-img {
+      max-width: 100%;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    #lightbox-close {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.92);
+      color: #111;
+      font-size: 1.2rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── 捲動淡入 ── */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
     .fade-in-up.visible {
       animation: fadeInUp 0.42s ease both;
     }
+
     @media (prefers-reduced-motion: reduce) {
-      .fade-in-up.visible { animation: none; }
+      .fade-in-up.visible {
+        animation: none;
+      }
     }
 
-    /* ── Highlight text ── */
-    .hl-y { background: #ffe066; border-radius: 3px; padding: 0 2px; }
-    .hl-p { background: #f0c4f8; border-radius: 3px; padding: 0 2px; }
+    /* ── 重點文字標記 ── */
+    .hl-y {
+      background: linear-gradient(transparent 55%, rgba(255, 210, 0, 0.3) 55%);
+      padding: 0 2px;
+    }
 
+    .hl-p {
+      border-bottom: 2px solid rgba(255, 110, 140, 0.75);
+      padding-bottom: 1px;
+    }
 
     /* ── Desktop RWD (≥ 768px) ── */
     @media (min-width: 768px) {
@@ -1321,12 +1523,14 @@
         grid-template-rows: auto 1fr auto;
         grid-template-columns: 240px 1fr;
       }
+
       #header {
         grid-column: 1 / -1;
         grid-row: 1;
         position: relative;
         top: auto;
       }
+
       #day-selector {
         grid-column: 1;
         grid-row: 2;
@@ -1341,6 +1545,7 @@
         height: 100%;
         background: var(--surface);
       }
+
       .day-btn {
         flex-direction: row;
         min-width: auto;
@@ -1350,8 +1555,16 @@
         padding: 8px 12px;
         text-align: left;
       }
-      .day-btn .day-n { width: 40px; flex-shrink: 0; }
-      .day-btn .day-wd { margin-left: auto; }
+
+      .day-btn .day-n {
+        width: 40px;
+        flex-shrink: 0;
+      }
+
+      .day-btn .day-wd {
+        margin-left: auto;
+      }
+
       #main {
         grid-column: 2;
         grid-row: 2;
@@ -1360,16 +1573,23 @@
         overflow-y: auto;
         padding: 0 8px;
       }
+
       #tab-bar {
         grid-column: 1 / -1;
         grid-row: 3;
         position: relative;
         bottom: auto;
       }
-      #driver-sheet { max-width: 500px; }
-      #day-content { max-width: 900px; margin: 0 auto; }
-    }
 
+      #driver-sheet {
+        max-width: 500px;
+      }
+
+      #day-content {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+    }
   </style>
 </head>
 
@@ -1380,201 +1600,441 @@
      ================================================ -->
   <script id="trip-data" type="text/plain">
 ---
-title: "新加坡 2026"
-emoji: "🇸🇬"
-subtitle: "2026/05/01 - 05/03 (3天2夜)"
-people: 4
-tripType: "自由行"
-transport: ["MRT", "Grab", "步行"]
-weather:
-  新加坡:
-    temp: "28-34°C"
-    condition: "熱帶氣候，全年高溫潮濕"
-    tips: "防曬、補水、隨身帶雨傘"
-    url: "https://www.weather.gov.sg/"
+title: "新加坡慶生行"
+subtitle: "2026/05/22 - 05/24 (3天2夜)"
+people: 2
+keywords: ["", "", "", "", "", "", "", "", "", ""]
 ---
 
-## Day 1 | 2026/05/01 (五) | 抵達新加坡
+## Day 0 | 行前準備
 
-route: 台北 → 新加坡
-dayNote: 無需租車，全程搭乘 MRT / Grab
+dayNote: 香港行動電源規定：100Wh以下最多2顆；100-160Wh經航空公司許可最多2顆；160Wh以上禁止攜帶。
 
-### 交通 | 搭機出發
-time: 08:00
-endTime: 13:30
-description: CI751 TPE→SIN，飛行時間約 4.5 小時
-notes: 提早 2 小時到桃園機場 T1
-copyable: 訂票代號 CI751-20260501ABC
+### 🛂 證件 | 護照
+### 🛂 證件 | 台胞證
 
-### 行程 | 硓𥑮石．芳宅
+### 💳 重要 | 錢包
+### 💳 重要 | 星展卡
+### 💳 重要 | 現金 SGD 1,000
+
+### 👕 衣物 | 短袖上衣
+### 👕 衣物 | 內褲
+### 👕 衣物 | 襪子
+### 👕 衣物 | 腰包
+
+### 🪥 清潔 | 牙刷
+### 🪥 清潔 | 牙膏
+### 🪥 清潔 | 牙間刷
+### 🪥 清潔 | 汙衣袋
+
+### 🔌 電子 | iPhone 15 Pro Max
+### 🔌 電子 | 手機殼與掛繩
+### 🔌 電子 | Airpods
+### 🔌 電子 | 充電器(英式三腳方型插頭) * 2
+### 🔌 電子 | 充電線 * 5
+### 🔌 電子 | 行動電源 * 2
+
+### 💊 藥妝 | Loxonin * 3
+### 💊 藥妝 | B群 * 3
+### 💊 藥妝 | 樂途達
+### 💊 藥妝 | 爽身濕紙巾
+### 💊 藥妝 | 衛生紙
+### 💊 藥妝 | 易克冒 * 2
+### 💊 藥妝 | 休足時間 * 2
+
+### 🎒 其他 | 菜單夾
+### 🎒 其他 | 筆
+
+## Day 1 | 2026/05/22 (五) |
+
+route: 
+dayNote: 
+weatherTemp: 
+weatherCond: 
+weatherRain: 
+weatherTips: 
+
+### 景點 | 出發
+time: 04:00
+endTime: 05:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 交通 | TPE
+time: 05:00
+endTime: 07:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 交通 | TPE-SIN(BR225)
+time: 07:00
+endTime: 13:00
+group: 
+description: 0730-1155(04:25)
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | 亞坤
+time: 13:00
+endTime: 15:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | KeSa House / Amara singapore
 time: 15:00
-endTime: 18:30
-nameEn: Gardens by the Bay
-description: 超級樹林光影秀，推薦傍晚前往，18:45 和 20:45 各一場
-hours: 05:00-02:00
-cost: SGD 14/人（步道）
-ticket: 超級樹林步道 SGD 14/人，室內花穹 SGD 28/人
-address: 18 Marina Gardens Dr, Singapore 018953
-mapLink: https://maps.google.com/?q=Gardens+by+the+Bay+Singapore
-notes: ⚠️ 提前網路訂票，現場常售罄
-meta: 光影秀時間 18:45 / 20:45
+endTime: 16:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
 
-### 飲食 | 老巴剎 Lau Pa Sat
+### 景點 | 哈利波特：魔法幻境
+time: 16:00
+endTime: 18:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | 多巴胺樂園
+time: 18:00
+endTime: 19:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | BON BROTH
 time: 19:00
-nameEn: Lau Pa Sat Festival Market
-description: 新加坡最著名的老牌美食中心，沙嗲是必點
-hours: 24 小時
-cost: $100-200/人
-address: 18 Raffles Quay, Singapore 048582
-mapLink: https://maps.google.com/?q=Lau+Pa+Sat+Singapore
+endTime: 21:00
+group: 
+description: 1930-2130
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
 
-### 住宿 | Marina Bay Sands
-checkIn: 15:00
-checkOut: 11:00
-price: SGD 450/晚
-nights: 2
-address: 10 Bayfront Ave, Singapore 018956
-notes: 確認碼 MBS20260501
-copyable: 確認碼 MBS20260501
+### 景點 | Nutmeg & Clove
+time: 21:00
+endTime: 23:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
 
----
-
-## Day 2 | 2026/05/02 (六) | 聖淘沙 & 老城區
-
-route: 市區 → 聖淘沙 → 牛車水
-dayNote: 全程 MRT，Sentosa Express 單程 SGD 4
-
-### 行程 | 環球影城 Universal Studios Singapore
-time: 09:00
-endTime: 17:00
-nameEn: Universal Studios Singapore
-description: 建議購買 Express Pass，熱門設施等候時間長
-hours: 10:00-18:00（建議提前確認）
-cost: SGD 83/人
-ticket: 成人 SGD 83/人，Express Pass SGD 55起
-address: 8 Sentosa Gateway, Singapore 098269
-mapLink: https://maps.google.com/?q=Universal+Studios+Singapore
-notes: ⚠️ 強烈建議提前購票，現場票價更高
-copyable: 訂票代號 USS-20260502XYZ
-
-### 飲食 | 麥士威熟食中心 Maxwell Food Centre
-time: 18:30
-nameEn: Maxwell Food Centre
-description: 道地新加坡小販中心，天天海南雞飯是必吃
-hours: 08:00-22:00
-cost: $80-120/人
-address: 1 Kadayanallur St, Singapore 069184
-mapLink: https://maps.google.com/?q=Maxwell+Food+Centre+Singapore
-
-### 行程 | 小印度 Little India
-time: 20:00
-nameEn: Little India
-description: 感受印度文化氛圍，購買特色紀念品
-address: Little India, Singapore
-cancelled: true
-cancelReason: 行程太滿，移至 Day 3 備選
-
-### 住宿 | Marina Bay Sands
-checkIn: 15:00
-checkOut: 11:00
-price: SGD 450/晚
-nights: 2
-address: 10 Bayfront Ave, Singapore 018956
-notes: 確認碼 MBS20260501
-copyable: 確認碼 MBS20260501
+### 景點 | KeSa House / Amara singapore
+time: 23:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
 
 ---
 
-## Day 3 | 2026/05/03 (日) | 返台
+## Day 2 | 2026/05/23 (六) |
 
-route: 新加坡 → 台北
-dayNote: Grab 至機場，約 SGD 25-35
+route: 
+dayNote: 
+weatherTemp: 
+weatherCond: 
+weatherRain: 
+weatherTips: 
 
-### 行程 | 星耀樟宜 Jewel Changi Airport
-time: 09:00
+### 景點 | 喜園 YY Kafei Dian
+time: 08:00
+endTime: 10:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 展覽 | 新加坡國家博物館
+time: 10:00
 endTime: 12:00
-nameEn: Jewel Changi Airport
-description: 全球最美機場，雨霧漩渦瀑布必看，可在此購買伴手禮
-hours: 24 小時
-address: 78 Airport Blvd, Singapore 819666
-mapLink: https://maps.google.com/?q=Jewel+Changi+Airport+Singapore
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
 
-### 交通 | 返台
+### 景點 | Burnt Ends
+time: 12:00
+endTime: 14:00
+group: 
+description: 1200-1400
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | 藝術之家
 time: 14:00
-endTime: 18:30
-description: CI752 SIN→TPE
-notes: 建議 11:00 前抵達機場辦理登機
-copyable: 訂票代號 CI752-20260503DEF
+endTime: 15:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 展覽 | 新加坡國家美術館
+time: 15:00
+endTime: 16:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | Raffles Heritage Tour
+time: 16:00
+endTime: 17:00
+group: 
+description: 1600-1700
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | 聖安德烈座堂
+time: 17:00
+endTime: 18:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 購物 | 萊佛士城購物中心
+time: 18:00
+endTime: 19:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | 1887 by André
+time: 19:00
+endTime: 22:00
+group: 
+description: 1900-2130 (x4)
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | Marina Bay Sands Casino
+time: 22:00
+endTime: 23:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | KeSa House / Amara singapore
+time: 23:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
 
 ---
 
-## 美食清單
+## Day 3 | 2026/05/24 (日) |
 
-### 新加坡（全程）
+route: 
+dayNote: 
+weatherTemp: 
+weatherCond: 
+weatherRain: 
+weatherTips: 
 
-- 天天海南雞飯 Tian Tian Hainanese Chicken Rice | 必吃！麥士威熟食中心 | SGD 5-8
-- 辣螃蟹 Chilli Crab | 推薦 Jumbo Seafood，2人份約 SGD 80-100 | SGD 80-100/2人
-- 肉骨茶 Bak Kut Teh | 松發肉骨茶，早餐必試 | SGD 10-15
-- 椰漿飯 Nasi Lemak | 各大小販中心均有 | SGD 3-6
-- 榴槤 Durian | 貓山王當季必試，金鳳榴槤城 | SGD 20-50/kg
+### 景點 | Le Matin Petit
+time: 10:00
+endTime: 12:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 景點 | SIN
+time: 12:00
+endTime: 15:00
+group: 
+description: 
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+
+### 交通 | SIN-TPE(BR216)
+time: 15:00
+group: 
+description: 1520-2000(04:40)
+cost: NTD  / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
 
 ---
 
-## 航班資訊
-
-### 去程（全員）
-- CI751 | 桃園(TPE) → 新加坡(SIN) | 08:00 → 13:30 | 飛行 4h30m
-- 費用：TWD 18,500/人
-
-### 回程（全員）
-- CI752 | 新加坡(SIN) → 桃園(TPE) | 14:00 → 18:30 | 飛行 4h30m
-- 費用：含去程票價
-
----
-
-## 行李清單
-
-### 📄 證件
-- 護照（效期 6 個月以上）
-- 機票確認信（印出或截圖）
-- 訂房確認信
-
-### 👕 衣物
-- 輕薄排汗上衣 x 4
-- 短褲 x 3
-- 備用內衣褲 x 4
-
-### 🩺 醫藥
-- 胃藥
-- 止痛藥
-- 防蚊液
-- 防曬乳（SPF50+）
-
-### 📱 電子
-- 手機充電線
-- 行動電源（≤20000mAh）
-- 旅行插頭轉接頭（英式三腳插頭 Type G）
-
----
-
-## 旅遊須知
-
-### 入境規定
-- 台灣護照免簽，可停留 30 天
-- 嚴禁攜帶口香糖入境（罰款高達 SGD 1000）
-- 不可攜帶生鮮食品、動植物
-- 攜帶菸草超過 1 條需申報繳稅
-
-### 交通
-- MRT 是最便宜的交通方式，買 EZ-Link 卡或用 Apple Pay 感應
-- Grab 類似台灣 Uber，建議下載備用
-- 禁止在 MRT 內飲食，罰款 SGD 500
-
-### 當地習慣
-- 餐廳通常已含 10% 服務費，不需額外小費
-- 全年高溫約 28-34°C，午後雷陣雨頻繁，帶折疊傘
-- 語言：英文通用
-- 插頭：英式三腳插頭（Type G），記得帶轉接頭
 </script>
   <!-- ================================================
      以上為資料區，以下為應用程式邏輯（勿修改）
@@ -1598,10 +2058,11 @@ copyable: 訂票代號 CI752-20260503DEF
     </header>
 
     <!-- Main -->
+    <div id="day-selector"></div>
+
     <div id="main">
       <!-- 行程 Tab -->
       <div class="tab-panel active" data-tab="itinerary">
-        <div id="day-selector"></div>
         <div id="day-content"></div>
       </div>
 
@@ -1621,15 +2082,7 @@ copyable: 訂票代號 CI752-20260503DEF
       <div class="tab-panel" data-tab="packing">
         <div class="section-header">打包清單</div>
         <div id="packing-progress" class="pack-progress"></div>
-        <div class="pack-tips">
-          <div class="pack-tips-title">✈️ 航空行李提醒</div>
-          <ul>
-            <li>液體、膠狀物品：每件≤100ml，裝入 1L 透明夾鏈袋（隨身行李）</li>
-            <li>鋰電池/行動電源：≤100Wh 免申報，100-160Wh 須航空公司同意，禁止托運</li>
-            <li>行動電源容量限制：≤20000mAh（約 74Wh）</li>
-            <li>托運行李限重：每件 23kg（請確認您的票種規定）</li>
-          </ul>
-        </div>
+        <div id="packing-tips"></div>
         <div id="packing-list"></div>
       </div>
 
@@ -1637,46 +2090,20 @@ copyable: 訂票代號 CI752-20260503DEF
       <div class="tab-panel" data-tab="tips">
         <div class="section-header">旅遊須知</div>
         <div id="tips-list"></div>
-        <div class="backup-section">
-          <div class="backup-title">📦 資料備份</div>
-          <div class="backup-btns">
-            <button class="backup-btn" onclick="exportData()">📤 匯出備份</button>
-            <button class="backup-btn" onclick="document.getElementById('import-file').click()">📥 匯入備份</button>
-          </div>
-          <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
-        </div>
       </div>
     </div>
 
-    <!-- Tab Bar -->
-    <nav id="tab-bar">
-      <button class="tab-btn active" data-tab="itinerary" onclick="switchTab('itinerary')">
-        <span class="tab-icon">🗓</span><span>行程</span>
-      </button>
-      <button class="tab-btn" data-tab="food" onclick="switchTab('food')">
-        <span class="tab-icon">🍽️</span><span>美食</span>
-      </button>
-      <button class="tab-btn" data-tab="flights" onclick="switchTab('flights')">
-        <span class="tab-icon">✈️</span><span>航班</span>
-      </button>
-      <button class="tab-btn" data-tab="packing" onclick="switchTab('packing')">
-        <span class="tab-icon">🧳</span><span>行李</span>
-      </button>
-      <button class="tab-btn" data-tab="tips" onclick="switchTab('tips')">
-        <span class="tab-icon">📋</span><span>須知</span>
-      </button>
-    </nav>
+    <!-- Tab Bar（由 JS 動態產生）-->
+    <nav id="tab-bar"></nav>
   </div>
 
   <!-- Driver Modal -->
   <div id="driver-modal">
-    <div id="driver-overlay" onclick="closeDriver()"></div>
     <div id="driver-sheet">
-      <div class="driver-handle"></div>
       <button id="driver-close" onclick="closeDriver()">✕</button>
       <div class="driver-label">📍 給司機看地址</div>
       <div id="driver-address"></div>
-      <a id="driver-map-link" href="#" target="_blank">🗺 開啟 Google Maps 導航</a>
+      <button id="driver-confirm" onclick="closeDriver()">確定</button>
     </div>
   </div>
 
@@ -1752,19 +2179,23 @@ copyable: 訂票代號 CI752-20260503DEF
       const hmShort = !hmFull && headerLine.match(/##\s*Day\s*(\d+)\s*\|\s*(.*)/);
       if (!hmFull && !hmShort) return null;
       const dayNum = parseInt(hmFull ? hmFull[1] : hmShort[1]);
-      const date    = hmFull ? hmFull[2] : '';
+      const date = hmFull ? hmFull[2] : '';
       const weekday = hmFull ? hmFull[3].trim() : '';
-      const title   = hmFull ? hmFull[4].trim() : hmShort[2].trim();
-      const day = { day: dayNum, date, weekday, title, route: '', dayNote: '', activities: [], accommodation: null };
+      const title = hmFull ? hmFull[4].trim() : hmShort[2].trim();
+      const day = { day: dayNum, date, weekday, title, route: '', dayNote: '', weather: null, activities: [], accommodation: null };
 
       const rest = block.split('\n').slice(1);
-      // parse route/dayNote before first ###
+      // parse route/dayNote/weather before first ###
       let i = 0;
       while (i < rest.length && !rest[i].startsWith('###')) {
         const rkv = rest[i].match(/^(\w+):\s*(.*)/);
         if (rkv) {
           if (rkv[1] === 'route') day.route = rkv[2].trim();
           if (rkv[1] === 'dayNote') day.dayNote = rkv[2].trim();
+          if (rkv[1] === 'weatherTemp') { if (!day.weather) day.weather = {}; day.weather.temp = rkv[2].trim(); }
+          if (rkv[1] === 'weatherCond') { if (!day.weather) day.weather = {}; day.weather.condition = rkv[2].trim(); }
+          if (rkv[1] === 'weatherRain') { if (!day.weather) day.weather = {}; day.weather.rain = rkv[2].trim(); }
+          if (rkv[1] === 'weatherTips') { if (!day.weather) day.weather = {}; day.weather.tips = rkv[2].trim(); }
         }
         i++;
       }
@@ -1772,7 +2203,22 @@ copyable: 訂票代號 CI752-20260503DEF
       const actBlocks = rest.slice(i).join('\n').split(/(?=^###)/m).filter(s => s.trim());
       for (const ab of actBlocks) {
         const aLines = ab.trim().split('\n');
-        const aHeader = aLines[0].match(/###\s*([^|]+)\|\s*(.*)/);
+        const headerLine = aLines[0];
+
+        // 人名區塊：### Name（沒有 | 符號）
+        if (!headerLine.includes('|')) {
+          const personName = headerLine.replace(/^###\s*/, '').trim();
+          if (!personName) continue;
+          for (const line of aLines.slice(1)) {
+            const itemM = line.match(/^-\s*([^|]+)\|\s*(.*)/);
+            if (!itemM) continue;
+            day.activities.push({ type: itemM[1].trim(), nameCn: itemM[2].trim(), person: personName });
+          }
+          continue;
+        }
+
+        // 一般項目：### type | name
+        const aHeader = headerLine.match(/###\s*([^|]+)\|\s*(.*)/);
         if (!aHeader) continue;
         const type = aHeader[1].trim();
         const name = aHeader[2].trim();
@@ -1820,7 +2266,7 @@ copyable: 訂票代號 CI752-20260503DEF
         if (!current) continue;
         if (line.startsWith('- 費用：')) { current.cost = line.slice(5).trim(); continue; }
         if (line.startsWith('- ')) {
-          // CI751 | 桃園(TPE) → 新加坡(SIN) | 08:00 → 13:30 | 飛行 4h30m
+          // 例: CX456 | 台北(TPE) → 大阪(KIX) | 08:00 → 12:00 | 飛行 3h00m
           const parts = line.slice(2).split('|').map(s => s.trim());
           if (parts.length < 3) continue;
           const flight = parts[0];
@@ -1880,7 +2326,7 @@ copyable: 訂票代號 CI752-20260503DEF
     const blocks = body.split(/^(?=##\s)/m).filter(s => s.trim());
     const DATA = {
       ...config,
-      days: [], food: [], flights: { routes: [] }, packingList: [], tips: { sections: [] }
+      days: [], food: [], flights: { routes: [] }, packingList: [], packingTips: { sections: [] }, tips: { sections: [] }
     };
 
     for (const block of blocks) {
@@ -1894,6 +2340,8 @@ copyable: 訂票代號 CI752-20260503DEF
         DATA.flights = parseFlightsBlock(block.trim());
       } else if (firstLine.includes('行李清單')) {
         DATA.packingList = parsePackingBlock(block.trim());
+      } else if (firstLine.includes('打包提醒')) {
+        DATA.packingTips = parseTipsBlock(block.trim());
       } else if (firstLine.includes('旅遊須知')) {
         DATA.tips = parseTipsBlock(block.trim());
       }
@@ -1949,70 +2397,20 @@ copyable: 訂票代號 CI752-20260503DEF
     function mapsUrl(act) {
       if (act.mapLink) return act.mapLink;
       if (act.address) return `https://maps.google.com/?q=${encodeURIComponent(act.address)}`;
-      if (act.nameEn) return `https://maps.google.com/?q=${encodeURIComponent(act.nameEn)}`;
-      if (act.nameCn) return `https://maps.google.com/?q=${encodeURIComponent(act.nameCn)}`;
       return null;
     }
 
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg; t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2000);
-    }
+    // ── App Deep Link Button ─────────────────────────────────
+    const APP_MAP = {
+      '台鐵': { label: '🚂 台鐵 e 訂通', url: 'traeticket://', bg: '#1a6b3a', color: '#fff' },
+      '高鐵': { label: '🚄 T-Express 高鐵', url: 'texpress://', bg: '#e65100', color: '#fff' },
+      '長榮航空': { label: '✈️ 長榮航空', url: 'evaair://', bg: '#005f40', color: '#fff' },
+      '國泰航空': { label: '✈️ 國泰航空', url: 'https://www.cathaypacific.com/', bg: '#006564', color: '#fff' },
+      'Agoda': { label: '🏨 Agoda', url: 'agoda://', bg: '#5c2d91', color: '#fff' },
+      'Grab': { label: '🚗 Grab', url: 'grab://', bg: '#00b14f', color: '#fff' },
+    };
 
-    function copyText(text) {
-      navigator.clipboard?.writeText(text).catch(() => {
-        const el = document.createElement('textarea');
-        el.value = text; document.body.appendChild(el);
-        el.select(); document.execCommand('copy');
-        document.body.removeChild(el);
-      });
-      showToast('✅ 已複製！');
-    }
-
-    function openDriver(address, mapUrl) {
-      document.getElementById('driver-address').textContent = address;
-      const link = document.getElementById('driver-map-link');
-      link.href = mapUrl || `https://maps.google.com/?q=${encodeURIComponent(address)}`;
-      document.getElementById('driver-modal').classList.add('open');
-    }
-    function closeDriver() { document.getElementById('driver-modal').classList.remove('open'); }
-
-    // ── Render Header ────────────────────────────────────────
-    document.getElementById('header-title').textContent = `${DATA.emoji} ${DATA.title}`;
-    document.getElementById('header-subtitle').textContent = DATA.subtitle;
-    const badges = document.getElementById('header-badges');
-    [DATA.tripType, `${DATA.people}人`, ...(DATA.transport || [])].forEach(b => {
-      const s = document.createElement('span'); s.textContent = b; badges.appendChild(s);
-    });
-
-    // ── Tab switching ────────────────────────────────────────
-    function switchTab(tab) {
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector(`.tab-panel[data-tab="${tab}"]`).classList.add('active');
-      document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
-      document.getElementById('main').scrollTop = 0;
-    }
-
-    // ── Render Itinerary ─────────────────────────────────────
-    let currentDayIndex = 0;
-
-    function renderDaySelector() {
-      const el = document.getElementById('day-selector');
-      const today = new Date();
-      const todayStr = `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}`;
-      el.innerHTML = DATA.days.map((d, i) => {
-        const isToday = d.date === todayStr;
-        const isActive = i === currentDayIndex;
-        return `<button class="day-btn ${isActive ? 'active' : ''} ${isToday && !isActive ? 'today' : ''}" onclick="selectDay(${i})">
-      <span class="day-n">Day ${d.day}</span>
-      <span class="day-date">${d.date.slice(5)}</span>
-      <span class="day-wd">${d.weekday}</span>
-    </button>`;
-      }).join('');
-    }
-
+    // ── 文字標記處理 ─────────────────────────────────────────
     function renderText(raw) {
       if (!raw) return '';
       const parts = [];
@@ -2029,6 +2427,7 @@ copyable: 訂票代號 CI752-20260503DEF
       return parts.join('').replace(/\\n/g, '<br>');
     }
 
+    // ── 景點圖片卡 ───────────────────────────────────────────
     function renderImageCard(act) {
       if (!act.imageUrl) return '';
       const imgs = [act.imageUrl, act.imageUrl2, act.imageUrl3].filter(Boolean);
@@ -2051,31 +2450,112 @@ copyable: 訂票代號 CI752-20260503DEF
       return `<div class="si-grid-3">${makeWrap(imgs[0])}<div class="si-row2">${makeWrap(imgs[1])}${makeWrap(imgs[2])}</div></div>`;
     }
 
-    function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.add('hidden');
-      document.body.style.overflow = '';
+    function renderAppButton(act) {
+      if (!act.app) return '';
+      const cfg = APP_MAP[act.app];
+      const url = cfg ? cfg.url : act.app; // 若非內建關鍵字，把 app 欄位本身當作 URL
+      if (!url) return '';
+      const label = cfg ? cfg.label : `📱 開啟 App`;
+      const bg = cfg ? cfg.bg : '#555';
+      return `<a href="${escHtml(url)}" class="btn-app" style="background:${bg};color:${cfg ? cfg.color : '#fff'}">${label}</a>`;
     }
 
-    function initFadeIn(container) {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-        });
-      }, { threshold: 0.05 });
-      container.querySelectorAll('.fade-in-up').forEach(el => obs.observe(el));
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    function copyText(text) {
+      navigator.clipboard?.writeText(text).catch(() => {
+        const el = document.createElement('textarea');
+        el.value = text; document.body.appendChild(el);
+        el.select(); document.execCommand('copy');
+        document.body.removeChild(el);
+      });
+      showToast('✅ 已複製！');
+    }
+
+    function openDriver(address) {
+      document.body.style.overflow = 'hidden';
+      document.getElementById('driver-address').textContent = address;
+      document.getElementById('driver-modal').classList.add('open');
+    }
+    function closeDriver() {
+      document.body.style.overflow = '';
+      document.getElementById('driver-modal').classList.remove('open');
+    }
+
+    // ── Render Header ────────────────────────────────────────
+
+    // 從資料動態設定網頁標題與 App Icon
+    document.title = `${DATA.title || '行程表'} ${DATA.emoji || ''}`.trim();
+
+    // 動態設定 iOS 桌面名稱
+    const iosTitleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+    if (iosTitleMeta) {
+      iosTitleMeta.setAttribute('content', DATA.title || '行程表');
+    }
+    (function () {
+      try {
+        var c = document.createElement('canvas');
+        c.width = c.height = 180;
+        var ctx = c.getContext('2d');
+        var g = ctx.createLinearGradient(0, 0, 180, 180);
+        g.addColorStop(0, '#c0392b'); g.addColorStop(1, '#7b241c');
+        ctx.fillStyle = g; ctx.fillRect(0, 0, 180, 180);
+        ctx.font = '90px serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(DATA.emoji || '📅', 90, 90);
+        document.getElementById('app-icon').href = c.toDataURL('image/png');
+      } catch (e) { }
+    })();
+
+    document.getElementById('header-title').textContent = `${DATA.emoji || ''} ${DATA.title || ''}`.trim();
+    document.getElementById('header-subtitle').textContent = DATA.subtitle;
+    const badges = document.getElementById('header-badges');
+    [`${DATA.people}人`, ...(DATA.keywords || [])].forEach(b => {
+      if (!b) return;
+      const s = document.createElement('span'); s.textContent = b; badges.appendChild(s);
+    });
+
+    // ── Tab switching ────────────────────────────────────────
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.tab-panel[data-tab="${tab}"]`).classList.add('active');
+      document.getElementById('day-selector').style.display = tab === 'itinerary' ? '' : 'none';
+      document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
+      document.getElementById('main').scrollTop = 0;
+    }
+
+    // ── Render Itinerary ─────────────────────────────────────
+    let currentDayIndex = 0;
+
+    function renderDaySelector() {
+      const el = document.getElementById('day-selector');
+      const today = new Date();
+      const todayStr = `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}`;
+      el.innerHTML = DATA.days.map((d, i) => {
+        const isToday = d.date === todayStr;
+        const isActive = i === currentDayIndex;
+        if (!d.date) {
+          return `<button class="day-btn ${isActive ? 'active' : ''} ${isToday && !isActive ? 'today' : ''}" onclick="selectDay(${i})" style="justify-content: center;">
+      <span class="day-n">Day ${d.day}</span>
+    </button>`;
+        }
+        return `<button class="day-btn ${isActive ? 'active' : ''} ${isToday && !isActive ? 'today' : ''}" onclick="selectDay(${i})">
+      <span class="day-n">Day ${d.day}</span>
+      <span class="day-date">${d.date.slice(5)}</span>
+      <span class="day-wd">${d.weekday}</span>
+    </button>`;
+      }).join('');
     }
 
     function renderActivity(act, dayIdx, actIdx) {
       if (act.type === '住宿') {
         const id = `act-${dayIdx}-${actIdx}`;
         const mapUrl = mapsUrl(act);
-        const storKey = `note_${dayIdx}_${actIdx}`;
-        const savedNote = localStorage.getItem(storKey) || '';
         const timeStr = act.time ? (act.endTime ? `${act.time} - ${act.endTime}` : act.time) : '';
         return `<div class="activity-card fade-in-up" id="${id}">
     <div class="card-header" onclick="toggleCard('${id}')">
@@ -2086,22 +2566,23 @@ copyable: 訂票代號 CI752-20260503DEF
         <div class="card-tags">
           <span class="tag-type" style="background:var(--type-住宿-bg);color:var(--type-住宿)">住宿</span>
           ${act.price ? `<span class="tag-cost">${escHtml(act.price)}</span>` : ''}
+          ${act.group ? `<span class="tag-group">👥 ${escHtml(act.group)}</span>` : ''}
         </div>
       </div>
       <span class="card-chevron" id="chv-${id}">›</span>
     </div>
     <div class="card-body" id="body-${id}">
+      ${renderImageCard(act)}
       ${act.checkIn || act.checkOut ? `<div class="accom-sub" style="margin-bottom:8px">${act.checkIn ? `入住 ${act.checkIn}` : ''}${act.checkOut ? ` · 退房 ${act.checkOut}` : ''}</div>` : ''}
       ${(act.nights || act.night) ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${act.nights || act.night} 晚</span></div>` : ''}
       ${act.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')" style="margin-top:8px">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
-      ${act.notes ? `<div class="notes-box" style="margin-top:8px">${renderText(act.notes)}</div>` : ''}
+      ${act.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(act.notes)}</div>` : ''}
       ${renderAppButton(act)}
       <div class="card-buttons" style="margin-top:8px">
-        ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
-        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
+        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
+        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看</button>` : ''}
       </div>
-      <textarea class="note-textarea" placeholder="備注…" onchange="localStorage.setItem('${storKey}',this.value)">${escHtml(savedNote)}</textarea>
     </div>
   </div>`;
       }
@@ -2109,8 +2590,6 @@ copyable: 訂票代號 CI752-20260503DEF
       const icon = typeIcon(act);
       const timeStr = act.time ? (act.endTime ? `${act.time} - ${act.endTime}` : act.time) : '';
       const mapUrl = mapsUrl(act);
-      const storKey = `note_${dayIdx}_${actIdx}`;
-      const savedNote = localStorage.getItem(storKey) || '';
       const isCancelled = act.cancelled;
 
       return `<div class="activity-card fade-in-up ${isCancelled ? 'cancelled-card' : ''}" id="act-${dayIdx}-${actIdx}">
@@ -2122,6 +2601,7 @@ copyable: 訂票代號 CI752-20260503DEF
         <div class="card-tags">
           <span class="tag-type" style="background:var(--type-${tc}-bg);color:var(--type-${tc})">${escHtml(act.type)}</span>
           ${act.cost ? `<span class="tag-cost">${escHtml(act.cost)}</span>` : ''}
+          ${act.group ? `<span class="tag-group">👥 ${escHtml(act.group)}</span>` : ''}
         </div>
       </div>
       <span class="card-chevron" id="chv-act-${dayIdx}-${actIdx}">›</span>
@@ -2131,17 +2611,16 @@ copyable: 訂票代號 CI752-20260503DEF
       ${isCancelled && act.cancelReason ? `<div class="notes-box">已排除：${escHtml(act.cancelReason)}</div>` : ''}
       ${act.description ? `<div class="card-desc">${renderText(act.description)}</div>` : ''}
       ${act.hours ? `<div class="card-hours">🕐 營業時間：${escHtml(act.hours)}</div>` : ''}
-      ${act.cost ? `<div class="tag-cost" style="display:inline-block;margin-bottom:8px">💰 ${escHtml(act.cost)}</div>` : ''}
       ${act.ticket ? `<div class="ticket-box">🎫 ${escHtml(act.ticket)}</div>` : ''}
       ${act.meta ? `<div class="meta-box">ℹ️ ${escHtml(act.meta)}</div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box">${renderText(act.notes)}</div>` : ''}
-      ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">📄 查看文件</a>` : ''}
+      ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">🔗 相關連結</a>` : ''}
+      ${renderAppButton(act)}
       <div class="card-buttons">
-        ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
-        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
+        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
+        ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看</button>` : ''}
       </div>
-      <textarea class="note-textarea" placeholder="備注…" onchange="localStorage.setItem('${storKey}',this.value)">${escHtml(savedNote)}</textarea>
     </div>
   </div>`;
     }
@@ -2149,13 +2628,11 @@ copyable: 訂票代號 CI752-20260503DEF
     function renderAccommodation(accom, dayIdx) {
       if (!accom) return '';
       const mapUrl = accom.mapLink || (accom.address ? `https://maps.google.com/?q=${encodeURIComponent(accom.address)}` : null);
-      const storKey = `note_accom_${dayIdx}`;
-      const savedNote = localStorage.getItem(storKey) || '';
       return `<div class="accommodation-section" id="accom-${dayIdx}">
     <div class="accom-header" onclick="toggleAccom(${dayIdx})">
       <span>🏠</span>
       <div style="flex:1">
-        <div class="accom-title">${escHtml(accom.name)}</div>
+        <div class="accom-title"><span class="tag-type" style="background:var(--type-住宿-bg);color:var(--type-住宿);margin-right:6px;">住宿</span>${escHtml(accom.name)}</div>
         <div class="accom-sub">${accom.checkIn ? `入住 ${accom.checkIn}` : ''}${accom.checkOut ? ` · 退房 ${accom.checkOut}` : ''}</div>
       </div>
       <span class="card-chevron" id="chv-accom-${dayIdx}">›</span>
@@ -2166,38 +2643,55 @@ copyable: 訂票代號 CI752-20260503DEF
       ${accom.address ? `<div class="accom-row"><span class="accom-label">地址</span><span class="accom-val" style="font-size:0.72rem">${escHtml(accom.address)}</span></div>` : ''}
       ${accom.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(accom.copyable)}')" style="margin-top:8px">${escHtml(accom.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${escHtml(accom.notes)}</div>` : ''}
+      ${renderAppButton(accom)}
       <div class="card-buttons" style="margin-top:8px">
-        ${mapUrl ? `<button class="btn-map" onclick="window.open('${mapUrl}','_blank')">🗺 Google Maps</button>` : ''}
-        ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}','${mapUrl || ''}')">👁 給司機看</button>` : ''}
+        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
+        ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}')">👁 給司機看</button>` : ''}
       </div>
-      <textarea class="note-textarea" placeholder="備注…" onchange="localStorage.setItem('${storKey}',this.value)">${escHtml(savedNote)}</textarea>
     </div>
   </div>`;
     }
 
     function renderWeather(day) {
-      if (!DATA.weather) return '';
-      for (const [cityKey, w] of Object.entries(DATA.weather)) {
-        if (day.title.includes(cityKey) || day.route.includes(cityKey) || (day.dayNote && day.dayNote.includes(cityKey))) {
-          return `<div class="weather-bar">
-        <div class="weather-temp">${escHtml(w.temp)}</div>
+      if (!day.weather) return '';
+      const w = day.weather;
+      return `<div class="weather-bar">
+        <div class="weather-temp">${escHtml(w.temp || '')}</div>
         <div class="weather-info">
-          <div class="weather-cond">${escHtml(w.condition)}</div>
-          <div class="weather-tips">${escHtml(w.tips)}</div>
+          ${w.condition ? `<div class="weather-cond">${escHtml(w.condition)}</div>` : ''}
+          ${w.rain ? `<div class="weather-cond" style="margin-top:2px;">☂️ ${escHtml(w.rain)}</div>` : ''}
+          ${w.tips ? `<div class="weather-tips">${escHtml(w.tips)}</div>` : ''}
         </div>
       </div>`;
-        }
-      }
-      return '';
     }
 
     function getPrep0Key(dayIdx, actIdx) {
       return `prep0-${encodeURIComponent(DATA.title)}-${dayIdx}-${actIdx}`;
     }
-    function togglePrep0(dayIdx, actIdx) {
+    function togglePrep0(element, dayIdx, actIdx, countId, totalItems) {
       const key = getPrep0Key(dayIdx, actIdx);
-      localStorage.setItem(key, localStorage.getItem(key) === '1' ? '0' : '1');
-      renderDayContent(dayIdx);
+      const isChecked = localStorage.getItem(key) === '1';
+      const newVal = isChecked ? '0' : '1';
+      localStorage.setItem(key, newVal);
+
+      const checkEl = element.querySelector('.pack-check');
+      const textEl = element.querySelector('.pack-item-text');
+      if (newVal === '1') {
+        checkEl.classList.add('checked');
+        checkEl.textContent = '✓';
+        textEl.classList.add('checked');
+      } else {
+        checkEl.classList.remove('checked');
+        checkEl.textContent = '';
+        textEl.classList.remove('checked');
+      }
+
+      const countEl = document.getElementById(countId);
+      if (countEl) {
+        const groupEl = element.closest('.pack-items');
+        const done = groupEl.querySelectorAll('.pack-check.checked').length;
+        countEl.textContent = `${done}/${totalItems}`;
+      }
     }
     function togglePrep0Cat(bodyId, chvId) {
       const el = document.getElementById(bodyId);
@@ -2205,36 +2699,114 @@ copyable: 訂票代號 CI752-20260503DEF
       el.classList.toggle('open');
       chv.classList.toggle('open', el.classList.contains('open'));
     }
-    function renderDay0Checklist(day, dayIdx) {
-      if (!day.activities.length) return '<div style="padding:20px;opacity:0.5;text-align:center">尚無項目</div>';
+    function renderPrep0Groups(actPairs, dayIdx, ns) {
       const groups = {}, groupOrder = [];
-      day.activities.forEach((act, i) => {
+      actPairs.forEach(({ act, i }) => {
         const t = act.type || '其他';
         if (!groups[t]) { groups[t] = []; groupOrder.push(t); }
         groups[t].push({ act, i });
       });
       return groupOrder.map((type, gi) => {
         const items = groups[type];
-        const done = items.filter(({i}) => localStorage.getItem(getPrep0Key(dayIdx, i)) === '1').length;
-        const icon = typeIcon({ type, nameCn: '', description: '' });
+        const done = items.filter(({ i }) => localStorage.getItem(getPrep0Key(dayIdx, i)) === '1').length;
+        const countId = `prep0count-${dayIdx}-${ns}-${gi}`;
         return `<div class="pack-cat fade-in-up">
-          <div class="pack-cat-header" onclick="togglePrep0Cat('prep0cat-${dayIdx}-${gi}','prep0chv-${dayIdx}-${gi}')">
-            <span class="pack-cat-icon">${icon}</span>
+          <div class="pack-cat-header" onclick="togglePrep0Cat('prep0cat-${dayIdx}-${ns}-${gi}','prep0chv-${dayIdx}-${ns}-${gi}')">
             <span class="pack-cat-name">${escHtml(type)}</span>
-            <span class="pack-cat-count">${done}/${items.length}</span>
-            <span class="card-chevron open" id="prep0chv-${dayIdx}-${gi}">›</span>
+            <span class="pack-cat-count" id="${countId}">${done}/${items.length}</span>
+            <span class="card-chevron open" id="prep0chv-${dayIdx}-${ns}-${gi}">›</span>
           </div>
-          <div class="pack-items open" id="prep0cat-${dayIdx}-${gi}">
-            ${items.map(({act, i}) => {
-              const checked = localStorage.getItem(getPrep0Key(dayIdx, i)) === '1';
-              return `<div class="pack-item" onclick="togglePrep0(${dayIdx},${i})">
+          <div class="pack-items open" id="prep0cat-${dayIdx}-${ns}-${gi}">
+            ${items.map(({ act, i }) => {
+          const checked = localStorage.getItem(getPrep0Key(dayIdx, i)) === '1';
+          return `<div class="pack-item" onclick="togglePrep0(this, ${dayIdx}, ${i}, '${countId}', ${items.length})">
                 <div class="pack-check ${checked ? 'checked' : ''}">${checked ? '✓' : ''}</div>
                 <span class="pack-item-text ${checked ? 'checked' : ''}">${escHtml(act.nameCn)}</span>
               </div>`;
-            }).join('')}
+        }).join('')}
           </div>
         </div>`;
       }).join('');
+    }
+
+    function selectPrep0Tab(dayIdx, personIdx, total) {
+      for (let i = 0; i < total; i++) {
+        const panel = document.getElementById(`prep0panel-${dayIdx}-${i}`);
+        if (panel) panel.style.display = i === personIdx ? '' : 'none';
+      }
+      document.querySelectorAll('.prep0-tabs .prep0-tab').forEach((tab, i) => {
+        tab.classList.toggle('active', i === personIdx);
+      });
+    }
+
+    function renderDay0Checklist(day, dayIdx) {
+      if (!day.activities.length) return '<div style="padding:20px;opacity:0.5;text-align:center">尚無項目</div>';
+
+      const persons = [...new Set(day.activities.map(a => a.person).filter(Boolean))];
+
+      if (persons.length < 2) {
+        // 0 或 1 個人：不顯示頁籤
+        const pairs = day.activities.map((act, i) => ({ act, i }));
+        return renderPrep0Groups(pairs, dayIdx, 'all');
+      }
+
+      // 多人：頁籤模式
+      // 有 person 的項目進各人頁籤，沒有 person 的進「共用」區塊
+      const sharedPairs = day.activities.map((act, i) => ({ act, i })).filter(({ act }) => !act.person);
+
+      const tabsHtml = `<div class="prep0-tabs">
+        ${persons.map((p, pi) => `<button class="prep0-tab${pi === 0 ? ' active' : ''}" onclick="selectPrep0Tab(${dayIdx}, ${pi}, ${persons.length})">${escHtml(p)}</button>`).join('')}
+      </div>`;
+
+      const panelsHtml = persons.map((person, pi) => {
+        const pairs = day.activities.map((act, i) => ({ act, i })).filter(({ act }) => act.person === person);
+        return `<div id="prep0panel-${dayIdx}-${pi}"${pi > 0 ? ' style="display:none"' : ''}>
+          ${pairs.length ? renderPrep0Groups(pairs, dayIdx, `p${pi}`) : '<div style="padding:12px 16px;opacity:0.5;font-size:0.8rem">尚無專屬物品</div>'}
+        </div>`;
+      }).join('');
+
+      const sharedHtml = sharedPairs.length
+        ? `<div class="prep0-shared-label">共用</div>${renderPrep0Groups(sharedPairs, dayIdx, 'shared')}`
+        : '';
+
+      return tabsHtml + panelsHtml + sharedHtml;
+    }
+
+    function buildRenderQueue(activities) {
+      const queue = [];
+      let i = 0;
+      while (i < activities.length) {
+        if (activities[i].group) {
+          const block = [];
+          while (i < activities.length && activities[i].group) {
+            block.push({ act: activities[i], origIdx: i });
+            i++;
+          }
+          queue.push({ type: 'split', items: block });
+        } else {
+          queue.push({ type: 'single', act: activities[i], origIdx: i });
+          i++;
+        }
+      }
+      return queue;
+    }
+
+    function renderSplitGroup(items, dayIdx) {
+      const firstTime = items[0].act.time || '';
+      const allSameEnd = items.every(x => x.act.endTime && x.act.endTime === items[0].act.endTime);
+      const timeStr = firstTime
+        ? (allSameEnd ? `${firstTime} - ${items[0].act.endTime}` : firstTime)
+        : '';
+      return `<div class="split-group fade-in-up">
+        <div class="split-group-header">
+          <span>⑂</span>
+          <span class="split-label">分組行程</span>
+          ${timeStr ? `<span class="split-time">${escHtml(timeStr)}</span>` : ''}
+        </div>
+        <div class="split-cards">
+          ${items.map(({ act, origIdx }) => renderActivity(act, dayIdx, origIdx)).join('')}
+        </div>
+      </div>`;
     }
 
     function renderDayContent(dayIdx) {
@@ -2252,26 +2824,24 @@ copyable: 訂票代號 CI752-20260503DEF
       }
       const normal = day.activities.filter(a => !a.cancelled);
       const cancelled = day.activities.filter(a => a.cancelled);
-      const dayNoteKey = `daynote_${dayIdx}`;
-      const savedDayNote = localStorage.getItem(dayNoteKey) || '';
+      const queue = buildRenderQueue(normal);
 
       let html = `<div class="day-header">
     <div class="day-route">📍 ${escHtml(day.route || day.title)}</div>
     ${day.dayNote ? `<div class="day-note">${renderText(day.dayNote)}</div>` : ''}
   </div>
   ${renderWeather(day)}
-  ${normal.map((a, i) => renderActivity(a, dayIdx, i)).join('')}
+  ${queue.map(item => item.type === 'split'
+        ? renderSplitGroup(item.items, dayIdx)
+        : renderActivity(item.act, dayIdx, item.origIdx)
+      ).join('')}
   ${cancelled.length ? `
     <div class="cancelled-section">
       <div class="cancelled-toggle" onclick="toggleCancelled(${dayIdx})">已排除行程 (${cancelled.length}) ▾</div>
       <div id="cancelled-list-${dayIdx}" style="display:none">
         ${cancelled.map((a, i) => renderActivity(a, dayIdx, normal.length + i)).join('')}
       </div>
-    </div>` : ''}
-  <div class="day-note-section">
-    <div class="day-note-label">今日備注</div>
-    <textarea class="note-textarea" placeholder="今天的備注…" onchange="localStorage.setItem('${dayNoteKey}',this.value)">${escHtml(savedDayNote)}</textarea>
-  </div>`;
+    </div>` : ''}`;
       el.innerHTML = html;
       initFadeIn(el);
     }
@@ -2300,12 +2870,24 @@ copyable: 訂票代號 CI752-20260503DEF
     }
 
     // Auto-locate current activity
+    // 若今天在行程日期內 → 切換至今日並定位當前時段活動
+    // 若今天不在行程日期內 → 顯示 Day 1 最頂端（不捲動）
     function autoLocate() {
       const now = new Date();
       const todayStr = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`;
       const dayIdx = DATA.days.findIndex(d => d.date === todayStr);
-      if (dayIdx < 0) return;
+
+      // 今天不在行程範圍內 → 顯示 Day 1 最頂端
+      if (dayIdx < 0) {
+        const fallBackIdx = DATA.days.findIndex(d => d.day === 1);
+        selectDay(fallBackIdx >= 0 ? fallBackIdx : 0);
+        return;
+      }
+
+      // 今天在行程內 → 切換至今日
       selectDay(dayIdx);
+
+      // 找出當前時段對應的活動
       const day = DATA.days[dayIdx];
       const nowMin = now.getHours() * 60 + now.getMinutes();
       const normal = day.activities.filter(a => !a.cancelled);
@@ -2351,8 +2933,8 @@ copyable: 訂票代號 CI752-20260503DEF
       <div class="food-list open" id="food-group-${gi}">
         ${group.items.map(item => {
         const searchQ = item.nameEn || item.name;
-        const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(searchQ + ' Singapore')}`;
-        return `<div class="food-item" onclick="window.open('${mapUrl}','_blank')">
+        const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(searchQ + ' ' + (group.city || ''))}`;
+        return `<div class="food-item" onclick="location.href='${mapUrl}'">
             <div class="food-item-info">
               <div class="food-name">${escHtml(item.name)}</div>
               ${item.nameEn ? `<div class="food-en">${escHtml(item.nameEn)}</div>` : ''}
@@ -2420,11 +3002,31 @@ copyable: 訂票代號 CI752-20260503DEF
     <div class="pack-progress-label">已打包 ${checked} / ${total} 項（${pct}%）</div>`;
     }
 
-    function togglePackItem(ci, ii) {
+    function togglePackItem(element, ci, ii, countId, total) {
       const k = getPackKey(ci, ii);
-      const checked = localStorage.getItem(k) === '1';
-      localStorage.setItem(k, checked ? '0' : '1');
-      renderPacking();
+      const isChecked = localStorage.getItem(k) === '1';
+      const newVal = isChecked ? '0' : '1';
+      localStorage.setItem(k, newVal);
+
+      const checkEl = element.querySelector('.pack-check');
+      const textEl = element.querySelector('.pack-item-text');
+      if (newVal === '1') {
+        checkEl.classList.add('checked');
+        checkEl.textContent = '✓';
+        textEl.classList.add('checked');
+      } else {
+        checkEl.classList.remove('checked');
+        checkEl.textContent = '';
+        textEl.classList.remove('checked');
+      }
+
+      const countEl = document.getElementById(countId);
+      if (countEl) {
+        const groupEl = element.closest('.pack-items');
+        const done = groupEl.querySelectorAll('.pack-check.checked').length;
+        countEl.textContent = `${done}/${total}`;
+      }
+      updatePackProgress();
     }
 
     function renderPacking() {
@@ -2432,17 +3034,17 @@ copyable: 訂票代號 CI752-20260503DEF
       el.innerHTML = DATA.packingList.map((cat, ci) => {
         const total = cat.items.length;
         const done = cat.items.filter((_, ii) => localStorage.getItem(getPackKey(ci, ii)) === '1').length;
+        const countId = `pack-count-${ci}`;
         return `<div class="pack-cat">
       <div class="pack-cat-header" onclick="togglePackCat(${ci})">
-        <span class="pack-cat-icon">${escHtml(cat.icon)}</span>
         <span class="pack-cat-name">${escHtml(cat.cat)}</span>
-        <span class="pack-cat-count">${done}/${total}</span>
+        <span class="pack-cat-count" id="${countId}">${done}/${total}</span>
         <span class="card-chevron open" id="chv-pack-${ci}">›</span>
       </div>
       <div class="pack-items open" id="pack-cat-${ci}">
         ${cat.items.map((item, ii) => {
           const isChecked = localStorage.getItem(getPackKey(ci, ii)) === '1';
-          return `<div class="pack-item" onclick="togglePackItem(${ci},${ii})">
+          return `<div class="pack-item" onclick="togglePackItem(this, ${ci}, ${ii}, '${countId}', ${total})">
             <div class="pack-check ${isChecked ? 'checked' : ''}">${isChecked ? '✓' : ''}</div>
             <span class="pack-item-text ${isChecked ? 'checked' : ''}">${escHtml(item.item)}</span>
           </div>`;
@@ -2458,6 +3060,17 @@ copyable: 訂票代號 CI752-20260503DEF
       const chv = document.getElementById(`chv-pack-${ci}`);
       el.classList.toggle('open');
       chv.classList.toggle('open', el.classList.contains('open'));
+    }
+
+    // ── Render Packing Tips ───────────────────────────────────
+    function renderPackingTips() {
+      const el = document.getElementById('packing-tips');
+      if (!DATA.packingTips.sections.length) { el.innerHTML = ''; return; }
+      el.innerHTML = DATA.packingTips.sections.map(sec => `
+    <div class="pack-tips">
+      <div class="pack-tips-title">${escHtml(sec.title)}</div>
+      <ul>${sec.items.map(item => `<li>${escHtml(item)}</li>`).join('')}</ul>
+    </div>`).join('');
     }
 
     // ── Render Tips ───────────────────────────────────────────
@@ -2480,6 +3093,29 @@ copyable: 訂票代號 CI752-20260503DEF
       const chv = document.getElementById(`chv-tips-${i}`);
       body.classList.toggle('open');
       chv.classList.toggle('open', body.classList.contains('open'));
+    }
+
+    // ── Tab Bar 動態產生 ──────────────────────────────────────
+    function renderTabBar() {
+      const tabs = [
+        { key: 'itinerary', icon: '🗓', label: '行程', hasContent: DATA.days.length > 0 },
+        { key: 'food', icon: '🍽️', label: '美食', hasContent: DATA.food.length > 0 },
+        { key: 'flights', icon: '✈️', label: '航班', hasContent: DATA.flights.routes.length > 0 },
+        { key: 'packing', icon: '🧳', label: '行李', hasContent: DATA.packingList.length > 0 },
+        { key: 'tips', icon: '📋', label: '須知', hasContent: DATA.tips.sections.length > 0 },
+      ];
+      const visible = tabs.filter(t => t.hasContent);
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      if (visible.length) {
+        document.querySelector(`.tab-panel[data-tab="${visible[0].key}"]`).classList.add('active');
+      }
+      const nav = document.getElementById('tab-bar');
+      nav.style.display = visible.length <= 1 ? 'none' : '';
+      nav.innerHTML = visible.map((t, i) =>
+        `<button class="tab-btn ${i === 0 ? 'active' : ''}" data-tab="${t.key}" onclick="switchTab('${t.key}')">
+          <span class="tab-icon">${t.icon}</span><span>${t.label}</span>
+        </button>`
+      ).join('');
     }
 
     // ── Search ────────────────────────────────────────────────
@@ -2558,48 +3194,45 @@ copyable: 訂票代號 CI752-20260503DEF
       header.classList.toggle('compact', this.scrollTop > 10);
     });
 
-    // ── Backup ────────────────────────────────────────────────
-    function exportData() {
-      const data = {};
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        data[k] = localStorage.getItem(k);
-      }
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url;
-      a.download = `sg2026-backup-${new Date().toISOString().slice(0, 10)}.json`;
-      a.click(); URL.revokeObjectURL(url);
-      showToast('✅ 已匯出備份');
-    }
-
-    function importData(e) {
-      const file = e.target.files[0]; if (!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => {
-        try {
-          const data = JSON.parse(ev.target.result);
-          Object.entries(data).forEach(([k, v]) => localStorage.setItem(k, v));
-          showToast('✅ 已匯入備份，請重新整理');
-          renderPacking(); renderDayContent(currentDayIndex);
-        } catch { showToast('❌ 匯入失敗'); }
-      };
-      reader.readAsText(file);
-    }
-
     // ── Init ──────────────────────────────────────────────────
+    renderTabBar();
     renderFood();
     renderFlights();
+    renderPackingTips();
     renderPacking();
     renderTips();
+    // ── 圖片 Lightbox ────────────────────────────────────────
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // ── 捲動淡入 ─────────────────────────────────────────────
+    function initFadeIn(container) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.05 });
+      container.querySelectorAll('.fade-in-up').forEach(el => obs.observe(el));
+    }
+
     renderDaySelector();
-    renderDayContent(0);
-    autoLocate();
+    autoLocate(); // 統一負責初始渲染：今天在行程內→定位；不在→顯示 Day 1 頂端
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
   </script>
 
-  <div id="lightbox" class="hidden" onclick="closeLightbox()">
-    <span id="lightbox-close" onclick="closeLightbox()">✕</span>
-    <img id="lightbox-img" src="" alt="">
+  <!-- Lightbox -->
+  <div id="lightbox" class="hidden" onclick="if(event.target===this)closeLightbox()">
+    <button id="lightbox-close" onclick="closeLightbox()" aria-label="關閉">✕</button>
+    <img id="lightbox-img" alt="">
   </div>
 </body>
 

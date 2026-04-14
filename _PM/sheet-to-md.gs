@@ -14,12 +14,12 @@
  *   - 其餘儲存格：活動名稱（可多行，首行為名稱，其餘為 description）
  */
 
-// ── 設定區 ────────────────────────────────────────
+// --- 設定區 ---
 var YEAR = 2026;
-// ──────────────────────────────────────────────────
+// --------------
 
 function exportTripMD() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
   var data = sheet.getDataRange().getValues();
 
   // 收集日期欄
@@ -69,22 +69,30 @@ function exportTripMD() {
         }
       }
 
-      // 多行儲存格：第一行為名稱，其餘為 description
+      // 多行儲存格：第一行為名稱，其餘為 description 或 KV 欄位
       var lines = raw.split('\n');
       var name = lines[0].trim();
-      var extraParts = [];
+      var descParts = [];
+      var cellKV = {};
       for (var li = 1; li < lines.length; li++) {
         var trimmed = lines[li].trim();
-        if (trimmed) extraParts.push(trimmed);
+        if (!trimmed) continue;
+        var kvMatch = trimmed.match(/^(\w+):\s*(.*)/);
+        if (kvMatch) {
+          cellKV[kvMatch[1]] = kvMatch[2].trim();
+        } else {
+          descParts.push(trimmed);
+        }
       }
-      var extra = extraParts.join(' | ');
+      var description = cellKV.description !== undefined ? cellKV.description : descParts.join(' | ');
 
       var type = inferType(name);
 
       md += '### ' + type + ' | ' + name + '\n';
       md += 'time: ' + time + '\n';
       if (endTime) md += 'endTime: ' + endTime + '\n';
-      md += 'description: ' + extra + '\n';
+      md += 'group: ' + (cellKV.group || '') + '\n';
+      md += 'description: ' + description + '\n';
 
       if (type === '住宿') {
         md += 'checkIn: \n';
@@ -113,7 +121,7 @@ function exportTripMD() {
   showDialog(md);
 }
 
-// ── 工具函式 ──────────────────────────────────────
+// --- 工具函式 ---
 
 function formatTime(val) {
   if (!val && val !== 0) return '';
