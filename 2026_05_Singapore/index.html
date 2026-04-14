@@ -1226,9 +1226,12 @@
     }
 
     .split-col .tag-type,
-    .split-col .tag-cost,
-    .split-col .tag-group {
+    .split-col .tag-cost {
       white-space: normal;
+    }
+
+    .split-col .tag-group {
+      display: none;
     }
 
     .tag-group {
@@ -1706,6 +1709,7 @@ dayNote: 行動電源規定：100Wh以下最多2顆；100-160Wh經航空公司�
 - 👕 衣物 | 西裝褲
 - 👕 衣物 | 眼鏡
 - 🪥 清潔 | 電動牙刷
+- 🪥 清潔 | 電動牙刷頭 * 2
 - 🪥 清潔 | 牙膏
 - 🪥 清潔 | 牙間刷
 - 🪥 清潔 | 汙衣袋
@@ -1745,7 +1749,7 @@ dayNote: 行動電源規定：100Wh以下最多2顆；100-160Wh經航空公司�
 
 route: 台北 → 新加坡
 dayNote: 亞坤、哈利波特、Bon Broth、Nutmeg&Clove
-weatherTemp: 26 - 29
+weatherTemp: 26-29°C
 weatherCond: 陣雨
 weatherRain: 70%
 weatherTips: 要帶傘
@@ -1761,7 +1765,7 @@ time: 05:00
 endTime: 07:00
 group: 
 description: 在機場休息、喝興波咖啡、去貴賓室
-cost: NTD  / 人
+cost: 
 hours: 
 ticket: 
 meta: 
@@ -1887,7 +1891,6 @@ time: 23:30
 endTime: 23:59
 group: 小胤、朱朱
 description: 
-cost: NTD 3,732 / 人
 checkIn: 15:00
 checkOut: 12:00
 meta: 預定編號 1709616661 \n 參考編號 41272SG011301
@@ -1914,7 +1917,7 @@ app: Agoda
 
 route: 新加坡
 dayNote: 喜園、國家博物館、Burnt Ends、國家美術館、聖安德烈座堂、1887 by André、賭場
-weatherTemp: 26 - 29
+weatherTemp: 26-29°C
 weatherCond: 陣雨
 weatherRain: 60%
 weatherTips: 要帶傘
@@ -2008,7 +2011,7 @@ time: 15:30
 endTime: 15:45
 group: 
 description: 新加坡最大教堂、哥德復興風格、最老英國聖公會、白色石英外牆、彩繪玻璃
-cost: NTD  / 人
+cost: 
 hours: 
 ticket: 
 meta: 
@@ -2024,7 +2027,7 @@ time: 16:00
 endTime: 17:30
 group: 
 description: 萊佛士飯店歷史、殖民時期、建築特色、文化故事。
-cost: NTD  / 人
+cost: 
 hours: 
 ticket: 
 meta: 
@@ -2045,6 +2048,11 @@ address: 55 Keong Saik Rd., 新加坡 089158
 mapLink: https://maps.app.goo.gl/xDwiMrYQrKpWW2Rh8
 imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/KeSa%20House.jpg?raw=true
 
+### 休息 | 自由活動
+time: 17:30
+endTime: 19:00
+group: 滷蛋、阿凱
+description: 休息自由活動
 
 ### 飲食 | 1887 by André
 time: 19:00
@@ -2068,7 +2076,7 @@ time: 22:00
 endTime: 23:30
 group: 
 description: 小賭怡情
-cost: NTD  / 人
+cost: 
 hours: 24hr
 ticket: 
 meta: 
@@ -2085,7 +2093,6 @@ imageUrl3: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/im
 time: 23:59
 group: 小胤、朱朱
 description: 
-cost: NTD 3,732 / 人
 checkIn: 15:00
 checkOut: 12:00
 meta: 預定編號 1709616661 \n 參考編號 41272SG011301
@@ -2111,7 +2118,7 @@ app: Agoda
 
 route: 新加坡 → 台北
 dayNote: 早午餐、樟宜機場、回家
-weatherTemp: 26 - 31
+weatherTemp: 26-31°C
 weatherCond: 陣雨
 weatherRain: 80%
 weatherTips: 要帶傘
@@ -2132,7 +2139,7 @@ time: 10:00
 endTime: 12:00
 group: 小胤、朱朱
 description: Chef的徒弟、Le Matin復活、週末限定糕點、三明治、酸種布里歐修、拿鐵
-cost: NTD 30 / 人
+cost: SGD 30 / 人
 hours: 10:00-14:00
 ticket: 
 meta: 
@@ -2149,7 +2156,7 @@ time: 12:00
 endTime: 15:00
 group: 小胤、朱朱
 description: 在機場休息玩耍。朱朱想去玩溜滑梯。
-cost: NTD  / 人
+cost: 
 hours: 24hr
 ticket: 
 meta: 
@@ -3442,6 +3449,7 @@ docLink:
       document.getElementById('lightbox').classList.add('hidden');
       document.body.style.overflow = '';
     }
+
 
     // ── 捲動淡入 ─────────────────────────────────────────────
     function initFadeIn(container) {
