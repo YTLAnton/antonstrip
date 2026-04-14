@@ -166,17 +166,33 @@
 
     #header-badges {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 5px;
       margin-top: 8px;
     }
 
-    #header-badges span {
-      background: rgba(255, 255, 255, 0.18);
+    .badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .badge-people {
+      background: rgba(255, 255, 255, 0.22);
       border-radius: 99px;
       padding: 2px 9px;
       font-size: 0.7rem;
-      font-weight: 500;
+      font-weight: 600;
+    }
+
+    .badge-keyword {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 99px;
+      padding: 2px 9px;
+      font-size: 0.68rem;
+      font-weight: 400;
+      opacity: 0.85;
     }
 
     #header.compact #header-subtitle,
@@ -492,9 +508,6 @@
     .card-name {
       font-size: 0.88rem;
       font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .card-name.cancelled-text {
@@ -1367,16 +1380,19 @@
     }
 
     #driver-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: var(--bg);
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       border: none;
-      border-radius: 99px;
-      width: 28px;
-      height: 28px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #111;
+      font-size: 1.2rem;
+      line-height: 1;
       cursor: pointer;
-      font-size: 0.9rem;
+      z-index: 10000;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1770,8 +1786,7 @@ address: 165 Tg Pagar Rd, 新加坡 088539
 mapLink: https://maps.app.goo.gl/CEudcspyKwkSNhW59
 imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/Amara%20singapore.jpg?raw=true
 
-### 展覽 | 哈利波特：魔法幻境 
-nameEn: Harry Potter: Visions of Magic
+### 展覽 | 哈利波特：魔法幻境 Harry Potter: Visions of Magic
 time: 16:00
 endTime: 18:00
 description: 世界最大、哈利波特、沉浸式、互動魔杖、魔法動物、光影特效
@@ -2072,6 +2087,7 @@ weatherTips: 要帶傘
 ### 起床 | KeSa House
 time: 09:00
 endTime: 09:30
+group: 小胤、朱朱
 
 ### 行程 | 自由活動
 time: 09:00
@@ -2207,7 +2223,7 @@ docLink:
   </div>
 
   <!-- Driver Modal -->
-  <div id="driver-modal">
+  <div id="driver-modal" onclick="if(event.target===this)closeDriver()">
     <div id="driver-sheet">
       <button id="driver-close" onclick="closeDriver()">✕</button>
       <div class="driver-label">📍 給司機看地址</div>
@@ -2623,11 +2639,26 @@ docLink:
     document.getElementById('header-title').textContent = `${DATA.emoji || ''} ${DATA.title || ''}`.trim();
     document.getElementById('header-subtitle').textContent = DATA.subtitle;
     const badges = document.getElementById('header-badges');
-    const peopleLabel = Array.isArray(DATA.people) ? DATA.people.join(', ') : (DATA.people || '');
-    [peopleLabel, ...(DATA.keywords || [])].filter(Boolean).forEach(b => {
-      if (!b) return;
-      const s = document.createElement('span'); s.textContent = b; badges.appendChild(s);
-    });
+    const peopleList = Array.isArray(DATA.people)
+      ? DATA.people
+      : (DATA.people ? String(DATA.people).split(/[,，]/).map(s => s.trim()).filter(Boolean) : []);
+    const keywords = (DATA.keywords || []).filter(Boolean);
+    if (peopleList.length) {
+      const row = document.createElement('div'); row.className = 'badges-row';
+      peopleList.forEach(p => {
+        const s = document.createElement('span'); s.className = 'badge-people';
+        s.textContent = '👤 ' + p; row.appendChild(s);
+      });
+      badges.appendChild(row);
+    }
+    if (keywords.length) {
+      const row = document.createElement('div'); row.className = 'badges-row';
+      keywords.forEach(k => {
+        const s = document.createElement('span'); s.className = 'badge-keyword';
+        s.textContent = k; row.appendChild(s);
+      });
+      badges.appendChild(row);
+    }
 
     // ── Tab switching ────────────────────────────────────────
     function switchTab(tab) {
@@ -2697,7 +2728,6 @@ docLink:
       ${renderImageCard(act)}
       ${act.checkIn || act.checkOut ? `<div class="accom-sub" style="margin-bottom:8px">${act.checkIn ? `入住 ${act.checkIn}` : ''}${act.checkOut ? ` · 退房 ${act.checkOut}` : ''}</div>` : ''}
       ${(act.nights || act.night) ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${act.nights || act.night} 晚</span></div>` : ''}
-      ${act.address ? `<div class="accom-row"><span class="accom-val" style="font-size:0.72rem">${escHtml(act.address)}</span></div>` : ''}
       ${act.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(act.copyable)}')" style="margin-top:8px">${escHtml(act.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${act.notes ? `<div class="notes-box" style="margin-top:8px">${renderText(act.notes)}</div>` : ''}
       ${renderAppButton(act)}
@@ -2763,7 +2793,6 @@ docLink:
     <div class="accom-body" id="body-accom-${dayIdx}">
       ${accom.price ? `<div class="accom-row"><span class="accom-label">費用</span><span class="accom-val">${escHtml(accom.price)}</span></div>` : ''}
       ${accom.nights ? `<div class="accom-row"><span class="accom-label">晚數</span><span class="accom-val">${accom.nights} 晚</span></div>` : ''}
-      ${accom.address ? `<div class="accom-row"><span class="accom-val" style="font-size:0.72rem">${escHtml(accom.address)}</span></div>` : ''}
       ${accom.copyable ? `<div class="copyable-box" onclick="copyText('${escHtml(accom.copyable)}')" style="margin-top:8px">${escHtml(accom.copyable)}<span class="copy-icon">📋</span></div>` : ''}
       ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${renderText(accom.notes)}</div>` : ''}
       ${renderAppButton(accom)}
