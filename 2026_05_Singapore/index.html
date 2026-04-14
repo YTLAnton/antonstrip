@@ -401,6 +401,33 @@
       padding: 0 4px 8px;
     }
 
+    .day-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .expand-all-btn {
+      flex-shrink: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .expand-all-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
     .day-route {
       font-size: 0.78rem;
       color: var(--text-2);
@@ -1326,7 +1353,7 @@
       inset: 0;
       z-index: 300;
       display: none;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.93);
       align-items: center;
       justify-content: center;
     }
@@ -1381,8 +1408,9 @@
 
     #driver-close {
       position: fixed;
-      top: 10px;
-      right: 10px;
+      bottom: calc(32px + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -1516,8 +1544,9 @@
 
     #lightbox-close {
       position: fixed;
-      top: 10px;
-      right: 10px;
+      bottom: calc(32px + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -2645,10 +2674,8 @@ docLink:
     const keywords = (DATA.keywords || []).filter(Boolean);
     if (peopleList.length) {
       const row = document.createElement('div'); row.className = 'badges-row';
-      peopleList.forEach(p => {
-        const s = document.createElement('span'); s.className = 'badge-people';
-        s.textContent = '👤 ' + p; row.appendChild(s);
-      });
+      const s = document.createElement('span'); s.className = 'badge-people';
+      s.textContent = '👤 ' + peopleList.join('、'); row.appendChild(s);
       badges.appendChild(row);
     }
     if (keywords.length) {
@@ -2981,7 +3008,10 @@ docLink:
       const queue = buildRenderQueue(normal);
 
       let html = `<div class="day-header">
-    <div class="day-route">📍 ${escHtml(day.route || day.title)}</div>
+    <div class="day-header-row">
+      <div class="day-route">📍 ${escHtml(day.route || day.title)}</div>
+      <button class="expand-all-btn" id="expand-btn-${dayIdx}" onclick="toggleAllCards(${dayIdx})" title="全部展開">${ICON_EXPAND}</button>
+    </div>
     ${day.dayNote ? `<div class="day-note">${renderText(day.dayNote)}</div>` : ''}
   </div>
   ${renderWeather(day)}
@@ -3021,6 +3051,41 @@ docLink:
     function toggleCancelled(dayIdx) {
       const el = document.getElementById(`cancelled-list-${dayIdx}`);
       el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    const ICON_EXPAND = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9,3 3,3 3,9"/><line x1="10" y1="10" x2="3" y2="3"/>
+      <polyline points="15,3 21,3 21,9"/><line x1="14" y1="10" x2="21" y2="3"/>
+      <polyline points="9,21 3,21 3,15"/><line x1="10" y1="14" x2="3" y2="21"/>
+      <polyline points="15,21 21,21 21,15"/><line x1="14" y1="14" x2="21" y2="21"/>
+    </svg>`;
+    const ICON_COLLAPSE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="10,6 10,10 6,10"/><line x1="3" y1="3" x2="10" y2="10"/>
+      <polyline points="14,6 14,10 18,10"/><line x1="21" y1="3" x2="14" y2="10"/>
+      <polyline points="10,18 10,14 6,14"/><line x1="3" y1="21" x2="10" y2="14"/>
+      <polyline points="14,18 14,14 18,14"/><line x1="21" y1="21" x2="14" y2="14"/>
+    </svg>`;
+
+    function toggleAllCards(dayIdx) {
+      const container = document.getElementById('day-content');
+      const expandables = [];
+      container.querySelectorAll('.card-header:not(.no-expand)').forEach(h => {
+        const body = h.nextElementSibling;
+        const chv = h.querySelector('.card-chevron');
+        if (body) expandables.push({ body, chv });
+      });
+      container.querySelectorAll('.accom-header').forEach(h => {
+        const body = h.nextElementSibling;
+        const chv = h.querySelector('.card-chevron');
+        if (body) expandables.push({ body, chv });
+      });
+      const expand = !expandables.some(e => e.body.classList.contains('open'));
+      expandables.forEach(({ body, chv }) => {
+        body.classList.toggle('open', expand);
+        if (chv) chv.classList.toggle('open', expand);
+      });
+      const btn = document.getElementById(`expand-btn-${dayIdx}`);
+      if (btn) btn.innerHTML = expand ? ICON_COLLAPSE : ICON_EXPAND;
     }
 
     // Auto-locate current activity
@@ -3343,9 +3408,16 @@ docLink:
     }
 
     // ── Header scroll ─────────────────────────────────────────
+    let _headerCompact = false;
     document.getElementById('main').addEventListener('scroll', function () {
       const header = document.getElementById('header');
-      header.classList.toggle('compact', this.scrollTop > 10);
+      if (!_headerCompact && this.scrollTop > 60) {
+        _headerCompact = true;
+        header.classList.add('compact');
+      } else if (_headerCompact && this.scrollTop < 20) {
+        _headerCompact = false;
+        header.classList.remove('compact');
+      }
     });
 
     // ── Init ──────────────────────────────────────────────────
