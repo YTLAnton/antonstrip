@@ -2962,6 +2962,7 @@ docLink:
       document.querySelectorAll('.prep0-tabs .prep0-tab').forEach((tab, i) => {
         tab.classList.toggle('active', i === personIdx);
       });
+      document.getElementById('main').scrollTop = 0;
     }
 
     function renderDay0Checklist(day, dayIdx) {
@@ -3082,6 +3083,7 @@ docLink:
       currentDayIndex = idx;
       renderDaySelector();
       renderDayContent(idx);
+      document.getElementById('main').scrollTop = 0;
     }
 
     function toggleCard(id) {
