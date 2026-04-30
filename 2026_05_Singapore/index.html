@@ -90,6 +90,7 @@
     html,
     body {
       height: 100%;
+      overflow: hidden;
       font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
       scrollbar-width: none;
     }
@@ -114,10 +115,10 @@
 
     #app {
       width: 100%;
-      min-height: 100dvh;
+      height: 100dvh;
       background: var(--bg);
       position: relative;
-      overflow-x: hidden;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
@@ -570,10 +571,13 @@
     }
 
     .card-chevron {
-      color: var(--text-3);
-      font-size: 0.8rem;
+      color: var(--text-2);
+      font-size: 1.65rem;
+      line-height: 1;
       flex-shrink: 0;
       transition: transform 0.2s;
+      display: flex;
+      align-items: center;
     }
 
     .card-chevron.open {

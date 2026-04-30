@@ -90,6 +90,7 @@
     html,
     body {
       height: 100%;
+      overflow: hidden;
       font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
       scrollbar-width: none;
     }
@@ -114,10 +115,10 @@
 
     #app {
       width: 100%;
-      min-height: 100dvh;
+      height: 100dvh;
       background: var(--bg);
       position: relative;
-      overflow-x: hidden;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
@@ -570,10 +571,13 @@
     }
 
     .card-chevron {
-      color: var(--text-3);
-      font-size: 0.8rem;
+      color: var(--text-2);
+      font-size: 1.65rem;
+      line-height: 1;
       flex-shrink: 0;
       transition: transform 0.2s;
+      display: flex;
+      align-items: center;
     }
 
     .card-chevron.open {
@@ -1892,7 +1896,7 @@ imageUrl2: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/TR
 time: 21:00
 endTime: 00:00
 group: 
-description: 南臺灣最難訂的餐廳之一、Chef André 的徒弟、直火料理、AKAME(阿尬恩)是魯凱族語的「烤」
+description: 南臺灣最難訂的餐廳之一、Chef André 的徒弟、直火料理、AKAME（阿尬恩）是魯凱族語的「烤」
 cost: NTD 5,000 / 人
 hours: 
 ticket: 
@@ -2002,7 +2006,7 @@ imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/BEN
 time: 12:00
 endTime: 14:30
 group: 小胤, 朱朱, Arro, Joyce, Miku, Oscar 
-description: AKAME的副品牌、鐵板料理、Mahtariri是魯凱族語的「美好」
+description: AKAME 的副品牌、鐵板料理、Mahtariri 是魯凱族語的「美好」
 cost: NTD 4,000 / 人
 hours: 
 ticket: 
