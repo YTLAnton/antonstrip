@@ -14,7 +14,13 @@
       "WebFetch(domain:www.airlinemobileapps.com)",
       "WebFetch(domain:iosbundleidfinder.vercel.app)",
       "Bash(node *)",
-      "Bash(PowerShell *)"
+      "Bash(PowerShell *)",
+      "Bash(sed -n '1610,1620p' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_04_HK\\\\index.html\")",
+      "Bash(sed -n '1610,1620p' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_04_MO\\\\index.html\")",
+      "Bash(sed -n '1704,1714p' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_05_Singapore\\\\index.html\")",
+      "Bash(awk '/## Day 1 /,/## Day 2 / {print}' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_05_Singapore\\\\index.html\")",
+      "Bash(awk '/## Day 2 /,/## Day 3 / {print}' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_05_Singapore\\\\index.html\")",
+      "Bash(awk '/## Day 3 /,$ {print}' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_05_Singapore\\\\index.html\")"
     ]
   }
 }

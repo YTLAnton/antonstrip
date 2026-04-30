@@ -144,10 +144,6 @@
       transition: padding 0.2s;
     }
 
-    #header.compact {
-      padding-bottom: 8px;
-    }
-
     #header-top {
       display: flex;
       align-items: center;
@@ -198,18 +194,9 @@
       opacity: 0.85;
     }
 
-    #header.compact #header-subtitle,
-    #header.compact #header-badges {
-      display: none;
-    }
-
     #search-wrap {
       margin-top: 8px;
       position: relative;
-    }
-
-    #header.compact #search-wrap {
-      margin-top: 6px;
     }
 
     #search-input {
@@ -1209,6 +1196,7 @@
       border-right: 1px solid var(--border);
       min-width: 0;
       overflow: hidden;
+      align-self: start;
     }
 
     .split-col:last-child {
@@ -1846,8 +1834,7 @@ mapLink:
 notes: 
 copyable: 
 docLink: 
-imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/Rinari_front.png?raw=true
-imageUrl2: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/Rinari.png?raw=true
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/Rinari.png?raw=true
 
 ### 行程 | 禮納里 部落深度導覽
 time: 14:00
@@ -1894,7 +1881,7 @@ mapLink:
 notes: 
 copyable: 
 docLink: 
-imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/Riniri_stay.png?raw=true
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/Rinari_front.png?raw=true
 
 ### 行程 | TRPG
 time: 16:30
@@ -2004,6 +1991,23 @@ mapLink:
 notes: 
 copyable: 
 docLink: 
+
+### 行程 | 返鄉
+time: 10:00
+endTime: 12:00
+group: 小米, 阿浩
+description: 返鄉回家
+cost: NTD 800 / 人
+hours: 
+ticket: 
+meta: 
+address: 
+mapLink: 
+notes: 
+copyable: 
+docLink: 
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/BENZ.png?raw=true
+
 
 ### 飲食 | Mathariri 山菜野寮
 time: 12:00
@@ -3292,18 +3296,6 @@ docLink:
       }
     }
 
-    // ── Header scroll ─────────────────────────────────────────
-    let _headerCompact = false;
-    document.getElementById('main').addEventListener('scroll', function () {
-      const header = document.getElementById('header');
-      if (!_headerCompact && this.scrollTop > 60) {
-        _headerCompact = true;
-        header.classList.add('compact');
-      } else if (_headerCompact && this.scrollTop < 20) {
-        _headerCompact = false;
-        header.classList.remove('compact');
-      }
-    });
 
     // ── Init ──────────────────────────────────────────────────
     renderTabBar();
