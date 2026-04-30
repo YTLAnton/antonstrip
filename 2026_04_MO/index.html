@@ -141,10 +141,6 @@
       transition: padding 0.2s;
     }
 
-    #header.compact {
-      padding-bottom: 8px;
-    }
-
     #header-top {
       display: flex;
       align-items: center;
@@ -179,18 +175,9 @@
       font-weight: 500;
     }
 
-    #header.compact #header-subtitle,
-    #header.compact #header-badges {
-      display: none;
-    }
-
     #search-wrap {
       margin-top: 8px;
       position: relative;
-    }
-
-    #header.compact #search-wrap {
-      margin-top: 6px;
     }
 
     #search-input {
@@ -2789,11 +2776,6 @@ notes: 到了之後現場購票等車
       }
     }
 
-    // ── Header scroll ─────────────────────────────────────────
-    document.getElementById('main').addEventListener('scroll', function () {
-      const header = document.getElementById('header');
-      header.classList.toggle('compact', this.scrollTop > 10);
-    });
 
     // ── Init ──────────────────────────────────────────────────
     renderTabBar();
