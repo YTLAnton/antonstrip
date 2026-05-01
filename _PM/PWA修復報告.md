@@ -110,6 +110,52 @@ CSS Grid 預設 `align-self: stretch`，所有欄位高度對齊最高的那欄�
 
 ---
 
+## 五、底部黑條再次出現（viewport-fit=cover 造成的根本問題）
+
+### 問題描述
+在先前修復（一）之後，底部黑條問題持續出現。無論如何調整 `body` 背景色或 `#tab-bar` 的 `padding-bottom`，黑條仍然存在。
+
+### 根本原因分析
+
+問題來自 `viewport-fit=cover` 這個設定：
+
+- `viewport-fit=cover` 讓 App 的 viewport（畫面可用區域）延伸到 iOS 底部的 home indicator（小橫條）底下
+- 因此需要用 `padding-bottom: env(safe-area-inset-bottom)` 手動在 `#tab-bar` 補出空間
+- 但這塊補出的空間，若因任何瀏覽器 layout engine 的微小偏差、或 `overflow: hidden` 的裁切，導致 `body` 背景色從縫隙透出，就會出現黑條
+- `body` 背景色（`#121212`）與 `#tab-bar` 背景色（`#1e1e1e`）有微小色差，使黑條在高解析螢幕上清晰可見
+
+### 為什麼之前把 body 改成 `var(--surface)` 也沒用？
+即使讓 `body` 背景色和 tab bar 相同，`viewport-fit=cover` 本身讓 viewport 延伸到 home indicator 底下這件事沒有改變，OS 不再負責那塊區域，App 自己管理，管理不完美就有黑條。
+
+### 真正的修復方式
+
+**移除 `viewport-fit=cover`**
+
+```html
+<!-- 修改前 -->
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<!-- 修改後 -->
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+```
+
+### 移除後的行為對照
+
+| 項目 | 有 `viewport-fit=cover` | 移除後 |
+|---|---|---|
+| 頂部 status bar | App 延伸進去，需 `env(safe-area-inset-top)` | `black-translucent` 自動讓內容延伸，`env(safe-area-inset-top)` **依然有效** |
+| 底部 home indicator | App 延伸進去，需手動補 padding → **黑條來源** | OS 自動處理，自動以 App 最底部顏色填滿 → **無黑條** |
+
+### 重點說明
+
+`env(safe-area-inset-top)`（用於 header 頂部 padding）在 **PWA standalone 模式 + `black-translucent`** 的組合下，**不需要 `viewport-fit=cover` 也能正常運作**。因為 `black-translucent` 本身就讓 PWA 的內容延伸到 status bar 底下，OS 會提供正確的 `safe-area-inset-top` 值給 CSS 使用。
+
+這也是參考網站（Pikmin Bloom 飾品圖鑑）的做法：使用 `black-translucent`，但沒有 `viewport-fit=cover`，底部完全沒有黑條。
+
+---
+
 ## 適用範圍
 
 以上修改均已同步套用至全部四個行程頁面：
