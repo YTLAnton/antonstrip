@@ -3,8 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Horlick送別行">
@@ -71,8 +70,8 @@
       --type-飲食-bg: rgba(251, 146, 60, 0.15);
       --type-交通: #93c5fd;
       --type-交通-bg: rgba(96, 165, 250, 0.15);
-      --type-作業: #c4b5fd;
-      --type-作業-bg: rgba(167, 139, 250, 0.15);
+      --type-任務: #c4b5fd;
+      --type-任務-bg: rgba(167, 139, 250, 0.15);
       --type-住宿: #fcd34d;
       --type-住宿-bg: rgba(251, 191, 36, 0.15);
       --type-景點: #fb923c;
@@ -176,8 +175,13 @@
     }
 
     @keyframes spinOnce {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     #reload-btn.spinning svg {
@@ -2184,7 +2188,7 @@ description: 自由活動準備回家
 
 ### 飲食 | Le Matin Petit
 time: 10:00
-endTime: 12:00
+endTime: 11:30
 group: 小胤、朱朱
 description: Chef的徒弟、Le Matin復活、週末限定糕點、三明治、酸種布里歐修、拿鐵
 cost: SGD 30 / 人
@@ -2199,13 +2203,80 @@ docLink:
 imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/Le%20Matin%20Petit-2.png?raw=true
 imageUrl2: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/Le%20Matin%20Petit.png?raw=true
 
-### 休息 | SIN
+### 任務 | SIN T3 Check in
 time: 12:00
-endTime: 15:00
+endTime: 12:30
 group: 小胤、朱朱
-description: 在機場休息玩耍。朱朱想去玩溜滑梯。
+description: 報到劃位、托運行李
 cost: 
 hours: 24hr
+ticket: 
+meta: 
+address: 60 Airport Blvd., 新加坡 819643
+mapLink: https://maps.app.goo.gl/dXJDxcLDnhaNFRvXA
+notes: 
+copyable: 
+docLink: 
+imageUrl: 
+imageUrl2: 
+
+### 行程 | 星耀樟宜 Jewel Changi Airport
+time: 12:30
+endTime: 13:30
+group: 小胤、朱朱
+description: 觀賞世界最大市內瀑布
+cost: 
+hours: 24hr
+ticket: 
+meta: 
+address: 60 Airport Blvd., 新加坡 819643
+mapLink: https://maps.app.goo.gl/dXJDxcLDnhaNFRvXA
+notes: 
+copyable: 
+docLink: 
+imageUrl: 
+imageUrl2: 
+
+### 購物 | 老成昌 Old Seng Choong T2
+time: 13:30
+endTime: 14:00
+group: 小胤、朱朱
+description: 新加坡特色口味餅乾
+cost: 
+hours: 06:00-01:00
+ticket: 
+meta: 
+address: 60 Airport Blvd., 新加坡 819643
+mapLink: https://maps.app.goo.gl/dXJDxcLDnhaNFRvXA
+notes: 
+copyable: 
+docLink: 
+imageUrl: 
+imageUrl2: 
+
+### 行程 | The Slide@T3
+time: 14:00
+endTime: 14:30
+group: 小胤、朱朱
+description: 世界最大市內溜滑梯。先註冊機場會員取得 QRCode，再到 B2 換票。
+cost: 
+hours: 24hr
+ticket: 
+meta: 
+address: 70 Airport Blvd., Singapore 819661
+mapLink: https://maps.app.goo.gl/n8BsMyxLL6oSpoQ4A
+notes: 
+copyable: 
+docLink: 
+imageUrl: 
+imageUrl2: 
+
+### 休息 | SIN T3
+time: 14:30
+endTime: 14:50
+group: 小胤、朱朱
+description: 在機場休息
+hours: 
 ticket: 
 meta: 
 address: 60 Airport Blvd., 新加坡 819643
@@ -2213,10 +2284,10 @@ mapLink: https://maps.app.goo.gl/YoSXtUZ4gVK7rMm76
 notes: 
 copyable: 
 docLink: 
-imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/SIN.jpg?raw=true
-imageUrl2: https://github.com/YTLAnton/antonstrip/blob/main/2026_05_Singapore/img/SIN-2.jpg?raw=true
+imageUrl: 
 
-### 交通 | SIN-TPE BR216
+
+### 交通 | SIN T3 - TPE T2 BR216
 time: 15:20
 endTime: 20:00
 group: 小胤、朱朱
@@ -2261,9 +2332,10 @@ docLink:
           <div id="header-subtitle"></div>
         </div>
         <button id="reload-btn" onclick="forceReload()" title="重新整理">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 4 23 10 17 10"/>
-            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10" />
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
           </svg>
         </button>
       </div>
@@ -2591,7 +2663,7 @@ docLink:
       if (act.type === '行程') return '🎯';
       if (act.type === '景點') return '📸';
       if (act.type === '飲食') return '🍽️';
-      if (act.type === '作業') return '📋';
+      if (act.type === '任務') return '📋';
       if (act.type === '參考') return '💡';
       if (act.type === '住宿') return '🏠';
       if (act.type === '休息') return '😴';
@@ -2607,7 +2679,7 @@ docLink:
     }
 
     function typeColor(type) {
-      const map = { '行程': '行程', '景點': '景點', '飲食': '飲食', '交通': '交通', '作業': '作業', '住宿': '住宿', '參考': '參考', '休息': '休息', '展覽': '展覽', '購物': '購物' };
+      const map = { '行程': '行程', '景點': '景點', '飲食': '飲食', '交通': '交通', '任務': '任務', '住宿': '住宿', '參考': '參考', '休息': '休息', '展覽': '展覽', '購物': '購物' };
       return map[type] || '行程';
     }
 
