@@ -2068,6 +2068,7 @@
       });
 
       // Initial render (was scattered at the bottom)
+      renderHeader();
       renderTabBar();
       renderFood();
       renderFlights();
@@ -2201,21 +2202,20 @@
     }
 
     // ── Render Header ────────────────────────────────────────
+    function renderHeader() {
+      // 從資料動態設定網頁標題與 App Icon
+      document.title = `${DATA.title || '行程表'} ${DATA.emoji || ''}`.trim();
 
-    // 從資料動態設定網頁標題與 App Icon
-    document.title = `${DATA.title || '行程表'} ${DATA.emoji || ''}`.trim();
-
-    // 動態設定 iOS 桌面名稱
-    const iosTitleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
-    if (iosTitleMeta) {
-      iosTitleMeta.setAttribute('content', DATA.title || '行程表');
-    }
-    (function () {
+      // 動態設定 iOS 桌面名稱
+      const iosTitleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+      if (iosTitleMeta) {
+        iosTitleMeta.setAttribute('content', DATA.title || '行程表');
+      }
       try {
-        var c = document.createElement('canvas');
+        const c = document.createElement('canvas');
         c.width = c.height = 180;
-        var ctx = c.getContext('2d');
-        var g = ctx.createLinearGradient(0, 0, 180, 180);
+        const ctx = c.getContext('2d');
+        const g = ctx.createLinearGradient(0, 0, 180, 180);
         g.addColorStop(0, '#c0392b'); g.addColorStop(1, '#7b241c');
         ctx.fillStyle = g; ctx.fillRect(0, 0, 180, 180);
         ctx.font = '90px serif';
@@ -2223,28 +2223,29 @@
         ctx.fillText(DATA.emoji || '📅', 90, 90);
         document.getElementById('app-icon').href = c.toDataURL('image/png');
       } catch (e) { }
-    })();
 
-    document.getElementById('header-title').textContent = `${DATA.emoji || ''} ${DATA.title || ''}`.trim();
-    document.getElementById('header-subtitle').textContent = DATA.subtitle;
-    const badges = document.getElementById('header-badges');
-    const peopleList = Array.isArray(DATA.people)
-      ? DATA.people
-      : (DATA.people ? String(DATA.people).split(/[,，]/).map(s => s.trim()).filter(Boolean) : []);
-    const keywords = (DATA.keywords || []).filter(Boolean);
-    if (peopleList.length) {
-      const row = document.createElement('div'); row.className = 'badges-row';
-      const s = document.createElement('span'); s.className = 'badge-people';
-      s.textContent = '👤 ' + peopleList.join('、'); row.appendChild(s);
-      badges.appendChild(row);
-    }
-    if (keywords.length) {
-      const row = document.createElement('div'); row.className = 'badges-row';
-      keywords.forEach(k => {
-        const s = document.createElement('span'); s.className = 'badge-keyword';
-        s.textContent = k; row.appendChild(s);
-      });
-      badges.appendChild(row);
+      document.getElementById('header-title').textContent = `${DATA.emoji || ''} ${DATA.title || ''}`.trim();
+      document.getElementById('header-subtitle').textContent = DATA.subtitle;
+      const badges = document.getElementById('header-badges');
+      badges.innerHTML = '';
+      const peopleList = Array.isArray(DATA.people)
+        ? DATA.people
+        : (DATA.people ? String(DATA.people).split(/[,，]/).map(s => s.trim()).filter(Boolean) : []);
+      const keywords = (DATA.keywords || []).filter(Boolean);
+      if (peopleList.length) {
+        const row = document.createElement('div'); row.className = 'badges-row';
+        const s = document.createElement('span'); s.className = 'badge-people';
+        s.textContent = '👤 ' + peopleList.join('、'); row.appendChild(s);
+        badges.appendChild(row);
+      }
+      if (keywords.length) {
+        const row = document.createElement('div'); row.className = 'badges-row';
+        keywords.forEach(k => {
+          const s = document.createElement('span'); s.className = 'badge-keyword';
+          s.textContent = k; row.appendChild(s);
+        });
+        badges.appendChild(row);
+      }
     }
 
     // ── Tab switching ────────────────────────────────────────
