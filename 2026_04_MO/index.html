@@ -6,9 +6,11 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Horlick送別行">
   <meta name="theme-color" content="#121212">
+  <link id="app-icon" rel="icon" href="data:,">
 
   <!-- ╔══════════════════════════════════════════╗
        ║  🔧 可調整區：分享預覽（LINE / FB 卡片）  ║
@@ -1618,123 +1620,9 @@
 <body>
 
   <!-- ================================================
-     行程資料區（使用者只需編輯這個區塊）
-     ================================================ -->
-  <script id="trip-data" type="text/plain">
-
----
-title: "MO台南行"
-subtitle: "2026/04/25 - 04/26 (2天1夜)"
-people: 2
-keywords: ["自由行", "台鐵", "計程車", "步行"]
----
-
-## Day 0 | 行前準備
-
-dayNote: 香港行動電源規定：100Wh以下最多2顆；100-160Wh經航空公司許可最多2顆；160Wh以上禁止攜帶。
-
-### 💳 重要 | 錢包
-### 💳 重要 | 星展卡
-### 💳 重要 | 現金 HKD 1,000
-
-### 👕 衣物 | 短袖上衣
-### 👕 衣物 | 內褲
-### 👕 衣物 | 襪子
-### 👕 衣物 | 腰包
-
-### 🪥 清潔 | 牙刷
-### 🪥 清潔 | 牙膏
-### 🪥 清潔 | 牙間刷
-### 🪥 清潔 | 汙衣袋
-
-### 🔌 電子 | iPhone 15 Pro Max
-### 🔌 電子 | 手機殼與掛繩
-### 🔌 電子 | Airpods
-### 🔌 電子 | 充電器(英式三腳方型插頭) * 2
-### 🔌 電子 | 充電線 * 5
-### 🔌 電子 | 行動電源 * 2
-
-### 💊 藥妝 | Loxonin * 3
-### 💊 藥妝 | B群 * 3
-### 💊 藥妝 | 樂途達
-### 💊 藥妝 | 爽身濕紙巾
-### 💊 藥妝 | 衛生紙
-### 💊 藥妝 | 易克冒 * 2
-### 💊 藥妝 | 休足時間 * 2
-
-### 🎒 其他 | 菜單夾
-### 🎒 其他 | 筆
-
-## Day 1 | 2026/04/25 (六) | 抵達台南
-
-route: 台北 → 台南
-dayNote: 聽講座吃MO
-weatherTemp: 24-29°C
-weatherCond: 可能會有陣雨
-weatherRain: 40%
-weatherTips: 帶雨傘
-
-### 交通 | 台鐵出發：台北 → 台南
-time: 08:00
-endTime: 11:25
-description: 自強(3000)111次 | 座位 10 車 5,7 號
-cost: NTD 891 / 人
-notes: 提早 20 分鐘到台北車站
-copyable: 訂票代碼 3615829
-
-### 飲食 | 落成米糕
-time: 12:00
-endTime: 12:30
-description: 必比登、順流Joyce推薦
-cost: NTD 100 / 人
-address: 台南市中西區民族路二段241號
-mapLink: https://maps.app.goo.gl/rk36ADP2t5FgKaEJ9
-
-### 景點 | Tu Xing 土星工作室｜Soil Space 應力空間
-time: 12:40
-endTime: 13:30
-description: 順流Joyce推薦
-cost: NTD 0 / 人
-address: 台南市中西區民權路二段64巷56號
-mapLink: https://maps.app.goo.gl/vMXbGvzbHQYYCnUR8
-
-### 景點 | 臺灣首廟天壇【天公廟】
-time: 13:40
-endTime: 14:30
-description: 歷史悠久的玉皇上帝廟、寵物光明燈
-cost: NTD 1,200 / 貓
-address: 台南市中西區忠義路二段84巷16號
-mapLink: https://maps.app.goo.gl/csEPMZJw4msM6wKw6
-
-### 行程 | 「五條港的仕紳南管音樂」@ 硓𥑮石．芳宅
-time: 15:30
-endTime: 17:00
-description: 在百年老屋中，透過南管音樂的演繹與導聆，理解仕紳文化與地方生活的連結。
-cost: NTD 0 / 人
-address: 台南市中西區信義街46巷15號
-mapLink: https://maps.app.goo.gl/wDUqCpyqUgQQna5s7
-notes: 已報名
-
-### 飲食 | MO
-time: 18:00
-endTime: 22:30
-description: 號稱全台最強Fine Dining
-cost: NTD 7,095 / 人
-address: 台南市北區崇安街30號
-mapLink: https://maps.app.goo.gl/KSj8Q1q6sWADc23P6
-
-### 交通 | 客運回程：台南 → 台北
-time: 23:00
-price: NTD 660 / 人
-address: 704臺南市北區公園路291號
-mapLink: https://maps.app.goo.gl/gafbhL7LZBF5o1vK8
-notes: 到了之後現場購票等車
-
----
-
-</script>
-  <!-- ================================================
-     以上為資料區，以下為應用程式邏輯（勿修改）
+     行程資料來自同資料夾的 itinerary.md（fetch 載入）
+     編輯行程請改 itinerary.md，本檔僅負責畫面與互動
+     以下為應用程式邏輯（勿修改）
      ================================================ -->
 
   <div id="app">
@@ -1814,7 +1702,8 @@ notes: 到了之後現場購票等車
 
   <script>
     // ── Parser ──────────────────────────────────────────────
-    const raw = document.getElementById('trip-data').textContent.trim();
+    // 行程資料由 boot() 從 itinerary.md 載入後填入下列變數。
+    let config, body, DATA;
 
     function parseFrontmatter(text) {
       const m = text.match(/^---\n([\s\S]*?)\n---/);
@@ -2022,49 +1911,76 @@ notes: 到了之後現場購票等車
       return { sections };
     }
 
-    // ── Main parse ──────────────────────────────────────────
-    const { config, body } = parseFrontmatter(raw);
-
-    const blocks = body.split(/^(?=##\s)/m).filter(s => s.trim());
-    const DATA = {
-      ...config,
-      days: [], food: [], flights: { routes: [] }, packingList: [], packingTips: { sections: [] }, tips: { sections: [] }
-    };
-
-    for (const block of blocks) {
-      const firstLine = block.trim().split('\n')[0];
-      if (firstLine.match(/##\s*Day\s*\d+/)) {
-        const d = parseDayBlock(block.trim());
-        if (d) DATA.days.push(d);
-      } else if (firstLine.includes('美食清單')) {
-        DATA.food = parseFoodBlock(block.trim());
-      } else if (firstLine.includes('航班資訊')) {
-        DATA.flights = parseFlightsBlock(block.trim());
-      } else if (firstLine.includes('行李清單')) {
-        DATA.packingList = parsePackingBlock(block.trim());
-      } else if (firstLine.includes('打包提醒')) {
-        DATA.packingTips = parseTipsBlock(block.trim());
-      } else if (firstLine.includes('旅遊須知')) {
-        DATA.tips = parseTipsBlock(block.trim());
+    // ── Boot: fetch itinerary.md then parse + render ─────────
+    async function boot() {
+      let raw;
+      try {
+        const res = await fetch('./itinerary.md', { cache: 'no-cache' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        raw = (await res.text()).trim();
+      } catch (e) {
+        document.body.insertAdjacentHTML('afterbegin',
+          '<div style="padding:16px;margin:16px;background:#fee;color:#900;border-radius:8px;font-family:system-ui;line-height:1.6">'
+          + '⚠️ 無法載入 <code>itinerary.md</code>：' + e.message + '<br>'
+          + '若是用瀏覽器雙擊 <code>file://</code> 開啟，請改用本機 server 或推上 GitHub Pages。'
+          + '</div>');
+        return;
       }
-    }
 
-    // ── Sort activities by time ──────────────────────────────
-    function actTime(a) {
-      const t = a.time || (a.type === '住宿' ? a.checkIn : null);
-      if (!t) return null;
-      const [h, m] = t.split(':').map(Number);
-      return h * 60 + (m || 0);
-    }
-    DATA.days.forEach(day => {
-      day.activities.sort((a, b) => {
-        const ta = actTime(a), tb = actTime(b);
-        if (ta === null && tb === null) return 0;
-        if (ta === null) return 1;
-        if (tb === null) return -1;
-        return ta - tb;
+      ({ config, body } = parseFrontmatter(raw));
+      const blocks = body.split(/^(?=##\s)/m).filter(s => s.trim());
+      DATA = {
+        ...config,
+        days: [], food: [], flights: { routes: [] }, packingList: [], packingTips: { sections: [] }, tips: { sections: [] }
+      };
+
+      for (const block of blocks) {
+        const firstLine = block.trim().split('\n')[0];
+        if (firstLine.match(/##\s*Day\s*\d+/)) {
+          const d = parseDayBlock(block.trim());
+          if (d) DATA.days.push(d);
+        } else if (firstLine.includes('美食清單')) {
+          DATA.food = parseFoodBlock(block.trim());
+        } else if (firstLine.includes('航班資訊')) {
+          DATA.flights = parseFlightsBlock(block.trim());
+        } else if (firstLine.includes('行李清單')) {
+          DATA.packingList = parsePackingBlock(block.trim());
+        } else if (firstLine.includes('打包提醒')) {
+          DATA.packingTips = parseTipsBlock(block.trim());
+        } else if (firstLine.includes('旅遊須知')) {
+          DATA.tips = parseTipsBlock(block.trim());
+        }
+      }
+
+      // Sort activities by time
+      const actTime = (a) => {
+        const t = a.time || (a.type === '住宿' ? a.checkIn : null);
+        if (!t) return null;
+        const [h, m] = t.split(':').map(Number);
+        return h * 60 + (m || 0);
+      };
+      DATA.days.forEach(day => {
+        day.activities.sort((a, b) => {
+          const ta = actTime(a), tb = actTime(b);
+          if (ta === null && tb === null) return 0;
+          if (ta === null) return 1;
+          if (tb === null) return -1;
+          return ta - tb;
+        });
       });
-    });
+
+      // Initial render (was scattered at the bottom)
+      searchIndex = buildSearchIndex();
+      renderHeader();
+      renderTabBar();
+      renderFood();
+      renderFlights();
+      renderPackingTips();
+      renderPacking();
+      renderTips();
+      renderDaySelector();
+      autoLocate(); // 統一負責初始渲染：今天在行程內→定位；不在→顯示 Day 1 頂端
+    }
 
     // ── Helpers ─────────────────────────────────────────────
     function escHtml(s) {
@@ -2189,21 +2105,20 @@ notes: 到了之後現場購票等車
     }
 
     // ── Render Header ────────────────────────────────────────
+    function renderHeader() {
+      // 從資料動態設定網頁標題與 App Icon
+      document.title = `${DATA.title || '行程表'} ${DATA.emoji || ''}`.trim();
 
-    // 從資料動態設定網頁標題與 App Icon
-    document.title = `${DATA.title || '行程表'} ${DATA.emoji || ''}`.trim();
-
-    // 動態設定 iOS 桌面名稱
-    const iosTitleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
-    if (iosTitleMeta) {
-      iosTitleMeta.setAttribute('content', DATA.title || '行程表');
-    }
-    (function () {
+      // 動態設定 iOS 桌面名稱
+      const iosTitleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+      if (iosTitleMeta) {
+        iosTitleMeta.setAttribute('content', DATA.title || '行程表');
+      }
       try {
-        var c = document.createElement('canvas');
+        const c = document.createElement('canvas');
         c.width = c.height = 180;
-        var ctx = c.getContext('2d');
-        var g = ctx.createLinearGradient(0, 0, 180, 180);
+        const ctx = c.getContext('2d');
+        const g = ctx.createLinearGradient(0, 0, 180, 180);
         g.addColorStop(0, '#c0392b'); g.addColorStop(1, '#7b241c');
         ctx.fillStyle = g; ctx.fillRect(0, 0, 180, 180);
         ctx.font = '90px serif';
@@ -2211,15 +2126,16 @@ notes: 到了之後現場購票等車
         ctx.fillText(DATA.emoji || '📅', 90, 90);
         document.getElementById('app-icon').href = c.toDataURL('image/png');
       } catch (e) { }
-    })();
 
-    document.getElementById('header-title').textContent = `${DATA.emoji || ''} ${DATA.title || ''}`.trim();
-    document.getElementById('header-subtitle').textContent = DATA.subtitle;
-    const badges = document.getElementById('header-badges');
-    [`${DATA.people}人`, ...(DATA.keywords || [])].forEach(b => {
-      if (!b) return;
-      const s = document.createElement('span'); s.textContent = b; badges.appendChild(s);
-    });
+      document.getElementById('header-title').textContent = `${DATA.emoji || ''} ${DATA.title || ''}`.trim();
+      document.getElementById('header-subtitle').textContent = DATA.subtitle;
+      const badges = document.getElementById('header-badges');
+      badges.innerHTML = '';
+      [`${DATA.people}人`, ...(DATA.keywords || [])].forEach(b => {
+        if (!b) return;
+        const s = document.createElement('span'); s.textContent = b; badges.appendChild(s);
+      });
+    }
 
     // ── Tab switching ────────────────────────────────────────
     function switchTab(tab) {
@@ -2753,7 +2669,7 @@ notes: 到了之後現場購票等車
       });
       return idx;
     }
-    const searchIndex = buildSearchIndex();
+    let searchIndex = [];  // populated by boot() once itinerary.md is parsed
 
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
@@ -2821,13 +2737,6 @@ notes: 到了之後現場購票等車
       }
     }
 
-    // ── Init ──────────────────────────────────────────────────
-    renderTabBar();
-    renderFood();
-    renderFlights();
-    renderPackingTips();
-    renderPacking();
-    renderTips();
     // ── 圖片 Lightbox ────────────────────────────────────────
     function openLightbox(src) {
       document.getElementById('lightbox-img').src = src;
@@ -2849,11 +2758,12 @@ notes: 到了之後現場購票等車
       container.querySelectorAll('.fade-in-up').forEach(el => obs.observe(el));
     }
 
-    renderDaySelector();
-    autoLocate(); // 統一負責初始渲染：今天在行程內→定位；不在→顯示 Day 1 頂端
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLightbox();
     });
+
+    // ── 啟動 ─────────────────────────────────────────────────
+    boot();
   </script>
 
   <!-- Lightbox -->
