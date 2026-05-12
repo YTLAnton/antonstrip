@@ -20,7 +20,13 @@
       "Bash(sed -n '1704,1714p' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_05_Singapore\\\\index.html\")",
       "Bash(awk '/## Day 1 /,/## Day 2 / {print}' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_05_Singapore\\\\index.html\")",
       "Bash(awk '/## Day 2 /,/## Day 3 / {print}' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_05_Singapore\\\\index.html\")",
-      "Bash(awk '/## Day 3 /,$ {print}' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_05_Singapore\\\\index.html\")"
+      "Bash(awk '/## Day 3 /,$ {print}' \"D:\\\\Antons App\\\\Anti Git\\\\antonstrip\\\\2026_05_Singapore\\\\index.html\")",
+      "PowerShell(Get-Content *)",
+      "PowerShell(Join-Path *)",
+      "Bash(curl -s -o NUL -w \"index.html: %{http_code} \\(%{size_download} bytes\\)\\\\n\" http://localhost:8765/index.html)",
+      "Bash(curl -s -o NUL -w \"itinerary.md: %{http_code} \\(%{size_download} bytes\\)\\\\n\" http://localhost:8765/itinerary.md)",
+      "Bash(curl -s http://localhost:8765/itinerary.md)",
+      "PowerShell(Get-NetTCPConnection *)"
     ]
   }
 }
