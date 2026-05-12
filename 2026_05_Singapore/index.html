@@ -2068,6 +2068,7 @@
       });
 
       // Initial render (was scattered at the bottom)
+      searchIndex = buildSearchIndex();
       renderHeader();
       renderTabBar();
       renderFood();
@@ -2920,7 +2921,7 @@
       });
       return idx;
     }
-    const searchIndex = buildSearchIndex();
+    let searchIndex = [];  // populated by boot() once itinerary.md is parsed
 
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
