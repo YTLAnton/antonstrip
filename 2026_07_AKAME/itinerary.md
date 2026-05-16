@@ -178,9 +178,9 @@ imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/IRI
 
 ### 行程 | 禮納里 住宿 C/I
 time: 16:00
-endTime: 16:30
+endTime: 17:00
 group: 
-description: 快速放好行李集合跑團
+description: 放行李、休息、準備跑團
 hours: 
 ticket: 
 meta: 
@@ -191,14 +191,14 @@ copyable:
 docLink: 
 imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/Rinari_front.png?raw=true
 
-### 行程 | TRPG
-time: 16:30
-endTime: 20:30
+### 行程 | TRPG 《愛麗絲失蹤了》
+time: 17:00
+endTime: 20:00
 group: 
-description: 朱朱還在考慮要跑甚麼
+description: 非傳統 TRPG。透過文字訊息進行的 TRPG，主題是小鎮女高中生 Alice 失蹤後，玩家透過群聊與私訊尋找真相。整體氛圍沉浸、情感向。
 hours: 
 ticket: 
-meta: GM 朱朱
+meta: GM 朱朱&小胤
 address: 
 mapLink: 
 notes: 
