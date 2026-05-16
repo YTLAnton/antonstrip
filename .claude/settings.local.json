@@ -28,7 +28,11 @@
       "Bash(curl -s http://localhost:8765/itinerary.md)",
       "PowerShell(Get-NetTCPConnection *)",
       "Bash(curl -s -o NUL -w '%{http_code}/%{size_download}' http://localhost:8765/__TRACKED_VAR__/index.html)",
-      "Bash(curl -s -o NUL -w '%{http_code}/%{size_download}' http://localhost:8765/__TRACKED_VAR__/itinerary.md)"
+      "Bash(curl -s -o NUL -w '%{http_code}/%{size_download}' http://localhost:8765/__TRACKED_VAR__/itinerary.md)",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
