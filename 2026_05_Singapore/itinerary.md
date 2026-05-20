@@ -74,8 +74,8 @@ dayNote: 行動電源規定：100Wh以下最多2顆；100-160Wh經航空公司�
 
 route: 台北 → 新加坡
 dayNote: 亞坤、哈利波特、Bon Broth、Nutmeg&Clove
-weatherTemp: 28-30°C
-weatherCond: 陣雨
+weatherTemp: 24-33°C
+weatherCond: 早晨雷陣雨
 weatherRain: 35%
 weatherTips: 要帶傘
 
@@ -244,8 +244,8 @@ app: Agoda
 
 route: 新加坡
 dayNote: 喜園、國家博物館、Burnt Ends、國家美術館、聖安德烈座堂、1887 by André、賭場
-weatherTemp: 28-28°C
-weatherCond: 陣雨
+weatherTemp: 25-34°C
+weatherCond: 午後雷陣雨
 weatherRain: 40%
 weatherTips: 要帶傘
 
@@ -445,8 +445,8 @@ app: Agoda
 
 route: 新加坡 → 台北
 dayNote: 早午餐、樟宜機場、回家
-weatherTemp: 28-29°C
-weatherCond: 陣雨
+weatherTemp: 25-34°C
+weatherCond: 午後雷陣雨
 weatherRain: 35%
 weatherTips: 要帶傘
 
