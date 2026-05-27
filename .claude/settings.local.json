@@ -32,7 +32,10 @@
       "Bash(git checkout *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "PowerShell(Get-Process *)",
+      "Bash(rm devtools_offline_2026_04_HK.png)",
+      "Bash(mv devtools_offline_2026_04_HK.png.png devtools_offline_2026_04_HK.png)"
     ]
   }
 }

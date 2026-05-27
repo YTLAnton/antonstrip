@@ -40,7 +40,7 @@ const PRECACHE = [
   './img/simplekaffa.jpeg',
   './img/SIN T3.png',
   './img/SIN.png',
-  './img/St Andrew's Cathedral.jpg',
+  "./img/St Andrew's Cathedral.jpg",
   './img/The Arts House.png',
   './img/The Slide.png',
   './img/the Slide_logo.png',
