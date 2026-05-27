@@ -149,6 +149,36 @@ status: in-progress（補件期持續累積）
 
 ---
 
+### IMP-候選-J：Harness 中央 Claude 引導 PDM 時自己也踩 IMP-F 的坑（指令過度冗長）
+
+- **嚴重度**：🟡 P1
+- **提出者**：Anton（PDM）2026-05-27 sprint-close 啟動前
+- **觸發事件**：Anton 看到我寫「`/harness:sprint-close sprint-001-pwa-install-prompt`」後反問「**必須寫全名嗎？不能只寫 `/harness:sprint-close`?**」——查 SKILL.md 確認 argument 是 optional、skill 會自動偵測最近 sprint
+- **問題本質**：
+  Harness 中央 Claude（我自己）寫指引時為了「過度保險」總是給 argument 全名——但這違反了 IMP-候選-F「明確下一步」的精神。**冗餘 ≠ 明確**。對 PDM 來說多打的字會讓他懷疑「是不是必須」、變成假信息。
+- **同類問題**：
+  我整個 sprint 對話中對所有 `/harness:*` skill 都建議「打全名」：
+  - `/harness:planner sprint-001-pwa-install-prompt`
+  - `/harness:generator sprint-001-pwa-install-prompt`
+  - `/harness:evaluator sprint-001-pwa-install-prompt`
+  - `/harness:sprint-close sprint-001-pwa-install-prompt`
+  
+  全部 argument optional、單一 sprint 場景下都自動偵測最近的。
+- **回灌建議**（v0.7 IMP）：
+  1. **`USAGE.html` 5 步走指令展示時明示 argument 是 optional**：
+     ```
+     /harness:sprint-close              # 自動偵測最近的 sprint
+     /harness:sprint-close sprint-001-xxx  # 明示指定（多 sprint 並行時用）
+     ```
+  2. **`templates/03_evaluator.md` review.md「下一步」段（IMP-F 落地）強制使用 skill 預設值（不打 argument）作為示範**——除非真的需要明示
+  3. **`skills/*/SKILL.md` 的 `description` 段明示「無 argument 時自動偵測最近 sprint」**
+  4. **記憶層處置**：我自己（Harness 中央 Claude）下次給 PDM 指令時、預設不打 argument
+
+- **跟 IMP-F 的關係**：
+  IMP-F 主張「每階段 AI 報告含明確下一步」、本 IMP-J 補一條子規則：「下一步的指令樣本應該用最簡形式（不打多餘 argument）」
+
+---
+
 ### IMP-候選-G：台灣繁中規範必須擴張到 sub-agent 報告 + AI 產出檔
 
 - **嚴重度**：🔴 P0
@@ -166,16 +196,24 @@ status: in-progress（補件期持續累積）
 
 ---
 
-### IMP-候選-H：Evaluator Step 1.6 必加語法檢查（從 4 道防線漏的 P0 bug 學到）
+### IMP-候選-H：Evaluator Step 1.6 必加語法檢查（方向對；本輪 Singapore 失效真實根因待查）
 
 - **嚴重度**：🔴 P0
-- **提出者**：Evaluator 第二輪自身回灌建議 2026-05-27
-- **觸發事件**：Singapore sw.js Line 43 未轉義單引號 `'./img/St Andrew's Cathedral.jpg'` 造成 SyntaxError → Singapore SW 完全沒註冊、Singapore 完全沒離線能力（AC-08 16% 權重核心 AC）
+- **提出者**：Evaluator 第二輪自身回灌建議 2026-05-27、**Evaluator v3.0 + Anton 2026-05-27 修正根因論述**
+- **本筆 v1.0 → v1.1 修正紀錄**：
+  - v1.0（2026-05-27 早些時段）原文宣稱：「Singapore sw.js Line 43 未轉義單引號 `'./img/St Andrew's Cathedral.jpg'` 造成 SyntaxError」——**這個因果鏈是錯的**
+  - v1.1（2026-05-27 晚些時段 sprint-close 後）修正：Evaluator v3.0 親自跑 `node -c 2026_05_Singapore/sw.js` 確認**無 SyntaxError**（雙引號內含單引號是合法 JS、Harness 中央 Claude 改成雙引號後 syntax 確實通過、但 Singapore SW 仍是 redundant 灰點）
+  - **真實根因待查**：可能是補件期間多次 unregister/重整循環、`clients.claim()` 競態、或 install/activate 階段的非語法錯誤——本 sprint 不修、留 sprint-002
+- **這條 IMP 仍然成立的理由**：
+  「Evaluator 必跑 syntax check（node -c / python -m py_compile / json.tool）」這個方向**仍是好實踐**——只是不要再宣稱「修了 syntax 就能修 Singapore」這個錯誤的因果鏈
+- **觸發事件**：Singapore SW 顯示 redundant 狀態，self_review v1.1 line 111 卻書面承諾「4 個行程 sw.js 全部 activated and is running」——Generator 沒實機驗、Anton 看「灰點」但沒辨識「灰 vs 綠」、前兩輪 Evaluator 沒打開圖
 - **4 道防線全漏**：
-  1. ❌ Generator 寫程式時沒跑 `node -c` syntax check
-  2. ❌ self_review v1.1 沒做語法驗證、誤宣稱「4 個行程 sw.js 全部 activated and is running」
+  1. ❌ Generator 寫程式時沒跑 `node -c` syntax check（雖然 syntax 不是真因、但流程應該跑）
+  2. ❌ self_review v1.1 沒做運行時驗證、誤宣稱「4 個行程 sw.js 全部 activated and is running」
   3. ❌ Anton 截圖時看到「灰點」但沒辨識「灰 vs 綠」差異
-  4. ❌ 前一輪 Evaluator v2.0 沒跑語法檢查、只 grep precache 數量
+  4. ❌ 前一輪 Evaluator v2.0 沒打開圖看狀態指示燈
+- **第 5 道防線**（補件期新增）：
+  5. ❌ **Harness 中央 Claude（我自己）跨界修 syntax 後沒重測 SW 是否真的 activated 就寫進 IMP-H** —— 太快下「syntax 修好就完事」結論
 - **回灌建議**（v0.7 IMP）：
   1. **`templates/03_evaluator.md` Step 1.6** 新增硬規則：
      ```

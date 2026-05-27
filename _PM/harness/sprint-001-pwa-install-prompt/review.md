@@ -1,464 +1,404 @@
 ---
 sprint_id: sprint-001-pwa-install-prompt
 from_role: evaluator
-to_role: human
+to_role: human (Anton)
 produced_at: 2026-05-27
-produced_by: Claude Opus 4.7 (sub-agent, independent context)
+produced_by: Claude Opus 4.7（獨立 sub-agent，未看過 Generator 對話脈絡，亦未影響於前版 review）
 adapter: content-site
 work_type: new-feature
 mode: production
 references:
-  - "{SPRINT_DIR}/contract.md"
-  - "{SPRINT_DIR}/output/"
+  - "{SPRINT_DIR}/contract.md (v2.0)"
   - "{SPRINT_DIR}/self_review.md (v1.1)"
-  - "{SPRINT_DIR}/blockers.md"
-  - "{HARNESS_ROOT}/adapters/content_site.md"
+  - "{SPRINT_DIR}/blockers.md (v1.2)"
+  - "{SPRINT_DIR}/output/SPEC_v2.4_note.md"
+  - "{SPRINT_DIR}/output/lighthouse_unavailable_note.md"
+  - "{SPRINT_DIR}/output/notes_for_retrospective.md"
+  - "{SPRINT_DIR}/output/inline_patches/body_pwa_block.html"
+  - "{SPRINT_DIR}/output/install_screenshots/ (14 PNG)"
+  - "{PROJECT_ROOT}/2026_*/manifest.json (4)"
+  - "{PROJECT_ROOT}/2026_*/sw.js (4)"
+  - "{PROJECT_ROOT}/2026_*/index.html (4 — head + body PWA block)"
+  - "{PROJECT_ROOT}/_PM/SPEC.md:816"
+  - "{HARNESS_ROOT}/01_CORE_CONCEPTS.html § p5"
   - "{HARNESS_ROOT}/templates/03_evaluator.md"
-  - "{HARNESS_ROOT}/01_CORE_CONCEPTS.html"
+  - "{HARNESS_ROOT}/adapters/content_site.md"
 status: complete
-revision: v3.0（v1.1 self_review 後重評；發現 Singapore sw.js 致命語法錯誤）
+review_version: v3.0（第三輪獨立 sub-agent 重評；覆蓋 v2.0；發現新 P0 silent failure）
 ---
 
-# Sprint Review — sprint-001-pwa-install-prompt
+# Sprint Review — sprint-001-pwa-install-prompt（v3.0 重評）
 
-**Evaluator**：Claude Opus 4.7（獨立 sub-agent context、未看 Generator / 中央對話脈絡）
+**Evaluator**：Claude Opus 4.7（獨立 sub-agent）
 **評估時間**：2026-05-27
 **Adapter**：content-site
 **Work Type**：new-feature
 **Mode**：production
 
+> ⚠️ 本檔覆蓋 v2.0 review。本輪是全新 sub-agent context，獨立讀 contract / output / 實際專案檔，並**親自打開所有截圖看內容**（不只是看檔名）。發現 v2.0 漏抓的 1 個 P0 silent failure。
+
 ---
 
-## PDM Summary（≤200 字、0 jargon）
+## PDM Summary（≤200 字、無 jargon）
 
-**這份文件做了什麼**：我（冷眼驗收者）對 sprint-001（為 4 個行程加 PWA 安裝提示 + 離線快取）重新逐條打分。第一次補件後（v1.1 self_review），證據看似齊全；但我抽查 4 個 sw.js 程式碼時用 Node.js 驗語法，**發現 Singapore 的 sw.js 第 43 行有 JavaScript 語法錯誤**（檔名 `St Andrew's Cathedral.jpg` 的單引號沒跳脫）。
+**這份文件做了什麼**：用「冷眼第三方」角度重新驗收 sprint-001 的 12 條 AC，方法是：跑 syntax check、開圖看內容、grep 既有檔、git blame 驗範圍紀律、Python 對照 SW 預快取 vs 實際圖片清單。
 
-**結果是什麼**：總分 **0.69 / 1.00**——**未達 0.80 達標門檻**（屬條件性達標下緣，距離 0.11）。比 v1.1 自評 0.746 低，因為 Singapore SW 廣播性失效：(a) AC-07 Singapore 一票 redundant，整條從 1.0 降到 0.5；(b) AC-08 飛航離線對 Singapore 完全不可達，從 0.5 降到 0.25；(c) AC-09 對 Singapore 也不達標。
+**結果是什麼**：總分 **0.665 / 1.00**，🟡 **條件性達標**（≥0.60、< 0.80）。前兩輪 Evaluator 漏抓的 P0 silent failure：**新加坡（Singapore）的 Service Worker 實際處於「redundant」狀態（不是活的）**——這在 AKAME 截圖底部清楚可見、但前兩版 review 沒打開圖看。Singapore 的離線能力 = 0。
 
-**最重要的事**：(1) 🔴 **Singapore sw.js 必須修**——一個跳脫字元就修好（`St Andrew\\'s`），但這是「**Generator + Anton + 前一個 Evaluator 三方都漏掉的 silent failure**」，因為大家都看了 Singapore SW 截圖卻沒看到「redundant」狀態的暗示；(2) 範圍紀律仍極好——+1016/-0、3 個錯誤值 apple-title 都未動；(3) AC-12 SPEC v2.4 草稿援引 line 816 已親查行號驗證。**建議：補 Singapore sw.js 跳脫 + 重截 Singapore SW screenshot 後可達 0.83 過關**。
+**最重要的事**：**不要直接收尾**。最小修補（30 分鐘可做）：(1) Anton 在桌面 Chrome 重新註冊 Singapore SW（DevTools → Application → Service Workers → Unregister → 重整頁），驗證能達 activated；(2) 然後抓一張 Singapore SW activated 的乾淨截圖覆蓋現有那張。修完後可重評估到 ~0.78（接近達標）。次重要：拿手機跑 1 張真飛航 + 完整載入截圖補 AC-08。
 
 ---
 
 ## 總結（給技術讀者 30 秒讀完）
 
-- **加權總分**：0.685 / 1.00（v1.1 自評 0.746 的下修版）
-- **全局調整**：+0.005（範圍紀律 + 措辭警報全綠的疊加；但抵不過 Singapore SW silent failure）
-- **最終總分**：**0.69 / 1.00**
-- **判定**：🟡 **條件性達標下緣（接近不達標）—— 補 Singapore sw.js 後可達標**
-- **最大亮點**：範圍紀律 100%——`git diff HEAD~1 HEAD 2026_*/index.html | grep "^-" | grep -v "^---"` 零命中；4 個 index.html 各 +254/-0；MO/Singapore/AKAME 的 `apple-mobile-web-app-title="Horlick送別行"` 錯誤值全部反向驗證為「沒動」。SPEC v2.4 草稿 Read SPEC.md:816 逐字援引精確。
-- **最大紅旗**：🔴 **Singapore sw.js line 43 JavaScript 語法錯誤——SW 無法 install，飛航離線對 Singapore 完全不可達**。前一個 Evaluator + Anton + Generator 三方都沒抓到，是 silent failure 教科書案例。
-- **是否建議進下一個 Sprint**：❌ **否——必須先讓 Generator / Anton 修 Singapore sw.js（單行修改：line 43 `'./img/St Andrew's Cathedral.jpg'` → `"./img/St Andrew's Cathedral.jpg"` 或 `'./img/St Andrew\\'s Cathedral.jpg'`）並重截 Singapore SW screenshot**。修完後重評預計 ~0.83 達標。
+- **加權總分**：0.685 / 1.00
+- **全局調整**：-0.02（見全局調整欄；4 條 AC 共用「DevTools = 等價實機」假設的集中風險）
+- **最終總分**：**0.665 / 1.00**
+- **判定**：🟡 **條件性達標**（≥ 0.60、< 0.80）
+- **最大亮點**：範圍紀律 100% — git blame 確認 3 個錯誤的 `apple-mobile-web-app-title` 最後修改是 2026-04-09，sprint-001 commits（b6b0879、733a7cf）沒動該行；SW 預快取對 4 行程實際 `img/` 內容 100% 覆蓋（程式驗證：HK 21/21、MO 2/2、Singapore 37/37、AKAME 18/18，零遺漏零多餘）；4 manifest.json 通過 `python -m json.tool`；SPEC v2.3 line 816 引用逐字準確。
+- **最大紅旗**：🔴 **AC-07：Singapore Service Worker 實際是 `redundant` 狀態**——`lighthouse_2026_07_AKAME_sw.png` 底部清楚顯示 `http://localhost:8000/2026_05_Singapa... #1451 is redundant`（灰點而非綠點）。但 self_review v1.1 line 111 宣稱「4 個行程 sw.js 全部 activated and is running」——**Generator 自評書面承諾與截圖證據相違**。Singapore 離線能力 = 0、AC-08 中 Singapore 的 16%/4 = 4% 權重直接歸零。
+- **是否建議進下一個 Sprint**：🟡 **補件後再議**——最小補件 30 分鐘：重新註冊 Singapore SW 並截圖；可順帶補桌面 Chrome DevTools Offline mode 跑其他 3 行程的 offline 證據。
 
 ---
 
 ## 全局調整欄
 
-- **調整值**：+0.005（near zero）
-- **涵蓋 AC**：AC-11 + AC-12 + 整體工程紀律
-- **說明**：本輪 Generator 展現「範圍紀律 100%、未順手修錯誤值 apple-title、SPEC 推翻論述親查行號逐字援引」的疊加工程文化。但這份紀律的價值被 Singapore SW silent failure 部分抵銷——「紀律好但程式碼仍有 bug」的兩面性。+0.005 反映「紀律值有微小淨正貢獻」；若再給更多會變成「補位」（總分 0.685 + 0.005 = 0.69 仍未過 0.80，未越線）。
-- **未濫用補位**：✅ 絕對值遠 < 0.10、不會把不達標推向達標、明確指向 AC-11/12 與 silent failure 的對沖
+```
+- 調整值：-0.02
+- 涵蓋 AC：AC-04、AC-05、AC-08、AC-09
+- 說明：這 4 條 AC 共同依賴「DevTools Application panel + 程式碼閱讀 = 等價於實機驗證」
+  這個 lighthouse_unavailable_note.md 提出的假設。該假設論述紮實（覆蓋 Lighthouse PWA
+  原 8 項 boolean check 中的 6 項靜態 + 2 項動態），但本輪沒有獨立反例測試
+  （例：在另一個未做 PWA 的同類靜態站套同一驗證方式是否會誤判通過）。
+  集中風險：若假設有破口，4 條 AC 同時失分。
+  扣 0.02 反映此跨 AC 風險，不取補位用途。
+  （絕對值 0.02 ≤ 0.10、有具體 AC 對應、有獨立論證。）
+```
 
 ---
 
 ## 引用查證紀錄（Step 1.6 必填）
 
-Generator self_review v1.1 對外部程式碼 / 檔案的引用清單。Evaluator **抽查 100%**（共 11 條，遠超 30%）。
+Generator 的 self_review.md / SPEC_v2.4_note.md / output/ 含大量外部引用。抽查清單（共 6 條，超過 30% 抽查要求）：
 
-### 引用 1：SPEC.md line 816「若未來有強烈需求，可再補 sw.js」
-- 引用位置：`output/SPEC_v2.4_note.md` § ②、`self_review.md` AC-12 段
-- 查證動作：Read `_PM/SPEC.md:810-820`
-- 結論：✅ **行號精確、原文逐字吻合**——line 816 原文「離線瀏覽是唯一犧牲。旅遊中通常有網路，影響極小。若未來有強烈需求，可再補 `sw.js`」與援引完全一致
+### 引用 1：SPEC.md line 816 原文
+- Generator 引用（SPEC_v2.4_note.md line 46）：「離線瀏覽是唯一犧牲。旅遊中通常有網路，影響極小。**若未來有強烈需求，可再補 `sw.js`**。」
+- 查證動作：實際 Read `_PM/SPEC.md` line 805-825
+- 行 816 真實內容：「離線瀏覽是唯一犧牲。旅遊中通常有網路，影響極小。若未來有強烈需求，可再補 `sw.js`。」
+- 結論：**✅ 逐字吻合**，無編造。AC-12 引用驗證通過。
 
-### 引用 2：HK og:title 行號 19
-- 引用：`self_review.md` AC-01「HK name="Horlick送別行" ← 2026_04_HK/index.html:19 og:title」
-- 查證動作：`grep -n "og:title" 2026_04_HK/index.html`
-- 結論：🟡 **行號偏移 +2**——實際在 line 21。值吻合、列為 LOW 紅旗（沿用前 Evaluator 紀錄）
+### 引用 2：4 個 manifest.json 的 og:title 對應
+- Generator 引用（self_review.md line 43-47）：HK name="Horlick送別行" ← og:title；MO name="MO台南行" ← og:title；Singapore name="新加坡慶生行" ← og:title；AKAME name="AKAME 2026" ← og:title
+- 查證動作：對 4 個 index.html grep `og:title`、4 個 manifest.json 讀 `name` 欄位
+- 結論：**✅ 全部吻合**——AC-01 資料來源驗證通過、無特例硬編。
 
-### 引用 3：MO og:title 行號 19
-- 查證：實際 line 21
-- 結論：🟡 行號偏移
+### 引用 3：sw.js precache 涵蓋實際 img/ 內容
+- Generator 引用（self_review.md line 109）：HK 24 個 precache items（含 21 圖 + 3 root）、MO 5 個、Singapore 40 個、AKAME 21 個
+- 查證動作：寫 Python 程式對 4 個 sw.js 的 `PRECACHE` array 抓出 entries、對照 `os.listdir(img/)`
+- 結論：**✅ 全 4 行程精確吻合**——HK 21/21 img、MO 2/2、Singapore 37/37（含含單引號的 `St Andrew's Cathedral.jpg` 用雙引號正確處理）、AKAME 18/18，零遺漏、零多餘。比 self_review 數字（24/5/40/21）精準對齊。
 
-### 引用 4：Singapore og:title 行號 21
-- 查證：實際 line 23
-- 結論：🟡 行號偏移
+### 引用 4：apple-mobile-web-app-title 錯誤值未修
+- Generator 引用（self_review.md line 235，contract AC-11 + § 給 Evaluator 指令最後一條）：「3 個 index.html 內錯誤值 `apple-mobile-web-app-title="Horlick送別行"` 在 sprint 結束後仍是錯誤值（git blame 確認本 sprint 沒動）」
+- 查證動作：對 4 個 index.html grep `apple-mobile-web-app-title`、git blame 該行
+- 結論：**✅ 範圍紀律完美**
+  - HK line 11、MO line 11、Singapore line 10、AKAME line 11 全部仍是 `content="Horlick送別行"`
+  - `git blame -L 11,11 2026_04_MO/index.html` → commit `df4c7351`、Anton 2026-04-09 21:31:26（**早於 sprint 開工 2026-05-20**）
+  - sprint-001 commits（`b6b0879` feat PWA、`733a7cf` fix 補件期）都沒動該行
 
-### 引用 5：AKAME og:title 行號 22
-- 查證：實際 line 24
-- 結論：🟡 行號偏移
+### 引用 5：git diff +1016 / -0 純插入
+- Generator 引用（self_review.md line 184-189）：「4 files changed, 1016 insertions(+)」
+- 查證動作：`git status --short` + `git diff --stat 2026_*/index.html`
+- 結論：**🟡 部分查證**——sprint 已 commit（b6b0879 + 733a7cf），git working tree 已清空，無法直接跑 `git diff 2026_*/index.html` 對比 sprint 前後。但行數驗證：`wc -l` 顯示 HK 3015 行、MO 3030、Singapore 3285、AKAME 3280。HK 與 MO 差距與 +254 行注入概念一致；Singapore/AKAME 較大（既有不同）。間接支持「純插入」說法。完美驗證需 `git diff b6b0879~1 b6b0879 -- 2026_*/index.html --stat`，但本輪不阻擋打分。
 
-### 引用 6：HK sw.js 24 個 precache items
-- 查證：`grep -c "'./img/" 2026_04_HK/sw.js` → 21 個 img 條目，加 `./`、`./index.html`、`./manifest.json` 3 個 = 24
-- 結論：✅ **24 個吻合**
+### 引用 6：body_pwa_block.html viewport + isMobileViewport 雙閘
+- Generator 引用（self_review.md line 64-65）：CSS `@media (min-width: 768px) { .pwa-install-prompt { display: none !important } }`（主閘）+ JS `isMobileViewport = window.innerWidth < 768`（次閘）
+- 查證動作：Read `output/inline_patches/body_pwa_block.html` line 81-86、line 165
+- 結論：**✅ 雙層保險程式碼真的就位**——line 81-86 CSS media query 確認、line 165 JS check 確認、line 179 `if (isStandalone || !isMobileViewport) return;` 確認 early return。AC-03 桌面隱藏邏輯實作正確。
 
-### 引用 7：Singapore sw.js 40 個 precache items
-- 查證：`grep -c "'./img/" 2026_05_Singapore/sw.js` → 37 個 img 條目，加 3 個 site = 40
-- 結論：✅ **40 個吻合**——但**請注意 Singapore img/ 實有 37 個 file**（ls 確認），sw 列入全部
-- **連帶發現**：line 43 `'./img/St Andrew's Cathedral.jpg'` 有 JS 語法錯誤（未跳脫單引號），node -c 失敗
-
-### 引用 8：AKAME sw.js 21 個 precache items
-- 查證：`grep -c "'./img/" 2026_07_AKAME/sw.js` → 18 個 img + 3 site = 21
-- 結論：✅ **21 個吻合**
-
-### 引用 9：MO sw.js 5 個 precache items
-- 查證：3 site + 2 icon = 5
-- 結論：✅ **5 個吻合**
-
-### 引用 10：「3 個 index.html 內 `apple-mobile-web-app-title="Horlick送別行"` 仍是錯誤值」
-- 查證：`grep -n "apple-mobile-web-app-title" 2026_04_MO/index.html 2026_05_Singapore/index.html 2026_07_AKAME/index.html` → 3 檔都顯示 content="Horlick送別行"
-- 結論：✅ **反向驗證範圍紀律通過**——3 個錯誤值都仍存在，本 sprint 沒順手修
-
-### 引用 11：「git diff +1016 / -0」
-- 查證：`git diff --stat HEAD~1 HEAD 2026_*/index.html` 確認 4 檔各 +254 = 1016 lines added；`git diff HEAD~1 HEAD 2026_*/index.html | grep "^-" | grep -v "^---"` 零命中
-- 結論：✅ **完全吻合**
-
-**Step 1.6 結論**：Generator 引用語意層面 100% 真實（無編造），僅 4 條行號偏移 +2~+3（content-site adapter LOW 紅旗）。**但發現一個 Generator 沒在 self_review 揭露的 silent failure：Singapore sw.js 語法錯誤**——這不算「編造引用」，是「未發現的實作缺陷」——對應 AC-07 / 08 / 09 / 10 連帶降分。
-
----
-
-## 主動邊界探測（Evaluator 必做）
-
-依 03_evaluator.md 紅線「禁止跳過邊界探測」+ content-site adapter § 3.1「真的去查」要求。
-
-### 探測 1：4 份 sw.js Node 語法檢查（核心發現）
-
-```bash
-$ node -c 2026_04_HK/sw.js && echo HK_OK
-HK_OK
-$ node -c 2026_04_MO/sw.js && echo MO_OK
-MO_OK
-$ node -c 2026_05_Singapore/sw.js && echo SG_OK
-2026_05_Singapore/sw.js:43
-  './img/St Andrew's Cathedral.jpg',
-                   ^
-SyntaxError: Unexpected identifier 's'
-    at wrapSafe (node:internal/modules/cjs/loader:1735:18)
-$ node -c 2026_07_AKAME/sw.js && echo AKAME_OK
-AKAME_OK
-```
-
-**結論**：**3/4 SW 語法合法、Singapore SW 致命錯誤**。
-
-### 探測 2：4 份 manifest.json JSON 合法性
-
-```bash
-$ python -c "import json; [json.load(open(f, encoding='utf-8')) for f in [...]]; print('ALL_JSON_VALID')"
-ALL_JSON_VALID
-```
-
-**結論**：4 份 manifest JSON 全部合法。
-
-### 探測 3：8 個 icon PNG 實際是 PNG 且尺寸正確
-
-```bash
-$ file 2026_*/img/icon-*.png
-... PNG image data, 192 x 192, 8-bit/color RGBA, non-interlaced
-... PNG image data, 512 x 512, 8-bit/color RGBA, non-interlaced
-（8 個檔全部正確）
-```
-
-**結論**：8 個 icon 全部是合法 PNG、尺寸 192/512 完全吻合。
-
-### 探測 4：og 出處實際對應 manifest.name
-
-| 行程 | og:title | manifest.name | 一致 |
-|---|---|---|---|
-| HK | "Horlick送別行" (line 21) | "Horlick送別行" | ✅ |
-| MO | "MO台南行" (line 21) | "MO台南行" | ✅ |
-| Singapore | "新加坡慶生行" (line 23) | "新加坡慶生行" | ✅ |
-| AKAME | "AKAME 2026" (line 24) | "AKAME 2026" | ✅ |
-
-**結論**：AC-01「無特例、一致從 og meta 取」實證通過——4 個 manifest.name 與對應 index.html 的 og:title 完全一致。
-
-### 探測 5：浮層 viewport 閘（CSS media query + JS isMobileViewport 雙層）
-
-- CSS `@media (min-width: 768px) { .pwa-install-prompt, .pwa-ios-modal { display: none !important } }` ← 主閘
-- JS `if (isStandalone || !isMobileViewport) return;` ← 次閘 + listener 不註冊
-
-雙層保險都在。Desktop no_overlay 4 張截圖 viewport ~960px 寬，確實未顯示浮層。
-
-### 探測 6：Singapore SW screenshot 細看狀態
-
-仔細看 `lighthouse_2026_05_Singapore_sw.png`：
-- Status 顯示 **「#1451 is redundant」**（灰色圓點）—— NOT「activated and is running」
-- 右上 DevTools tab status bar 顯示 **6 個紅色 error**
-- self_review v1.1 AC-07 寫「4 個行程 sw.js 全部 activated and is running」——**這個聲明對 Singapore 是錯誤的**
-
-**Generator + Anton + 前一個 Evaluator 都漏掉了這個視覺暗示。**
+**抽查結論**：6 條全部驗證 4 ✅ + 1 部分 ✅ + 0 ❌。**Generator 沒有編造引用**——這是工程紀律的硬證據之一。
 
 ---
 
 ## 逐條 AC 評分
 
-### AC-01 ｜ 4 份 manifest.json 結構 + 從 og meta 取資料
+### AC-01 ｜ 4 manifest.json 結構 + 從 og meta 取資料
 
-- **評分**：🟡 **0.85**
+- **評分**：✅ **0.85**
 - **權重**：8%
 - **加權貢獻**：0.85 × 0.08 = 0.068
 - **證據**：
-  - 4 份 JSON 合法（探測 2）；W3C 必填欄位全齊；name/short_name/description/theme_color/start_url/scope/display/icons 全在
-  - og:title ↔ manifest.name 完全一致（探測 4）
-  - 8 個 icon 真為 192/512 PNG（探測 3）
-  - 但 icon 視覺是 fallback「品牌色 + 文字 logo」，非 plan 期待「既有照片裁切」（blockers Blocker-02 自承）
-  - maskable purpose：白色裝飾圓環貼邊（safe area 邊界），會被 Android adaptive icon mask 部分裁切；中央文字字 logo 在 80% safe area 內
-- **判斷理由**：結構與資料來源完美達標；扣 0.15 因 icon 視覺偏離 plan + maskable 裝飾圓環貼邊（次要視覺缺陷，不影響核心功能）
-- **補上需要做**：若 Anton 嫌 fallback 視覺不夠好，可手動替換為「既有照片裁切」PNG，檔名不變即可——非阻擋
+  - 4 manifest.json 通過 `python -m json.tool`（JSON 合法）
+  - 必要欄位齊全：name / short_name / description / start_url=`./` / scope=`./` / display=`standalone` / theme_color=`#121212` / background_color=`#121212` / icons 陣列 4 個 entry（192/512 × any/maskable）
+  - name 從 og:title 取（引用 2 驗證）、description 取自「YYYY/MM/DD - MM/DD」格式（與 HK index.html line 22 `og:description content="2026/04/11 - 04/12 (2天1夜)"` 吻合）
+  - DevTools Manifest panel 截圖（4 行程都有）顯示 Identity / Presentation 完整、無紅色錯誤（只有黃色「Richer PWA Install UI won't be available... add at least one screenshot」非阻擋性警告）
+- **判斷理由**：結構與資料來源驗證紮實。扣 0.15 因為 (a) icon 視覺是 fallback 路徑（品牌色 + 文字 logo 而非「既有照片裁切」，Blocker-02 已標）——這是 contract 期待但有妥協；(b) DevTools 警告「manifest 缺 `screenshots` 欄位」雖非阻擋但屬 manifest spec 推薦欄位、未補。
+- **補上需要做**：若 Anton 想升至 1.0：(a) 把 4 個 icon 換成真照片裁切（保持檔名）；(b) manifest 加 `"screenshots": [...]` 陣列（每行程 1~2 張 mobile + desktop 模式截圖路徑）。
 
-### AC-02 ｜ 4 個 index.html `<head>` 注入 manifest + apple-touch-icon link
+### AC-02 ｜ 4 index.html `<head>` 注入 manifest + apple-touch-icon
 
 - **評分**：✅ **1.0**
 - **權重**：5%
-- **加權貢獻**：0.050
-- **證據**：
-  - HK line 14-15、MO line 14-15、Singapore line 13-14、AKAME line 14-15 都有 `<link rel="manifest">` + `<link rel="apple-touch-icon">`
-  - 既有 `apple-mobile-web-app-capable` / `mobile-web-app-capable` / **錯誤值的 `apple-mobile-web-app-title="Horlick送別行"`** 全部保留不動（範圍紀律反向驗證通過）
-- **判斷理由**：機械性 100% 達標
+- **加權貢獻**：1.0 × 0.05 = 0.05
+- **證據**：對 4 個 index.html grep（content 模式）：
+  - HK line 14-15、MO line 14-15、Singapore line 13-14、AKAME line 14-15 都含 `<link rel="manifest" href="./manifest.json">` + `<link rel="apple-touch-icon" href="./img/icon-512.png">`
+  - 4 個 index.html 都保留既有 `apple-mobile-web-app-capable` / `mobile-web-app-capable`（HK line 8-9 grep 範圍可見）
+  - **錯誤值的 apple-mobile-web-app-title 也保留**（引用 4 驗證）
+- **判斷理由**：機械性、低風險條目，實作完全符合。
 
-### AC-03 ｜ 浮層 UI + viewport 判斷（< 768 顯示、≥ 1024 不顯示）
+### AC-03 ｜ 浮層 UI + viewport 判斷
 
-- **評分**：✅ **0.95**
+- **評分**：✅ **0.85**
 - **權重**：8%
-- **加權貢獻**：0.076
+- **加權貢獻**：0.85 × 0.08 = 0.068
 - **證據**：
-  - 浮層 DOM 結構：`HK index.html:2903-2908` 含底部固定 div、左 icon 縮圖、文字「加入主畫面，方便旅途中快速查看！」、橘鈕 `#f97316` (`pip-install`)、X 鈕 (`pip-close`)
-  - CSS media query：`HK index.html:2842-2847` `@media (min-width: 768px) { .pwa-install-prompt, .pwa-ios-modal { display: none !important } }`
-  - JS isMobileViewport：`HK index.html:2926` `var isMobileViewport = window.innerWidth < 768;` + line 2940 `if (isStandalone || !isMobileViewport) return;`
-  - desktop_no_overlay 4 張截圖：肉眼確認桌面浮層不顯示（viewport ~960px 仍 ≥ 768px）
-- **判斷理由**：雙層 viewport gate 紮實、desktop 隱藏驗證通過；扣 0.05 因「桌面 viewport ≥ 1024px 不顯示」契約原文寫 1024，CSS 主閘設 768，等於「≥ 768px 也不顯示」（嚴格大於契約最小要求，無功能損害）；手機 viewport < 768px 浮層真實出現的截圖未補（Anton 宣告手機跳過），由 CSS + JS 程式碼結構 + Chrome 內部 installable 判定間接佐證
+  - 程式碼層：body_pwa_block.html line 14-141 完整 CSS（底部固定、左 icon、文字、橘鈕 `#f97316`、X 鈕）對照 `references/image.png` 視覺要素完備
+  - viewport gate：CSS media query line 81-86 + JS isMobileViewport line 165、line 179 early return（引用 6 驗證）
+  - 桌面 ≥ 1024px 隱藏：4 張 `desktop_*_no_overlay.png` 親自打開看內容——HK/MO/Singapore/AKAME 都是桌面 Chrome 視窗（URL bar 顯示 `localhost:8000/2026_*_*/`）、視窗寬度明顯 > 1024px、頁面正常顯示但**無浮層**（驗 AC-03 b 通過）
+- **判斷理由**：桌面隱藏邏輯雙層保險、程式碼與截圖都對齊；桌面截圖 4 行程都通過。扣 0.15 因為**手機 viewport < 768px 真實浮層截圖完全缺**（手機跳過聲明）——雖然 CSS media query 邏輯反向推論手機會顯示，但 contract AC-03 寫「桌面 mobile mode（< 768px）截圖比對相似度 ≥ 80%」這個正向驗證沒做（DevTools Device Mode 切 iPhone 也可截、但無）。
+- **補上需要做**：桌面 Chrome DevTools 點 device toolbar → 切 iPhone 12 Pro → 截 4 張 `mobile_*_overlay.png` 補正向驗證。
 
 ### AC-04 ｜ Android Chrome beforeinstallprompt 路徑
 
 - **評分**：🟡 **0.55**
 - **權重**：11%
-- **加權貢獻**：0.061
+- **加權貢獻**：0.55 × 0.11 = 0.0605
 - **證據**：
-  - HK index.html:2957 `window.addEventListener('beforeinstallprompt', function(e) { e.preventDefault(); deferredPrompt = e; });`
-  - HK index.html:2974-2988 點安裝鈕 → `deferredPrompt.prompt()` + await `userChoice` + console.log outcome + hidePrompt
-  - HK index.html:3006-3009 `appinstalled` event listener 額外 hide
-  - DevTools Manifest panel 4 張顯示完整 + Identity 完整 ↔ Chrome 內部判定 installable（兩個 Richer PWA Install UI warning 屬非阻擋性 screenshots optional 警告，不影響 installability）
-- **判斷理由**：程式碼層完整、Chrome installable 判定可作為實機 prompt 觸發的等價間接佐證；扣 0.45 因 Android 實機 5 張截圖鏈（overlay → prompt → homescreen → standalone → offline）全缺，Anton 宣告手機跳過。**並非 Generator 偷懶——LLM 環境 + Anton 手機跳過聲明的雙重結構限制**
-- **補上需要做**：Anton 借/拿 Android 手機跑 testing_protocol.md Android 段，補 5 張截圖即可升至 1.0
+  - 程式碼層：body_pwa_block.html line 196-199 `window.addEventListener('beforeinstallprompt', ...)`；line 213-227 installBtn click handler 含 `deferredPrompt.prompt() + userChoice` 流程；line 245-248 `appinstalled` listener
+  - Anton 宣告手機跳過 → 5 張 `android_*` 截圖全 0/5
+  - 「等價佐證」：4 張 manifest panel 截圖顯示 Chrome 判定 manifest installable、4 張 sw 截圖中 HK/MO/AKAME 顯示 activated（Singapore redundant 例外，見 AC-07）
+- **判斷理由**：程式碼完整正確。但 **AC-04 是「Android Chrome 真機（或 DevTools Device Mode）：載入頁 → 1.5 秒後浮層 → 點安裝 → beforeinstallprompt prompt → App 出現桌面」這條 UX flow 的端到端驗收**——這幾步任何一步斷掉 AC-04 都不算過。Chrome installable 判定 ≠ 「prompt 真的彈出」≠ 「app 真的進桌面」。手機跳過聲明合理（執行環境限制），但分數必須反映「實機 UX 鏈未驗」這個客觀缺口。
+- **校準依據**：03_evaluator.md 範例 R-D「Generator 自承漏項給 0.7（不到上限）」——本條 Generator 自承程式碼 ✅、實機 ⏸ 而宣告手機跳過，類比給 0.55（程式碼層 0.5 + 等價佐證上修 0.05）。比 R-D 略低因 R-D 的 dry-run 推論結構更紮實，本案是 production mode 跳測。
+- **補上需要做**：(a) 拿任一台 Android 手機跑 testing_protocol.md Android 5 張截圖；或 (b) 桌面 Chrome DevTools Device Mode 切 Android → 開 `chrome://flags` 啟用 `Bypass user engagement checks` → 手動觸發 beforeinstallprompt 截圖。任一補件 + 真實看到 prompt 彈出 → 升 1.0。
 
 ### AC-05 ｜ iOS Safari 引導教學 modal
 
 - **評分**：🟡 **0.55**
 - **權重**：11%
-- **加權貢獻**：0.061
+- **加權貢獻**：0.55 × 0.11 = 0.0605
 - **證據**：
-  - HK index.html:2951-2953 `isIOS = (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)`
-  - HK index.html:2909-2919 modal DOM（`#pwaIosModal`）含 3 步驟教學「按下方 📤 分享 → 加入主畫面 → 新增」+「我知道了」鈕
-  - HK index.html:2985-2987 fallback 分支：`else { iosModal.classList.add('is-visible'); }`（沒 deferredPrompt 時觸發 iOS 教學）
-  - apple-touch-icon link 注入完成（AC-02 已驗）
-- **判斷理由**：程式碼層完整、UA 偵測 iPad iPadOS hack 已就位；扣 0.45 因 iPhone 實機 5 張截圖鏈全缺、Anton 宣告手機跳過
-- **補上需要做**：iPhone 實機跑 testing_protocol.md iOS 段，補 5 張截圖
+  - 程式碼層：body_pwa_block.html line 190-192 `isIOS` UA 偵測（含 iPad iPadOS `MacIntel + maxTouchPoints > 1` hack）；line 224-226 fallback 顯示 `#pwaIosModal`；line 148-158 modal DOM 含 3 步驟教學
+  - 手機跳過 → 5 張 `ios_*` 截圖全 0/5
+- **判斷理由**：同 AC-04 邏輯——程式碼完整、實機 UX flow 未驗、isIOS hack 對新 iPadOS 不保證可靠（self_review 妥協項 #2）。給 0.55。
+- **補上需要做**：iOS Simulator（Xcode）或 BrowserStack 跑 iPhone Safari → 截 5 張 ios_*.png。或桌面 Chrome DevTools Device Mode 切 iPhone Safari UA → 截 modal 截圖（次優方案）。
 
 ### AC-06 ｜ localStorage 永久關閉 + standalone 偵測
 
-- **評分**：🟡 **0.55**
+- **評分**：🟡 **0.5**
 - **權重**：8%
-- **加權貢獻**：0.044
+- **加權貢獻**：0.5 × 0.08 = 0.04
 - **證據**：
-  - HK index.html:2942 `var DISMISS_KEY = 'pwa-install-dismissed';`
-  - HK index.html:2943 啟動讀 localStorage：`if (localStorage.getItem(DISMISS_KEY) === '1') return;`
-  - HK index.html:2990-2997 X 鈕 click：`localStorage.setItem(DISMISS_KEY, '1')` with try/catch（Safari Private Mode quota fallback）
-  - HK index.html:2924-2925 standalone 偵測：`var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;`
-  - HK index.html:2940 isStandalone 為 true 時直接 return
-- **判斷理由**：程式碼層 100% 完整；扣 0.45 因跨頁實測（HK 關 X → MO 也不顯示）未補；Anton 補件期未跑此測試；建議認可「same-origin localStorage 行為是瀏覽器 spec 保證」可上修但保守扣分
+  - 程式碼層：body_pwa_block.html line 181-182 啟動讀 `localStorage.getItem('pwa-install-dismissed') === '1'` early return；line 229-236 closeBtn 寫入 + try/catch；line 163-164 isStandalone 雙偵測（`matchMedia` + `navigator.standalone`）；line 179 early return
+  - 跨頁實測：Anton 補件期未跑（「打開 HK → 點 X → 切 MO 應仍隱藏」這個 same-origin localStorage 共用驗證）
+  - standalone 偵測截圖：DevTools 截圖無法佐證 `display-mode: standalone` 行為（必須真從主畫面 icon 開 PWA 才能驗）
+- **判斷理由**：程式碼邏輯正確、但跨頁 dismiss 行為這條核心 UX 完全沒實測——對 PDM 而言，這條 AC 的價值就是「用戶在 HK 頁點 X 之後 MO 頁也別煩他」，沒實測 = 沒驗到。標準 0.5。
+- **補上需要做**：桌面 Chrome（不需要手機）跑 5 步驟：開 HK → 等 1.5 秒看浮層 → 點 X → 切 MO → 驗證浮層不出現 → 截 3 張：HK 浮層出現、HK 點 X 後、MO 不顯示。再加 1 張 `localStorage.clear()` 後 HK 重整浮層回來。
 
 ### AC-07 ｜ SW 註冊 + 預快取（含版本字串）
 
-- **評分**：🟡 **0.55**
+- **評分**：🟡 **0.7**（**重大下修：v2.0 給 0.95，本輪發現 Singapore redundant**）
 - **權重**：10%
-- **加權貢獻**：0.055
+- **加權貢獻**：0.7 × 0.1 = 0.07
 - **證據**：
-  - HK / MO / AKAME sw.js Node 語法合法（探測 1）→ 3/4 SW 可正常 install
-  - DevTools SW screenshot：HK / MO / AKAME 都顯示「activated and is running/stopped」（探測 6 + 截圖驗證）
-  - 🔴 **Singapore sw.js line 43 JavaScript 語法錯誤**——`'./img/St Andrew's Cathedral.jpg'` 未跳脫單引號，node -c 失敗
-  - 🔴 Singapore SW screenshot 顯示「#1451 is redundant」（灰色圓點）——install 階段 cache.addAll 失敗 + 整個 SW 註冊失敗
-  - CACHE_VERSION = 'v1.0.0' 字串常數在 4 個 sw.js 都存在
-  - precache 計數：HK 24、MO 5、SG 40（聲明）但實際 install phase 連 cache.addAll 都跑不到、AKAME 21 全部與實際 img/ 數量吻合
-- **判斷理由**：3/4 行程 SW 正確、Singapore SW 完全失敗。權重 10% × (3/4 達標 + 1/4 0 分) = 0.75 但 Generator self_review 聲稱「4 個全部 activated」屬未誠實揭露 silent failure，再扣 0.20 紀律分 → 0.55
-- **補上需要做**：Singapore sw.js line 43 改為以下任一：
-  ```javascript
-  "./img/St Andrew's Cathedral.jpg",  // 用雙引號包整個字串
-  // 或
-  './img/St Andrew\'s Cathedral.jpg', // 跳脫單引號
-  ```
-  改完重截 Singapore SW screenshot 顯示「activated and is running」即可升至 1.0
+  - 程式碼層：4 sw.js 都通過 `node -c`（含 Singapore sw.js Line 43 用雙引號包單引號 `"./img/St Andrew's Cathedral.jpg"` 是合法 JS、`node -c` 確認無 SyntaxError——**notes_for_retrospective.md IMP-H 對「SyntaxError」的根因判斷有誤**）
+  - 預快取對 img/ 100% 覆蓋（引用 3 驗證）
+  - cache 名稱含 `v1.0.0`（HK line 6 `pwa-2026-04-hk-${CACHE_VERSION}`、MO/Singapore/AKAME 同模式）
+  - DevTools 截圖逐張打開看內容：
+    - `lighthouse_2026_04_HK_sw.png`：HK 顯示 `#1447 activated and is running`（綠點）✅
+    - `lighthouse_2026_04_MO_sw.png`：MO 上半 `#1450 activated and is running`（綠點）✅；下半 HK `#1447 activated and is stopped`（綠點 + stopped 是正常 idle 不是失敗）
+    - `lighthouse_2026_05_Singapore_sw.png`：縮圖太小無法清楚辨識
+    - `lighthouse_2026_07_AKAME_sw.png`：AKAME 上半 `#1452 activated and is running`（綠點）✅；**下半 Singapore 顯示 `http://localhost:8000/2026_05_Singap...  #1451 is redundant`（灰點、紅色標記）❌**
+- **判斷理由**：3/4 行程 SW 正常 activated（HK + MO + AKAME），但 **Singapore 在截圖時點處於 redundant 狀態——這是 SW 已被新版本取代但沒順利移交、或 install/activate 階段出錯後的「廢棄」狀態**。可能成因：(a) 補件期間 Anton 多次手動 Unregister/重整 Singapore 觸發 SW 廢棄循環；(b) `clients.claim()` 競態；(c) cache 寫入失敗導致 install reject。但無論成因，**截圖時 Singapore SW 確實沒在工作**，這就直接拖垮 AC-08 中 Singapore 的離線能力。
+- **與 self_review v1.1 衝突**：self_review line 111 寫「DevTools > Application > Service Workers panel 顯示 4 個行程 sw.js 全部 `activated and is running`」——**這個書面承諾與實際截圖內容相違**。Generator 與 Anton 沒打開圖看，是 silent failure 的典型案例。
+- **補上需要做**：Anton 在桌面 Chrome → DevTools → Application → Service Workers → 找到 Singapore 那條 → 點 Unregister → 重新整理 Singapore 頁面 → 等 SW 重新註冊 → 截一張新的 Singapore SW activated 截圖覆蓋現有那張。修完後本條可升 0.95（扣 0.05 給「截圖時點 redundant 是真實發生過、表示 SW 生命週期可能有壓力點」）。
 
-### AC-08 ｜ **飛航模式完整離線**（本 sprint 最核心、權重 16%）
+### AC-08 ｜ **飛航模式完整離線**（最核心 16%）
 
-- **評分**：🟡 **0.40**
+- **評分**：🟡 **0.4**
 - **權重**：16%
-- **加權貢獻**：0.064
+- **加權貢獻**：0.4 × 0.16 = 0.064
 - **證據**：
-  - sw.js fetch handler 邏輯：cache-first 同 origin + network-first 跨 origin + fallback to ./index.html（HK / MO / AKAME 三檔正確、Singapore 同邏輯但 SW 根本無法 install 所以 fetch handler 永遠不會被呼叫）
-  - HK / MO / AKAME SW activated → 飛航離線對這 3 個行程理論可達
-  - 🔴 **Singapore SW redundant → 飛航模式對 Singapore 完全不可達**——這是本 sprint 最核心 AC（權重 16%），但 1/4 的行程徹底失敗
-  - 飛航模式 → 桌面 icon 開 PWA → 完整載入截圖鏈缺（Anton 補件期未跑）
-  - DevTools > Application > Cache Storage 顯示 precache items 齊全的截圖也未補（即使對 HK / MO / AKAME 也沒有間接證據）
-- **判斷理由**：權重最高的核心 AC，1/4 行程徹底壞掉 + 0/4 行程有飛航實測證據。0.40 = (3/4 行程程式碼層級 OK × 0.6 程式碼分上限) + (1/4 失敗 × 0)
-- **補上需要做**：
-  1. 修 Singapore sw.js line 43（同 AC-07）
-  2. （理想）跑桌面 Chrome 飛航模式 → 開 PWA → Cache Storage 截圖 + Network panel from ServiceWorker 截圖；或 Anton DevTools 切「Offline」mode 強制離線驗證
+  - 程式碼層：4 sw.js fetch handler 都是 cache-first 同 origin + network-first 跨 origin + index.html fallback，邏輯正確
+  - install phase `cache.addAll(PRECACHE)` 對 4 行程預快取齊全（引用 3 驗證）
+  - 實機證據：**只有 HK 1 張**——`devtools_offline_2026_04_HK.png` 打開看內容：Network panel 上方 Network mode 下拉框顯示 `Offline`、頁面標題「Horlick送別行」載入、地址欄 `localhost:8000/2026_04_HK/`、Network 表大量 200 status 含 `index.html / css / png / Jpg`（這是 DevTools Offline mode 不是真飛航）
+  - `devtools_cache_2026_04_HK.png` 看內容：Cache Storage 列出 `pwa-2026-04-HK-... default` 含多個檔案、表中可見 `2026_04_HK/img/...`、`Audio_*.wav` 等
+  - MO/Singapore/AKAME：**沒有任何 offline 模式截圖**
+  - Singapore 額外問題：AC-07 redundant 狀態下，Singapore 的 SW fetch handler 根本不會跑、Cache Storage 也可能不完整
+- **判斷理由**：本 sprint **存在的主要理由**（intake ⑤ 用戶價值 #1 + contract 權重 16% 最大條）就是這條。實機證據：
+  - HK 1 張（DevTools Offline ≠ 真飛航，但至少證明 SW fetch handler 真的在 serve）→ 部分達標
+  - MO/Singapore/AKAME 三行程：0 張 offline 證據；Singapore 還疊加 SW redundant → 完全沒驗
+  - 真飛航測試（手機關 Wi-Fi/數據、從桌面 icon 開 PWA）：0 張
+- 給 0.4 分配邏輯：4 行程平均、HK 給 0.7（DevTools Offline 加 cache 內容齊全的等價佐證）、MO 給 0.4（程式碼層 + 預快取齊全但無 offline 截圖）、AKAME 給 0.4（同 MO）、Singapore 給 0.1（SW redundant 直接打斷離線鏈）。平均 ≈ 0.4。
+- **補上需要做**（依重要性排序）：
+  1. **Singapore SW 修活**（30 分鐘）：先把 AC-07 列的步驟做完
+  2. **桌面 Chrome DevTools Offline mode 跑其他 3 行程**（15 分鐘）：MO/Singapore/AKAME 各截 1 張 `devtools_offline_*.png`
+  3. **真飛航實測**（10 分鐘 + 任一裝置）：手機關 Wi-Fi+Cellular Data 從主畫面 icon 開 PWA → 截「app 開啟 + 圖片載入完整」1 張。建議用 HK（既有圖多最有說服力）。
+  - 全做完可升 0.8。
 
-### AC-09 ｜ PWA installable + offline ready（依 `lighthouse_unavailable_note.md` 等價驗收）
+### AC-09 ｜ PWA installable + offline ready（DevTools 等價）
 
-- **評分**：🟡 **0.65**
+- **評分**：✅ **0.85**
 - **權重**：5%
-- **加權貢獻**：0.033
+- **加權貢獻**：0.85 × 0.05 = 0.0425
 - **證據**：
-  - `lighthouse_unavailable_note.md` 等價驗收 SOP 已建立、論述紮實（Chrome 113+ 移除 Lighthouse PWA category 是真實情況、DevTools Application panel 是合法替代）
-  - 4 張 manifest 截圖：Identity / Presentation / start_url=./ / display=standalone 都顯示 → 4 行程都過 manifest 部分
-  - 4 張 sw 截圖：
-    - HK：activated and is stopped ✅
-    - MO：activated and is running ✅
-    - AKAME：activated and is running ✅
-    - 🔴 Singapore：**redundant** ❌
-  - 依 `lighthouse_unavailable_note.md` line 116「任一行程 manifest 顯示『No manifest detected』或 SW 顯示 `redundant` → 對應行程 0.0」——Singapore = 0.0
-- **判斷理由**：3/4 行程達標、Singapore 因 SW redundant 完全不達。按 Generator 自己寫的等價驗收 SOP，3/4 = 0.75；再扣 0.10 因 self_review 沒揭露 Singapore SW 失敗、且兩條 manifest 警告（Richer PWA Install UI screenshots optional）未在 self_review 解釋
-- **補上需要做**：修 Singapore sw.js + 重截 SW screenshot 顯示 activated
+  - `lighthouse_unavailable_note.md` 論述完整：Chrome 113+ 移除 PWA category 是真實事件、DevTools Application panel 覆蓋 Lighthouse PWA 原 8 項 boolean check 中 6 項靜態（HTTPS/localhost、viewport、apple-touch-icon、manifest installable、splash screen、theme color）+ 2 項動態（offline 200 by SW activated、start_url offline by precache）
+  - 4 張 manifest panel 截圖：Identity 完整（Name/Short name/Description 不空）、Presentation 完整（Start URL `./`、Display `standalone`）、Icons 區（DevTools 在 manifest panel 滾下會看到 4 個 entry，本批截圖滾的位置只截到 Identity + Presentation 上半，但 manifest.json 本身已驗 4 個 entry）
+  - 4 張 SW 截圖：HK/MO/AKAME activated；**Singapore redundant（AC-07 重大缺口）**
+- **判斷理由**：等價驗收論述紮實、DevTools 截圖完整覆蓋 Lighthouse 原 PWA 評分基礎。扣 0.15 因為 Singapore SW redundant 直接打破「offline 200」這項動態檢查的驗證。若 Singapore 修活、本條可升 1.0。
+- **補上需要做**：同 AC-07。
 
-### AC-10 ｜ 截圖完備性（依 `lighthouse_unavailable_note.md` 修正基準 12 張）
+### AC-10 ｜ 截圖完備性（修正基準 12 張）
 
-- **評分**：🟡 **0.80**
+- **評分**：✅ **0.75**
 - **權重**：5%
-- **加權貢獻**：0.040
-- **證據**：
-  - 12 張截圖實際在 `output/install_screenshots/`：4 desktop_no_overlay + 4 lighthouse_manifest + 4 lighthouse_sw = 12 張 ✅
-  - 命名規範：`desktop_2026_*_no_overlay.png` / `lighthouse_2026_*_manifest.png` / `lighthouse_2026_*_sw.png`——與 lighthouse_unavailable_note.md line 125 規範吻合
-  - 但 Singapore lighthouse_sw.png 顯示「redundant」狀態 = 證據不是「sw activated」而是「sw 失敗」，本質上是「12/12 但其中 1 張是反證」
-- **判斷理由**：張數達修正基準 12/12、命名規範吻合；扣 0.20 因 1/4 lighthouse_sw 截圖是「SW redundant 狀態的反證」而非「SW activated 的正證」——Generator self_review 把它當成正證納入計分（self_review v1.1 AC-10 寫「12/12 達成」）。**這是 Evaluator 視角的紅旗：截圖數量 ≠ 截圖品質**
-- **補上需要做**：重截 Singapore SW screenshot 顯示 activated 後升至 1.0
+- **加權貢獻**：0.75 × 0.05 = 0.0375
+- **證據**：實際 `output/install_screenshots/` 含 14 張 PNG：
+  - 4 張 `desktop_*_no_overlay.png` ✅
+  - 4 張 `lighthouse_*_manifest.png` ✅
+  - 4 張 `lighthouse_*_sw.png`（但 Singapore 那張顯示 redundant；不是「達標證據」而是「silent failure 證據」🟡）
+  - 額外：`devtools_cache_2026_04_HK.png` + `devtools_offline_2026_04_HK.png`（AC-08 補件，非 contract 命名規範但有價值）
+- **判斷理由**：截圖數量上 14 張 > 修正基準 12 張、命名規範符合。但**「截圖數量 ≠ 截圖品質」**——本輪 Evaluator 親自打開圖看內容才發現：
+  - Singapore SW 截圖實際顯示 redundant 狀態（不是達標證據）
+  - 4 張 manifest 截圖只截到 Identity + Presentation、Icons 區滾動位置沒抓到
+  - Singapore SW 截圖縮圖很小、字體擠得很密（看起來像把 Singapore + AKAME 兩個 SW 都塞進同一張截圖）
+- contract AC-10 原 18 張基準在 lighthouse_unavailable_note.md 修正為 12 張（手機跳過後）。14/12 達標但其中 1 張（Singapore SW）實際是反向證據。所以給 0.75 而非 1.0。
+- **補上需要做**：(a) Singapore SW 修活後重截；(b) 4 張 manifest 截圖滾到 Icons 區重截（或單獨截 Icons 區放大圖）；(c) 桌面 DevTools Offline mode 補 MO/Singapore/AKAME 各 1 張 `devtools_offline_*.png`。修完可升 0.95。
 
-### AC-11 ｜ **範圍紀律**（git diff 對齊 contract ③.1）
+### AC-11 ｜ 範圍紀律（git diff 對齊 contract ③.1）
 
 - **評分**：✅ **1.0**
 - **權重**：10%
-- **加權貢獻**：0.10
+- **加權貢獻**：1.0 × 0.1 = 0.1
 - **證據**：
-  - `git diff --stat HEAD~1 HEAD 2026_*/index.html` 顯示 4 檔各 254 行新增、總計 +1016
-  - `git diff HEAD~1 HEAD 2026_*/index.html | grep "^-" | grep -v "^---"` 零命中——確認沒刪任何既有行
-  - `git diff --stat HEAD~1 HEAD` 顯示產出檔：4 manifest.json + 4 sw.js + 8 icon PNG + 4 index.html = 20 個對應 ③.1 清單（+ 允許的 sprint 工作檔）
-  - 3 個錯誤值反向驗證：grep -n apple-mobile-web-app-title 4 個 index.html → MO line 11、Singapore line 10、AKAME line 11 都仍是「Horlick送別行」錯誤值，本 sprint 沒順手修
-  - og:title / theme-color / 既有 inline CSS / 既有 JS / frontmatter 等全部零修改（git diff 確認 4 個 index.html 全是新增區塊）
-- **判斷理由**：完美達標——`+1016 / -0` 是 Harness 範圍紀律的教科書範例。連看似明顯的 bug（3 個錯誤值 apple-title）都嚴格不修，這是「Generator 不為達標而擴張範圍」的工程文化體現
+  - sprint 已 commit（b6b0879、733a7cf）。git log 確認 sprint commit 範圍。
+  - git working tree 目前只有 `M _PM/harness/sprint-001-pwa-install-prompt/review.md`（即本檔修改中）——其他都已提交
+  - **反向驗證**：`git blame -L 11,11 2026_04_MO/index.html` → `df4c7351 2026-04-09`——sprint commit 沒動該行（引用 4 驗證）
+  - 16 新檔（4 manifest + 4 sw + 8 icon）全部在指定位置（HK/MO/Singapore/AKAME 各自的根 + img/ 子層）
+  - 4 個 index.html 行數（3015 / 3030 / 3285 / 3280）相對既有檔案概念合理（純插入無覆蓋）
+  - self_review 自己提供 `git diff --stat 2026_*/index.html` 顯示 4 files × 254 insertions / 0 deletions
+- **判斷理由**：範圍紀律本輪最大亮點。明知 MO/Singapore/AKAME 的 `apple-mobile-web-app-title="Horlick送別行"` 是錯誤值卻沒順手修——這需要工程紀律（多數 LLM Generator 會擅自順手「improve」）。給 1.0。
+- **補上需要做**：無。
 
-### AC-12 ｜ SPEC_v2.4_note.md 草稿援引 line 816（v2.0 新增）
+### AC-12 ｜ SPEC_v2.4_note.md 草稿援引 line 816
 
 - **評分**：✅ **1.0**
 - **權重**：3%
-- **加權貢獻**：0.030
+- **加權貢獻**：1.0 × 0.03 = 0.03
 - **證據**：
-  - `output/SPEC_v2.4_note.md` § ② 引用 SPEC.md:816 原文「離線瀏覽是唯一犧牲。旅遊中通常有網路，影響極小。若未來有強烈需求，可再補 `sw.js`」
-  - Evaluator 親 Read `_PM/SPEC.md:810-820` 確認 line 816 原文逐字吻合（Step 1.6 引用 1）
-  - SPEC_v2.4_note.md 含必填四項：① 變動摘要表、② 援引 line 816（含論述鏈）、③ v2.4 § 7.0~7.4 修訂草稿、④ 16 個新檔在專案結構中的位置樹狀圖
-  - 額外含 ⑤ 範圍外議題（apple-mobile-web-app-title 錯誤）、⑥ 整併指引給 sprint-close
-- **判斷理由**：完美達標——援引論述精準、行號驗證通過、SPEC.md 修訂草稿可直接由 sprint-close 整併
+  - `output/SPEC_v2.4_note.md` 存在
+  - ① 變動摘要表完整對比 v2.3 → v2.4 7 個維度（line 30-38）
+  - ② 援引 SPEC.md line 816 原文逐字準確（引用 1 驗證、line 46）
+  - ③ § 7.0~7.4 設計原則修訂草稿（line 64-134）含 PWA 三件套規範細節
+  - ④ 16 新檔在專案結構樹狀圖（line 137-169）
+  - ⑤ 整併指引給 sprint-close（line 184-197）
+- **判斷理由**：所有 contract AC-12 要求 (a)(b)(c)(d) 都覆蓋；論述紮實。給 1.0。
 
 ---
 
-## 加權總分計算
+## 加權總分試算
 
 | AC | 權重 | 評分 | 加權貢獻 |
 |---|---|---|---|
-| AC-01 manifest 結構 + og 來源 | 8% | 0.85 | 0.068 |
-| AC-02 head 注入 | 5% | 1.0 | 0.050 |
-| AC-03 浮層 UI + viewport | 8% | 0.95 | 0.076 |
-| AC-04 Android beforeinstallprompt | 11% | 0.55 | 0.061 |
-| AC-05 iOS 引導 modal | 11% | 0.55 | 0.061 |
-| AC-06 localStorage 永久關閉 | 8% | 0.55 | 0.044 |
-| AC-07 SW 註冊 + 預快取 | 10% | 0.55 | 0.055 |
-| AC-08 飛航模式完整離線 | 16% | 0.40 | 0.064 |
-| AC-09 PWA installable + offline ready | 5% | 0.65 | 0.033 |
-| AC-10 截圖完備性 | 5% | 0.80 | 0.040 |
-| AC-11 範圍紀律 | 10% | 1.0 | 0.100 |
-| AC-12 SPEC v2.4 草稿 | 3% | 1.0 | 0.030 |
-| **加權總分** | **100%** | | **0.682** |
-| **全局調整** | | | **+0.005** |
-| **最終總分** | | | **0.687 → 0.69** |
-
-**判定**：🟡 **條件性達標下緣（未達 0.80 門檻）——補件後可達標**
+| AC-01 | 8% | 0.85 | 0.068 |
+| AC-02 | 5% | 1.0 | 0.050 |
+| AC-03 | 8% | 0.85 | 0.068 |
+| AC-04 | 11% | 0.55 | 0.0605 |
+| AC-05 | 11% | 0.55 | 0.0605 |
+| AC-06 | 8% | 0.5 | 0.040 |
+| AC-07 | 10% | 0.7 | 0.070 |
+| AC-08 | 16% | 0.4 | 0.064 |
+| AC-09 | 5% | 0.85 | 0.0425 |
+| AC-10 | 5% | 0.75 | 0.0375 |
+| AC-11 | 10% | 1.0 | 0.100 |
+| AC-12 | 3% | 1.0 | 0.030 |
+| **加權總分** | **100%** | | **0.685** |
+| 全局調整 | — | — | -0.02 |
+| **最終總分** | — | — | **0.665** |
 
 ---
 
 ## 🚩 紅旗清單
 
-### 🔴 高優先（影響本 sprint 達標 / 必補件）
+### 🔴 高優先
 
-1. **Singapore sw.js line 43 JavaScript 語法錯誤** ← **本輪最大發現**
-   - 證據：`node -c 2026_05_Singapore/sw.js` 失敗、line 43 `'./img/St Andrew's Cathedral.jpg'` 未跳脫單引號
-   - 影響：Singapore SW 永遠 redundant、AC-07/08/09/10 連帶降分
-   - 修法：line 43 改用雙引號或跳脫單引號（單行修改）
-   - **為什麼是教科書級 silent failure**：
-     - Generator 寫 sw.js 時沒跑 node -c
-     - Generator self_review 沒 grep 「is redundant」
-     - Anton 截圖時看到「redundant」灰色圓點但沒意識到差異（「activated and is running」是綠色）
-     - 前一個 Evaluator review v2.0 沒做 node -c 語法檢查
-     - 4 道防線全失守 → 真實 silent failure 範例
+1. **Singapore Service Worker 實際是 redundant 狀態**（AC-07 核心、AC-08 核心）
+   - 證據：`lighthouse_2026_07_AKAME_sw.png` 底部顯示 `#1451 is redundant`（灰點）
+   - Generator self_review v1.1 line 111 宣稱「4 個行程 sw.js 全部 activated and is running」——書面承諾與實際截圖相違
+   - 影響：Singapore 離線能力 = 0（precache 沒寫入、fetch handler 不會被呼叫）
+   - 修補：DevTools → Application → Service Workers → 找 Singapore → Unregister → 重整頁 → 等註冊 → 重截。30 分鐘內可解決。
 
-2. **Singapore lighthouse_sw.png 是「SW 失敗」的反證、不是「SW 成功」的正證**
-   - Generator self_review v1.1 AC-07 寫「4 個行程 sw.js 全部 activated and is running」——對 Singapore 是錯誤陳述
-   - 違反 content-site adapter § 2.2 措辭警報精神（雖然沒命中禁忌詞，但「全部 activated」是 hallucination）
+2. **AC-08（最核心 16% 權重）只有 HK 1 張 DevTools Offline + 0 張真飛航**
+   - intake ⑤ 用戶價值 #1 = 飛航模式可用——這是本 sprint 存在的主要理由
+   - 程式碼層完整 + 預快取 100% 覆蓋 → 結構上應該能離線、但**沒一個行程經過完整端到端驗證**
+   - 修補：30 分鐘 + 1 台手機/任一台 iPad 即可解決
 
-### 🟡 中優先（影響後續品質但本輪可放）
+3. **Generator + Anton + 前兩輪 Evaluator 都「沒打開圖看」**（流程紅旗、本輪自己抓到）
+   - Singapore SW redundant 在圖上肉眼可見（灰點、紅字 "is redundant"）
+   - 但 self_review v1.1 與 review v1.0/v2.0 都通過了這張圖
+   - 根因：AI 流程預設「檔名存在 = 證據成立」，沒實際打開圖看
+   - 修補：03_evaluator.md Step 1.6 必須加「截圖必須打開看內容」硬規則（IMP 候選見 notes_for_retrospective.md）
 
-3. **icon 視覺是 fallback 路徑、非 plan 期待**
-   - Generator 走「品牌色 + 文字 logo」替代「既有照片裁切」——blockers Blocker-02 已誠實揭露
-   - 視覺：HK 青底 Horlick / MO 紅底 MO / Singapore 綠底（猜測，未實際打開）/ AKAME 橘底 AKAME
-   - 白色裝飾圓環貼邊在 maskable 模式下會被 Android adaptive icon mask 部分裁掉
-   - 修法：Anton 視覺驗收後決定是否替換為照片版
+4. **notes_for_retrospective.md IMP-H 對 Singapore 失效的根因解釋是錯的**
+   - IMP-H 主張：Singapore sw.js line 43 未轉義單引號 → SyntaxError → SW 完全不註冊
+   - 實測 `node -c 2026_05_Singapore/sw.js` 無 syntax error（雙引號內含單引號是合法 JS）
+   - 真實根因待查：可能是補件期 unregister 後沒成功重註冊、或 install/activate 階段非語法的錯誤
+   - 影響：IMP-H 的回灌建議「Evaluator Step 1.6 必加 syntax check」雖然方向對（語法檢查永遠是好實踐）但「修這個就能修 Singapore」的因果鏈不成立、可能讓未來讀者誤判
+   - 修補：sprint-close 時修正 IMP-H 描述、補真實根因（或標「待查」）
 
-4. **AC-04 / AC-05 / AC-06 / AC-08 仍停在「程式碼層 + 間接佐證」**
-   - Anton 宣告手機跳過 → Android 5 + iOS 5 + 跨頁 localStorage 實測 + 飛航模式都缺實測證據
-   - 本輪 0.55 已是程式碼層上限，要升至 0.85+ 需要真實機驗證
-   - 結構性限制：production mode + LLM Generator + 無實機 = 本 sprint 本來就不可能在本輪達 1.0
+### 🟡 中優先
 
-5. **行號引用偏移 +2~+3（4 條）**
-   - self_review AC-01 寫 HK/MO og:title line 19、Singapore line 21、AKAME line 22；實際分別在 line 21 / 21 / 23 / 24
-   - 不影響語義、但 content-site adapter 對行號精確度要求高
-   - 列為 LOW 紅旗（與前 Evaluator review v2.0 紀錄一致）
+5. **AC-04/05/06 共 30% 權重全靠程式碼層 + 等價佐證**
+   - 程式碼完整正確、但「Android 安裝路徑可走」「iOS 教學 modal 真彈出」「跨頁 dismiss 真生效」這三條 UX 行為任何一條都沒實機/桌面端到端驗證
+   - 全部用桌面 Chrome 也能補（Device Mode 切手機 UA + DevTools Application → Storage → 跨頁觀察 localStorage）、不需要實機
+   - 修補：30 分鐘桌面操作
 
-### 🔵 低優先（紀錄留底）
+6. **icon 視覺是 fallback（品牌色 + 文字）而非「既有照片裁切」**
+   - 不是工程問題、是 UX 品質問題
+   - Anton 未來新增第 5 個行程時，要不要繼續走 fallback？這是 sprint-002 候選議題
 
-6. **maskable safe-area 邊界貼壁**
-   - icon 白色裝飾圓環在 80% safe area 邊界、Android 部分 launcher 會裁掉外環
-   - 視覺影響：中央文字不受影響、外環變不完整圓
-   - 修法：未來新增行程 icon 時把裝飾元素往內收 10%
+7. **contract AC-09 硬綁 Lighthouse PWA category**
+   - Chrome 113+ 已移除、contract 寫出來就過時
+   - lighthouse_unavailable_note.md 主動處理是亮點、但 Harness 模板（04_sprint_contract.md）應該防止這種事再發生
+   - 修補：IMP 候選 B（Generator/Anton 已提出）落地
 
-7. **DevTools manifest panel 顯示「theme_color / background_color」為空 checkbox**
-   - 因為 `#121212` 是接近全黑、DevTools 對極暗色顯示為空。實際 manifest JSON 值正確（#121212）
-   - 非 bug、純 DevTools UI 顯示限制
+### 🔵 低優先
 
-8. **contract.md 第二行 sprint_id 寫 production 但 references 路徑用了 `_PM/SPEC.md`（絕對路徑），跨 Sprint 不可移植**
-   - 不影響本輪，未來 Harness 中央同步若移植本 sprint 到其他專案會破
+8. **manifest.json `screenshots` 欄位未補**
+   - DevTools manifest panel 黃色警告「Richer PWA Install UI won't be available... add at least one screenshot with form_factor」
+   - 非阻擋（已驗 installable）、但會影響 Chrome 安裝對話框視覺豐富度
+   - 修補：sprint-002 或獨立 sprint-001b
 
-9. **`output/inline_patches/` 與 `output/icons/generate_icons.py`、`output/service_workers/generate_sw.py` 等是 sprint 工作檔**
-   - contract ③.1 沒明列、但 self_review 主動聲明屬合理擴充
-   - Evaluator 認可——這些是 Generator 為自動化重複任務寫的 helper script、可丟可留
+9. **跨 origin（字型 / 天氣 / 地圖）的 network-first cache 沒設 TTL**
+   - 4 sw.js fetch handler 跨 origin 路徑 `caches.put(req, copy)` 無容量上限或過期機制
+   - 長期累積會佔用 SW 配額（self_review 已知妥協項 #3）
+   - 修補：未來 sprint-XXX 加 quota monitoring
+
+10. **body_pwa_block.html line 213-227 的 Android 用戶 race condition 風險**
+    - 當 `setTimeout 1500ms` 到達時，浮層 fade-in 但 `beforeinstallprompt` 可能 still pending；若用戶在 1.5~2 秒內快速點安裝、`deferredPrompt` 為 null → fallthrough 到 `else { iosModal.classList.add('is-visible'); }` → **Android 用戶會看到 iOS 教學 modal**
+    - 真實 UX bug、Generator 沒提到。發生機率低但確實存在
+    - 修補：在 else 分支加 isIOS 判斷、Android 場景顯示「請稍候、安裝提示準備中」或 disabled state
 
 ---
 
-## 對 self_review v1.1 的回應
+## 對 self_review 的回應
 
-| AC | Generator v1.1 自評 | 我評 | 出入 / 理由 |
+| AC | Generator v1.1 自評 | Evaluator v3.0 評分 | 差異與原因 |
 |---|---|---|---|
-| AC-01 | 🟡 0.7 | 🟡 0.85 | **我高 +0.15**——Generator 對自己 icon fallback 太嚴；structure / og 對應 / JSON 合法都完美，0.7 過低 |
-| AC-02 | ✅ 1.0 | ✅ 1.0 | 一致 |
-| AC-03 | ✅ 1.0 | ✅ 0.95 | 我低 -0.05——CSS 主閘設 768 但契約寫 1024，雖無實害但精確度差 0.05 |
-| AC-04 | 🟡 0.5 | 🟡 0.55 | 我高 +0.05——Chrome installable 判定（manifest panel）作為間接佐證輕微加分 |
-| AC-05 | 🟡 0.5 | 🟡 0.55 | 同上 |
-| AC-06 | 🟡 0.5 | 🟡 0.55 | 同上 |
-| AC-07 | ✅ 1.0 | 🟡 0.55 | **🔴 我低 -0.45**——Generator 沒揭露 Singapore SW redundant 失敗、且自己寫「4 個全部 activated」是錯誤陳述。silent failure 必須反映在分數 |
-| AC-08 | 🟡 0.5 | 🟡 0.40 | 我低 -0.10——Singapore SW 失敗連帶飛航離線對 1/4 行程完全不可達，是本 sprint 最核心 AC 的硬扣分 |
-| AC-09 | ✅ 1.0 | 🟡 0.65 | **🔴 我低 -0.35**——Generator 自己寫的 lighthouse_unavailable_note.md line 116 明確說「SW redundant → 對應行程 0.0」、Singapore redundant 應該扣分 |
-| AC-10 | ✅ 1.0 | 🟡 0.80 | 我低 -0.20——張數雖達 12/12、但其中 1 張是 SW 失敗的反證；數量 ≠ 品質 |
-| AC-11 | ✅ 1.0 | ✅ 1.0 | 一致——+1016/-0 範圍紀律完美 |
-| AC-12 | ✅ 1.0 | ✅ 1.0 | 一致 |
+| AC-01 | 0.7 | 0.85 | Evaluator 上修 0.15。Generator 對 icon 視覺自評太嚴；contract AC-01 主要驗收結構與資料來源（不是視覺品質），icon 視覺差異是 spec ambiguity 而非實作錯誤。 |
+| AC-02 | 1.0 | 1.0 | 一致 ✅ |
+| AC-03 | 1.0 | 0.85 | Evaluator 下修 0.15。Generator 對 4 張 desktop_no_overlay 截圖過於樂觀；正向手機 viewport < 768px 浮層出現的驗證完全缺。 |
+| AC-04 | 0.5 | 0.55 | 接近一致；Evaluator 略上修反映 DevTools manifest 顯示 installable + 程式碼完整。 |
+| AC-05 | 0.5 | 0.55 | 同上 |
+| AC-06 | 0.5 | 0.5 | 一致 |
+| AC-07 | 1.0 | 0.7 | **Evaluator 重大下修 0.3**。Generator 自評書面承諾「4 個行程 sw.js 全部 activated and is running」但 `lighthouse_2026_07_AKAME_sw.png` 底部清楚顯示 Singapore SW redundant。**這是 Generator + Anton + 前兩輪 Evaluator 都漏抓的 silent failure**。 |
+| AC-08 | 0.5 | 0.4 | Evaluator 下修 0.1。Generator 給 0.5 是基於「飛航實測沒做」的客觀缺口；Evaluator 額外發現 Singapore redundant 連帶拖累、且 MO/AKAME 也沒 DevTools offline 截圖（只有 HK 1 張），所以再扣 0.1。 |
+| AC-09 | 1.0 | 0.85 | Evaluator 下修 0.15。Generator 對 4 張 manifest + 4 張 sw 截圖品質過於樂觀。 |
+| AC-10 | 1.0 | 0.75 | Evaluator 下修 0.25。Generator 數截圖數量（14 > 12 修正基準）就給滿分、沒看內容品質。 |
+| AC-11 | 1.0 | 1.0 | 一致 ✅ — 範圍紀律是本輪最大亮點 |
+| AC-12 | 1.0 | 1.0 | 一致 ✅ |
 
-**Generator self_review v1.1 vs my review v3.0 主要分歧點**：
-- Generator 沒對自己的截圖證據做「最後一公里檢查」——把「Singapore SW redundant 截圖」當成「activated 截圖」納入計分
-- 這不是 Generator 故意造假——是 Generator 在 v1.1 補件時相信了 Anton 的截圖、沒重新打開圖片仔細看每個 status 文字
-- 這也展現了「Evaluator 必須真的看圖、不能只看檔名」的價值
+**最大差異 = AC-07（差 0.3）**。原因：Generator 沒打開 lighthouse_2026_07_AKAME_sw.png 看內容、誤宣稱 4 行程 SW 全 activated。這是 self_review 流程的核心信任破口——v1.1 補件期 Anton 截圖時也沒辨識「灰 vs 綠」差異（notes_for_retrospective IMP-I 自己提到了，但只是事後反省）。
+
+**對 Generator 自評加權總分 0.746 的回應**：Evaluator 算到 0.665（全局調整後）、與 Generator 自評差 0.081。差距主要來自 AC-07 重大下修（-0.03 加權）、AC-09 下修（-0.0075）、AC-10 下修（-0.0125）、AC-03 下修（-0.012）、加上全局調整 -0.02。
 
 ---
 
@@ -466,108 +406,171 @@ $ file 2026_*/img/icon-*.png
 
 ### 必補件（本輪達標前要做）
 
-1. **修 Singapore sw.js line 43**（5 秒修法）
-   ```javascript
-   // 原（line 43）：
-   './img/St Andrew's Cathedral.jpg',
-   // 改成：
-   "./img/St Andrew's Cathedral.jpg",
-   ```
+**最高槓桿補件路徑（~1.5 小時，全程桌面 Chrome、不需手機）**：
 
-2. **重截 Singapore SW screenshot**（顯示「activated and is running」）
-   - 流程：清除舊 SW（DevTools > Application > Service Workers > Unregister）→ 重新整理 Singapore 行程頁 → 等 SW 重新註冊 → 截圖
-   - 替換 `output/install_screenshots/lighthouse_2026_05_Singapore_sw.png`
+1. **修活 Singapore SW + 重截**（30 分鐘，+0.025 加權）：
+   - 桌面 Chrome 開 `http://localhost:8000/2026_05_Singapore/`
+   - F12 → Application → Service Workers
+   - 找到 `2026_05_Singapore` 那條 → 點 `Unregister`
+   - Ctrl+Shift+R 強制重整
+   - 等 SW 重新註冊（觀察 Update Cycle 出現 #1453 Install/Wait/Activate）
+   - 看到綠點 + `activated and is running` 後截圖、命名 `lighthouse_2026_05_Singapore_sw.png` 覆蓋現有
+   - 同時截一張 Cache Storage 列出 Singapore precache items 的截圖、命名 `devtools_cache_2026_05_Singapore.png`
+   - **影響**：AC-07 從 0.7 升 0.95（+0.025 加權）、AC-09 從 0.85 升 1.0（+0.0075 加權）、AC-10 從 0.75 升 0.85（+0.005 加權）、AC-08 從 0.4 升 0.5（Singapore 不再拖累，+0.016 加權）
 
-3. **Generator / Harness 中央 commit 修法 + 跑 node -c 驗 4 sw.js**
-   ```bash
-   cd antonstrip && node -c 2026_04_HK/sw.js && node -c 2026_04_MO/sw.js && node -c 2026_05_Singapore/sw.js && node -c 2026_07_AKAME/sw.js
-   ```
+2. **桌面 DevTools Offline mode 跑其他 3 行程**（20 分鐘，+0.022 加權）：
+   - HK 已有 `devtools_offline_2026_04_HK.png`
+   - MO/Singapore/AKAME 各跑一次：開頁 → F12 → Application → Service Workers → 確認 activated → 切 Network 上 `Offline` 下拉 → 重整頁 → 確認頁面與圖片完整載入 → 截 `devtools_offline_2026_04_MO.png` / `devtools_offline_2026_05_Singapore.png` / `devtools_offline_2026_07_AKAME.png`
+   - **影響**：AC-08 從 0.5 升 0.7（+0.032 加權）
 
-4. **（強烈建議）跑桌面 Chrome DevTools > Network > Offline mode 對 4 個行程驗飛航離線**
-   - 截 1 張 DevTools Application > Cache Storage 顯示 precache items 齊全
-   - 截 1 張 Network panel 顯示「from ServiceWorker」for 行程主圖片
-   - 這 2 張可大幅升 AC-08 至 0.85+（從 0.40）
+3. **桌面跨頁 localStorage 測試**（15 分鐘，+0.04 加權）：
+   - 開 HK → 等 1.5 秒看浮層（Device Mode 切 iPhone）→ 截 `mobile_2026_04_HK_overlay.png`
+   - 點 X → 截 `mobile_2026_04_HK_dismissed.png`
+   - 切到 MO 頁面 → 截 `mobile_2026_04_MO_no_overlay_post_dismiss.png`
+   - F12 → Application → Local Storage → 看到 `pwa-install-dismissed: 1` 截圖 `mobile_localstorage_dismissed.png`
+   - 清 localStorage → 重整 HK → 浮層回來 → 截 `mobile_2026_04_HK_overlay_after_clear.png`
+   - **影響**：AC-06 從 0.5 升 1.0（+0.04 加權）
 
-完成 1+2+3 後預計總分：
-- AC-07: 0.55 → 1.0（+0.045）
-- AC-08: 0.40 → 0.55（+0.024，因 Singapore 修好但 4 個行程的飛航實測截圖仍缺）
-- AC-09: 0.65 → 1.0（+0.018）
-- AC-10: 0.80 → 1.0（+0.010）
-- **預計總分**：0.687 + 0.045 + 0.024 + 0.018 + 0.010 = **0.784 ≈ 0.78（仍 < 0.80）**
+4. **桌面 Chrome DevTools Device Mode 切 iPhone 觸發浮層**（10 分鐘，+0.012 加權）：
+   - 與步驟 3 重疊；可同時截浮層在 iPhone viewport 內的視覺對照 `references/image.png`
+   - **影響**：AC-03 從 0.85 升 1.0（+0.012 加權）
 
-完成 1+2+3+4 後預計總分：
-- 額外 AC-08: 0.55 → 0.85（+0.048）
-- **預計總分**：0.78 + 0.048 = **0.83 → 達標**
+**全做完總分變化**：0.665 + 0.025 + 0.0075 + 0.005 + 0.016 + 0.032 + 0.04 + 0.012 = **~0.80**（達標下緣，可進 sprint-close）。
 
-### 下一個 Sprint 主題建議（補件後）
+### 真飛航實測（補件次優先，30 分鐘 + 1 台裝置）
 
-- **主題 A（推薦）**：sprint-002「編輯工作流簡化 + 修 apple-mobile-web-app-title 錯誤值」——把本輪刻意不修的 3 個錯誤值順手修掉、同時擴張 sync-meta.py 自動產 manifest（已知妥協項 #1）
-- **主題 B**：「PWA cache quota 健康檢查 + telemetry」——已知妥協項 #3，Singapore 40 個 entries 在 Safari 50MB 配額下有風險
-- **主題 C**：「全域 PWA install protocol + 視覺驗收套件」——把本 sprint 學到的「DevTools 等價 Lighthouse」、「LLM 環境 + Anton 補件分工」、「sw.js 語法檢查」做成可重用的 helper script
+- 任一台手機/iPad，桌面 Chrome 訪問一次該行程讓 SW precache 完成 → 同網域用 PWA URL 或加入主畫面後從 icon 開啟 → 關 Wi-Fi + Cellular（飛航模式）→ 重新從主畫面 icon 開 PWA → 截「app 開啟 + 圖片完整載入」1 張
+- **影響**：AC-08 直接升 0.85（+0.072 加權）、總分到 ~0.85（穩穩達標）
+
+### 下一個 Sprint 主題建議
+
+- **主題 A：sprint-001b 微補**（建議優先）：把上述必補件做完、修活 Singapore SW、補 6~8 張桌面截圖 + 真飛航 1 張。1~2 小時完工後重跑 Evaluator 升 ~0.85 達標。
+- **主題 B：sprint-002 編輯工作流簡化**（intake 已預埋）：包含修 `apple-mobile-web-app-title` 錯誤值、sync-meta.py 擴張處理 manifest/sw、新增第 5 個行程的工作流模板化。
+- **主題 C：sprint-003 浮層 UX bug 修正**：紅旗 #10 的 Android 用戶 race condition（1.5 秒內快速點安裝會看到 iOS modal）。
 
 ### 回灌 Harness 自身的反省
 
-1. **🔴 P0 IMP 候選：Evaluator Step 1.6 應加「語法檢查產出檔」硬規則**
-   - 本 sprint silent failure 4 道防線全失守的核心原因：沒人對 sw.js 跑 `node -c`
-   - 建議 03_evaluator.md Step 1.6 補充：「對 Generator 產出的可執行檔（.js / .py / .sh / .ts）強制跑語法檢查工具」
-   - 若 Evaluator 環境無對應 runtime，至少要明寫「無法跑、跳過此步驟」而非默認略過
+1. **`templates/03_evaluator.md` Step 1.6 必須補「截圖打開看內容」硬規則**（notes_for_retrospective IMP-I 已提出，本輪自己驗證了必要性——前兩版 Evaluator 漏抓 Singapore redundant 就是因為沒打開圖）
+2. **`templates/04_sprint_contract.md` 必須補「AC 寫驗收意圖不寫工具操作步驟」**（IMP-B、本輪自己驗證了——AC-09「Lighthouse PWA ≥ 90」這種寫法已過時）
+3. **`templates/02_generator.md` self_review 必須加「我已對每張截圖打開看、確認顯示內容符合 AC 期待」段**（IMP-I 延伸）
+4. **`adapters/content_site.md` § 五 antonstrip 特例補一條 hybrid 情境條款**：content-site adapter 預設假設「程式碼薄、內容厚」，但 sprint-001 是「為現有 content-site 加 UX 互動」這種 hybrid 情境——adapter 沒明確指引如何處理「程式碼也得做、實機驗收也得做」的 sprint
+5. **`templates/03_evaluator.md` 校準範例新增 C-F「工具版本漂移」與 C-G「Generator 沒打開圖看 / Evaluator 補抓 silent failure」**
 
-2. **🔴 P0 IMP 候選：Evaluator 對截圖證據必須「打開圖片看文字內容」**
-   - 不能只看檔名（`lighthouse_*_sw.png` ≠ SW activated）
-   - 03_evaluator.md 加紅線：「對所有截圖實際開圖確認關鍵狀態文字（如 Status: activated / Score: 90+）」
+### 校準範例補充建議
 
-3. **🟡 P1 IMP 候選**（沿用 lighthouse_unavailable_note.md 既有建議）：contract.md 不該硬綁特定工具 UI，要寫驗收意圖
-   - Chrome 113+ 移除 Lighthouse PWA category 案例
-   - 已在 lighthouse_unavailable_note.md 詳述
+**範例 C-F：工具版本漂移**（本輪情境寫成草稿）：
+```markdown
+- Generator 產出：contract 寫「跑 Lighthouse PWA audit、分數 ≥ 90」、self_review 補件期發現 Chrome 113+ 已移除 PWA category
+- Generator 反應：起草 `output/lighthouse_unavailable_note.md` 論述等價替代（DevTools Application panel 覆蓋原 8 項 boolean check 中 6 項靜態 + 2 項動態）、給 Evaluator 評分指引
+- Evaluator 接到後：(a) 親自驗證 Chrome 真的移除 PWA category（IMP 候選 B）；(b) 親自驗證等價對映確實覆蓋；(c) 採用等價評分但保留 0.15 給「等價假設未被獨立反例測試」風險
+- **該打分區間：✅ 0.85**（等價驗收 + 集中風險全局調整）
+- **理由**：工具改版不是 Generator/Anton 失職，是 contract 隱含假設過時。Generator 主動補救 + 給 Evaluator SOP 是工程紀律亮點。
+```
 
-4. **🔵 P2 IMP 候選**：Generator self_review 模板加「最後一公里檢查表」
-   - 寫到 AC「截圖達標」時，強制聲明「我親自打開了每張圖、確認關鍵狀態文字是 X」
-   - 防止把「截圖數量」誤判為「截圖證據品質」
-
-### 校準範例補充建議（IMP-09 持續慣例）
-
-本輪情境涵蓋的「校準範例未涵蓋」邊界情境：
-
-**C-D（草稿）：silent failure 通過多道防線（sprint-001 Singapore sw.js 案例）**
-- Generator 產出：4 sw.js + 4 manifest + 8 icon + 4 index.html 浮層 + DevTools 截圖證據齊全（12 張）；self_review v1.1 聲稱「4 個 SW 全部 activated」
-- 但：Evaluator 用 `node -c` 跑 4 個 sw.js 發現 Singapore 第 43 行 JavaScript 語法錯誤（檔名含未跳脫單引號）；Singapore lighthouse_sw 截圖實際顯示「redundant」灰圓點、不是「activated」綠圓點
-- 發現方式：Evaluator 主動跑 `node -c sw.js` × 4（探測 1）+ 重新開圖確認每張 status 文字（探測 6）
-- **該打分：🟡 0.55（AC-07）+ 連帶 AC-08 / 09 / 10 降分**
-- 理由：silent failure 必須在分數體現、不能因「Generator 沒抓到 + 截圖數量達標」就放過。Evaluator 的核心價值就是「Generator 自己看不到的地方」
-
-→ 此範例 sprint-close 時併入 `templates/03_evaluator.md` 或 `adapters/content_site.md`
-
-**C-E（草稿）：Generator 寫的等價驗收 SOP 反過來綁住 Generator 自己（sprint-001 lighthouse_unavailable_note.md 案例）**
-- Generator 產出：`lighthouse_unavailable_note.md` line 116 明確規則：「SW redundant → 對應行程 0.0」
-- 但：Generator 自己在 self_review v1.1 AC-09 寫「4 行程都過 = 1.0」、沒套用自己定的規則對 Singapore 評 0.0
-- Evaluator 用 Generator 自己寫的 SOP 反過來校準分數
-- **該打分**：依 Generator 自己寫的規則 = 3/4 = 0.75，再扣 0.10 紀律分（沒揭露 Singapore 失敗 + 自相矛盾）→ 0.65
-- 理由：Evaluator 不只看 contract 原文、也看 Generator 在補件期建立的等價 SOP；「用 Generator 自己的標準評 Generator」是公平且有教育意義的判斷
-
-→ 此範例可併入 `adapters/content_site.md` § 3 校準範例補強
+**範例 C-G：Generator 漏看截圖內容 / Evaluator 補抓**（本輪情境寫成草稿）：
+```markdown
+- Generator 產出：self_review 宣稱「4 個行程 sw.js 全部 activated and is running」
+- 但實際 lighthouse_2026_07_AKAME_sw.png 截圖底部顯示 Singapore SW redundant（灰點、紅字）
+- Generator + Anton + 前兩輪 Evaluator 都沒打開圖看
+- 第三輪 Evaluator 親自開圖、發現失配
+- **該打分：AC-07 從 1.0（Generator 自評）降至 0.7**
+- **理由**：Generator 沒打開圖看 = 自評流程的核心信任破口。Evaluator 必須親自看圖驗證每一張的內容、不只看檔名存在。
+```
 
 ---
 
 ## 我（Evaluator）的自我檢查
 
-- [x] 每條 AC 都讀過實際產物（不是只讀 self_review）—— 4 sw.js / 4 manifest / 4 index.html PWA block / 12 張截圖全部親 Read / 親開圖
-- [x] **Step 1.6 引用查證已執行**（外部引用 100% 抽查、共 11 條）
-- [x] mode == production，所有 AC 採實測，無 dry-run 上限套用
-- [x] 全局調整欄已填（+0.005、明確指向 AC-11/12 vs Singapore silent failure 的對沖、絕對值 << 0.10、未補位）
-- [x] **主動邊界探測 6 項**：node -c sw.js × 4、JSON 合法、PNG 真實性、og↔manifest 一致、viewport 雙閘、截圖 status 文字
-- [x] 每個評分都附證據引用（檔案路徑 + 行號 + 截圖描述 + log 摘錄）
-- [x] 紅旗清單含 9 條（高 2 / 中 3 / 低 4）—— 完全不可能「真的完美」
-- [x] 沒有用「整體不錯」「應該可以」等模糊措辭
-- [x] 對 self_review 的回應逐條對照、所有出入都附理由
-- [x] 校準範例補充 2 條（C-D silent failure 多道防線、C-E Generator 自綁等價 SOP）
-- [x] 下一輪建議含「修一行就升分」的可執行步驟（Singapore sw.js line 43）
+- [x] 每條 AC 都讀過實際產物（不只讀 self_review）
+- [x] **Step 1.6 引用查證已執行**（6 條引用、5 ✅ + 1 部分 ✅、超過 30% 抽查要求）
+- [x] **本輪打開所有 14 張 PNG 看內容**（不只是看檔名存在）
+- [x] mode = production，所有 AC 按實測證據評分（不放寬上限）
+- [x] 全局調整欄已填（-0.02、具體 AC、有獨立論證、絕對值 < 0.10）
+- [x] 主動探測 1+ 邊界 case：
+  - 跑 `node -c` syntax check 4 個 sw.js（驗證 IMP-H 的 SyntaxError 主張）
+  - 跑 `python -m json.tool` 4 個 manifest.json
+  - 寫 Python 程式對照 SW precache vs 實際 img/ 內容
+  - 用 git blame 反向驗證 apple-mobile-web-app-title 沒被本 sprint 動過
+  - 親自打開 Singapore + AKAME SW 截圖看到 redundant 灰點
+- [x] 每個評分都附證據引用（檔案路徑 + 行號 + 截圖內容描述）
+- [x] 紅旗清單含 10 條（4 高 + 3 中 + 3 低）
+- [x] 沒有用「整體不錯」這類模糊措辭
+- [x] 全程繁體中文（feedback_taiwan_traditional_chinese.md 規範）
 
 ---
 
-> Review 版本：v3.0（取代 v2.0；發現 Singapore sw.js silent failure）
-> Evaluator：Claude Opus 4.7（獨立 sub-agent context、未看 Generator / 中央對話脈絡）
-> 2026-05-27
+## 補件 / 重評 SOP（給 Anton 直接照做）
+
+> 依 notes_for_retrospective IMP-候選-A 與 IMP-候選-F 規範，本段給「PDM 對著做」級的下一步。
+
+### 路徑 A：補件至達標（推薦，~1.5 小時，全桌面 Chrome）
+
+1. **修活 Singapore SW**（必做）：
+   - 開 `http://localhost:8000/2026_05_Singapore/`（先確認 python -m http.server 8000 還在跑）
+   - F12 → Application → Service Workers
+   - 找 `http://localhost:8000/2026_05_Singapore/` 那條 → 點 `Unregister`（或 Update）
+   - Ctrl+Shift+R 強制重整頁
+   - 等 5 秒、看到綠點 + `activated and is running`
+   - 截整個 DevTools 視窗（建議用 Win+Shift+S 區域截圖、命名 `lighthouse_2026_05_Singapore_sw.png`）→ 放進 `_PM/harness/sprint-001-pwa-install-prompt/output/install_screenshots/` 覆蓋現有
+   - **不要在檔名輸入框補 `.png` 副檔名**（IMP-候選-E 雙副檔名陷阱）
+
+2. **補 3 行程 DevTools Offline 截圖**（建議做）：
+   - 對 MO / Singapore / AKAME 各做：
+     - 開頁 → F12 → 確認 SW activated
+     - Network tab → Network conditions 下拉 → 勾 `Offline`
+     - 重整頁
+     - 確認頁面文字 + 圖片完整載入
+     - 截整個 Chrome 視窗、命名 `devtools_offline_2026_04_MO.png` / `devtools_offline_2026_05_Singapore.png` / `devtools_offline_2026_07_AKAME.png`
+   - 放進同一資料夾
+
+3. **跨頁 localStorage 測試 + 桌面 Device Mode 浮層截圖**（建議做）：
+   - F12 → Toggle device toolbar（Ctrl+Shift+M）→ 切 iPhone 12 Pro
+   - 開 HK 頁 → 等 1.5 秒看浮層 → 截 `mobile_2026_04_HK_overlay.png`
+   - 點 X 鈕 → 浮層消失 → 截 `mobile_2026_04_HK_dismissed.png`
+   - 切換 URL 到 MO 頁 → 確認浮層沒出現 → 截 `mobile_2026_04_MO_no_overlay_post_dismiss.png`
+   - F12 → Application → Local Storage → `http://localhost:8000` → 確認看到 `pwa-install-dismissed = 1` → 截 `mobile_localstorage_dismissed.png`
+   - 點 Application 內 `Clear site data` → 重整 HK → 浮層回來 → 截 `mobile_2026_04_HK_overlay_after_clear.png`
+
+4. **重跑 Evaluator**：
+   - 開新對話（必須 context reset）
+   - cwd 在 `C:\Users\anton_liu\Downloads\ANTI\antonstrip`（或 Harness 中央亦可，Evaluator skill 會自己找）
+   - 輸入 `/harness:evaluator`（或 `/evaluator`，視 skill 註冊路徑）
+   - 預期：總分升至 ~0.80、達標、可進 sprint-close
+
+### 路徑 B：直接收尾（如果決定接受 0.665 條件性達標）
+
+- 接受本 sprint 在 16% 核心 AC-08 未完整驗證的狀態下進 sprint-close
+- 開新對話 → 在 antonstrip cwd 下 → 輸入 `/harness:sprint-close sprint-001-pwa-install-prompt`
+- 在 sprint-close 流程中明確標「本 sprint 條件性達標 0.665、AC-08 飛航未驗、Singapore SW redundant 待 sprint-002 處理」
+- 把 Singapore redundant 議題寫進 sprint-002 backlog
+
+### 路徑 C：直接補真飛航實測（最強證據，~30 分鐘 + 1 台裝置）
+
+- 拿手機開 `https://ytlanton.github.io/antonstrip/2026_04_HK/`（或本機任一可達網址）
+- 確認頁面完整載入（讓 SW precache 完成）
+- Safari/Chrome → 分享 → 加入主畫面（iOS）或選單 → 安裝（Android）
+- 打開飛航模式（設定 → 飛航模式 ON）
+- 從主畫面 icon 開 PWA → 截「app 開啟 + 圖片完整顯示」1 張、命名 `mobile_2026_04_HK_offline_real_airplane.png`
+- AC-08 直接升 0.85（最強證據），總分到 ~0.85
 
 ---
 
-sprint-001-pwa-install-prompt 驗收完成，總分 0.69，**條件性達標下緣（未達 0.80 門檻）**。請呼叫 `/harness:sprint-close` 收尾——但建議先修 Singapore sw.js line 43（一行字串修改）+ 重截 Singapore SW screenshot 後再重評，預計可推至 0.78~0.83 達標。
+## 下一步：分支
+
+### 達標分支
+未觸發（總分 0.665 < 0.80）
+
+### 條件性達標分支（本輪適用）
+
+1. **PDM 評估**：看上述路徑 A/B/C，決定要不要補件。建議路徑 A（性價比最高、不需手機、~1.5 小時）。
+2. **若選 A 或 C**：依「補件 / 重評 SOP」操作 → 重跑 Evaluator → 達標後進 sprint-close
+3. **若選 B**：直接 sprint-close、把缺口寫進 sprint-002 backlog
+4. **任一路徑後**：開新對話、在 antonstrip cwd 下、輸入 `/harness:sprint-close sprint-001-pwa-install-prompt`
+
+### 不達標分支
+未觸發（總分 0.665 ≥ 0.60）
+
+---
+
+> Review 版本：v3.0（第三輪獨立 sub-agent 重評；覆蓋 v2.0；發現新 P0 silent failure：Singapore SW redundant）｜Evaluator：Claude Opus 4.7｜2026-05-27
+> **sprint-001-pwa-install-prompt 驗收完成，總分 0.665，條件性達標。請呼叫 `/harness:sprint-close` 收尾（或先依路徑 A 補件後重評）。**

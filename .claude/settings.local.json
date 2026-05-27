@@ -35,7 +35,9 @@
       "Bash(git push *)",
       "PowerShell(Get-Process *)",
       "Bash(rm devtools_offline_2026_04_HK.png)",
-      "Bash(mv devtools_offline_2026_04_HK.png.png devtools_offline_2026_04_HK.png)"
+      "Bash(mv devtools_offline_2026_04_HK.png.png devtools_offline_2026_04_HK.png)",
+      "Read(//c/Users/anton_liu/Downloads/ANTI/Harness/retrospectives/**)",
+      "Read(//c/Users/anton_liu/Downloads/ANTI/Harness/templates/**)"
     ]
   }
 }
