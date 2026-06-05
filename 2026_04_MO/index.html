@@ -11,6 +11,8 @@
   <meta name="apple-mobile-web-app-title" content="Horlick送別行">
   <meta name="theme-color" content="#121212">
   <link id="app-icon" rel="icon" href="data:,">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./img/icon-512.png">
 
   <!-- ╔══════════════════════════════════════════╗
        ║  🔧 可調整區：分享預覽（LINE / FB 卡片）  ║
@@ -2771,6 +2773,258 @@
     <button id="lightbox-close" onclick="closeLightbox()" aria-label="關閉">✕</button>
     <img id="lightbox-img" alt="">
   </div>
+
+  <!--
+    Sprint sprint-001-pwa-install-prompt — body PWA block
+    ──────────────────────────────────────────────────────
+    注入位置：4 個 index.html 的 lightbox div 結束後、</body> 之前
+    覆蓋範圍：Step 3 (浮層 UI) + Step 4 (Android/iOS/X 永久關閉) + Step 5 (SW 註冊)
+    viewport 閘：CSS media query (max-width: 767px) 是主閘；JS isMobileViewport 是次閘
+    inline 原則：依 SPEC v2.3 不引入外部 JS/CSS，全部寫死在 index.html
+  
+    各行程 4 份 index.html 注入的內容完全一致——無特例。
+  -->
+  <!-- ╔══════════════════════════════════════════╗
+       ║  📲 PWA 安裝提示（sprint-001）            ║
+       ╚══════════════════════════════════════════╝ -->
+  <style>
+    .pwa-install-prompt {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: #ffffff;
+      color: #1f2937;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      transform: translateY(120%);
+      opacity: 0;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+    .pwa-install-prompt.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .pwa-install-prompt .pip-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 9px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .pwa-install-prompt .pip-text {
+      flex: 1;
+      font-size: 13.5px;
+      line-height: 1.35;
+      color: #1f2937;
+    }
+    .pwa-install-prompt .pip-install {
+      flex-shrink: 0;
+      background: #f97316;
+      color: #fff;
+      border: 0;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .pwa-install-prompt .pip-install:hover { background: #ea580c; }
+    .pwa-install-prompt .pip-close {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.05);
+      color: #4b5563;
+      border: 0;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+      font-family: inherit;
+    }
+    .pwa-install-prompt .pip-close:hover { background: rgba(0,0,0,0.1); }
+  
+    /* viewport gate: 桌面 ≥ 768px 永遠看不到（AC-03 b） */
+    @media (min-width: 768px) {
+      .pwa-install-prompt,
+      .pwa-ios-modal {
+        display: none !important;
+      }
+    }
+  
+    /* iOS 引導 modal */
+    .pwa-ios-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.55);
+      padding: 24px;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+    .pwa-ios-modal.is-visible { display: flex; }
+    .pwa-ios-modal .pim-card {
+      background: #fff;
+      color: #1f2937;
+      border-radius: 14px;
+      padding: 20px 22px;
+      max-width: 320px;
+      width: 100%;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .pwa-ios-modal .pim-card h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .pwa-ios-modal .pim-card ol {
+      margin: 10px 0 14px 18px;
+      padding: 0;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+    .pwa-ios-modal .pim-card .pim-share {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: rgba(8,145,178,0.12);
+      color: #0e7490;
+      font-weight: 600;
+    }
+    .pwa-ios-modal .pim-card .pim-ok {
+      background: #0891b2;
+      color: #fff;
+      border: 0;
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      width: 100%;
+    }
+  </style>
+  <div class="pwa-install-prompt" id="pwaInstallPrompt" role="dialog" aria-label="安裝到主畫面提示">
+    <img class="pip-icon" src="./img/icon-192.png" alt="">
+    <div class="pip-text">加入主畫面，方便旅途中快速查看！</div>
+    <button class="pip-install" type="button" id="pwaInstallBtn">安裝</button>
+    <button class="pip-close" type="button" id="pwaCloseBtn" aria-label="關閉提示">✕</button>
+  </div>
+  <div class="pwa-ios-modal" id="pwaIosModal" role="dialog" aria-label="iOS 安裝教學">
+    <div class="pim-card">
+      <h3>加入主畫面</h3>
+      <ol>
+        <li>按 Safari 下方的 <span class="pim-share">📤 分享</span> 圖示</li>
+        <li>選「加入主畫面」</li>
+        <li>確認名稱後按「新增」即可</li>
+      </ol>
+      <button class="pim-ok" type="button" id="pwaIosOk">我知道了</button>
+    </div>
+  </div>
+  <script>
+    (function () {
+      'use strict';
+  
+      var isStandalone = window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true;
+      var isMobileViewport = window.innerWidth < 768;
+  
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('./sw.js', { scope: './' })
+            .then(function (reg) {
+              console.log('[PWA] SW registered scope=', reg.scope);
+            })
+            .catch(function (err) {
+              console.warn('[PWA] SW registration failed:', err);
+            });
+        });
+      }
+  
+      if (isStandalone || !isMobileViewport) return;
+  
+      var DISMISS_KEY = 'pwa-install-dismissed';
+      if (localStorage.getItem(DISMISS_KEY) === '1') return;
+  
+      var prompt = document.getElementById('pwaInstallPrompt');
+      var installBtn = document.getElementById('pwaInstallBtn');
+      var closeBtn = document.getElementById('pwaCloseBtn');
+      var iosModal = document.getElementById('pwaIosModal');
+      var iosOk = document.getElementById('pwaIosOk');
+  
+      var ua = navigator.userAgent;
+      var isIOS = (/iPad|iPhone|iPod/.test(ua) && !window.MSStream)
+        || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  
+      var deferredPrompt = null;
+  
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+  
+      setTimeout(function () {
+        if (localStorage.getItem(DISMISS_KEY) === '1') return;
+        prompt.style.display = 'flex';
+        void prompt.offsetWidth;
+        prompt.classList.add('is-visible');
+      }, 1500);
+  
+      function hidePrompt() {
+        prompt.classList.remove('is-visible');
+        setTimeout(function () { prompt.style.display = 'none'; }, 350);
+      }
+  
+      installBtn.addEventListener('click', function () {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function (choice) {
+            console.log('[PWA] userChoice:', choice.outcome);
+            deferredPrompt = null;
+            hidePrompt();
+          }).catch(function (err) {
+            console.warn('[PWA] prompt error:', err);
+            hidePrompt();
+          });
+        } else {
+          iosModal.classList.add('is-visible');
+        }
+      });
+  
+      closeBtn.addEventListener('click', function () {
+        try {
+          localStorage.setItem(DISMISS_KEY, '1');
+        } catch (e) {
+          console.warn('[PWA] localStorage write failed:', e);
+        }
+        hidePrompt();
+      });
+  
+      iosOk.addEventListener('click', function () {
+        iosModal.classList.remove('is-visible');
+      });
+      iosModal.addEventListener('click', function (e) {
+        if (e.target === iosModal) iosModal.classList.remove('is-visible');
+      });
+  
+      window.addEventListener('appinstalled', function () {
+        console.log('[PWA] installed');
+        hidePrompt();
+      });
+    })();
+  </script>
+  <!-- ═══════════════════════════════════════════ -->
 </body>
 
 </html>
