@@ -52,8 +52,8 @@ keywords: ["AKAME", "魯凱族", "部落", "TRPG", "Mathariri"]
 - 💊 藥妝 | 化妝包
 - 💊 藥妝 | 日拋隱形眼鏡
 - 🎒 其他 | 雨傘
-- 🎒 其他 | 骰子
 - 🎒 其他 | 角卡
+- 🎒 其他 | 《愛麗絲失蹤了》* 2
 
 ## Day 1 | 2026/07/11 (六) |
 
@@ -204,8 +204,8 @@ mapLink:
 notes: 
 copyable: 
 docLink: 
-imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/Sranger%20thing%20dnd.png?raw=true
-imageUrl2: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/TRPG.png?raw=true
+imageUrl: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/Alice.png?raw=true
+imageUrl2: https://github.com/YTLAnton/antonstrip/blob/main/2026_07_AKAME/img/Sranger%20thing%20dnd.png?raw=true
 
 ### 飲食 | AKAME
 time: 21:00
