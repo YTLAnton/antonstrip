@@ -274,10 +274,12 @@ cost: ¥1,000–2,000 / 人（預估）
 mapLink: https://www.google.com/maps/place/Shinpachi+Shokud%C5%8D+Shinjuku+Tonanguchi/data=!4m2!3m1!1s0x0:0x70bb1c28905d1260
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/shinpachi-shokudo.jpg
 
-### 購物 | 7-Eleven 外苑前站前店
+### 行程 | 7-Eleven 外苑前站前店
 time: 09:00
+description: 寄放行李（已預約）。
 hours: 24 小時營業
 address: 東京都港区北青山2-7-19
+meta: ✅ 已預約行李寄放
 mapLink: https://www.google.com/maps/search/?api=1&query=%E3%82%BB%E3%83%96%E3%83%B3-%E3%82%A4%E3%83%AC%E3%83%96%E3%83%B3%20%E5%A4%96%E8%8B%91%E5%89%8D%E9%A7%85%E5%89%8D%E5%BA%97
 
 ### 景點 | 迎賓館
