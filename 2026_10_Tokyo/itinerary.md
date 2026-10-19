@@ -243,7 +243,9 @@ weatherTips: 降雨機率高，帶傘、穿防水鞋
 time: 07:30
 endTime: 08:30
 description: 新宿站東南口附近的定食店，以炭火烤魚定食為主。
-notes: ⚠️ 營業時間待確認（同連鎖他店為 7:00–23:00 無休）
+hours: 04:00–03:00（每日）
+address: 〒160-0022 東京都新宿区新宿3-35-5
+cost: ¥1,000–2,000 / 人（預估）
 mapLink: https://www.google.com/maps/place/Shinpachi+Shokud%C5%8D+Shinjuku+Tonanguchi/data=!4m2!3m1!1s0x0:0x70bb1c28905d1260
 
 ### 購物 | 7-Eleven 外苑前站前店
