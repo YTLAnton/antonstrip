@@ -243,8 +243,8 @@ weatherTips: 降雨機率高，帶傘、穿防水鞋
 time: 07:30
 endTime: 08:30
 description: 新宿站東南口附近的定食店，以炭火烤魚定食為主。
-notes: ⚠️ 10/24（六）營業日待確認（查不到營業時間與公休日）
-mapLink: https://www.google.com/maps/search/?api=1&query=%E3%81%97%E3%82%93%E3%81%B1%E3%81%A1%E9%A3%9F%E5%A0%82%20%E6%96%B0%E5%AE%BF%E6%9D%B1%E5%8D%97%E5%8F%A3%E5%BA%97
+notes: ⚠️ 營業時間待確認（同連鎖他店為 7:00–23:00 無休）
+mapLink: https://www.google.com/maps/place/Shinpachi+Shokud%C5%8D+Shinjuku+Tonanguchi/data=!4m2!3m1!1s0x0:0x70bb1c28905d1260
 
 ### 購物 | 7-Eleven 外苑前站前店
 time: 09:00
