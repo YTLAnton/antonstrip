@@ -2120,6 +2120,15 @@
       return null;
     }
 
+    // 地圖按鈕：僅一個連結時維持原樣；有 mapLink2~6 時每個地點一顆按鈕
+    function renderMapButtons(obj, mapUrl) {
+      if (!mapUrl) return '';
+      const extra = [2, 3, 4, 5, 6].map(n => ({ url: obj['mapLink' + n], label: obj['mapLabel' + n], n })).filter(x => x.url);
+      if (!obj.mapLink || !extra.length) return `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>`;
+      const all = [{ url: mapUrl, label: obj.mapLabel, n: 1 }, ...extra];
+      return all.map(x => `<button class="btn-map" onclick="location.href='${x.url}'">🗺 ${x.label ? escHtml(x.label) : '地圖 ' + x.n}</button>`).join('');
+    }
+
     // ── App Deep Link Button ─────────────────────────────────
     const APP_MAP = {
       '台鐵': { label: '🚂 台鐵 e 訂通', url: 'traeticket://', bg: '#1a6b3a', color: '#fff' },
@@ -2327,7 +2336,7 @@
       ${act.notes ? `<div class="notes-box" style="margin-top:8px">${renderText(act.notes)}</div>` : ''}
       ${renderAppButton(act)}
       <div class="card-buttons" style="margin-top:8px">
-        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
+        ${renderMapButtons(act, mapUrl)}
         ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看</button>` : ''}
       </div>
     </div>
@@ -2366,7 +2375,7 @@
       ${act.docLink ? `<a class="btn-doc" href="${escHtml(act.docLink)}" target="_blank">🔗 相關連結</a>` : ''}
       ${renderAppButton(act)}
       <div class="card-buttons">
-        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
+        ${renderMapButtons(act, mapUrl)}
         ${act.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(act.address)}')">👁 給司機看</button>` : ''}
       </div>
     </div>
@@ -2392,7 +2401,7 @@
       ${accom.notes ? `<div class="notes-box" style="margin-top:8px">${renderText(accom.notes)}</div>` : ''}
       ${renderAppButton(accom)}
       <div class="card-buttons" style="margin-top:8px">
-        ${mapUrl ? `<button class="btn-map" onclick="location.href='${mapUrl}'">🗺 Google Maps</button>` : ''}
+        ${renderMapButtons(accom, mapUrl)}
         ${accom.address ? `<button class="btn-driver" onclick="openDriver('${escHtml(accom.address)}')">👁 給司機看</button>` : ''}
       </div>
     </div>

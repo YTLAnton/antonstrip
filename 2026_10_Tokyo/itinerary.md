@@ -39,7 +39,14 @@ mapLink: https://www.google.com/maps/search/?api=1&query=DOMO%20HOTEL
 time: 15:00
 endTime: 18:00
 description: TOHO影城、Onigiri Shop Mamma、Échiré Pâtisserie Au Beurre Shinjuku Store、3Coins
-mapLink: https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E5%AE%BF%E9%A7%85
+mapLink: https://www.google.com/maps/search/?api=1&query=TOHO%20%E3%82%B7%E3%83%8D%E3%83%9E%E3%82%BA%20%E6%96%B0%E5%AE%BF
+mapLabel: TOHO影城
+mapLink2: https://www.google.com/maps/search/?api=1&query=Onigiri%20Shop%20Mamma%20%E6%96%B0%E5%AE%BF
+mapLabel2: Onigiri Shop Mamma
+mapLink3: https://www.google.com/maps/search/?api=1&query=%C3%89chir%C3%A9%20P%C3%A2tisserie%20Au%20Beurre%20Shinjuku
+mapLabel3: Échiré Pâtisserie
+mapLink4: https://www.google.com/maps/search/?api=1&query=3COINS%20%E6%96%B0%E5%AE%BF
+mapLabel4: 3Coins
 
 ### 行程 | KP Photography
 time: 18:00
@@ -74,6 +81,9 @@ time: 06:00
 time: 07:00
 endTime: 11:00
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E5%AE%BF%E5%BE%A1%E8%8B%91
+mapLabel: 新宿御苑
+mapLink2: https://www.google.com/maps/search/?api=1&query=%E6%98%8E%E6%B2%BB%E7%A5%9E%E5%AE%AE
+mapLabel2: 明治神宮
 
 ### 行程 | Studio RAAR
 time: 11:00
@@ -92,6 +102,13 @@ time: 14:00
 endTime: 17:00
 description: 3 Coins 原宿旗艦店、GENDY 青山、The T Bar、出雲大社東京分祠
 mapLink: https://www.google.com/maps/search/?api=1&query=3%20Coins%20%E5%8E%9F%E5%AE%BF%E6%97%97%E8%89%A6%E5%BA%97
+mapLabel: 3 Coins 原宿旗艦店
+mapLink2: https://www.google.com/maps/search/?api=1&query=GENDY%20%E9%9D%92%E5%B1%B1
+mapLabel2: GENDY 青山
+mapLink3: https://www.google.com/maps/search/?api=1&query=The%20T%20Bar%20%E9%9D%92%E5%B1%B1
+mapLabel3: The T Bar
+mapLink4: https://www.google.com/maps/search/?api=1&query=%E5%87%BA%E9%9B%B2%E5%A4%A7%E7%A4%BE%E6%9D%B1%E4%BA%AC%E5%88%86%E7%A5%A0
+mapLabel4: 出雲大社東京分祠
 
 ### 行程 | Bluenote
 time: 17:30
@@ -147,6 +164,13 @@ time: 16:00
 endTime: 18:00
 description: Workman Colors 銀座店、LOFT、綠壽庵清水、DOLCE TACUBO
 mapLink: https://www.google.com/maps/search/?api=1&query=Workman%20Colors%20%E9%8A%80%E5%BA%A7%E5%BA%97
+mapLabel: Workman Colors 銀座店
+mapLink2: https://www.google.com/maps/search/?api=1&query=%E9%8A%80%E5%BA%A7%20LOFT
+mapLabel2: LOFT
+mapLink3: https://www.google.com/maps/search/?api=1&query=%E7%B6%A0%E5%A3%BD%E5%BA%B5%E6%B8%85%E6%B0%B4%20%E9%8A%80%E5%BA%A7
+mapLabel3: 綠壽庵清水
+mapLink4: https://www.google.com/maps/search/?api=1&query=DOLCE%20TACUBO
+mapLabel4: DOLCE TACUBO
 
 ### 景點 | ntv big clock
 time: 18:00
