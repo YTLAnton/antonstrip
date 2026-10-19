@@ -62,11 +62,13 @@ mapLink: https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E6%9
 ### 交通 | JL96 松山 T1 → 羽田 T3
 time: 09:40
 endTime: 13:50
+meta: ✅ 已訂位
 mapLink: https://www.google.com/maps/search/?api=1&query=%E7%BE%BD%E7%94%B0%E6%A9%9F%E5%A0%B4%20%E7%AC%AC3%E8%88%AA%E5%BB%88
 description: JL96 台北松山（TSA）T1 09:40 起飛 → 東京羽田（HND）T3 13:50 抵達。
 
 ### 交通 | 接機移動
 time: 14:00
+meta: ✅ 已訂位
 mapLink: https://www.google.com/maps/search/?api=1&query=%E7%BE%BD%E7%94%B0%E6%A9%9F%E5%A0%B4%20%E7%AC%AC3%E8%88%AA%E5%BB%88
 
 ### 住宿 | DOMO HOTEL Check-in
@@ -102,6 +104,7 @@ imageUrl3: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_To
 ### 行程 | KP Photography
 time: 18:00
 description: 預約外拍攝影，集合座標 35.692517, 139.699419
+meta: ✅ 已訂位
 mapLink: https://www.google.com/maps/search/?api=1&query=35.692517,139.699419
 
 ### 景點 | 都民廣場 + 移動
@@ -119,7 +122,8 @@ description: 銀座的無菜單炸豬排名店，可品嚐多種精緻部位。
 hours: 11:30–14:00, 18:00–21:30（晚餐 18:00、20:00 兩輪）
 address: 東京都中央区銀座6-8-7 交詢ビル4F（銀座かつかみ弐）
 cost: ¥5,500 / 人（預估）
-notes: ⚠️ 官網出現「10月の臨時休業」公告但讀不到日期，出發前向店家確認\n官網另有本店（銀座5-6-10）與弐店，此處依 Sheet 標示以弐店為準
+meta: ✅ 已訂位
+notes: 官網另有本店（銀座5-6-10）與弐店，此處依 Sheet 標示以弐店為準
 mapLink: https://www.google.com/maps?cid=9731612265541105569
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/ginza-katsukami.jpg
 
@@ -177,6 +181,7 @@ description: 新宿的日系形象沙龍，提供色彩診斷、骨骼分析與�
 hours: 每日 10:00–20:00（全預約制，以預約時段為準）
 address: 東京都新宿区新宿5-18-12 八重洲ビル6階60A
 cost: ¥21,000 / 人（預估）
+meta: ✅ 已訂位
 mapLink: https://www.google.com/maps/search/?api=1&query=%E5%A5%B3%E8%A3%85%E3%82%B5%E3%83%AD%E3%83%B3%20studio%20RAAR
 
 ### 交通 | 移動
@@ -188,6 +193,7 @@ description: 青山的和食居酒屋，主打每日築地直送的鮮魚與當�
 hours: 12:00–14:00, 18:00–23:00（週日休）
 address: 東京都渋谷区神宮前3-1-28 B1F
 cost: ¥6,500 / 人（預估）
+meta: ✅ 已訂位
 mapLink: https://www.google.com/maps/place/%E9%9D%92%E5%B1%B1Ototo%EF%BC%88%E9%9D%92%E5%B1%B1%E3%81%8A%E3%81%A8%E3%81%A8%EF%BC%89/data=!4m2!3m1!1s0x60188d8fa9c4c17b:0x89d35ec5cd17588c
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/aoyama-ototo.jpg
 
@@ -198,7 +204,7 @@ description: 下午的購物行程：逛 3 Coins 原宿旗艦店、GENDY 買雪�
 hours: 3 Coins 原宿 11:00–20:00／GENDY 11:00–19:00／The T Bar 11:00–19:00（週一、週日休）／出雲大社東京分祠 受付 09:00–17:00
 address: 3 Coins：〒150-0001 東京都渋谷区神宮前6-12-22 秋田ビル1F／GENDY：東京都港区南青山5-12-2 倉澤ビルディング1F／The T Bar：東京都港区六本木7-18-15 1F／出雲大社東京分祠：〒106-0032 東京都港区六本木7-18-5
 cost: GENDY ¥3,500（預估）
-meta: ⏳ 彈性時段，期間內自由安排
+meta: ✅ GENDY 青山已訂位\n⏳ 其餘店家彈性時段，期間內自由安排
 notes: GENDY 南青山店 2026/9/16 已搬至現址（骨董通同一條路上），地圖即為新址\n⚠️ The T Bar 與出雲大社東京分祠實際在六本木，不在青山
 mapLink: https://www.google.co.jp/maps/place/%E3%80%92150-0001+%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%8B%E8%B0%B7%E5%8C%BA%E7%A5%9E%E5%AE%AE%E5%89%8D%EF%BC%96%E4%B8%81%E7%9B%AE%EF%BC%91%EF%BC%92%E2%88%92%EF%BC%92%EF%BC%92+%E7%A7%8B%E7%94%B0%E3%83%93%E3%83%AB+1f/@35.6667913,139.7023858,17z/data=!3m1!4b1!4m5!3m4!1s0x60188ca439f70ab9:0x9080bcf75de540ba!8m2!3d35.6667913!4d139.7045798?hl=ja
 mapLabel: 3 Coins 原宿旗艦店
@@ -215,7 +221,7 @@ imageUrl3: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_To
 ### 行程 | Bluenote
 time: 17:30
 endTime: 19:20
-description: 南青山的傳奇爵士俱樂部，現場 Live 搭配調酒與餐點。
+description: 表演：The Legendary Count Basie Orchestra。南青山的傳奇爵士俱樂部，現場 Live 搭配調酒與餐點。
 hours: 平日 16:30–22:30／週末 15:00–21:30
 address: 〒107-0062 東京都港区南青山6-3-16
 cost: ¥13,000 / 人（預估）
@@ -230,7 +236,7 @@ description: 高評價的炭火燒鳥，使用鮮嫩地雞、職人手烤，是�
 hours: 17:30–23:00（週二休）
 address: 東京都港区西麻布1-4-40 SHINOビル1F
 cost: ¥14,000 / 人（預估）
-meta: 🍢 兩輪制：17:30、20:30（本行程排 20:30）
+meta: ✅ 已訂位\n🍢 兩輪制：17:30、20:30（本行程排 20:30）
 mapLink: https://www.google.com/maps/place/Yakitori+Shinohara/data=!4m2!3m1!1s0x60188b14680c24f9:0xc83ddbcaea0d07ec
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/yakitori-shinohara.jpg
 
@@ -288,7 +294,7 @@ endTime: 13:00
 description: 麻布台之丘內的那不勒斯披薩餐廳。
 hours: 週六 11:30–14:30, 18:00–22:00；週一公休
 address: 〒106-0041 東京都港区麻布台1-3-1 麻布台ヒルズ タワープラザ3F
-meta: 📍 實際位置在麻布台之丘
+meta: ✅ 已訂位\n📍 實際位置在麻布台之丘
 mapLink: https://www.google.com/maps/search/?api=1&query=RistoPizza%20by%20Napoli%20sta%20ca
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/ristopizza.jpg
 
@@ -348,6 +354,7 @@ endTime: 19:00
 description: Louis Vuitton 銀座並木通り店 7 樓的咖啡廳。
 hours: 11:00–20:00（LO 19:00）
 address: 東京都中央区銀座7-6-1
+meta: ✅ 已訂位
 notes: ⚠️ LE CAFE V 19:00 結束後要立刻前往 JULIA（19:00 一齊開始），兩地移動約 20 分鐘以上，可能遲到
 mapLink: https://maps.app.goo.gl/o2V4QNTurseL6mRn9
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/le-cafe-v.jpg
@@ -359,6 +366,7 @@ description: 創新美式和風料理的全預約制吧檯餐廳，招牌是牛�
 hours: 週一、三至日 12:00–24:00（週二休；全預約制）
 address: 東京都渋谷区神宮前3-1-25 1F
 cost: ¥22,000 / 人（預估）
+meta: ✅ 已訂位
 mapLink: https://www.google.com/maps/place/JULIA/data=!4m2!3m1!1s0x60188b3ff1ef2209:0xac7d643b21d1b553
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/julia.jpg
 
@@ -380,7 +388,8 @@ weatherTips: 降雨機率高，帶雨衣；雨勢大時可先排室內設施
 time: 06:00
 description: 一早從葛西 Airbnb 出發，抵達後辦理入住、寄放行李
 address: 千葉県浦安市舞浜1-2
-notes: ⚠️ 官網載入館者抵達日 07:00 起可入館，06:00 抵達恐需先在外等候
+meta: ✅ 套票已訂
+notes: ⚠️ 官網載入館者抵達日 07:00 起可入館，06:00 抵達恐需先在外等候\n🛏️ 房型：Fantasy Chateau Bay Area Side Superior Room（大人 2 位，10/25 入住 1 晚）
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%82%B7%E3%83%BC%E3%83%BB%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC%E3%82%B9%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/fantasy-springs-hotel.jpg
 
@@ -391,6 +400,7 @@ description: 開園前先排隊入園，備妥門票與官方 App。
 hours: 09:00–21:00
 address: 〒279-0031 千葉県浦安市舞浜1-1
 meta: ⏳ 彈性時段，期間內自由安排
+notes: 🎟️ 套票：Enjoy Lots of Attractions — 2DAYS（2 天 1 夜），含 10/25 樂園、10/26 海洋 1-Day Passport 與夢幻泉鄉飯店住宿\n🎁 套票贈品：原創商品兌換券（Original Goods Voucher）1／人、飲料券（Beverage Ticket）1／人、爆米花桶兌換券（Popcorn bucket Voucher）1／房\n✅ 套票含 1 項指定設施（Eligible attractions）
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tdl-entrance.jpg
 
@@ -419,8 +429,9 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 ### 飲食 | 中央大街咖啡館 (世界市集)
 time: 11:10
 description: 世界市集的咖啡館，中午補給休息。
-hours: 09:00–21:00（依當日 App 公告為準）
+hours: 09:00–21:00
 address: 〒279-0031 千葉県浦安市舞浜1-1
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%20%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%88%E3%83%BB%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%E3%83%8F%E3%82%A6%E3%82%B9
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tdl-center-street-coffeehouse.jpg
 
@@ -482,15 +493,16 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 time: 14:30
 description: 乘坐搖擺律動的魔法茶杯，走進真愛故事編織的世界。
 hours: 09:00–21:00
-ticket: 尊享卡 ¥2,500
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E5%A5%B3%E3%81%A8%E9%87%8E%E7%8D%A3%20%E9%AD%94%E6%B3%95%E3%81%AE%E3%82%82%E3%81%AE%E3%81%8C%E3%81%9F%E3%82%8A%20%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tdl-beauty-and-beast.jpg
 
 ### 景點 | 水晶宮 (探險樂園)
 time: 16:20
 description: 探險樂園的自助餐廳，適合傍晚前補給。
-hours: 11:00–19:45（依當日 App 公告為準）
+hours: 11:00–19:45
 address: 〒279-0031 千葉県浦安市舞浜1-1
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%20%E3%82%AF%E3%83%AA%E3%82%B9%E3%82%BF%E3%83%AB%E3%83%91%E3%83%AC%E3%82%B9%E3%83%BB%E3%83%AC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%B3
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tdl-crystal-palace.jpg
 
@@ -509,8 +521,7 @@ time: 17:00
 endTime: 19:00
 description: 搭上圓木舟展開刺激的冒險，最後會衝下水面。
 hours: 09:00–21:00
-ticket: 尊享卡 ¥1,500
-meta: ⏳ 彈性時段，期間內自由安排
+meta: ✅ 套票已含（無指定時間）\n⏳ 彈性時段，期間內自由安排
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%20%E3%82%B9%E3%83%97%E3%83%A9%E3%83%83%E3%82%B7%E3%83%A5%E3%83%BB%E3%83%9E%E3%82%A6%E3%83%B3%E3%83%86%E3%83%B3
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tdl-splash-mountain.jpg
 
@@ -542,6 +553,7 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 time: 22:00
 description: 返回飯店休息。
 address: 千葉県浦安市舞浜1-2
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%82%B7%E3%83%BC%E3%83%BB%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC%E3%82%B9%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/fantasy-springs-hotel.jpg
 
@@ -557,6 +569,7 @@ weatherTips: 氣溫穩定偏暖，帶薄外套即可
 time: 06:00
 description: 辦理退房，準備前往東京迪士尼海洋。
 address: 千葉県浦安市舞浜1-2
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%82%B7%E3%83%BC%E3%83%BB%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC%E3%82%B9%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/fantasy-springs-hotel.jpg
 
@@ -574,6 +587,7 @@ description: 先入園搶預約後，出園回飯店，在館內自助餐廳「�
 hours: 06:30–11:00（早餐時段至 11:00）／11:30–15:30／17:00–22:30
 address: 〒279-8526 千葉県浦安市舞浜1-2 東京ディズニーシー・ファンタジースプリングスホテル
 cost: ¥4,000 / 人（預估）
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC%E3%82%B9%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%B9%E3%83%BB%E3%83%AC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%B3%20%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%82%B7%E3%83%BC%E3%83%BB%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC%E3%82%B9%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/fantasy-springs-restaurant.jpg
 
@@ -607,9 +621,10 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 
 ### 飲食 | 醜小鴨小館 (夢幻泉鄉)
 time: 12:30
-description: 夢幻泉鄉樂佩公主森林裡的櫃檯式餐廳，僅能用 Disney Mobile Order 點餐。
-hours: 09:30–20:30（依當日 App 公告為準）
+description: 夢幻泉鄉樂佩公主森林裡的櫃檯式餐廳，套票已預約 12:30。
+hours: 09:30–20:30
 address: 〒279-0031 千葉県浦安市舞浜 ファンタジースプリングス ラプンツェルの森
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%83%8A%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%80%E3%83%83%E3%82%AF%E3%83%AA%E3%83%B3%E3%82%B0%20%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%82%B7%E3%83%BC
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tds-snuggly-duckling.jpg
 
@@ -635,7 +650,7 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 time: 13:30
 description: 乘小船前往年度天燈盛會，度過浪漫時光。
 hours: 09:00–21:00
-ticket: 尊享卡 ¥2,000
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%82%B7%E3%83%BC%20%E3%83%A9%E3%83%97%E3%83%B3%E3%83%84%E3%82%A7%E3%83%AB%E3%81%AE%E3%83%A9%E3%83%B3%E3%82%BF%E3%83%B3%E3%83%95%E3%82%A7%E3%82%B9%E3%83%86%E3%82%A3%E3%83%90%E3%83%AB
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tds-rapunzel-forest.jpg
 
@@ -643,7 +658,7 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 time: 14:30
 description: 乘船巡訪《冰雪奇緣》的經典名曲與故事場景。
 hours: 09:00–21:00
-ticket: 尊享卡 ¥2,500
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%82%B7%E3%83%BC%20%E3%82%A2%E3%83%8A%E3%81%A8%E3%82%A8%E3%83%AB%E3%82%B5%E3%81%AE%E3%83%95%E3%83%AD%E3%83%BC%E3%82%BA%E3%83%B3%E3%82%B8%E3%83%A3%E3%83%BC%E3%83%8B%E3%83%BC
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tds-frozen-journey.jpg
 
@@ -651,15 +666,16 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 time: 15:30
 description: 乘船前往夢幻島的冒險之旅。
 hours: 09:00–21:00
-ticket: 尊享卡 ¥2,000
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%82%B7%E3%83%BC%20%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%91%E3%83%B3%E3%81%AE%E3%83%8D%E3%83%90%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%E3%82%A2%E3%83%89%E3%83%99%E3%83%B3%E3%83%81%E3%83%A3%E3%83%BC
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tds-peter-pan-neverland.jpg
 
 ### 飲食 | 艾倫戴爾皇家宴會廳 (夢幻泉鄉)
 time: 18:00
-description: 夢幻泉鄉冰雪王國城堡內的櫃檯式餐廳，僅能用 Disney Mobile Order 點餐。
-hours: 10:00–20:00（依當日 App 公告為準）
+description: 夢幻泉鄉冰雪王國城堡內的櫃檯式餐廳，套票已預約 18:00。
+hours: 10:00–20:00
 address: 〒279-0031 千葉県浦安市舞浜 ファンタジースプリングス フローズンキングダム
+meta: ✅ 套票已訂
 mapLink: https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%83%AC%E3%83%B3%E3%83%87%E3%83%BC%E3%83%AB%E3%83%BB%E3%83%AD%E3%82%A4%E3%83%A4%E3%83%AB%E3%83%90%E3%83%B3%E3%82%B1%E3%83%83%E3%83%88
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tds-arendelle-banquet.jpg
 
@@ -700,6 +716,7 @@ weatherTips: 降雨機率高，帶摺疊傘
 
 ### 交通 | 送機移動
 time: 05:00
+meta: ✅ 已訂位
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%88%90%E7%94%B0%E6%A9%9F%E5%A0%B4%20%E7%AC%AC2%E8%88%AA%E5%BB%88
 
 ### 交通 | 成田機場 NRT
@@ -711,12 +728,14 @@ mapLink: https://www.google.com/maps/search/?api=1&query=%E6%88%90%E7%94%B0%E6%A
 ### 交通 | CX509 成田 T2 → 香港 T1
 time: 08:50
 endTime: 13:25
+meta: ✅ 已訂位
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%88%90%E7%94%B0%E6%A9%9F%E5%A0%B4%20%E7%AC%AC2%E8%88%AA%E5%BB%88
 description: CX509 東京成田（NRT）T2 08:50 起飛 → 香港（HKG）T1 13:25 抵達，香港轉機。
 
 ### 交通 | CX472 香港 T1 → 桃園 T1
 time: 15:45
 endTime: 17:35
+meta: ✅ 已訂位
 mapLink: https://www.google.com/maps/search/?api=1&query=%E9%A6%99%E6%B8%AF%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%20%E7%AC%AC%E4%B8%80%E5%AE%A2%E9%81%8B%E5%A4%A7%E6%A8%93
 description: CX472 香港（HKG）T1 15:45 起飛 → 台北桃園（TPE）T1 17:35 抵達。
 
