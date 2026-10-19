@@ -1765,12 +1765,6 @@
         <div id="food-list"></div>
       </div>
 
-      <!-- 航班 Tab -->
-      <div class="tab-panel" data-tab="flights">
-        <div class="section-header">航班資訊</div>
-        <div id="flights-list"></div>
-      </div>
-
       <!-- 行李 Tab -->
       <div class="tab-panel" data-tab="packing">
         <div class="section-header">打包清單</div>
@@ -2076,7 +2070,6 @@
       renderHeader();
       renderTabBar();
       renderFood();
-      renderFlights();
       renderPackingTips();
       renderPacking();
       renderTips();
@@ -2756,36 +2749,6 @@
       chv.classList.toggle('open', list.classList.contains('open'));
     }
 
-    // ── Render Flights ────────────────────────────────────────
-    function renderFlights() {
-      const el = document.getElementById('flights-list');
-      el.innerHTML = DATA.flights.routes.map(route => `
-    <div class="flight-group">
-      <div class="flight-group-title">${escHtml(route.label)}</div>
-      ${route.legs.map(leg => `
-        <div class="flight-card">
-          <div class="flight-row">
-            <span class="flight-no">${escHtml(leg.flight)}</span>
-            <span class="flight-duration">✈️ ${escHtml(leg.duration)}</span>
-          </div>
-          <div class="flight-route">
-            <div class="flight-city">
-              <div class="flight-code">${escHtml(leg.fromCode)}</div>
-              <div class="flight-name">${escHtml(leg.from)}</div>
-              <div class="flight-time">${escHtml(leg.depart)}</div>
-            </div>
-            <div class="flight-arrow">──────›</div>
-            <div class="flight-city" style="text-align:right">
-              <div class="flight-code">${escHtml(leg.toCode)}</div>
-              <div class="flight-name">${escHtml(leg.to)}</div>
-              <div class="flight-time">${escHtml(leg.arrive)}</div>
-            </div>
-          </div>
-          ${route.cost ? `<div class="flight-cost">💰 ${escHtml(route.cost)}</div>` : ''}
-        </div>`).join('')}
-    </div>`).join('') + '<div class="day-footer">- Crafted by Anton Liu -</div>';
-    }
-
     // ── Render Packing ────────────────────────────────────────
     function getPackKey(catName, itemName) { return `pack_${encodeURIComponent(DATA.title)}_${encodeURIComponent(catName)}_${encodeURIComponent(itemName)}`; }
 
@@ -2901,7 +2864,6 @@
       const tabs = [
         { key: 'itinerary', icon: '🗓', label: '行程', hasContent: DATA.days.length > 0 },
         { key: 'food', icon: '🍽️', label: '美食', hasContent: DATA.food.length > 0 },
-        { key: 'flights', icon: '✈️', label: '航班', hasContent: DATA.flights.routes.length > 0 },
         { key: 'packing', icon: '🧳', label: '行李', hasContent: DATA.packingList.length > 0 },
         { key: 'tips', icon: '📋', label: '須知', hasContent: DATA.tips.sections.length > 0 },
       ];
