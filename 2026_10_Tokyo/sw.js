@@ -1,8 +1,9 @@
 // Sprint-001 PWA Service Worker — 2026_10_Tokyo
-// 產出於 generator step 5；CACHE_VERSION 升版即可作廢舊快取。
-// 同 origin scope = './'，cache-first；跨 origin（字型 / 天氣圖示 / 地圖）= network-first。
+// CACHE_VERSION 升版即可作廢舊快取（activate 時清除）。
+// 同 origin scope = './'：network-first（繞過 HTTP 快取，成功即更新快取；離線才用快取，
+// 導覽請求連快取都沒有則回 index.html）；跨 origin（字型 / 天氣圖示 / 地圖）同為 network-first。
 
-const CACHE_VERSION = 'v1.0.0';
+const CACHE_VERSION = 'v1.1.0';
 const CACHE_NAME = `pwa-2026-10-tokyo-${CACHE_VERSION}`;
 
 const PRECACHE = [
@@ -57,19 +58,20 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 同 origin：cache-first
+  // 同 origin：network-first（no-cache 避開 HTTP 快取拿到舊檔）
   event.respondWith(
-    caches.match(req).then((cached) => {
-      if (cached) return cached;
-      return fetch(req)
-        .then((resp) => {
-          if (resp && resp.status === 200 && resp.type === 'basic') {
-            const copy = resp.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(req, copy)).catch(() => {});
-          }
-          return resp;
-        })
-        .catch(() => caches.match('./index.html'));
-    })
+    fetch(req, { cache: 'no-cache' })
+      .then((resp) => {
+        if (resp && resp.status === 200 && resp.type === 'basic') {
+          const copy = resp.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy)).catch(() => {});
+        }
+        return resp;
+      })
+      .catch(() => caches.match(req).then((cached) => {
+        if (cached) return cached;
+        if (req.mode === 'navigate') return caches.match('./index.html');
+        return Response.error();
+      }))
   );
 });
