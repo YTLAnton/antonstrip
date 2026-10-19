@@ -93,7 +93,7 @@ mapLink: https://www.google.com/maps/search/?api=1&query=Studio%20RAAR
 ### 交通 | 移動
 time: 12:00
 
-### 行程 | 青山Ototo
+### 飲食 | 青山Ototo
 time: 13:00
 mapLink: https://www.google.com/maps/search/?api=1&query=%E9%9D%92%E5%B1%B1Ototo
 
