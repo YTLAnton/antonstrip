@@ -120,13 +120,13 @@ hours: 11:30–14:00, 18:00–21:30（晚餐 18:00、20:00 兩輪）
 address: 東京都中央区銀座6-8-7 交詢ビル4F（銀座かつかみ弐）
 cost: ¥5,500 / 人（預估）
 notes: ⚠️ 官網出現「10月の臨時休業」公告但讀不到日期，出發前向店家確認\n官網另有本店（銀座5-6-10）與弐店，此處依 Sheet 標示以弐店為準
-mapLink: https://www.google.com/maps/place/Ginza+Katsukami/data=!4m2!3m1!1s0x60188bfca4c7d391:0xf52070b2a469b74a
+mapLink: https://www.google.com/maps?cid=9731612265541105569
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/ginza-katsukami.jpg
 
 ### 行程 | 黄金湯 新宿
 time: 23:00
 description: 新宿的錢湯，泡湯放鬆後再回飯店。
-hours: 12:30–24:00（8/26 起全夜營業至翌 9:30）；公休第1、3週二
+hours: 12:30–翌 9:30（8/26 起通宵）；公休每月第1、3週二
 address: 東京都新宿区新宿7-22-11 金沢マンション1F
 mapLink: https://maps.app.goo.gl/BCf3mrHbaG9mgJPYA
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/kogane-yu.jpg
@@ -195,12 +195,12 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 time: 14:00
 endTime: 17:00
 description: 下午的購物行程：逛 3 Coins 原宿旗艦店、GENDY 買雪茄酥、The T Bar 喝茶，最後到出雲大社東京分祠參拜。
-hours: 3 Coins 原宿 11:00–20:00（資料較舊）／GENDY 11:00–19:00／The T Bar 11:00–19:00（週一、週日休）／出雲大社東京分祠 受付 09:00–17:00
-address: 3 Coins：東京都渋谷区神宮前6-12-22 秋田ビル1F／GENDY：東京都港区南青山5-12-2 倉澤ビルディング1F／The T Bar：東京都港区六本木7-18-15 1F／出雲大社東京分祠：〒106-0032 東京都港区六本木7-18-5
+hours: 3 Coins 原宿 11:00–20:00／GENDY 11:00–19:00／The T Bar 11:00–19:00（週一、週日休）／出雲大社東京分祠 受付 09:00–17:00
+address: 3 Coins：〒150-0001 東京都渋谷区神宮前6-12-22 秋田ビル1F／GENDY：東京都港区南青山5-12-2 倉澤ビルディング1F／The T Bar：東京都港区六本木7-18-15 1F／出雲大社東京分祠：〒106-0032 東京都港区六本木7-18-5
 cost: GENDY ¥3,500（預估）
 meta: ⏳ 彈性時段，期間內自由安排
-notes: ⚠️ GENDY 南青山店 2026/9/16 搬到新址，出發前確認地圖位置\n⚠️ The T Bar 與出雲大社東京分祠實際在六本木，不在青山
-mapLink: https://www.google.com/maps/search/?api=1&query=3%20Coins%20%E5%8E%9F%E5%AE%BF%E6%97%97%E8%89%A6%E5%BA%97
+notes: GENDY 南青山店 2026/9/16 已搬至現址（骨董通同一條路上），地圖即為新址\n⚠️ The T Bar 與出雲大社東京分祠實際在六本木，不在青山
+mapLink: https://www.google.co.jp/maps/place/%E3%80%92150-0001+%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%8B%E8%B0%B7%E5%8C%BA%E7%A5%9E%E5%AE%AE%E5%89%8D%EF%BC%96%E4%B8%81%E7%9B%AE%EF%BC%91%EF%BC%92%E2%88%92%EF%BC%92%EF%BC%92+%E7%A7%8B%E7%94%B0%E3%83%93%E3%83%AB+1f/@35.6667913,139.7023858,17z/data=!3m1!4b1!4m5!3m4!1s0x60188ca439f70ab9:0x9080bcf75de540ba!8m2!3d35.6667913!4d139.7045798?hl=ja
 mapLabel: 3 Coins 原宿旗艦店
 mapLink2: https://www.google.com/maps/place/GENDY+%E5%8D%97%E9%9D%92%E5%B1%B1%E5%BA%97/data=!4m2!3m1!1s0x60188b60ee15bc0f:0x4440657766936b94
 mapLabel2: GENDY 青山
@@ -237,7 +237,7 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 ### 行程 | 黄金湯 新宿
 time: 23:00
 description: 新宿的錢湯，泡湯放鬆後再回飯店。
-hours: 12:30–24:00（8/26 起全夜營業至翌 9:30）；公休第1、3週二
+hours: 12:30–翌 9:30（8/26 起通宵）；公休每月第1、3週二
 address: 東京都新宿区新宿7-22-11 金沢マンション1F
 mapLink: https://maps.app.goo.gl/BCf3mrHbaG9mgJPYA
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/kogane-yu.jpg
@@ -419,7 +419,7 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 ### 飲食 | 中央大街咖啡館 (世界市集)
 time: 11:10
 description: 世界市集的咖啡館，中午補給休息。
-hours: 09:00–21:00
+hours: 09:00–21:00（依當日 App 公告為準）
 address: 〒279-0031 千葉県浦安市舞浜1-1
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%20%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%88%E3%83%BB%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%E3%83%8F%E3%82%A6%E3%82%B9
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tdl-center-street-coffeehouse.jpg
@@ -489,7 +489,7 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 ### 景點 | 水晶宮 (探險樂園)
 time: 16:20
 description: 探險樂園的自助餐廳，適合傍晚前補給。
-hours: 11:00–19:45
+hours: 11:00–19:45（依當日 App 公告為準）
 address: 〒279-0031 千葉県浦安市舞浜1-1
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%20%E3%82%AF%E3%83%AA%E3%82%B9%E3%82%BF%E3%83%AB%E3%83%91%E3%83%AC%E3%82%B9%E3%83%BB%E3%83%AC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%B3
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tdl-crystal-palace.jpg
@@ -608,7 +608,7 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 ### 飲食 | 醜小鴨小館 (夢幻泉鄉)
 time: 12:30
 description: 夢幻泉鄉樂佩公主森林裡的櫃檯式餐廳，僅能用 Disney Mobile Order 點餐。
-hours: 09:30–20:30
+hours: 09:30–20:30（依當日 App 公告為準）
 address: 〒279-0031 千葉県浦安市舞浜 ファンタジースプリングス ラプンツェルの森
 mapLink: https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%83%8A%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%80%E3%83%83%E3%82%AF%E3%83%AA%E3%83%B3%E3%82%B0%20%E6%9D%B1%E4%BA%AC%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC%E3%82%B7%E3%83%BC
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tds-snuggly-duckling.jpg
@@ -658,7 +658,7 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 ### 飲食 | 艾倫戴爾皇家宴會廳 (夢幻泉鄉)
 time: 18:00
 description: 夢幻泉鄉冰雪王國城堡內的櫃檯式餐廳，僅能用 Disney Mobile Order 點餐。
-hours: 10:00–20:00
+hours: 10:00–20:00（依當日 App 公告為準）
 address: 〒279-0031 千葉県浦安市舞浜 ファンタジースプリングス フローズンキングダム
 mapLink: https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%83%AC%E3%83%B3%E3%83%87%E3%83%BC%E3%83%AB%E3%83%BB%E3%83%AD%E3%82%A4%E3%83%A4%E3%83%AB%E3%83%90%E3%83%B3%E3%82%B1%E3%83%83%E3%83%88
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tds-arendelle-banquet.jpg
