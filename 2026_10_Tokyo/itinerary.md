@@ -63,6 +63,7 @@ mapLink: https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E6%9
 time: 09:40
 endTime: 13:50
 mapLink: https://www.google.com/maps/search/?api=1&query=%E7%BE%BD%E7%94%B0%E6%A9%9F%E5%A0%B4%20%E7%AC%AC3%E8%88%AA%E5%BB%88
+description: JL96 台北松山（TSA）T1 09:40 起飛 → 東京羽田（HND）T3 13:50 抵達。
 
 ### 交通 | 接機移動
 time: 14:00
@@ -711,23 +712,13 @@ mapLink: https://www.google.com/maps/search/?api=1&query=%E6%88%90%E7%94%B0%E6%A
 time: 08:50
 endTime: 13:25
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%88%90%E7%94%B0%E6%A9%9F%E5%A0%B4%20%E7%AC%AC2%E8%88%AA%E5%BB%88
+description: CX509 東京成田（NRT）T2 08:50 起飛 → 香港（HKG）T1 13:25 抵達，香港轉機。
 
 ### 交通 | CX472 香港 T1 → 桃園 T1
 time: 15:45
 endTime: 17:35
 mapLink: https://www.google.com/maps/search/?api=1&query=%E9%A6%99%E6%B8%AF%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%20%E7%AC%AC%E4%B8%80%E5%AE%A2%E9%81%8B%E5%A4%A7%E6%A8%93
+description: CX472 香港（HKG）T1 15:45 起飛 → 台北桃園（TPE）T1 17:35 抵達。
 
 ### 行程 | 回家
 time: 24:00
-
-## 航班資訊
-
-### 去程
-- JL96 | 松山(TSA) → 羽田(HND) | 09:40 → 13:50
-- 航廈：TSA T1 → HND T3
-
-### 回程
-- CX509 | 成田(NRT) → 香港(HKG) | 08:50 → 13:25
-- 航廈：NRT T2 → HKG T1
-- CX472 | 香港(HKG) → 桃園(TPE) | 15:45 → 17:35
-- 航廈：HKG T1 → TPE T1
