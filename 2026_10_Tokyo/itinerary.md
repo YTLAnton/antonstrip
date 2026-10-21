@@ -234,26 +234,28 @@ meta: ✅ 已訂位
 mapLink: https://www.google.com/maps/place/%E9%9D%92%E5%B1%B1Ototo%EF%BC%88%E9%9D%92%E5%B1%B1%E3%81%8A%E3%81%A8%E3%81%A8%EF%BC%89/data=!4m2!3m1!1s0x60188d8fa9c4c17b:0x89d35ec5cd17588c
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/aoyama-ototo.jpg
 
-### 購物 | 3 Coins 原宿旗艦店 + GENDY 青山 + The T Bar + 出雲大社東京分祠
+### 購物 | 3 Coins 原宿 + 澀谷 LOFT + GENDY 青山（必去）
 time: 14:00
 endTime: 17:00
-description: 下午的購物行程：逛 3 Coins 原宿旗艦店、GENDY 買雪茄酥、The T Bar 喝茶，最後到出雲大社東京分祠參拜。
-hours: 3 Coins 原宿 11:00–20:00／GENDY 11:00–19:00／The T Bar 11:00–19:00（週一、週日休）／出雲大社東京分祠 受付 09:00–17:00
-address: 3 Coins：〒150-0001 東京都渋谷区神宮前6-12-22 秋田ビル1F／GENDY：東京都港区南青山5-12-2 倉澤ビルディング1F／The T Bar：東京都港区六本木7-18-15 1F／出雲大社東京分祠：〒106-0032 東京都港区六本木7-18-5
+description: 下午購物：從青山Ototo 步行到原宿 3 Coins、續往澀谷 LOFT，再搭銀座線回南青山到 GENDY 買雪茄酥，接著赴 17:30 Bluenote。3 Coins、LOFT、The T Bar、出雲大社東京分祠為彈性店家，有空再去。
+hours: 【必去】GENDY 11:00–19:00　【彈性】3COINS 原宿本店 11:00–20:00／渋谷ロフト 11:00–21:00／The T Bar 11:00–18:00（週日、週一休，需預約）／出雲大社東京分祠 受付 09:00–17:00
+address: 【必去】GENDY：東京都港区南青山5-12-2 倉澤ビルディング1F　【彈性】3COINS 原宿本店：〒150-0001 東京都渋谷区神宮前6-12-22 秋田ビル1F／渋谷ロフト：〒150-0042 東京都渋谷区宇田川町18-2／The T Bar：〒106-0032 東京都港区六本木7-18-15 1F／出雲大社東京分祠：〒106-0032 東京都港区六本木7-18-5
 cost: GENDY ¥3,500（預估）
-meta: ✅ GENDY 青山已訂位\n⏳ 其餘店家彈性時段，期間內自由安排
-notes: GENDY 南青山店 2026/9/16 已搬至現址（骨董通同一條路上），地圖即為新址\n⚠️ The T Bar 與出雲大社東京分祠實際在六本木，不在青山
-mapLink: https://www.google.co.jp/maps/place/%E3%80%92150-0001+%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%8B%E8%B0%B7%E5%8C%BA%E7%A5%9E%E5%AE%AE%E5%89%8D%EF%BC%96%E4%B8%81%E7%9B%AE%EF%BC%91%EF%BC%92%E2%88%92%EF%BC%92%EF%BC%92+%E7%A7%8B%E7%94%B0%E3%83%93%E3%83%AB+1f/@35.6667913,139.7023858,17z/data=!3m1!4b1!4m5!3m4!1s0x60188ca439f70ab9:0x9080bcf75de540ba!8m2!3d35.6667913!4d139.7045798?hl=ja
-mapLabel: 3 Coins 原宿旗艦店
-mapLink2: https://www.google.com/maps/place/GENDY+%E5%8D%97%E9%9D%92%E5%B1%B1%E5%BA%97/data=!4m2!3m1!1s0x60188b60ee15bc0f:0x4440657766936b94
-mapLabel2: GENDY 青山
-mapLink3: https://www.google.com/maps/search/?api=1&query=The%20T%20Bar%20%E9%9D%92%E5%B1%B1
-mapLabel3: The T Bar
-mapLink4: https://www.google.com/maps/search/?api=1&query=%E5%87%BA%E9%9B%B2%E5%A4%A7%E7%A4%BE%E6%9D%B1%E4%BA%AC%E5%88%86%E7%A5%A0
-mapLabel4: 出雲大社東京分祠
+meta: ✅ GENDY 青山已訂位\n⭐ 必去：GENDY 青山（19:00 關門，排在 17:30 Bluenote 前順路停）\n⏳ 彈性（有空再去，建議動線）：青山Ototo → 原宿 3 Coins → 澀谷 LOFT → 回南青山 GENDY → 17:30 Bluenote\n⏳ 彈性（另外）：The T Bar、出雲大社東京分祠（皆在六本木）
+notes: 🚶 14:00 從 Ototo 步行約 12 分，約 14:12 抵達 3 Coins 原宿本店（明治神宮前站 7 號出口步行約 2 分），逛約 30 分（約）\n🚶 約 14:45 步行約 12 分到澀谷 LOFT，約 15:00 抵達，逛約 40 分（約）\n🚃 約 15:40 步行約 7 分到澀谷站 → 銀座線至表參道（乘車約 3 分）→ 出站步行約 7 分，約 16:05 抵達 GENDY（19:00 前取貨皆可），停約 15 分（約）\n🚶 約 16:20 從 GENDY 步行約 6 分，約 16:26 抵達 Bluenote，距 17:30 約有 1 小時寬裕，可補逛或在附近休息（約）\n⚠️ Workman 改在 10/24 銀座購物卡買\n⚠️ The T Bar 與出雲大社東京分祠在六本木（日比谷線六本木站 2 號出口步行 1～4 分），從 GENDY 步行約 27 分、無直達電車，與 LOFT 二擇一才不趕。The T Bar 官方頁寫需預約，沒預約只能逛一樓精品店；出雲大社受付到 17:00\n⚠️ 3 Coins 原宿本店公休官方頁未載，第三方寫不定休；澀谷 LOFT 官網 10/23～25 有「呪術廻戦PLAZA」活動公告，可能較擁擠，細節未查證\nGENDY 南青山店 2026/9/16 已搬至現址（骨董通同一條路上），地圖即為新址
+mapLink: https://www.google.com/maps/place/GENDY+%E5%8D%97%E9%9D%92%E5%B1%B1%E5%BA%97/data=!4m2!3m1!1s0x60188b60ee15bc0f:0x4440657766936b94
+mapLabel: 必去｜GENDY 青山
+mapLink2: https://www.google.com/maps/search/?api=1&query=3COINS%20%E5%8E%9F%E5%AE%BF%E6%9C%AC%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%8B%E8%B0%B7%E5%8C%BA%E7%A5%9E%E5%AE%AE%E5%89%8D6-12-22
+mapLabel2: 彈性｜3 Coins 原宿
+mapLink3: https://www.google.com/maps/search/?api=1&query=%E6%B8%8B%E8%B0%B7%E3%83%AD%E3%83%95%E3%83%88%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%8B%E8%B0%B7%E5%8C%BA%E5%AE%87%E7%94%B0%E5%B7%9D%E7%94%BA18-2
+mapLabel3: 彈性｜澀谷 LOFT
+mapLink4: https://www.google.com/maps/search/?api=1&query=The%20T%20Bar%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E5%85%AD%E6%9C%AC%E6%9C%A87-18-15
+mapLabel4: 彈性｜The T Bar
+mapLink5: https://www.google.com/maps/search/?api=1&query=%E5%87%BA%E9%9B%B2%E5%A4%A7%E7%A4%BE%E6%9D%B1%E4%BA%AC%E5%88%86%E7%A5%A0%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E5%85%AD%E6%9C%AC%E6%9C%A87-18-5
+mapLabel5: 彈性｜出雲大社東京分祠
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/3coins-harajuku.jpg
-imageUrl2: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/gendy-aoyama.jpg
-imageUrl3: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/izumo-taisha-tokyo.jpg
+imageUrl2: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/shibuya-loft.jpg
+imageUrl3: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/gendy-aoyama.jpg
 
 ### 行程 | Bluenote
 time: 17:30
@@ -358,25 +360,27 @@ notes: ⚠️ 14:40 場次官網未載，需到官網選日期確認
 mapLink: https://www.google.com/maps/place/Konica+Minolta+Planetaria+Tokyo/data=!4m2!3m1!1s0x60188b253e27bfd1:0x67b3b6fb0eafa9d1
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/planetaria-tokyo.jpg
 
-### 購物 | Workman Colors 銀座店 + LOFT + 綠壽庵清水 + DOLCE TACUBO
+### 購物 | Workman Colors 銀座店 + 3COINS+plus + LOFT + 綠壽庵清水 + DOLCE TACUBO
 time: 16:00
 endTime: 18:00
-description: 銀座購物行程：Workman Colors 逛機能服飾、銀座 LOFT 逛雜貨文具、綠壽庵清水買金平糖、DOLCE TACUBO 買費南雪。
-hours: Workman Colors 11:00–20:00／銀座 LOFT 11:00–21:00（週日 11:00–20:00）／綠壽庵清水 11:00–19:30（週六日 11:00–18:30，週三休）／DOLCE TACUBO 銀座 11:00–19:00（暫行 11:00–17:00）
-address: Workman Colors：東京都中央区銀座5-7-10 中村積善会ビル5F／銀座 LOFT：東京都中央区銀座2-4-6 銀座ベルビア館／綠壽庵清水：〒104-0061 東京都中央区銀座6-2-1／DOLCE TACUBO 銀座：東京都中央区銀座7-11-14 GINZA KAMUIビル1F
+description: 銀座購物行程：Workman Colors 逛機能服飾、3COINS+plus 西銀座店逛生活雜貨、銀座 LOFT 逛雜貨文具、綠壽庵清水買金平糖、DOLCE TACUBO 買費南雪。
+hours: Workman Colors 11:00–20:00／3COINS+plus 西銀座 11:00–20:00（不定休）／銀座 LOFT 11:00–21:00（週日 11:00–20:00）／綠壽庵清水 11:00–19:30（週六日 11:00–18:30，週三休）／DOLCE TACUBO 銀座 11:00–19:00（暫行 11:00–17:00）
+address: Workman Colors：東京都中央区銀座5-7-10 中村積善会ビル5F／3COINS+plus 西銀座デパート店：〒104-0061 東京都中央区銀座4-1 西銀座デパート 2F／銀座 LOFT：東京都中央区銀座2-4-6 銀座ベルビア館／綠壽庵清水：〒104-0061 東京都中央区銀座6-2-1／DOLCE TACUBO 銀座：東京都中央区銀座7-11-14 GINZA KAMUIビル1F
 cost: 綠壽庵清水 ¥2,500／DOLCE TACUBO ¥3,200（預估）
 meta: ⏳ 彈性時段，期間內自由安排
-notes: ⚠️ DOLCE TACUBO 銀座店暫行營業到 17:00，要在 17:00 前到
+notes: ⚠️ DOLCE TACUBO 銀座店暫行營業到 17:00，要在 17:00 前到\n⚠️ 3COINS+plus 西銀座店營業時間未經官方確認（依 2022 年開幕報導與 Navitime，無週六專屬時間，公休不定休）\n順路參考：DOLCE TACUBO 17:00 打烊，先到（7丁目）；再依地址丁目由大到小往北逛：綠壽庵清水（6丁目）→ Workman Colors（5丁目）→ 3COINS+plus（4丁目）→ LOFT（2丁目，營業到 21:00）
 mapLink: https://www.google.com/maps/search/?api=1&query=Workman%20Colors%20%E9%8A%80%E5%BA%A7%E5%BA%97
 mapLabel: Workman Colors 銀座店
-mapLink2: https://www.google.com/maps/search/?api=1&query=%E9%8A%80%E5%BA%A7%20LOFT
-mapLabel2: LOFT
-mapLink3: https://www.google.com/maps/place/%E9%8A%80%E5%BA%A7+%E7%B6%A0%E5%A3%BD%E5%BA%B5%E6%B8%85%E6%B0%B4/data=!4m2!3m1!1s0x60188bef100a66d3:0x3de6ee54dfa99c31
-mapLabel3: 綠壽庵清水
-mapLink4: https://www.google.com/maps/search/?api=1&query=%E3%83%89%E3%83%AB%E3%83%81%E3%82%A7%E3%82%BF%E3%82%AF%E3%83%9C%E9%8A%80%E5%BA%A7%20DOLCE%20TACUBO%20GINZA
-mapLabel4: DOLCE TACUBO
+mapLink2: https://www.google.com/maps/search/?api=1&query=3COINS%2Bplus%20%E8%A5%BF%E9%8A%80%E5%BA%A7%E3%83%87%E3%83%91%E3%83%BC%E3%83%88%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A74-1
+mapLabel2: 3COINS+plus 西銀座
+mapLink3: https://www.google.com/maps/search/?api=1&query=%E9%8A%80%E5%BA%A7%20LOFT
+mapLabel3: LOFT
+mapLink4: https://www.google.com/maps/place/%E9%8A%80%E5%BA%A7+%E7%B6%A0%E5%A3%BD%E5%BA%B5%E6%B8%85%E6%B0%B4/data=!4m2!3m1!1s0x60188bef100a66d3:0x3de6ee54dfa99c31
+mapLabel4: 綠壽庵清水
+mapLink5: https://www.google.com/maps/search/?api=1&query=%E3%83%89%E3%83%AB%E3%83%81%E3%82%A7%E3%82%BF%E3%82%AF%E3%83%9C%E9%8A%80%E5%BA%A7%20DOLCE%20TACUBO%20GINZA
+mapLabel5: DOLCE TACUBO
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/workman-colors-ginza.jpg
-imageUrl2: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/ryokujuan-shimizu.jpg
+imageUrl2: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/3coins-plus-nishi-ginza.jpg
 imageUrl3: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/dolce-tacubo-ginza.jpg
 
 ### 景點 | ntv big clock
