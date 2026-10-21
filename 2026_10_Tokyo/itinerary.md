@@ -304,8 +304,8 @@ weatherRain: 80%
 weatherTips: 降雨機率高，帶傘、穿防水鞋
 
 ### 飲食 | しんぱち食堂 新宿東南口店
-time: 07:30
-endTime: 08:30
+time: 07:00
+endTime: 08:00
 description: 新宿站東南口附近的定食店，以炭火烤魚定食為主。
 hours: 04:00–03:00（每日）
 address: 〒160-0022 東京都新宿区新宿3-35-5
