@@ -7,9 +7,9 @@ tripType: "自由行"
 transport: ["電車", "計程車", "步行", "接送機"]
 weather:
   東京:
-    temp: "13-21°C"
-    condition: "秋高氣爽，早晚偏涼，偶有秋雨"
-    tips: "早晚涼，帶薄外套"
+    temp: "13-24°C"
+    condition: "前兩天晴到多雲，10/24 起轉為多雲有雨"
+    tips: "早晚涼帶薄外套；10/24、10/26 雨量較明顯，帶傘"
     url: "https://tenki.jp/forecast/3/16/4410/13101/"
 ---
 
@@ -183,10 +183,10 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 ## Day 2 | 2026/10/23 (五) | 新宿御苑・明治神宮・青山
 route: 新宿 → 青山 → 新宿
 dayNote: 上午逛新宿御苑與明治神宮，下午青山、六本木一帶購物，傍晚聽 Blue Note，晚上吃燒鳥。
-weatherTemp: 14–22°C
+weatherTemp: 13–22°C
 weatherCond: 晴のち曇
 weatherRain: 30%
-weatherTips: 早晚約 14 度偏涼，白天舒適，帶薄外套
+weatherTips: 早晨約 13 度偏涼，白天舒適，帶薄外套
 
 ### 飲食 | 珈琲専科 メルヘン
 time: 07:30
@@ -298,10 +298,10 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 ## Day 3 | 2026/10/24 (六) | 外苑前・麻布台・銀座
 route: 新宿 → 外苑前 → 銀座
 dayNote: 上午外苑前與迎賓館，中午麻布台，下午銀座購物並看天象儀，晚上吃 JULIA。\n降雨機率高，記得帶傘。
-weatherTemp: 16–19°C
+weatherTemp: 16–18°C
 weatherCond: 曇のち雨
-weatherRain: 80%
-weatherTips: 降雨機率高，帶傘、穿防水鞋
+weatherRain: 90%
+weatherTips: 下午至晚上雨勢明顯（約 11–16 mm），帶傘、穿防水鞋，氣溫僅 16–18 度加外套
 
 ### 飲食 | しんぱち食堂 新宿東南口店
 time: 07:00
@@ -421,11 +421,11 @@ mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E9%8
 
 ## Day 4 | 2026/10/25 (日) | 東京迪士尼樂園
 route: 東京迪士尼樂園
-dayNote: 整天在東京迪士尼樂園，晚上看夢之光遊行與萬聖高空夜煙火。\n降雨機率高，備好雨衣；表演時間以官方 App 當天公布為準。
-weatherTemp: 17–25°C
+dayNote: 整天在東京迪士尼樂園，晚上看夢之光遊行與萬聖高空夜煙火。\n可能有零星小雨，帶輕便雨衣備用；表演時間以官方 App 當天公布為準。
+weatherTemp: 17–23°C
 weatherCond: 曇一時雨
-weatherRain: 80%
-weatherTips: 降雨機率高，帶雨衣；雨勢大時可先排室內設施
+weatherRain: 60%
+weatherTips: 偶有零星小雨、雨量預報很小，帶輕便雨衣備用
 
 ### 住宿 | 夢幻泉鄉飯店
 time: 06:00
@@ -602,11 +602,11 @@ imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tok
 
 ## Day 5 | 2026/10/26 (一) | 東京迪士尼海洋
 route: 夢幻泉鄉飯店 → 東京迪士尼海洋 → 葛西
-dayNote: 整天在東京迪士尼海洋，傍晚到夜間有多場表演。\n退房後回葛西過夜；表演時間以官方 App 當天公布為準。
-weatherTemp: 20–22°C
-weatherCond: 曇
-weatherRain: 30%
-weatherTips: 氣溫穩定偏暖，帶薄外套即可
+dayNote: 整天在東京迪士尼海洋，傍晚到夜間有多場表演。\n午後起轉雨，帶雨衣；退房後回葛西過夜；表演時間以官方 App 當天公布為準。
+weatherTemp: 18–20°C
+weatherCond: 曇のち雨
+weatherRain: 70%
+weatherTips: 午後起轉雨、晚上仍有雨，帶雨衣與薄外套
 
 ### 行程 | 夢幻泉鄉飯店 退房
 time: 06:00
@@ -752,10 +752,10 @@ mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E9%8
 ## Day 6 | 2026/10/27 (二) | 返程
 route: 東京 → 香港 → 台北
 dayNote: 一早搭機離開東京，經香港回台北。\n行李與證件提早備妥，早班機留意時間。
-weatherTemp: 17–21°C
+weatherTemp: 17–22°C
 weatherCond: 曇一時雨
-weatherRain: 70%
-weatherTips: 降雨機率高，帶摺疊傘
+weatherRain: 80%
+weatherTips: 清晨出發時段雨機率高，帶摺疊傘
 
 ### 交通 | 送機移動
 time: 05:00
