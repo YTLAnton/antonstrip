@@ -152,7 +152,7 @@ address: 東京都新宿区西新宿2-8-1
 mapLink: https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%BA%81%20%E9%83%BD%E6%B0%91%E5%BA%83%E5%A0%B4
 imageUrl: https://raw.githubusercontent.com/YTLAnton/antonstrip/main/2026_10_Tokyo/img/tokyo-metropolitan-building.jpg
 
-### 飲食 | Ginza Katsukami
+### 飲食 | Ginza Katsukami 弐店
 time: 20:00
 endTime: 22:00
 description: 銀座的無菜單炸豬排名店，可品嚐多種精緻部位。
