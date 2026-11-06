@@ -24,12 +24,11 @@ mapLink: https://maps.app.goo.gl/qv834eZ8tnQfSw4F7
 app: 高鐵
 imageUrl: img/HSR_TAIPEI.png
 
-### 交通 | 包車 左營-東港
+### 交通 | 包車 左營-車城
 time: 10:10
 endTime: 11:00
 meta: ✅ 已預訂
-description: 高鐵左營站出站後搭包車南下。
-notes: ⚠️ 下一站的阿品芋粿、黃家綠豆蒜和海生館都在車城鄉（左營到車城車程約 1.5 小時），請先和司機確認路線與抵達時間
+description: 高鐵左營站出站後搭包車南下到車城，車程約 1.5 小時。
 address: 813高雄市左營區高鐵路105號
 mapLink: https://maps.app.goo.gl/9YFd9BmhHJxyzRSu7
 imageUrl: img/BENZ.png
@@ -118,7 +117,9 @@ endTime: 15:00
 meta: ✅ 已訂位
 description: AKAME 的副品牌、鐵板料理、Mathariri 是魯凱族語的「美好」
 cost: NTD 4,000 / 人（預估）
-address: 屏東縣瑪家鄉北葉村風景巷200號
+hours: 週日 12:00–17:30（週三～五 12:00–15:00、週六 12:00–18:00，週一二公休）
+notes: 只收現金
+address: 903屏東縣瑪家鄉北葉村風景巷200號
 mapLink: https://www.google.com/maps/search/?api=1&query=Mathariri%20%E5%B1%B1%E8%8F%9C%E9%87%8E%E5%AF%AE
 imageUrl: img/MATHARIRI.png
 imageUrl2: img/mathariri_inside.png
