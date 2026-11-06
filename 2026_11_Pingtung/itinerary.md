@@ -7,7 +7,7 @@ keywords: ["AKAME", "Mathariri", "海生館", "看海美術館", "禮納里"]
 ## Day 1 | 2026/11/14 (六) | 車城・海生館・AKAME
 
 route: 台北 → 左營 → 車城 → 禮納里
-dayNote: 白天往南到車城：小吃、海生館、看海美術館看夕陽。\n晚上回禮納里入住，21:00 吃 AKAME。
+dayNote: 白天往南到車城：小吃、海生館、看海美術館看夕陽。\n17:30 從車城出發回禮納里（約 1 小時 45 分），入住後 21:00 吃 AKAME。
 weatherTemp: 22 - 28 °C
 weatherCond: 11 月氣候平均：多雲到晴，東北季風
 weatherRain: 10 - 20%
@@ -25,17 +25,17 @@ app: 高鐵
 imageUrl: img/HSR_TAIPEI.png
 
 ### 交通 | 包車 左營-車城
-time: 10:10
-endTime: 11:00
+time: 10:20
+endTime: 11:50
 meta: ✅ 已預訂
-description: 高鐵左營站出站後搭包車南下到車城，車程約 1.5 小時。
+description: 高鐵左營站出站後搭包車南下到車城，約 100 公里、車程約 1.5 小時。
 address: 813高雄市左營區高鐵路105號
 mapLink: https://maps.app.goo.gl/9YFd9BmhHJxyzRSu7
 imageUrl: img/BENZ.png
 
 ### 飲食 | 車城 阿品芋粿＋正記黃家綠豆蒜
-time: 11:00
-endTime: 12:00
+time: 11:50
+endTime: 12:40
 description: 車城福安宮一帶的在地小吃：芋粿配一碗綠豆蒜當早午餐。
 hours: 正記黃家綠豆蒜：週一二四五 10:00–16:30／週六日 09:30–17:00，週三公休
 address: 正記黃家綠豆蒜：屏東縣車城鄉福安路3之36號／阿品芋粿：車城福安宮（福安路51號）附近
@@ -46,27 +46,34 @@ mapLink2: https://www.google.com/maps/search/?api=1&query=%E6%AD%A3%E8%A8%98%E9%
 mapLabel2: 正記黃家綠豆蒜
 
 ### 景點 | 屏東海生館（國立海洋生物博物館）
-time: 12:00
+time: 12:50
 endTime: 16:00
 meta: ⏳ 彈性時段，期間內自由安排
-description: 台灣水域館、珊瑚王國館、世界水域館，海底隧道和白鯨都在這裡。
+description: 從福安宮開車約 15 分鐘。台灣水域館、珊瑚王國館、世界水域館，海底隧道和白鯨都在這裡。
 hours: 09:00–17:30
 ticket: 全票 NTD 450／優待票 NTD 250（以官網公告為準）
 address: 944屏東縣車城鄉後灣村後灣路2號
 mapLink: https://www.google.com/maps/search/?api=1&query=%E5%9C%8B%E7%AB%8B%E6%B5%B7%E6%B4%8B%E7%94%9F%E7%89%A9%E5%8D%9A%E7%89%A9%E9%A4%A8
 
 ### 景點 | 看海美術館＋看夕陽
-time: 16:00
-endTime: 19:00
+time: 16:15
+endTime: 17:30
 meta: ⏳ 彈性時段，期間內自由安排
-description: 海口漁港旁的白色美術館，逛完在海邊等夕陽，11 月中日落約 17:10。
+description: 從海生館開車約 10 分鐘。海口漁港旁的白色美術館，逛完在海邊等夕陽，11 月中日落約 17:10。
 hours: 10:00–18:00，週二公休
 address: 屏東縣車城鄉海口路1-12號
-notes: 從車城回禮納里車程約 1.5–2 小時，19:00 前要出發才趕得上入住和 21:00 的 AKAME
+notes: 美術館 18:00 關門；看完夕陽 17:30 出發回禮納里
 mapLink: https://www.google.com/maps/search/?api=1&query=%E7%9C%8B%E6%B5%B7%E7%BE%8E%E8%A1%93%E9%A4%A8%20%E8%BB%8A%E5%9F%8E
 
+### 交通 | 包車 車城-禮納里
+time: 17:30
+endTime: 19:15
+description: 從車城海口北上回禮納里，約 100 公里、車程約 1 小時 45 分。
+notes: Sheet 沒有列這段車程，請確認包車有包含
+imageUrl: img/BENZ.png
+
 ### 行程 | 禮納里 住宿 C/I
-time: 19:00
+time: 19:15
 endTime: 20:00
 meta: ✅ 已預訂
 description: 放行李、梳洗一下。
@@ -128,6 +135,7 @@ imageUrl2: img/mathariri_inside.png
 time: 15:00
 endTime: 16:00
 meta: ✅ 已預訂
+description: 禮納里到高鐵左營站約 55 公里、車程約 1 小時，16:55 的高鐵有將近 1 小時緩衝。
 imageUrl: img/BENZ.png
 
 ### 交通 | 高鐵 左營-台北 0144次
